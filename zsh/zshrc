@@ -1,0 +1,72 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=10000
+SAVEHIST=1000
+setopt extendedglob
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/Users/felipe/.zshrc'
+
+alias vim="nvim"
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+# Example aliases
+[[ -a ~/.alias ]] && source ~/.alias
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Chruby - The Switcher Of Rubies.
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
+
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+unsetopt correct
+
+zstyle ':prezto:module:history-substring-search:color' found 'bg=black,fg=blue'
+zstyle ':prezto:module:history-substring-search:color' not-found 'bg=black,fg=red'
+
+archey -c -o
+
+source /usr/local/share/zsh/site-functions/_aws
+unalias rm
+
+# added by travis gem
+[ -f /Users/felipe/.travis/travis.sh ] && source /Users/felipe/.travis/travis.sh
+
+
+export PATH=/Users/felipe/.cargo/bin:$PATH
+export RUST_SRC_PATH=/Users/felipe/Development/rust/rustc-1.4.0/src
+
+export PATH=/Users/felipe/bin:$PATH
+
+PATH="/Users/felipe/perl5/bin${PATH+:}${PATH}"; export PATH;
+PERL5LIB="/Users/felipe/perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/Users/felipe/perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/Users/felipe/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/felipe/perl5"; export PERL_MM_OPT;
+
+test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
+
+export FZF_DEFAULT_COMMAND='ag -g ""'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+function vimr {
+  ctags -R .
+  vim
+}
+
+test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
+if which jenv > /dev/null; then eval "$(jenv init -)"; fi
+
+function npm-do { (PATH=$(npm bin):$PATH; eval $@;) }
+
+export PATH=$PATH:$HOME/bin/dartino-sdk/bin
