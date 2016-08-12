@@ -70,3 +70,4 @@ if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 function npm-do { (PATH=$(npm bin):$PATH; eval $@;) }
 
 export PATH=$PATH:$HOME/bin/dartino-sdk/bin
+source /Users/felipe/Development/config/dotfiles/zsh/agnoster.zsh-theme
