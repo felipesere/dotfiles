@@ -1,0 +1,79 @@
+[user]
+  name  = Felipe Sere
+  email = felipesere@gmail.com
+
+[github]
+  user = felipesere
+
+[core]
+  pager = less -r -FX
+  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+  editor = vim -f
+  autocrlf = input
+  safecrlf = true
+	excludesfile = /Users/felipe/.gitignore
+  ignorecase = false
+	quotepath = false
+
+[web]
+  browser = open
+
+[push]
+  config = default
+  default = current
+
+[rebase]
+  autosquash = true
+
+[merge]
+  summary = true
+
+[color]
+  interactive = auto
+  ui = true
+  pager = true
+
+[color "grep"]
+  filename = blue
+  linenumber = green
+
+[color "branch"]
+  current = yellow reverse
+  local   = yellow
+  remote  = green
+
+[color "diff"]
+  meta = blue
+  frag = magenta
+  old  = red
+  new  = green
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = blue
+
+[grep]
+  linenumber = true
+
+[alias]
+  a   = add -u
+  b   = branch
+  aa  = add --all :/
+  c   = commit -v
+  co  = checkout
+  d   = diff
+  ds  = diff --staged
+  dw  = diff --color-words
+  s   = status -s -b
+  w   = whatchanged --decorate -p
+  l   = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short
+  ld  = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short --since=1.days
+  lw  = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short --since=1.weeks
+  lg  = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  ll  = log --pretty=format:'%C(yellow)%h%Cred%d %Creset %s%Cblue [%Cgreen%cn%Creset%Cblue]' --decorate --numstat
+  lm   = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short master..HEAD
+  sha = rev-parse HEAD
+
+[credential]
+  helper = osxkeychain
