@@ -3,10 +3,12 @@ export ZDOTDIR=$HOME
 export TERM='xterm-256color'
 export LANG="en_US.UTF-8"
 export EDITOR=vim
-
-HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=1000
+export CLICOLOR=1
+export LSCOLORS=exfxbxdxexegedabagacad
+export HISTFILE=~/.histfile
+export HISTSIZE=10000
+export SAVEHIST=1000
+export WORDCHARS=''
 
 source "$HOME/Development/config/dotfiles/zsh-minimal/functions/shrink-path.plugin.zsh"
 
@@ -31,9 +33,18 @@ zstyle ':completion:*' list-colors '' # Add colors to the ZSH completion menu
 zstyle ':completion:*:*:*:*:*' menu select
 
 
-WORDCHARS=''
+
+# Here come all my zsh plugins
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+zplug "willghatch/zsh-cdr"
+
+# Other things
 
 bindkey -e
+bindkey "[3~" delete-char
+bindkey '^w' backward-kill-word
 
 zstyle :compinstall filename '/Users/felipe/.zshrc'
 
