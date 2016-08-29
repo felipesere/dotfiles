@@ -11,8 +11,9 @@ export SAVEHIST=1000
 export WORDCHARS=''
 export PATH=/Users/felipe/bin:$PATH
 export FZF_DEFAULT_COMMAND='ag -g ""'
+export ENHANCD_FILTER="/Users/felipe/.fzf/bin/fzf"
 
-zstyle ':completion:*' list-colors '' # Add colors to the ZSH completion menu
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:*:*:*' menu select
 
 source "$HOME/Development/config/dotfiles/zsh-minimal/prompt.zsh"
@@ -46,8 +47,8 @@ source $ZPLUG_HOME/init.zsh
 
 zplug "willghatch/zsh-cdr"
 zplug "plugins/shrink-path",   from:oh-my-zsh
-zplug "zsh-users/zsh-autosuggestions", use:"*zsh"
 zplug "zsh-users/zsh-syntax-highlighting", nice:10
+zplug "b4b4r07/enhancd", use:init.sh
 
 zplug load
 # Other things
