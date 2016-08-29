@@ -15,15 +15,6 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 zstyle ':completion:*' list-colors '' # Add colors to the ZSH completion menu
 zstyle ':completion:*:*:*:*:*' menu select
 
-# Here come all my zsh plugins
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
-
-zplug "willghatch/zsh-cdr"
-zplug "plugins/shrink-path",   from:oh-my-zsh
-# Other things
-zplug load
-
 source "$HOME/Development/config/dotfiles/zsh-minimal/prompt.zsh"
 source "$HOME/Development/config/dotfiles/zsh-minimal/options.zsh"
 
@@ -48,3 +39,15 @@ source /usr/local/share/chruby/auto.sh
 archey -c -o
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Here come all my zsh plugins
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+zplug "willghatch/zsh-cdr"
+zplug "plugins/shrink-path",   from:oh-my-zsh
+zplug "zsh-users/zsh-autosuggestions", use:"*zsh"
+zplug "zsh-users/zsh-syntax-highlighting", nice:10
+
+zplug load
+# Other things
