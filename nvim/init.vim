@@ -9,7 +9,6 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'Shougo/deoplete.nvim'
   Plug 'ervandew/supertab'
-  Plug 'osyo-manga/vim-over'
 
   Plug 'tpope/vim-endwise'
   Plug 'albfan/nerdtree-git-plugin'
@@ -27,14 +26,20 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tfnico/vim-gradle',       { 'for' : 'groovy' }
   Plug 'cakebaker/scss-syntax.vim', { 'for' : 'scss' }
   Plug 'cespare/vim-toml', { 'for' : 'toml' }
-  Plug 'wting/rust.vim',   { 'for' : 'rust' }
+
+  Plug 'racer-rust/vim-racer'
+  Plug 'rust-lang/rust.vim'
+
   Plug 'ElmCast/elm-vim',  { 'for' : 'elm' }
   Plug 'vim-scripts/paredit.vim', { 'for' : 'clojure' }
+  Plug 'dag/vim-fish'
 call plug#end()
 
 scriptencoding utf-8
 set encoding=utf-8
 
+set hidden  " for rust racer, for now...
+set shell=sh                      " avoid major fuck up with fish shell
 syntax on                         " show syntax highlighting
 filetype plugin indent on
 set backspace=indent,eol,start    " respect backspace
@@ -68,7 +73,7 @@ let g:deoplete#enable_at_startup = 1
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
- let g:over_enable_auto_nohlsearch = 1
+let g:over_enable_auto_nohlsearch = 1
 
 " set color scheme
 colorscheme base16-default-dark
@@ -98,6 +103,10 @@ let g:airline_right_sep = ''
 let g:airline_section_b = ''
 let g:airline_section_x = ''
 let g:airline_section_y = ''
+
+let g:racer_cmd="/Users/felipe/.cargo/bin/racer"
+let $RUST_SRC_PATH="/Users/felipe/.cargo/source/rustc-1.11.0/src"
+let $CARGO_HOME="/Users/felipe/.cargo"
 
 let g:RootIgnoreUseHome = 1
 
