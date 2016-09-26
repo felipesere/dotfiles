@@ -8,9 +8,13 @@ export HISTFILE=~/.histfile
 export HISTSIZE=10000
 export SAVEHIST=1000
 export WORDCHARS=''
-export PATH=/Users/felipe/bin:$PATH
+export PATH=$PATH:/Users/felipe/bin:/Users/felipe/.cargo/bin
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export ENHANCD_FILTER=$(which fzf)
+export ENHANCD_DISABLE_DOT=1
+
+export RUST_SRC_PATH="/Users/felipe/.cargo/source/rustc-1.11.0/src"
+export CARGO_HOME="/Users/felipe/.cargo"
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
@@ -21,12 +25,18 @@ autoload -Uz vcs_info
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:*:*:*' menu select
 
-source "$HOME/Development/config/dotfiles/zsh-minimal/prompt.zsh"
-source "$HOME/Development/config/dotfiles/zsh-minimal/options.zsh"
+source "$HOME/.dotfiles/zsh-minimal/plugins.zsh"
+source "$HOME/.dotfiles/zsh-minimal/prompt.zsh"
+source "$HOME/.dotfiles/zsh-minimal/options.zsh"
+
+function projects() {
+  find ~/Development -d 2 -type d | fzf | cd
+}
 
 bindkey -e
 bindkey "[3~" delete-char
 bindkey '^w' backward-kill-word
+bindkey -s '^o' '^qprojects\n'
 
 zstyle :compinstall filename "$HOME/.zshrc"
 
@@ -36,8 +46,10 @@ alias vim="nvim"
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 
-archey -c -o
+test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
+if which jenv > /dev/null; then eval "$(jenv init -)"; fi
+
+#archey -c -o
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source "$HOME/Development/config/dotfiles/zsh-minimal/plugins.zsh"

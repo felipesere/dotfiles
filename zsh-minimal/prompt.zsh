@@ -26,5 +26,5 @@ if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && git st
 
 
 
-zstyle ':vcs_info:git*' formats "%{on %{$fg[blue]%}%b%{$reset_color%} %m%u%c% %{$fg[red]%}%a%{$reset_color%}"
-PROMPT='%{$fg[magenta]%}$(shrink_path -f)%{$reset_color%} ${vcs_info_msg_0_}% %{$reset_color%} » '
+zstyle ':vcs_info:git*' formats " %{on %{$fg[blue]%}%b%{$reset_color%} %m%u%c% %{$fg[red]%}%a%{$reset_color%}"
+PROMPT='%{$fg[magenta]%}$(shrink_path -f)%{$reset_color%}${vcs_info_msg_0_}%{$reset_color%} » '
