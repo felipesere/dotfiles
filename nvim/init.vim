@@ -1,6 +1,7 @@
 " Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
   Plug 'chriskempson/base16-vim'
+  Plug 'altercation/vim-colors-solarized'
 
   Plug 'bling/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -76,10 +77,13 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:over_enable_auto_nohlsearch = 1
 
 " set color scheme
-colorscheme base16-default-dark
 set background=dark
+" colorscheme base16-default-dark
+colorscheme solarized
 
-let g:airline_theme = 'base16'
+
+" let g:airline_theme = 'base16'
+let g:airline_theme = 'solarized'
 
 let g:rainbow#blacklist = [233, 234]
 
@@ -112,6 +116,7 @@ let g:RootIgnoreUseHome = 1
 
 let mapleader = ","
 map <leader>S :so $MYVIMRC <cr>
+map <Leader>K :let &background = ( &background == "dark" ? "light" : "dark" )<cr>
 
 let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 map <c-p> :execute 'FZF'<CR>
