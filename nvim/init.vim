@@ -10,12 +10,10 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'Shougo/deoplete.nvim'
   Plug 'ervandew/supertab'
+  Plug 'sjl/gundo.vim'
 
   Plug 'tpope/vim-endwise'
   Plug 'albfan/nerdtree-git-plugin'
-
-  Plug 'carlitux/deoplete-ternjs'
-  Plug 'dart-lang/dart-vim-plugin'
 
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
@@ -24,16 +22,12 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'bkad/vim-terraform',      { 'for' :  'terraform' }
   Plug 'elixir-lang/vim-elixir',  { 'for' : ['elixir', 'eelixir'] }
   Plug 'slashmili/alchemist.vim', { 'for' : ['elixir', 'eelixir'] }
-  Plug 'tfnico/vim-gradle',       { 'for' : 'groovy' }
-  Plug 'cakebaker/scss-syntax.vim', { 'for' : 'scss' }
   Plug 'cespare/vim-toml', { 'for' : 'toml' }
 
   Plug 'racer-rust/vim-racer'
   Plug 'rust-lang/rust.vim'
 
   Plug 'ElmCast/elm-vim',  { 'for' : 'elm' }
-  Plug 'vim-scripts/paredit.vim', { 'for' : 'clojure' }
-  Plug 'dag/vim-fish'
 call plug#end()
 
 scriptencoding utf-8
