@@ -27,7 +27,14 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'racer-rust/vim-racer'
   Plug 'rust-lang/rust.vim'
 
+  Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
+  Plug 'Shutnik/jshint2.vim', { 'for' : 'javascript' }
+  Plug 'cakebaker/scss-syntax.vim'
+  Plug 'sorin-ionescu/vim-htmlvalidator'
+  Plug 'alvan/vim-closetag'
+
   Plug 'ElmCast/elm-vim',  { 'for' : 'elm' }
+  Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 scriptencoding utf-8
@@ -61,6 +68,8 @@ set wildmode=list:longest,full
 set shortmess+=I
 set noswapfile
 
+set updatetime=250
+
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 let g:netrw_banner       = 0
@@ -70,20 +79,11 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 
 let g:over_enable_auto_nohlsearch = 1
 
-" set color scheme
 set background=dark
-" colorscheme base16-default-dark
 colorscheme solarized
 
-
-" let g:airline_theme = 'base16'
 let g:airline_theme = 'solarized'
-
 let g:rainbow#blacklist = [233, 234]
-
-" set up some custom colors
-highlight ColorColumn  ctermbg=00
-highlight LineNr       ctermbg=00 ctermfg=240
 
 set pastetoggle=<F2>
 
@@ -125,6 +125,10 @@ imap <F1> <C-o>:echo<CR>
 
 nnoremap <silent> <leader>f :NERDTreeToggle<CR>
 nnoremap <silent> <leader>F :NERDTreeFind<CR>
+
+" HTML
+au FileType html compiler html
+au QuickFixCmdPost make cwindow
 
 " map . in visual mode
 vnoremap . :norm.<cr>
