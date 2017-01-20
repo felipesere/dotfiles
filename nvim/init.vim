@@ -30,7 +30,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
   Plug 'Shutnik/jshint2.vim', { 'for' : 'javascript' }
   Plug 'cakebaker/scss-syntax.vim'
-  Plug 'sorin-ionescu/vim-htmlvalidator'
   Plug 'alvan/vim-closetag'
 
   Plug 'ElmCast/elm-vim',  { 'for' : 'elm' }
@@ -128,10 +127,6 @@ imap <F1> <C-o>:echo<CR>
 
 nnoremap <silent> <leader>f :NERDTreeToggle<CR>
 nnoremap <silent> <leader>F :NERDTreeFind<CR>
-
-" HTML
-au FileType html compiler html
-au QuickFixCmdPost make cwindow
 
 " map . in visual mode
 vnoremap . :norm.<cr>
