@@ -68,6 +68,9 @@ set wildmode=list:longest,full
 set shortmess+=I
 set noswapfile
 
+set foldmethod=indent " Fold code based on indentation. Maybe switch to 'syntax'?
+set foldlevel=20      " Don't actually fold when opening a file, file by choice :D
+
 set updatetime=250
 
 let g:loaded_netrw       = 1
