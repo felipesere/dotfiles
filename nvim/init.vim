@@ -108,7 +108,7 @@ let $CARGO_HOME="/Users/felipe/.cargo"
 
 let g:RootIgnoreUseHome = 1
 
-let mapleader = ","
+let mapleader = "\<Space>"
 map <leader>S :so $MYVIMRC <cr>
 map <Leader>K :let &background = ( &background == "dark" ? "light" : "dark" )<cr>
 
@@ -117,7 +117,7 @@ map <c-p> :execute 'FZF'<CR>
 
 "  eliminate white spaace
 nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>
-map <silent> <leader><space> :nohl<cr>
+map <silent> <leader>, :nohl<cr>
 
 " unmap F1 help
 nmap <F1> :echo<CR>
