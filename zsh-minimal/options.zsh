@@ -12,9 +12,9 @@ unsetopt correct             # diable auto-correct for commands
 unsetopt correctAll          # disable auto-correct for arguments
 unsetopt flowcontrol
 setopt always_to_end
-setopt nonomatch                # try to avoid the 'zsh: no matches found...'
+setopt nonomatch             # try to avoid the 'zsh: no matches found...'
 setopt notify                # report the status of backgrounds jobs immediately
 setopt hash_list_all         # whenever a command completion is attempted, make sure the entire command path is hashed first.
-setopt completeinword # not just at the end
-setopt noshwordsplit # use zsh style word splitting
-setopt interactivecomments # allow use of comments in interactive code
+setopt completeinword        # not just at the end
+setopt noshwordsplit         # use zsh style word splitting
+setopt interactivecomments   # allow use of comments in interactive code

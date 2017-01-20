@@ -38,9 +38,10 @@ bindkey "\e[3~" delete-char
 # [Backspace] - delete backward
 bindkey '^?' backward-delete-char
 bindkey '^w' backward-kill-word
-#
+
 # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5C' forward-word
+
 # [Ctrl-LeftArrow] - move backward one word
 bindkey '^[[1;5D' backward-word
 
@@ -55,7 +56,4 @@ source /usr/local/share/chruby/auto.sh
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 
-#archey -c -o
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
