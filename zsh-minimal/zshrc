@@ -52,8 +52,17 @@ alias vim="nvim"
 # Chruby - The Switcher Of Rubies.
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
+chruby 2.3.3
 
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+alias sec="/Applications/VeraCrypt.app/Contents/MacOS/VeraCrypt --text --mount /Volumes/TINY/secure"
+alias omcc="cd /Volumes/NO\ NAME/omcc-html"
+
+homeoffice () {
+  export GIT_AUTHOR_EMAIL="fsere@ford.com"
+}
+
+alias typora="open -a typora"

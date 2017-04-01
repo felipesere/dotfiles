@@ -7,13 +7,14 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'vim-airline/vim-airline-themes'
   Plug 'tpope/vim-surround'
   Plug 'scrooloose/nerdtree'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'albfan/nerdtree-git-plugin'
 
   Plug 'Shougo/deoplete.nvim'
   Plug 'ervandew/supertab'
   Plug 'sjl/gundo.vim'
 
   Plug 'tpope/vim-endwise'
-  Plug 'albfan/nerdtree-git-plugin'
 
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
@@ -22,18 +23,24 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'bkad/vim-terraform',      { 'for' :  'terraform' }
   Plug 'elixir-lang/vim-elixir',  { 'for' : ['elixir', 'eelixir'] }
   Plug 'slashmili/alchemist.vim', { 'for' : ['elixir', 'eelixir'] }
+  Plug 'vim-erlang/vim-erlang-runtime'
   Plug 'cespare/vim-toml', { 'for' : 'toml' }
 
   Plug 'racer-rust/vim-racer'
   Plug 'rust-lang/rust.vim'
 
   Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
-  Plug 'Shutnik/jshint2.vim', { 'for' : 'javascript' }
+  Plug 'w0rp/ale'
+
   Plug 'cakebaker/scss-syntax.vim'
   Plug 'alvan/vim-closetag'
 
   Plug 'ElmCast/elm-vim',  { 'for' : 'elm' }
-  Plug 'airblade/vim-gitgutter'
+
+  Plug 'idris-hackers/idris-vim'
+
+  Plug 'vim-scripts/indentpython.vim'
+  Plug 'mustache/vim-mustache-handlebars'
 call plug#end()
 
 scriptencoding utf-8
@@ -71,6 +78,7 @@ set foldmethod=indent " Fold code based on indentation. Maybe switch to 'syntax'
 set foldlevel=20      " Don't actually fold when opening a file, file by choice :D
 
 set updatetime=250
+set list listchars=tab:»\ ,trail:·
 
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
@@ -104,6 +112,10 @@ let g:airline_section_b = ''
 let g:airline_section_x = ''
 let g:airline_section_y = ''
 
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+
 let g:racer_cmd="/Users/felipe/.cargo/bin/racer"
 let $RUST_SRC_PATH="/Users/felipe/.cargo/source/rustc-1.11.0/src"
 let $CARGO_HOME="/Users/felipe/.cargo"
@@ -127,6 +139,11 @@ imap <F1> <C-o>:echo<CR>
 
 nnoremap <silent> <leader>f :NERDTreeToggle<CR>
 nnoremap <silent> <leader>F :NERDTreeFind<CR>
+
+" Only use eslint for linting
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
 
 " map . in visual mode
 vnoremap . :norm.<cr>
@@ -155,6 +172,12 @@ function! Extract_from_grep(line)
   normal! zz
 endfunction
 
+nnoremap <silent> <Leader>c :call fzf#run({
+      \ 'down': '40%',
+      \ 'source': "git diff --name-only HEAD",
+      \ 'sink': "e",
+      \ })<CR>
+
 " --column: Show column number
 " --line-number: Show line number
 " --no-heading: Do not show file headings in results
@@ -168,3 +191,7 @@ endfunction
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 nnoremap <silent> <leader>s :Find<cr>
+
+" Ale
+nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
+nmap <silent> <Leader>j <Plug>(ale_next_wrap)
