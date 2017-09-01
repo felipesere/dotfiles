@@ -11,9 +11,9 @@
   editor = nvim -f
   autocrlf = input
   safecrlf = true
-	excludesfile = /Users/felipe/.gitignore
+  excludesfile = /Users/felipe/.gitignore
   ignorecase = false
-	quotepath = false
+  quotepath = false
 
 [web]
   browser = open
@@ -75,8 +75,11 @@
   incoming   = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short ..@{u}
   outgoing   = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short @{u}..
   conflicts = diff --name-only --diff-filter=U
-  lm   = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short master..HEAD
   sha = rev-parse --short HEAD
 
 [credential]
   helper = osxkeychain
+[mergetool]
+  path = nvim
+[mergetool "vimdiff"]
+  path = nvim
