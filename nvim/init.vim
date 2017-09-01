@@ -1,52 +1,41 @@
 " Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
-  Plug 'chriskempson/base16-vim'
   Plug 'altercation/vim-colors-solarized'
 
   Plug 'bling/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  Plug 'tpope/vim-surround'
+  Plug 'gabrielelana/vim-markdown'
+  Plug 'mileszs/ack.vim'
   Plug 'scrooloose/nerdtree'
-  Plug 'airblade/vim-gitgutter'
-  Plug 'albfan/nerdtree-git-plugin'
 
   Plug 'Shougo/deoplete.nvim'
   Plug 'ervandew/supertab'
-  Plug 'sjl/gundo.vim'
 
   Plug 'tpope/vim-endwise'
+  Plug 'alvan/vim-closetag', { 'for' : ['eelixir', 'html'] }
 
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-  Plug 'kana/vim-textobj-user'
 
-  Plug 'bkad/vim-terraform',      { 'for' :  'terraform' }
-  Plug 'elixir-lang/vim-elixir',  { 'for' : ['elixir', 'eelixir'] }
+  Plug 'elixir-editors/vim-elixir',  { 'for' : ['elixir', 'eelixir'] }
   Plug 'slashmili/alchemist.vim', { 'for' : ['elixir', 'eelixir'] }
-  Plug 'vim-erlang/vim-erlang-runtime'
   Plug 'cespare/vim-toml', { 'for' : 'toml' }
 
-  Plug 'racer-rust/vim-racer'
-  Plug 'rust-lang/rust.vim'
+  Plug 'racer-rust/vim-racer', { 'for' : 'rust' }
+  Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
 
   Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
   Plug 'w0rp/ale'
 
-  Plug 'cakebaker/scss-syntax.vim'
-  Plug 'alvan/vim-closetag'
+  Plug 'cakebaker/scss-syntax.vim', { 'for' : ['scss', 'css'] }
 
   Plug 'ElmCast/elm-vim',  { 'for' : 'elm' }
-
-  Plug 'idris-hackers/idris-vim'
-
-  Plug 'vim-scripts/indentpython.vim'
-  Plug 'mustache/vim-mustache-handlebars'
 call plug#end()
 
 scriptencoding utf-8
 set encoding=utf-8
 
-set hidden  " for rust racer, for now...
+set hidden                        " for rust racer, for now...
 set shell=sh                      " avoid major fuck up with fish shell
 syntax on                         " show syntax highlighting
 filetype plugin indent on
@@ -73,6 +62,8 @@ set wildmenu                      " enable bash style tab completion
 set wildmode=list:longest,full
 set shortmess+=I
 set noswapfile
+set noshowcmd                    " Don't show the command as it is being typed in the bottom right
+set shell=/usr/local/bin/zsh
 
 set foldmethod=indent " Fold code based on indentation. Maybe switch to 'syntax'?
 set foldlevel=20      " Don't actually fold when opening a file, file by choice :D
@@ -84,16 +75,14 @@ let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 let g:netrw_banner       = 0
 let g:deoplete#enable_at_startup = 1
-
+let g:ackprg = 'rg --vimgrep --no-heading -i'
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
-let g:over_enable_auto_nohlsearch = 1
-
+"set termguicolors
 set background=dark
 colorscheme solarized
 
 let g:airline_theme = 'solarized'
-let g:rainbow#blacklist = [233, 234]
 
 set pastetoggle=<F2>
 
@@ -104,13 +93,7 @@ noremap gk k
 noremap H ^
 noremap L $
 
-command Q execute "qa!"
-
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_section_b = ''
-let g:airline_section_x = ''
-let g:airline_section_y = ''
+command! Q execute "qa!"
 
 au FileType rust nmap gd <Plug>(rust-def)
 au FileType rust nmap gs <Plug>(rust-def-split)
@@ -124,10 +107,14 @@ let g:RootIgnoreUseHome = 1
 
 let mapleader = "\<Space>"
 map <leader>S :so $MYVIMRC <cr>
-map <Leader>K :let &background = ( &background == "dark" ? "light" : "dark" )<cr>
+map <leader>K :let &background = ( &background == "dark" ? "light" : "dark" )<cr>
+map <F10> :let &background = ( &background == "dark" ? "light" : "dark" )<cr>
+map <leader>t :Ack "TODO\|FIXME"<cr>
 
 let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 map <c-p> :execute 'FZF'<CR>
+map <leader>g :execute 'GFiles?'<CR>
+
 
 "  eliminate white spaace
 nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>
@@ -148,7 +135,7 @@ let g:ale_linters = {
 " map . in visual mode
 vnoremap . :norm.<cr>
 
-nnoremap <silent> <Leader>g :call fzf#run({
+nnoremap <silent> <Leader>h :call fzf#run({
       \ 'down': '40%',
       \ 'source': "git grep " . expand("<cword>"),
       \ 'sink': function("Extract_from_grep"),
@@ -178,20 +165,60 @@ nnoremap <silent> <Leader>c :call fzf#run({
       \ 'sink': "e",
       \ })<CR>
 
-" --column: Show column number
-" --line-number: Show line number
-" --no-heading: Do not show file headings in results
-" --fixed-strings: Search term as a literal string
-" --ignore-case: Case insensitive search
-" --no-ignore: Do not respect .gitignore, etc...
-" --hidden: Search hidden files and folders
-" --follow: Follow symlinks
-" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-" --color: Search color options
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
-
-nnoremap <silent> <leader>s :Find<cr>
-
 " Ale
 nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>j <Plug>(ale_next_wrap)
+
+" Alchemist.VIM has its own shortcut for 'go to definition', remap to gd
+autocmd FileType elixir nmap <buffer> gd <c-]>
+
+" Open a potential readme if available
+
+function! Maybe_open_README()
+  if bufname('%') != ''
+    return
+  endif
+
+  let maybe_file = expand(globpath('.', 'README*'))
+  if filereadable(maybe_file)
+    execute 'edit '. s:escape(maybe_file)
+    execute 'set ft=markdown'
+  endif
+endfunction
+
+autocmd VimEnter * :call Maybe_open_README()
+
+
+"if has("gui_vimr")
+"  let g:terminal_color_0 = '#003541'
+"  let g:terminal_color_1 = '#dc322f'
+"  let g:terminal_color_2 = '#859901'
+"  let g:terminal_color_3 = '#b58901'
+"  let g:terminal_color_4 = '#268bd2'
+"  let g:terminal_color_5 = '#d33682'
+"  let g:terminal_color_6 = '#2aa198'
+"  let g:terminal_color_7 = '#eee8d5'
+"  let g:terminal_color_8 = '#002833'
+"  let g:terminal_color_9 = '#cb4b16'
+"  let g:terminal_color_10 = '#586e75'
+"  let g:terminal_color_11 = '#657b83'
+"  let g:terminal_color_12 = '#839496'
+"  let g:terminal_color_13 = '#6c6ec6'
+"  let g:terminal_color_14 = '#93a1a1'
+"  let g:terminal_color_15 = '#fdf6e3'
+"endif
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
