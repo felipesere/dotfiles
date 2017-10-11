@@ -1,11 +1,17 @@
 " Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
-  Plug 'altercation/vim-colors-solarized'
+  "Plug 'altercation/vim-colors-solarized'
+  Plug 'chriskempson/base16-vim'
+  Plug 'vim-airline/vim-airline-themes'
 
   Plug 'bling/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  Plug 'gabrielelana/vim-markdown'
+  Plug 'gabrielelana/vim-markdown', {'for' : 'markdown' }
+  Plug 'deanashton/vim-deckset', {'for' : 'markdown' }
   Plug 'mileszs/ack.vim'
+
+  Plug 'mxw/vim-jsx'
+
   Plug 'scrooloose/nerdtree'
 
   Plug 'Shougo/deoplete.nvim'
@@ -77,12 +83,13 @@ let g:netrw_banner       = 0
 let g:deoplete#enable_at_startup = 1
 let g:ackprg = 'rg --vimgrep --no-heading -i'
 let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:jsx_ext_required = 0
 
 "set termguicolors
 set background=dark
-colorscheme solarized
+colorscheme base16-default-dark
 
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'base16'
 
 set pastetoggle=<F2>
 
@@ -187,26 +194,6 @@ function! Maybe_open_README()
 endfunction
 
 autocmd VimEnter * :call Maybe_open_README()
-
-
-"if has("gui_vimr")
-"  let g:terminal_color_0 = '#003541'
-"  let g:terminal_color_1 = '#dc322f'
-"  let g:terminal_color_2 = '#859901'
-"  let g:terminal_color_3 = '#b58901'
-"  let g:terminal_color_4 = '#268bd2'
-"  let g:terminal_color_5 = '#d33682'
-"  let g:terminal_color_6 = '#2aa198'
-"  let g:terminal_color_7 = '#eee8d5'
-"  let g:terminal_color_8 = '#002833'
-"  let g:terminal_color_9 = '#cb4b16'
-"  let g:terminal_color_10 = '#586e75'
-"  let g:terminal_color_11 = '#657b83'
-"  let g:terminal_color_12 = '#839496'
-"  let g:terminal_color_13 = '#6c6ec6'
-"  let g:terminal_color_14 = '#93a1a1'
-"  let g:terminal_color_15 = '#fdf6e3'
-"endif
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
