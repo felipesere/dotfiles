@@ -1,16 +1,12 @@
 " Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
-  "Plug 'altercation/vim-colors-solarized'
   Plug 'chriskempson/base16-vim'
   Plug 'vim-airline/vim-airline-themes'
 
   Plug 'bling/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  Plug 'gabrielelana/vim-markdown', {'for' : 'markdown' }
-  Plug 'deanashton/vim-deckset', {'for' : 'markdown' }
+  Plug 'plasticboy/vim-markdown', {'for' : 'markdown' }
   Plug 'mileszs/ack.vim'
-
-  Plug 'mxw/vim-jsx'
 
   Plug 'scrooloose/nerdtree'
 
@@ -110,9 +106,13 @@ let g:racer_cmd="/Users/felipe/.cargo/bin/racer"
 let $RUST_SRC_PATH="/Users/felipe/.cargo/source/rustc-1.11.0/src"
 let $CARGO_HOME="/Users/felipe/.cargo"
 
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+
 let g:RootIgnoreUseHome = 1
 
 let mapleader = "\<Space>"
+let maplocalleader = ";"
 map <leader>S :so $MYVIMRC <cr>
 map <leader>K :let &background = ( &background == "dark" ? "light" : "dark" )<cr>
 map <F10> :let &background = ( &background == "dark" ? "light" : "dark" )<cr>
@@ -131,6 +131,7 @@ map <silent> <leader>, :nohl<cr>
 nmap <F1> :echo<CR>
 imap <F1> <C-o>:echo<CR>
 
+let NERDTreeQuitOnOpen=1
 nnoremap <silent> <leader>f :NERDTreeToggle<CR>
 nnoremap <silent> <leader>F :NERDTreeFind<CR>
 

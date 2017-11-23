@@ -18,3 +18,5 @@ setopt hash_list_all         # whenever a command completion is attempted, make 
 setopt completeinword        # not just at the end
 setopt noshwordsplit         # use zsh style word splitting
 setopt interactivecomments   # allow use of comments in interactive code
+
+zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
