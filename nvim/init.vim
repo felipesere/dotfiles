@@ -5,13 +5,19 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'bling/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  Plug 'plasticboy/vim-markdown', {'for' : 'markdown' }
   Plug 'mileszs/ack.vim'
+
+  Plug 'plasticboy/vim-markdown', {'for' : 'markdown' }
+  Plug 'dpelle/vim-LanguageTool', {'for' : 'markdown' }
 
   Plug 'scrooloose/nerdtree'
 
   Plug 'Shougo/deoplete.nvim'
   Plug 'ervandew/supertab'
+
+  Plug 'hashivim/vim-terraform'
+
+  Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
 
   Plug 'tpope/vim-endwise'
   Plug 'alvan/vim-closetag', { 'for' : ['eelixir', 'html'] }
@@ -19,12 +25,12 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
-  Plug 'elixir-editors/vim-elixir',  { 'for' : ['elixir', 'eelixir'] }
-  Plug 'slashmili/alchemist.vim', { 'for' : ['elixir', 'eelixir'] }
-  Plug 'cespare/vim-toml', { 'for' : 'toml' }
+  Plug 'rust-lang/rust.vim', {'for' : 'rust' }
 
-  Plug 'racer-rust/vim-racer', { 'for' : 'rust' }
-  Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
+  Plug 'elixir-editors/vim-elixir',  { 'for' : ['elixir', 'eelixir'] }
+  "Plug 'slashmili/alchemist.vim', { 'for' : ['elixir', 'eelixir'] }
+  Plug 'kana/vim-textobj-user'
+  Plug 'andyl/vim-textobj-elixir'
 
   Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
   Plug 'w0rp/ale'
@@ -73,6 +79,8 @@ set foldlevel=20      " Don't actually fold when opening a file, file by choice 
 set updatetime=250
 set list listchars=tab:»\ ,trail:·
 
+set grepprg=rg\ --vimgrep
+
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 let g:netrw_banner       = 0
@@ -80,6 +88,7 @@ let g:deoplete#enable_at_startup = 1
 let g:ackprg = 'rg --vimgrep --no-heading -i'
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:jsx_ext_required = 0
+let g:languagetool_jar = '/usr/local/Cellar/languagetool/4.0/libexec/languagetool-commandline.jar'
 
 "set termguicolors
 set background=dark
@@ -105,6 +114,7 @@ au FileType rust nmap gx <Plug>(rust-def-vertical)
 let g:racer_cmd="/Users/felipe/.cargo/bin/racer"
 let $RUST_SRC_PATH="/Users/felipe/.cargo/source/rustc-1.11.0/src"
 let $CARGO_HOME="/Users/felipe/.cargo"
+let g:autofmt_autosave = 1
 
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
@@ -148,6 +158,13 @@ nnoremap <silent> <Leader>h :call fzf#run({
       \ 'source': "git grep " . expand("<cword>"),
       \ 'sink': function("Extract_from_grep"),
       \ })<CR>
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
 nnoremap <silent> <Leader>G :call fzf#run({
       \ 'down': '40%',
