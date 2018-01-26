@@ -7,13 +7,15 @@ export HISTFILE=~/.histfile
 export HISTSIZE=10000
 export SAVEHIST=1000
 export WORDCHARS=''
-export PATH=$PATH:/Users/felipe/bin:/Users/felipe/.cargo/bin
-export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob \!.git'
 export ENHANCD_FILTER=$(which fzf)
 export ENHANCD_DISABLE_DOT=1
 
-export RUST_SRC_PATH="/Users/felipe/.cargo/source/rustc-1.11.0/src"
-export CARGO_HOME="/Users/felipe/.cargo"
+# Local binaries
+export PATH=$PATH:/Users/felipesere/bin
+
+#export RUST_SRC_PATH="/Users/felipe/.cargo/source/rustc-1.11.0/src"
+#export CARGO_HOME="/Users/felipe/.cargo"
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
@@ -50,13 +52,20 @@ alias vim="nvim"
 alias vi="nvim"
 
 # Chruby - The Switcher Of Rubies.
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
-chruby 2.4.1
+[ -f /usr/local/share/chruby/chruby.sh ] && source /usr/local/share/chruby/chruby.sh
+[ -f /usr/local/share/chruby/chruby.sh ] && source /usr/local/share/chruby/auto.sh
+if which chruby > /dev/null; then chruby 2.4.1; fi
 
+# Kiex
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
-if which jenv > /dev/null; then eval "$(jenv init -)"; fi
+
+# iterm2 integrations
+[ -f ~/.dotfiles/iterm2/it2setkeylabel ] && export PATH=$PATH:~/.dotfiles/iterm2
+
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-alias typora="open -a typora"
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home
+
+[ -f ~/.work ] && source ~/.work

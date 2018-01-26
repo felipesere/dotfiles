@@ -1,4 +1,3 @@
-# ~/Development/elm/ttt at master <untracked filed><staged files><stash><to-be-pushed><merging|rebasing>
 zstyle ':vcs_info:*' enable git
 precmd() {
   vcs_info
@@ -27,4 +26,4 @@ if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && git st
 
 
 zstyle ':vcs_info:git*' formats " %{on %{$fg[blue]%}%b%{$reset_color%} %m%u%c% %{$fg[red]%}%a%{$reset_color%}"
-PROMPT='%{$fg[magenta]%}$(shrink_path -f)%{$reset_color%}${vcs_info_msg_0_}%{$reset_color%} » '
+PROMPT='%{$fg[magenta]%}$(shrink_path -f)%{$reset_color%}%(1j. ‼️ .)${vcs_info_msg_0_}%{$reset_color%} » '
