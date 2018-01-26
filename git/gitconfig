@@ -1,19 +1,20 @@
 [user]
   name  = Felipe Sere
   email = felipesere@gmail.com
+	signingkey = B12F040F934D78D0
 
 [github]
   user = felipesere
 
 [core]
-  pager = less -r -FX
+  pager = diff-so-fancy | less --tabs=4 -RFX
   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
   autocrlf = input
   safecrlf = true
   excludesfile = /Users/felipe/.gitignore
   ignorecase = false
   quotepath = false
-  editor = "nvim -f -c'startinsert|norm! ggA '"
+  editor = "nvim"
 
 [web]
   browser = open
@@ -85,3 +86,7 @@
   path = nvim
 [ghi]
 	token = !security find-internet-password -a felipesere -s github.com -l 'ghi token' -w
+[commit]
+	gpgsign = true
+[diff-so-fancy]
+	markEmptyLines = false
