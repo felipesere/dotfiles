@@ -27,7 +27,6 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:*:*:*' menu select
 
 source "$HOME/.dotfiles/zsh-minimal/plugins.zsh"
-source "$HOME/.dotfiles/zsh-minimal/prompt.zsh"
 source "$HOME/.dotfiles/zsh-minimal/options.zsh"
 
 bindkey -e
