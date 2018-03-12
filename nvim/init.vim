@@ -2,43 +2,43 @@
 call plug#begin('~/.config/nvim/plugged')
 
   Plug 'rakr/vim-one'
-  
+
   Plug 'bling/vim-airline'
-  
+
   Plug 'plasticboy/vim-markdown', {'for' : 'markdown' }
   Plug 'dpelle/vim-LanguageTool', {'for' : 'markdown' }
-  
+
   Plug 'scrooloose/nerdtree'
-  
+
   Plug 'Shougo/deoplete.nvim'
   Plug 'ervandew/supertab'
-  
+
   Plug 'hashivim/vim-terraform'
-  
+
   Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
-  
+
   Plug 'tpope/vim-endwise'
   Plug 'alvan/vim-closetag', { 'for' : ['eelixir', 'html'] }
-  
+
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-  
+
   Plug 'rust-lang/rust.vim', {'for' : 'rust' }
-  
+
   Plug 'elixir-editors/vim-elixir',  { 'for' : ['elixir', 'eelixir'] }
-  
+
   Plug 'Chiel92/vim-autoformat'
-  
+
   Plug 'kana/vim-textobj-user'
   Plug 'andyl/vim-textobj-elixir'
-  
+
   Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
   Plug 'w0rp/ale'
-  
+
   Plug 'cakebaker/scss-syntax.vim', { 'for' : ['scss', 'css'] }
-  
+
   Plug 'ElmCast/elm-vim',  { 'for' : 'elm' }
-  
+
   " My own
   Plug 'felipesere/vim-open-readme'
 call plug#end()
@@ -95,16 +95,16 @@ set background=dark
 let g:one_allow_italics=1
 let g:airline_theme='one'
 
-call one#highlight('DiffDelete', '', 'ffffff', 'none')
-call one#highlight('DiffAdd',    '', 'ffffff', 'none')
-call one#highlight('DiffChange', '', 'ffffff', 'none')
-call one#highlight('DiffDelete', '', 'ffffff', 'none')
-call one#highlight('DiffText',   '', 'ffffff', 'none')
-call one#highlight('DiffAdded',  '', 'ffffff', 'none')
-call one#highlight('DiffFile',   '', 'ffffff', 'none')
-call one#highlight('DiffNewFile','', 'ffffff', 'none')
-call one#highlight('DiffLine',   '', 'ffffff', 'none')
-call one#highlight('DiffRemoved','', 'ffffff', 'none')
+call one#highlight('DiffDelete', '', 16, 'none')
+call one#highlight('DiffAdd',    '', 16, 'none')
+call one#highlight('DiffChange', '', 16, 'none')
+call one#highlight('DiffDelete', '', 16, 'none')
+call one#highlight('DiffText',   '', 16, 'none')
+call one#highlight('DiffAdded',  '', 16, 'none')
+call one#highlight('DiffFile',   '', 16, 'none')
+call one#highlight('DiffNewFile','', 16, 'none')
+call one#highlight('DiffLine',   '', 16, 'none')
+call one#highlight('DiffRemoved','', 16, 'none')
 
 set pastetoggle=<F2>
 
