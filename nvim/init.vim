@@ -1,43 +1,46 @@
 " Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
-  Plug 'chriskempson/base16-vim'
-  Plug 'vim-airline/vim-airline-themes'
 
+  Plug 'rakr/vim-one'
+  
   Plug 'bling/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'mileszs/ack.vim'
-
+  
   Plug 'plasticboy/vim-markdown', {'for' : 'markdown' }
   Plug 'dpelle/vim-LanguageTool', {'for' : 'markdown' }
-
+  
   Plug 'scrooloose/nerdtree'
-
+  
   Plug 'Shougo/deoplete.nvim'
   Plug 'ervandew/supertab'
-
+  
   Plug 'hashivim/vim-terraform'
-
+  
   Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
-
+  
   Plug 'tpope/vim-endwise'
   Plug 'alvan/vim-closetag', { 'for' : ['eelixir', 'html'] }
-
+  
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-
+  
   Plug 'rust-lang/rust.vim', {'for' : 'rust' }
-
+  
   Plug 'elixir-editors/vim-elixir',  { 'for' : ['elixir', 'eelixir'] }
-  "Plug 'slashmili/alchemist.vim', { 'for' : ['elixir', 'eelixir'] }
+  
+  Plug 'Chiel92/vim-autoformat'
+  
   Plug 'kana/vim-textobj-user'
   Plug 'andyl/vim-textobj-elixir'
-
+  
   Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
   Plug 'w0rp/ale'
-
+  
   Plug 'cakebaker/scss-syntax.vim', { 'for' : ['scss', 'css'] }
-
+  
   Plug 'ElmCast/elm-vim',  { 'for' : 'elm' }
+  
+  " My own
+  Plug 'felipesere/vim-open-readme'
 call plug#end()
 
 scriptencoding utf-8
