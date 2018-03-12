@@ -7,15 +7,15 @@ export HISTFILE=~/.histfile
 export HISTSIZE=10000
 export SAVEHIST=1000
 export WORDCHARS=''
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob \!.git'
+export FZF_DEFAULT_COMMAND='rg --files --follow --glob \!.git'
 export ENHANCD_FILTER=$(which fzf)
 export ENHANCD_DISABLE_DOT=1
+export RIPGREP_CONFIG_PATH=~/.ripgrep
 
 # Local binaries
-export PATH=$PATH:/Users/felipesere/bin
+export PATH=$PATH:/Users/felipesere/bin:
 
-#export RUST_SRC_PATH="/Users/felipe/.cargo/source/rustc-1.11.0/src"
-#export CARGO_HOME="/Users/felipe/.cargo"
+tic ~/.dotfiles/iterm2/xterm-256color-italic.terminfo
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
@@ -49,6 +49,7 @@ zstyle :compinstall filename "$HOME/.zshrc"
 
 alias vim="nvim"
 alias vi="nvim"
+alias cdg="cd $(git root)"
 
 # Chruby - The Switcher Of Rubies.
 [ -f /usr/local/share/chruby/chruby.sh ] && source /usr/local/share/chruby/chruby.sh
@@ -68,3 +69,6 @@ test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home
 
 [ -f ~/.work ] && source ~/.work
+
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
