@@ -126,6 +126,7 @@ map <leader>D :let &background = ( &background == "dark" ? "light" : "dark" )<cr
 
 map <c-p> :execute 'FZF'<CR>
 map <leader>g :execute 'GFiles?'<CR>
+map :W :w
 
 "  eliminate white spaace
 nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>
