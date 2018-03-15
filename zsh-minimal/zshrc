@@ -7,7 +7,7 @@ export HISTFILE=~/.histfile
 export HISTSIZE=10000
 export SAVEHIST=1000
 export WORDCHARS=''
-export ENHANCD_FILTER=$(which fzf)
+export ENHANCD_FILTER="$(which fzf) --reverse --height 50%"
 export ENHANCD_DISABLE_DOT=1
 export RIPGREP_CONFIG_PATH=~/.ripgrep
 
@@ -26,6 +26,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:*:*:*' menu select
 
 source "$HOME/.dotfiles/zsh-minimal/plugins.zsh"
+source "$HOME/.dotfiles/zsh-minimal/theme.zsh"
 source "$HOME/.dotfiles/zsh-minimal/options.zsh"
 
 bindkey -e
