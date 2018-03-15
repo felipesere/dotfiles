@@ -7,7 +7,6 @@ export HISTFILE=~/.histfile
 export HISTSIZE=10000
 export SAVEHIST=1000
 export WORDCHARS=''
-export FZF_DEFAULT_COMMAND='rg --files --follow --glob \!.git'
 export ENHANCD_FILTER=$(which fzf)
 export ENHANCD_DISABLE_DOT=1
 export RIPGREP_CONFIG_PATH=~/.ripgrep
@@ -71,3 +70,12 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home
 
 source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+
+
+rg() {
+    if [ -t 1 ]; then
+        command rg -p "$@" | less -RFX
+    else
+        command rg "$@"
+    fi
+}
