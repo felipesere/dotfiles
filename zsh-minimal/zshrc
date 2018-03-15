@@ -49,7 +49,6 @@ zstyle :compinstall filename "$HOME/.zshrc"
 
 alias vim="nvim"
 alias vi="nvim"
-alias cdg="cd $(git root)"
 
 # Chruby - The Switcher Of Rubies.
 [ -f /usr/local/share/chruby/chruby.sh ] && source /usr/local/share/chruby/chruby.sh
