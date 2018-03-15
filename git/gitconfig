@@ -77,13 +77,10 @@
   outgoing   = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short @{u}..
   conflicts = diff --name-only --diff-filter=U
   sha = rev-parse --short HEAD
+  root = rev-parse --show-toplevel
 
 [credential]
   helper = osxkeychain
-[mergetool]
-  path = nvim
-[mergetool "vimdiff"]
-  path = nvim
 [ghi]
 	token = !security find-internet-password -a felipesere -s github.com -l 'ghi token' -w
 [commit]
