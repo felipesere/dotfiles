@@ -1,5 +1,3 @@
-source ~/.dotfiles/zsh-minimal/shrink-path.plugin.zsh
-
 source <(antibody init)
 antibody bundle denysdovhan/spaceship-prompt
 
