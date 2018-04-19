@@ -51,6 +51,7 @@ zstyle :compinstall filename "$HOME/.zshrc"
 
 alias vim="nvim"
 alias vi="nvim"
+alias ls="exa -l"
 
 # Kiex
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
