@@ -80,3 +80,14 @@ rg() {
         command rg "$@"
     fi
 }
+
+c() {
+  IN_REPO=$(git rev-parse --is-inside-work-tree)
+  if [ "$IN_REPO" = "true" ]; then
+    builtin cd -q $(git root)
+  fi
+}
+
+title() {
+    echo -ne "\033]0;"$*"\007"
+}
