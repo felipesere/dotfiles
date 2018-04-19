@@ -52,11 +52,6 @@ zstyle :compinstall filename "$HOME/.zshrc"
 alias vim="nvim"
 alias vi="nvim"
 
-# Chruby - The Switcher Of Rubies.
-[ -f /usr/local/share/chruby/chruby.sh ] && source /usr/local/share/chruby/chruby.sh
-[ -f /usr/local/share/chruby/chruby.sh ] && source /usr/local/share/chruby/auto.sh
-if which chruby > /dev/null; then chruby 2.4.1; fi
-
 # Kiex
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 
