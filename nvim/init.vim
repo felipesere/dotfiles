@@ -1,4 +1,7 @@
-" Install basic plugins
+" some of the plugins need python which gets confused in virtualenv
+let g:python3_host_prog='/usr/local/bin/python3'
+
+ "Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
 
   Plug 'rakr/vim-one'
@@ -10,7 +13,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'scrooloose/nerdtree'
 
-  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-completion-manager'
   Plug 'ervandew/supertab'
 
   Plug 'hashivim/vim-terraform'
@@ -24,20 +27,19 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'junegunn/fzf.vim'
 
   Plug 'rust-lang/rust.vim', {'for' : 'rust' }
+  Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 
   Plug 'elixir-editors/vim-elixir',  { 'for' : ['elixir', 'eelixir'] }
 
-  Plug 'Chiel92/vim-autoformat'
-
-  Plug 'kana/vim-textobj-user'
-  Plug 'andyl/vim-textobj-elixir'
-
   Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
+  Plug 'mxw/vim-jsx'
+  Plug 'elzr/vim-json'
+
   Plug 'w0rp/ale'
 
-  Plug 'cakebaker/scss-syntax.vim', { 'for' : ['scss', 'css'] }
+  Plug 'sbdchd/neoformat'
 
-  Plug 'ElmCast/elm-vim',  { 'for' : 'elm' }
+  Plug 'junegunn/goyo.vim'
 
   " My own
   Plug 'felipesere/vim-open-readme'
@@ -71,7 +73,7 @@ set laststatus=2                  " always show status bar
 set clipboard=unnamed             " use the system clipboard
 set wildmenu                      " enable bash style tab completion
 set wildmode=list:longest,full
-set shortmess+=I
+set shortmess+=Ic
 set noswapfile
 set noshowcmd                    " Don't show the command as it is being typed in the bottom right
 set shell=/usr/local/bin/zsh
@@ -81,6 +83,9 @@ set updatetime=250
 set list listchars=tab:»\ ,trail:· " change  the way empty trailing whitespace and tabs look
 set grepprg=rg\ --vimgrep        " use ripgrep when grepping in vim
 
+"autocmd BufWritePre *.js Neoformat
+autocmd BufWritePre *.py Neoformat
+
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 let g:netrw_banner       = 0
@@ -88,6 +93,18 @@ let g:deoplete#enable_at_startup = 1
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:jsx_ext_required = 0
 let g:languagetool_jar = '/usr/local/Cellar/languagetool/4.0/libexec/languagetool-commandline.jar'
+let g:vim_json_syntax_conceal = 0
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ }
+
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+" Maps K to hover, gd to goto definition, F2 to rename
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<cr>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
 
 set termguicolors
 colorscheme one
@@ -132,10 +149,6 @@ map :W :w
 nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>
 map <silent> <leader>, :nohl<cr>
 
-" unmap F1 help
-nmap <F1> :echo<CR>
-imap <F1> <C-o>:echo<CR>
-
 nnoremap <silent> <leader>f :NERDTreeToggle<CR>
 nnoremap <silent> <leader>F :NERDTreeFind<CR>
 
@@ -147,58 +160,22 @@ let g:ale_linters = {
 " map . in visual mode
 vnoremap . :norm.<cr>
 
-nnoremap <silent> <Leader>h :call fzf#run({
-      \ 'down': '40%',
-      \ 'source': "git grep " . expand("<cword>"),
-      \ 'sink': function("Extract_from_grep"),
-      \ })<CR>
-
-command! -bang -nargs=* Rg
-      \ call fzf#vim#grep(
-      \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \   <bang>0)
-
-nnoremap <silent> <Leader>G :call fzf#run({
-      \ 'down': '40%',
-      \ 'source': "git grep -l " . expand("<cword>"),
-      \ 'sink': "e",
-      \ })<CR>
-
-function! s:escape(path)
-  return substitute(a:path, ' ', '\\ ', 'g')
-endfunction
-
-function! Extract_from_grep(line)
-  let parts = split(a:line, ':')
-  let [fn, lno] = parts[0 : 1]
-  execute 'e '. s:escape(fn)
-  execute lno
-  normal! zz
-endfunction
-
-nnoremap <silent> <Leader>c :call fzf#run({
-      \ 'down': '40%',
-      \ 'source': "git diff --name-only HEAD",
-      \ 'sink': "e",
-      \ })<CR>
-
 " Ale
 nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>j <Plug>(ale_next_wrap)
 
-" Customize fzf colors to match your color scheme
-let g:fzf_colors =
-      \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
-      \ 'hl':      ['fg', 'Comment'],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-      \ 'hl+':     ['fg', 'Statement'],
-      \ 'info':    ['fg', 'PreProc'],
-      \ 'prompt':  ['fg', 'Conditional'],
-      \ 'pointer': ['fg', 'Exception'],
-      \ 'marker':  ['fg', 'Keyword'],
-      \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Comment'] }
+
+command! -bang -nargs=1 Search
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '. shellescape(expand('<args>')), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+nmap <silent> <Leader>s :execute 'Find'<CR>
+command! -bang -nargs=* Find
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '. shellescape(expand('<cword>')), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
