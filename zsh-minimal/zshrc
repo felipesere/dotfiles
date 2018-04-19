@@ -10,9 +10,11 @@ export WORDCHARS=''
 export ENHANCD_FILTER="$(which fzf) --reverse --height 50%"
 export ENHANCD_DISABLE_DOT=1
 export RIPGREP_CONFIG_PATH=~/.ripgrep
+export FZF_DEFAULT_COMMAND="rg --files"
+export PIPENV_VENV_IN_PROJECT="true"
 
 # Local binaries
-export PATH=$PATH:/Users/felipesere/bin:
+export PATH=$PATH:/Users/felipesere/bin
 
 tic ~/.dotfiles/iterm2/xterm-256color-italic.terminfo
 
