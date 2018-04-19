@@ -60,6 +60,7 @@
 [alias]
   a   = add -u
   b   = branch
+  bb  = !git-br
   aa  = add --all :/
   c   = commit -v
   co  = checkout
@@ -68,13 +69,13 @@
   dw  = diff --color-words
   s   = status -s -b
   w   = whatchanged --decorate -p
-  l   = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short
-  ld  = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short --since=1.days
-  lw  = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short --since=1.weeks
+  l   = !git ll -20
+  ll  = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short
+  ld  = !git ll --since 1.days.ago
+  lw  = !git ll --since 1.weeks.ago
   lg  = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  ll  = log --pretty=format:'%C(yellow)%h%Cred%d %Creset %s%Cblue [%Cgreen%cn%Creset%Cblue]' --decorate --numstat
-  incoming   = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short ..@{u}
-  outgoing   = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short @{u}..
+  incoming   = !git l ..@{u}
+  outgoing   = !git l @{u}..
   conflicts = diff --name-only --diff-filter=U
   sha = rev-parse --short HEAD
   root = rev-parse --show-toplevel
