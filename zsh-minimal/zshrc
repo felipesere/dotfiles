@@ -16,7 +16,7 @@ export PIPENV_VENV_IN_PROJECT="true"
 # Local binaries
 export PATH=$PATH:/Users/felipesere/bin
 
-tic ~/.dotfiles/iterm2/xterm-256color-italic.terminfo
+#tic ~/.dotfiles/iterm2/xterm-256color-italic.terminfo
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
@@ -27,7 +27,7 @@ autoload -Uz vcs_info
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:*:*:*' menu select
 
-source "$HOME/.dotfiles/zsh-minimal/plugins.zsh"
+source "$HOME/.dotfiles/zsh-minimal/plugins-static.sh"
 source "$HOME/.dotfiles/zsh-minimal/theme.zsh"
 source "$HOME/.dotfiles/zsh-minimal/options.zsh"
 
@@ -54,22 +54,19 @@ alias vi="nvim"
 alias ls="exa -l"
 
 # Kiex
-test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
+[ -f ~/.kiex/scripts/kiex ] && source "$HOME/.kiex/scripts/kiex"
 
 # iterm2 integrations
-[ -f ~/.dotfiles/iterm2/it2setkeylabel ] && export PATH=$PATH:~/.dotfiles/iterm2
+#[ -f ~/.dotfiles/iterm2/it2setkeylabel ] && export PATH=$PATH:~/.dotfiles/iterm2
 
-
+# node version management
+n 9.8.0
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
 [ -f ~/.work ] && source ~/.work
-
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-
 
 rg() {
     if [ -t 1 ]; then
@@ -80,7 +77,7 @@ rg() {
 }
 
 c() {
-  IN_REPO=$(git rev-parse --is-inside-work-tree)
+  IN_REPO=$(git rev-parse --is-inside-work-tree 2&> /dev/null)
   if [ "$IN_REPO" = "true" ]; then
     builtin cd -q $(git root)
   fi
@@ -89,3 +86,15 @@ c() {
 title() {
     echo -ne "\033]0;"$*"\007"
 }
+
+adjust_title_to_iterm() {
+  IN_REPO=$(git rev-parse --is-inside-work-tree 2&> /dev/null)
+  if [ "$IN_REPO" = "true" ]; then
+    PATH_IN_GIT=$(git root)
+    title $(basename $PATH_IN_GIT)
+  fi
+}
+
+chpwd_functions+=adjust_title_to_iterm
+
+adjust_title_to_iterm
