@@ -5,11 +5,9 @@ let g:python3_host_prog='/usr/local/bin/python3'
 call plug#begin('~/.config/nvim/plugged')
 
   Plug 'rakr/vim-one'
-
-  Plug 'bling/vim-airline'
+  Plug 'vim-airline/vim-airline'
 
   Plug 'plasticboy/vim-markdown', {'for' : 'markdown' }
-  Plug 'dpelle/vim-LanguageTool', {'for' : 'markdown' }
 
   Plug 'scrooloose/nerdtree'
 
@@ -21,14 +19,18 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
 
   Plug 'tpope/vim-endwise'
+  Plug 'tpope/vim-fugitive'
+
   Plug 'alvan/vim-closetag', { 'for' : ['eelixir', 'html'] }
 
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
   Plug 'rust-lang/rust.vim', {'for' : 'rust' }
-  Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-
+  Plug 'autozimu/LanguageClient-neovim', {
+        \ 'branch': 'next',
+        \ 'do': 'bash install.sh',
+        \ }
   Plug 'elixir-editors/vim-elixir',  { 'for' : ['elixir', 'eelixir'] }
 
   Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
@@ -89,14 +91,14 @@ autocmd BufWritePre *.py Neoformat
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 let g:netrw_banner       = 0
-let g:deoplete#enable_at_startup = 1
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:jsx_ext_required = 0
-let g:languagetool_jar = '/usr/local/Cellar/languagetool/4.0/libexec/languagetool-commandline.jar'
 let g:vim_json_syntax_conceal = 0
 
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['javascript-typescript-stdio'],
     \ }
 
 " Automatically start language servers.
@@ -104,12 +106,14 @@ let g:LanguageClient_autoStart = 1
 
 " Maps K to hover, gd to goto definition, F2 to rename
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<cr>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
+autocmd FileType javascript,jsx,rust nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
+nnoremap <silent> <F6> :call LanguageClient_textDocument_rename()<cr>
 
 set termguicolors
 colorscheme one
 set background=dark
 let g:one_allow_italics=1
+
 let g:airline_theme='one'
 
 call one#highlight('DiffDelete', '', 16, 'none')
@@ -144,9 +148,10 @@ map <leader>D :let &background = ( &background == "dark" ? "light" : "dark" )<cr
 map <c-p> :execute 'FZF'<CR>
 map <leader>g :execute 'GFiles?'<CR>
 map :W :w
+map <leader>w :execute 'Windows'<CR>
 
 "  eliminate white spaace
-nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>
+nnoremap <leader>; mz:%s/\s\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>
 map <silent> <leader>, :nohl<cr>
 
 nnoremap <silent> <leader>f :NERDTreeToggle<CR>
@@ -164,10 +169,9 @@ vnoremap . :norm.<cr>
 nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>j <Plug>(ale_next_wrap)
 
-
 command! -bang -nargs=1 Search
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '. shellescape(expand('<args>')), 1,
+  \   'rg --column --line-number --no-heading --color=always --fixed-strings '. shellescape(expand('<args>')), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
@@ -175,7 +179,7 @@ command! -bang -nargs=1 Search
 nmap <silent> <Leader>s :execute 'Find'<CR>
 command! -bang -nargs=* Find
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '. shellescape(expand('<cword>')), 1,
+  \   'rg --column --line-number --no-heading --color=always --fixed-strings '. shellescape(expand('<cword>')), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
