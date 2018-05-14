@@ -1,6 +1,6 @@
 [user]
-  name  = Felipe Sere
-  email = felipesere@gmail.com
+	name = Felipe Sere
+	email = felipesere@gmail.com
 	signingkey = B12F040F934D78D0
 
 [github]
@@ -11,7 +11,7 @@
   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
   autocrlf = input
   safecrlf = true
-  excludesfile = /Users/felipe/.gitignore
+  excludesfile = /Users/felipesere/.gitignore
   ignorecase = false
   quotepath = false
   editor = "nvim"
