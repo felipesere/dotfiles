@@ -1,6 +1,9 @@
 # Created by https://www.gitignore.io
-#
+.nvimrc
+
 .nyc_output
+
+jsconfig.json
 
 tags
 

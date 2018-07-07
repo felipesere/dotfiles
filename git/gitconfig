@@ -1,7 +1,7 @@
 [user]
-	name = Felipe Sere
-	email = felipesere@gmail.com
-	signingkey = B12F040F934D78D0
+  name = Felipe Sere
+  email = felipesere@gmail.com
+  signingkey = B12F040F934D78D0
 
 [github]
   user = felipesere
@@ -83,8 +83,8 @@
 [credential]
   helper = osxkeychain
 [ghi]
-	token = !security find-internet-password -a felipesere -s github.com -l 'ghi token' -w
+  token = !security find-internet-password -a felipesere -s github.com -l 'ghi token' -w
 [commit]
-	gpgsign = true
+  gpgsign = true
 [diff-so-fancy]
-	markEmptyLines = false
+  markEmptyLines = false
