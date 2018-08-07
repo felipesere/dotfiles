@@ -5,17 +5,19 @@ let g:python3_host_prog='/usr/local/bin/python3'
 call plug#begin('~/.config/nvim/plugged')
 
   Plug 'rakr/vim-one'
+  Plug 'chriskempson/base16-vim'
+  Plug 'mhartington/oceanic-next'
+
   Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
 
   Plug 'plasticboy/vim-markdown', {'for' : 'markdown' }
 
   Plug 'scrooloose/nerdtree'
 
-  Plug 'roxma/nvim-completion-manager'
   Plug 'ervandew/supertab'
 
   Plug 'hashivim/vim-terraform'
-
   Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
 
   Plug 'tpope/vim-endwise'
@@ -37,11 +39,11 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'mxw/vim-jsx'
   Plug 'elzr/vim-json'
 
+  Plug 'ElmCast/elm-vim'
+
   Plug 'w0rp/ale'
 
   Plug 'sbdchd/neoformat'
-
-  Plug 'junegunn/goyo.vim'
 
   " My own
   Plug 'felipesere/vim-open-readme'
