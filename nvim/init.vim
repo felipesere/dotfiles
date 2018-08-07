@@ -90,8 +90,10 @@ set exrc                         " Allow project specif vim configs
 set secure                       " Prevent :autocmd, shell and write commands from being run inside project-specific .vimrc files unless they’re owned by you.
 
 
-"autocmd BufWritePre *.js Neoformat
-autocmd BufWritePre *.py Neoformat
+augroup fmt
+  autocmd!
+  autocmd BufWritePre *.py,*.rs, undojoin | Neoformat
+augroup END
 
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
