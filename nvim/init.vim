@@ -84,6 +84,9 @@ set foldlevel=20                 " Don't actually fold when opening a file, file
 set updatetime=250
 set list listchars=tab:»\ ,trail:· " change  the way empty trailing whitespace and tabs look
 set grepprg=rg\ --vimgrep        " use ripgrep when grepping in vim
+set exrc                         " Allow project specif vim configs
+set secure                       " Prevent :autocmd, shell and write commands from being run inside project-specific .vimrc files unless they’re owned by you.
+
 
 "autocmd BufWritePre *.js Neoformat
 autocmd BufWritePre *.py Neoformat
