@@ -132,6 +132,8 @@ call one#highlight('DiffNewFile','', 16, 'none')
 call one#highlight('DiffLine',   '', 16, 'none')
 call one#highlight('DiffRemoved','', 16, 'none')
 
+let g:airline#extensions#branch#enabled = 0
+
 set pastetoggle=<F2>
 
 noremap j gj
