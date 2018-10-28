@@ -159,6 +159,7 @@ map <leader>g :execute 'GFiles?'<CR>
 map :W :w
 map <leader>w :execute 'Windows'<CR>
 
+
 "  eliminate white spaace
 nnoremap <leader>; mz:%s/\s\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>
 map <silent> <leader>, :nohl<cr>
@@ -177,6 +178,15 @@ vnoremap . :norm.<cr>
 " Ale
 nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>j <Plug>(ale_next_wrap)
+
+function! s:all_files()
+  return filter(filter(v:oldfiles, "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|.git/'"), 'match(v:val, getcwd()) == 0')
+endfunction
+
+command! Recent call fzf#run(fzf#wrap({
+      \  'source':  s:all_files(),
+      \  'options': '-m -x +s',
+      \  'down':    '60%'}))
 
 command! -bang -nargs=1 Search
   \ call fzf#vim#grep(
