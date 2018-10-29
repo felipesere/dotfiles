@@ -188,12 +188,13 @@ command! Recent call fzf#run(fzf#wrap({
       \  'options': '-m -x +s',
       \  'down':    '60%'}))
 
-command! -bang -nargs=1 Search
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --fixed-strings '. shellescape(expand('<args>')), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
+command! -bang -nargs=1 Search call fzf#run(fzf#wrap({
+      \  'source':  'rg --column --line-number --no-heading --files-with-matches --fixed-strings '. shellescape(expand('<args>')),
+      \  'options': ['--ansi', '--prompt', 'Search > ',
+      \              '--multi', '--bind', 'alt-a:select-all,alt-d:deselect-all',
+      \              '--preview="/Users/felipesere/.cargo/bin/bat --style=numbers --color=always"', 
+      \              '--color', 'hl:4,hl+:12'],
+      \  'down':    '60%'}))
 
 nmap <silent> <Leader>s :execute 'Find'<CR>
 command! -bang -nargs=* Find
