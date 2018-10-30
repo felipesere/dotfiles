@@ -74,8 +74,8 @@
   ld  = !git ll --since 1.days.ago
   lw  = !git ll --since 1.weeks.ago
   lg  = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  incoming   = !git l ..@{u}
-  outgoing   = !git l @{u}..
+  incoming   = !git ll ..@{u}
+  outgoing   = !git ll @{u}..
   conflicts = diff --name-only --diff-filter=U
   sha = rev-parse --short HEAD
   root = rev-parse --show-toplevel
