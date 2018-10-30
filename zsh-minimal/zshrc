@@ -11,10 +11,15 @@ export ENHANCD_FILTER="$(which fzf) --reverse --height 50%"
 export ENHANCD_DISABLE_DOT=1
 export RIPGREP_CONFIG_PATH=~/.ripgrep
 export FZF_DEFAULT_COMMAND="rg --files"
+export FZF_CTRL_T_COMMAND="rg --files"
 export PIPENV_VENV_IN_PROJECT="true"
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
+export BAT_THEME="TwoDark"
+export BAT_STYLE="numbers"
+
 
 # Local binaries
-export PATH=$PATH:/Users/felipesere/bin
+export PATH=$PATH:/usr/local/bin:/$HOME/bin
 
 #tic ~/.dotfiles/iterm2/xterm-256color-italic.terminfo
 
@@ -69,17 +74,17 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 [ -f ~/.work ] && source ~/.work
 
 rg() {
-    if [ -t 1 ]; then
-        command rg -p "$@" | less -RFX
-    else
-        command rg "$@"
-    fi
+  if [ -t 1 ]; then
+    command rg -p "$@" | less -RFX
+  else
+    command rg "$@"
+  fi
 }
 
 c() {
-  IN_REPO=$(git rev-parse --is-inside-work-tree 2&> /dev/null)
+  IN_REPO=$(command git rev-parse --is-inside-work-tree 2&> /dev/null)
   if [ "$IN_REPO" = "true" ]; then
-    builtin cd -q $(git root)
+    builtin cd -q $(command git root)
   fi
 }
 
