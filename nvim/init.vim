@@ -149,6 +149,8 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeQuitOnOpen=1
 
+let NERDTreeMapOpenInTab='<c-t>'
+
 let mapleader = "\<Space>"
 let maplocalleader = ";"
 
