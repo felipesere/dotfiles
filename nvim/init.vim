@@ -181,31 +181,21 @@ vnoremap . :norm.<cr>
 nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>j <Plug>(ale_next_wrap)
 
-function! s:all_files()
-  return filter(filter(v:oldfiles, "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|.git/'"), 'match(v:val, getcwd()) == 0')
-endfunction
-
-command! Recent call fzf#run(fzf#wrap({
-      \  'source':  s:all_files(),
-      \  'options': '-m -x +s',
-      \  'down':    '60%'}))
-
-command! -bang -nargs=1 Search
+command! -bang -nargs=* Search
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --fixed-strings '. shellescape(expand('<args>')), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \    fzf#vim#with_preview('right:50%', '?'),
   \   <bang>0)
 
-nmap <silent> <Leader>s :execute 'Find'<CR>
-command! -bang -nargs=* Find
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --fixed-strings '. shellescape(expand('<cword>')), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
+command! -bang -nargs=* FindUnderCursor
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(expand('<cword>')), 1,
+      \    fzf#vim#with_preview('right:50%', '?'),
+      \   <bang>0)
 
-
+" one for selecting a word...
+nmap <silent> <Leader>s :execute 'FindUnderCursor'<CR>
+" ...and one for selecting the highlighted text
 vmap <silent> <Leader>s :call FindText()<CR>
 
 function! FindText() range
@@ -225,6 +215,5 @@ function! FindText() range
     " Get the desired text
     let selectedText = join(lines, "\n")
 
-    call fzf#vim#grep(
-          \   'rg --column --line-number --no-heading --color=always --fixed-strings "'. selectedText .'"', 1)
+    execute 'Search '.selectedText
 endfunction
