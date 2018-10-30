@@ -93,13 +93,18 @@ title() {
 }
 
 adjust_title_to_iterm() {
-  IN_REPO=$(git rev-parse --is-inside-work-tree 2&> /dev/null)
+ IN_REPO=$(command git rev-parse --is-inside-work-tree 2&> /dev/null)
   if [ "$IN_REPO" = "true" ]; then
-    PATH_IN_GIT=$(git root)
+    PATH_IN_GIT=$(command git root)
     title $(basename $PATH_IN_GIT)
+  else
+    title $(basename $PWD)
   fi
+  
 }
 
 chpwd_functions+=adjust_title_to_iterm
 
 adjust_title_to_iterm
+
+alias preview="fzf --preview 'bat --color \"always\" {}' --bind='ctrl-o:execute(nvim {})+abort'"
