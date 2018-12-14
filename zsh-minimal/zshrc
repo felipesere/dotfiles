@@ -58,6 +58,9 @@ alias vim="nvim"
 alias vi="nvim"
 alias ls="exa -l"
 
+# Node env
+eval "$(nodenv init -)"
+
 . $HOME/.kerl/installations/20.3/activate
 # Kiex
 [ -f ~/.kiex/scripts/kiex ] && source "$HOME/.kiex/scripts/kiex"
@@ -65,14 +68,10 @@ alias ls="exa -l"
 # iterm2 integrations
 #[ -f ~/.dotfiles/iterm2/it2setkeylabel ] && export PATH=$PATH:~/.dotfiles/iterm2
 
-# node version management
-n 9.8.0
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-
-[ -f ~/.work ] && source ~/.work
 
 rg() {
   if [ -t 1 ]; then
@@ -101,7 +100,7 @@ adjust_title_to_iterm() {
   else
     title $(basename $PWD)
   fi
-  
+
 }
 
 chpwd_functions+=adjust_title_to_iterm
@@ -109,3 +108,5 @@ chpwd_functions+=adjust_title_to_iterm
 adjust_title_to_iterm
 
 alias preview="fzf --preview 'bat --color \"always\" {}' --bind='ctrl-o:execute(nvim {})+abort'"
+
+eval "$(direnv hook zsh)"
