@@ -47,6 +47,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   " My own
   Plug 'felipesere/vim-open-readme'
+  Plug 'felipesere/search'
 call plug#end()
 
 scriptencoding utf-8
@@ -158,8 +159,10 @@ map <leader>D :let &background = ( &background == "dark" ? "light" : "dark" )<cr
 
 map <c-p> :execute 'FZF'<CR>
 map <leader>g :execute 'GFiles?'<CR>
-map :W :w
-map <leader>w :execute 'Windows'<CR>
+"
+nmap <silent> <Leader>s :execute 'FindUnderCursor'<CR>
+" ...and one for selecting the highlighted text
+" vmap <silent> <Leader>s :call FindText()<CR>
 
 
 "  eliminate white spaace
@@ -180,40 +183,3 @@ vnoremap . :norm.<cr>
 " Ale
 nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>j <Plug>(ale_next_wrap)
-
-command! -bang -nargs=* Search
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \    fzf#vim#with_preview('right:50%', '?'),
-  \   <bang>0)
-
-command! -bang -nargs=* FindUnderCursor
-      \ call fzf#vim#grep(
-      \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(expand('<cword>')), 1,
-      \    fzf#vim#with_preview('right:50%', '?'),
-      \   <bang>0)
-
-" one for selecting a word...
-nmap <silent> <Leader>s :execute 'FindUnderCursor'<CR>
-" ...and one for selecting the highlighted text
-vmap <silent> <Leader>s :call FindText()<CR>
-
-function! FindText() range
-    " see: https://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript/6271254#6271254
-    " Get the line and column of the visual selection marks
-    let [lnum1, col1] = getpos("'<")[1:2]
-    let [lnum2, col2] = getpos("'>")[1:2]
-
-    " Get all the lines represented by this range
-    let lines = getline(lnum1, lnum2)
-
-    " The last line might need to be cut if the visual selection didn't end on the last column
-    let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
-    " The first line might need to be trimmed if the visual selection didn't start on the first column
-    let lines[0] = lines[0][col1 - 1:]
-
-    " Get the desired text
-    let selectedText = join(lines, "\n")
-
-    execute 'Search '.selectedText
-endfunction
