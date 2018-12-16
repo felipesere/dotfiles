@@ -15,8 +15,12 @@ export FZF_DEFAULT_COMMAND="rg --files"
 export FZF_CTRL_T_COMMAND="rg --files"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
 
+HOMEBREW_BINARIES=/usr/local/bin
+CARGO_BINARIES=$HOME/.cargo/bin
+PERSONAL_BINARIES=$HOME/bin
+
 # Local binaries
-export PATH=$PATH:/usr/local/bin:/$HOME/bin
+export PATH=$PATH:$HOMEBREW_BINARIES:$CARGO_BINARIES:$PERSONAL_BINARIES
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
