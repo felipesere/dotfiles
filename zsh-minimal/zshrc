@@ -65,7 +65,7 @@ alias ls="exa -l"
 eval "$(nodenv init -)"
 
 # Erlang 
-. $HOME/.kerl/installations/20.3/activate
+[ -d $HOME/.kerl] ] && . $HOME/.kerl/installations/20.3/activate
 
 # Kiex
 [ -f ~/.kiex/scripts/kiex ] && source "$HOME/.kiex/scripts/kiex"
