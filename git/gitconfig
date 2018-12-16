@@ -82,9 +82,5 @@
 
 [credential]
   helper = osxkeychain
-[ghi]
-  token = !security find-internet-password -a felipesere -s github.com -l 'ghi token' -w
-[commit]
-  gpgsign = true
 [diff-so-fancy]
   markEmptyLines = false
