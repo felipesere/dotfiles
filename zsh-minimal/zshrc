@@ -7,7 +7,6 @@ export HISTFILE=~/.histfile
 export HISTSIZE=10000
 export SAVEHIST=1000
 export WORDCHARS=''
-export ENHANCD_FILTER="$(which fzf) --reverse --height 50%"
 export ENHANCD_DISABLE_DOT=1
 export RIPGREP_CONFIG_PATH=~/.ripgrep
 export BAT_CONFIG_PATH=~/.bat
