@@ -18,8 +18,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-fugitive'
 
-  Plug 'alvan/vim-closetag', { 'for' : ['eelixir', 'html'] }
-
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
@@ -34,15 +32,13 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'mxw/vim-jsx'
   Plug 'elzr/vim-json'
 
-  Plug 'ElmCast/elm-vim'
-
   Plug 'w0rp/ale'
-
   Plug 'sbdchd/neoformat'
 
   " My own
   Plug 'felipesere/vim-open-readme'
   Plug 'felipesere/search'
+  Plug 'felipesere/pie-highlight.vim'
 call plug#end()
 
 scriptencoding utf-8
@@ -90,11 +86,6 @@ if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
 
-
-augroup fmt
-  autocmd!
-  autocmd BufWritePre *.py,*.rs, undojoin | Neoformat
-augroup END
 
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
