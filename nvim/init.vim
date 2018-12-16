@@ -12,8 +12,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'scrooloose/nerdtree'
   Plug 'ervandew/supertab'
 
-  Plug 'hashivim/vim-terraform'
   Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
+  Plug 'fatih/vim-go' " Run :GoUpdateBinaries within the projects themselves
 
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-fugitive'
@@ -29,6 +29,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'elixir-editors/vim-elixir',  { 'for' : ['elixir', 'eelixir'] }
 
   Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
+
   Plug 'mxw/vim-jsx'
   Plug 'elzr/vim-json'
 
