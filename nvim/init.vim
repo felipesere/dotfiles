@@ -3,18 +3,13 @@ let g:python3_host_prog='/usr/local/bin/python3'
 
  "Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
-
-  Plug 'rakr/vim-one'
   Plug 'chriskempson/base16-vim'
-  Plug 'mhartington/oceanic-next'
-
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
 
   Plug 'plasticboy/vim-markdown', {'for' : 'markdown' }
 
   Plug 'scrooloose/nerdtree'
-
   Plug 'ervandew/supertab'
 
   Plug 'hashivim/vim-terraform'
@@ -90,6 +85,11 @@ set grepprg=rg\ --vimgrep        " use ripgrep when grepping in vim
 set exrc                         " Allow project specif vim configs
 set secure                       " Prevent :autocmd, shell and write commands from being run inside project-specific .vimrc files unless they’re owned by you.
 
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+
 
 augroup fmt
   autocmd!
@@ -116,24 +116,6 @@ let g:LanguageClient_autoStart = 1
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<cr>
 autocmd FileType javascript,jsx,rust nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
 nnoremap <silent> <F6> :call LanguageClient_textDocument_rename()<cr>
-
-set termguicolors
-colorscheme one
-set background=dark
-let g:one_allow_italics=1
-
-let g:airline_theme='one'
-
-call one#highlight('DiffDelete', '', 16, 'none')
-call one#highlight('DiffAdd',    '', 16, 'none')
-call one#highlight('DiffChange', '', 16, 'none')
-call one#highlight('DiffDelete', '', 16, 'none')
-call one#highlight('DiffText',   '', 16, 'none')
-call one#highlight('DiffAdded',  '', 16, 'none')
-call one#highlight('DiffFile',   '', 16, 'none')
-call one#highlight('DiffNewFile','', 16, 'none')
-call one#highlight('DiffLine',   '', 16, 'none')
-call one#highlight('DiffRemoved','', 16, 'none')
 
 let g:airline#extensions#branch#enabled = 0
 
