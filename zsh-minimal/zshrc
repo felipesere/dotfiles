@@ -10,18 +10,14 @@ export WORDCHARS=''
 export ENHANCD_FILTER="$(which fzf) --reverse --height 50%"
 export ENHANCD_DISABLE_DOT=1
 export RIPGREP_CONFIG_PATH=~/.ripgrep
+export BAT_CONFIG_PATH=~/.bat
 export FZF_DEFAULT_COMMAND="rg --files"
 export FZF_CTRL_T_COMMAND="rg --files"
-export PIPENV_VENV_IN_PROJECT="true"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
-export BAT_THEME="TwoDark"
-export BAT_STYLE="numbers"
-
 
 # Local binaries
 export PATH=$PATH:/usr/local/bin:/$HOME/bin
 
-#tic ~/.dotfiles/iterm2/xterm-256color-italic.terminfo
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
@@ -61,12 +57,14 @@ alias ls="exa -l"
 # Node env
 eval "$(nodenv init -)"
 
+# Erlang 
 . $HOME/.kerl/installations/20.3/activate
+
 # Kiex
 [ -f ~/.kiex/scripts/kiex ] && source "$HOME/.kiex/scripts/kiex"
 
-# iterm2 integrations
-#[ -f ~/.dotfiles/iterm2/it2setkeylabel ] && export PATH=$PATH:~/.dotfiles/iterm2
+# Go
+eval "$(direnv hook zsh)"
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -107,6 +105,3 @@ chpwd_functions+=adjust_title_to_iterm
 
 adjust_title_to_iterm
 
-alias preview="fzf --preview 'bat --color \"always\" {}' --bind='ctrl-o:execute(nvim {})+abort'"
-
-eval "$(direnv hook zsh)"
