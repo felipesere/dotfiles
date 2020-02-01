@@ -59,23 +59,27 @@ zstyle :compinstall filename "$HOME/.zshrc"
 alias vim="nvim"
 alias vi="nvim"
 alias ls="exa -l"
+alias bex="bundle exec"
 
 # Node env
 eval "$(nodenv init -)"
 
-# Erlang 
-[ -d $HOME/.kerl] ] && . $HOME/.kerl/installations/20.3/activate
-
-# Kiex
-[ -f ~/.kiex/scripts/kiex ] && source "$HOME/.kiex/scripts/kiex"
+# Ruby
+eval "$(rbenv init -)"
 
 # Go
 eval "$(direnv hook zsh)"
 
+# Erlang 
+. $HOME/.kerl/21.2/activate
+
+# Kiex
+[ -f ~/.kiex/scripts/kiex ] && source "$HOME/.kiex/scripts/kiex"
+
+
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
 rg() {
   if [ -t 1 ]; then
