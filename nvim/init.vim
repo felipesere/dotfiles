@@ -11,6 +11,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'scrooloose/nerdtree'
   Plug 'ervandew/supertab'
+  Plug 'airblade/vim-gitgutter'
 
   Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
   Plug 'fatih/vim-go' " Run :GoUpdateBinaries within the projects themselves
@@ -22,19 +23,23 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'junegunn/fzf.vim'
 
   Plug 'rust-lang/rust.vim', {'for' : 'rust' }
-  Plug 'autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
-        \ 'do': 'bash install.sh',
-        \ }
+
   Plug 'elixir-editors/vim-elixir',  { 'for' : ['elixir', 'eelixir'] }
+  Plug 'ElmCast/elm-vim'
 
   Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
 
   Plug 'mxw/vim-jsx'
   Plug 'elzr/vim-json'
+  Plug 'leafgarland/typescript-vim'
 
   Plug 'w0rp/ale'
   Plug 'sbdchd/neoformat'
+  Plug 'hashivim/vim-terraform'
+
+  Plug 'evanleck/vim-svelte'
+
+  Plug 'jparise/vim-graphql'
 
   " My own
   Plug 'felipesere/vim-open-readme'
@@ -81,6 +86,7 @@ set list listchars=tab:»\ ,trail:· " change  the way empty trailing whitespace
 set grepprg=rg\ --vimgrep        " use ripgrep when grepping in vim
 set exrc                         " Allow project specif vim configs
 set secure                       " Prevent :autocmd, shell and write commands from being run inside project-specific .vimrc files unless they’re owned by you.
+set termguicolors
 
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
@@ -94,20 +100,6 @@ let g:netrw_banner       = 0
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:jsx_ext_required = 0
 let g:vim_json_syntax_conceal = 0
-
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['javascript-typescript-stdio'],
-    \ }
-
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 1
-
-" Maps K to hover, gd to goto definition, F2 to rename
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<cr>
-autocmd FileType javascript,jsx,rust nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
-nnoremap <silent> <F6> :call LanguageClient_textDocument_rename()<cr>
 
 let g:airline#extensions#branch#enabled = 0
 
@@ -149,6 +141,8 @@ nnoremap <silent> <leader>F :NERDTreeFind<CR>
 " Only use eslint for linting
 let g:ale_linters = {
       \   'javascript': ['eslint'],
+      \   'ruby': ['standardrb'],
+      \   'elixir': ['credo'],
       \}
 
 " map . in visual mode
