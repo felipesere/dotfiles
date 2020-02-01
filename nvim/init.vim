@@ -7,44 +7,31 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
 
-  Plug 'plasticboy/vim-markdown', {'for' : 'markdown' }
-
   Plug 'scrooloose/nerdtree'
   Plug 'ervandew/supertab'
   Plug 'airblade/vim-gitgutter'
 
-  Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
-  Plug 'fatih/vim-go' " Run :GoUpdateBinaries within the projects themselves
-
-  Plug 'tpope/vim-endwise'
-  Plug 'tpope/vim-fugitive'
-
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
-  Plug 'rust-lang/rust.vim', {'for' : 'rust' }
-
-  Plug 'elixir-editors/vim-elixir',  { 'for' : ['elixir', 'eelixir'] }
-  Plug 'ElmCast/elm-vim'
-
-  Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
-
-  Plug 'mxw/vim-jsx'
-  Plug 'elzr/vim-json'
-  Plug 'leafgarland/typescript-vim'
-
   Plug 'w0rp/ale'
   Plug 'sbdchd/neoformat'
-  Plug 'hashivim/vim-terraform'
 
-  Plug 'evanleck/vim-svelte'
+  Plug 'plasticboy/vim-markdown', {'for' : 'markdown' }
+  Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
+  Plug 'rust-lang/rust.vim', {'for' : 'rust' }
+  Plug 'elixir-editors/vim-elixir',  {'for' : ['elixir', 'eelixir'] }
 
-  Plug 'jparise/vim-graphql'
+  Plug 'pangloss/vim-javascript', {'for' : 'javascript' }
+  Plug 'mxw/vim-jsx', { 'for' : 'javascript' }
+  Plug 'elzr/vim-json', { 'for' : 'json' }
+
+  Plug 'evanleck/vim-svelte', { 'for' : 'svelte' }
+  Plug 'jparise/vim-graphql', { 'for': 'graphql' }
 
   " My own
   Plug 'felipesere/vim-open-readme'
   Plug 'felipesere/search'
-  Plug 'felipesere/pie-highlight.vim'
 call plug#end()
 
 scriptencoding utf-8
