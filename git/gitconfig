@@ -53,6 +53,7 @@
   added = yellow
   changed = green
   untracked = blue
+  deleted = red
 
 [grep]
   linenumber = true
@@ -63,13 +64,14 @@
   bb  = !git-br
   aa  = add --all :/
   c   = commit -v
-  co  = checkout
+  co  = !echo "use restore or switch"
   d   = diff
   ds  = diff --staged
   dw  = diff --color-words
   s   = status -s -b
   w   = whatchanged --decorate -p
   l   = !git ll -20
+  tab = log --pretty='format:%C(yellow)%h%x09%C(blue)%ad%x09%C(reset)%<(90,trunc)%s%x09%C(green)%an%C(reset),%x09%C(cyan)%ar%x09' --date=short --abbrev-commit --color
   ll  = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short
   ld  = !git ll --since 1.days.ago
   lw  = !git ll --since 1.weeks.ago
