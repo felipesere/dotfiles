@@ -90,8 +90,6 @@ let g:vim_json_syntax_conceal = 0
 
 let g:airline#extensions#branch#enabled = 0
 
-set pastetoggle=<F2>
-
 noremap j gj
 noremap k gk
 noremap gj j
@@ -108,15 +106,8 @@ let NERDTreeMapOpenInTab='<c-t>'
 let mapleader = "\<Space>"
 let maplocalleader = ";"
 
-map <leader>D :let &background = ( &background == "dark" ? "light" : "dark" )<cr>
-
 map <c-p> :execute 'FZF'<CR>
-map <leader>g :execute 'GFiles?'<CR>
-"
 nmap <silent> <Leader>s :execute 'FindUnderCursor'<CR>
-" ...and one for selecting the highlighted text
-" vmap <silent> <Leader>s :call FindText()<CR>
-
 
 "  eliminate white spaace
 nnoremap <leader>; mz:%s/\s\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>
