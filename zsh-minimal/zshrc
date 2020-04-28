@@ -112,3 +112,8 @@ chpwd_functions+=adjust_title_to_iterm
 
 adjust_title_to_iterm
 
+
+mkcd() {
+  mkdir $1;
+  cd $1;
+}
