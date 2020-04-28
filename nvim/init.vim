@@ -29,6 +29,10 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'evanleck/vim-svelte', { 'for' : 'svelte' }
   Plug 'jparise/vim-graphql', { 'for': 'graphql' }
 
+  Plug 'lepture/vim-jinja'
+  Plug 'junegunn/goyo.vim'
+  Plug 'tpope/vim-fugitive'
+
   " My own
   Plug 'felipesere/vim-open-readme'
   Plug 'felipesere/search'
@@ -87,6 +91,7 @@ let g:netrw_banner       = 0
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:jsx_ext_required = 0
 let g:vim_json_syntax_conceal = 0
+let g:goyo_width = 160
 
 let g:airline#extensions#branch#enabled = 0
 
@@ -109,7 +114,7 @@ let maplocalleader = ";"
 map <c-p> :execute 'FZF'<CR>
 nmap <silent> <Leader>s :execute 'FindUnderCursor'<CR>
 
-"  eliminate white spaace
+"  eliminate white space
 nnoremap <leader>; mz:%s/\s\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>
 map <silent> <leader>, :nohl<cr>
 
