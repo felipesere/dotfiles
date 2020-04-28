@@ -76,9 +76,6 @@ eval "$(direnv hook zsh)"
 # Kiex
 [ -f ~/.kiex/scripts/kiex ] && source "$HOME/.kiex/scripts/kiex"
 
-
-
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 rg() {
