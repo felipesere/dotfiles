@@ -70,7 +70,7 @@ eval "$(rbenv init -)"
 # Go
 eval "$(direnv hook zsh)"
 
-# Erlang 
+# Erlang
 . $HOME/.kerl/21.2/activate
 
 # Kiex
@@ -94,7 +94,11 @@ c() {
 }
 
 title() {
-    echo -ne "\033]0;"$*"\007"
+    if [ -z "$TMUX" ]; then
+      echo -ne "\033]0;"$*"\007"
+    else
+      tmux rename-window $*
+    fi
 }
 
 adjust_title_to_iterm() {
@@ -105,13 +109,11 @@ adjust_title_to_iterm() {
   else
     title $(basename $PWD)
   fi
-
 }
 
 chpwd_functions+=adjust_title_to_iterm
 
 adjust_title_to_iterm
-
 
 mkcd() {
   mkdir $1;
