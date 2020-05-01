@@ -7,7 +7,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
 
-  Plug 'scrooloose/nerdtree'
+  Plug 'preservim/nerdtree'
   Plug 'ervandew/supertab'
   Plug 'airblade/vim-gitgutter'
 
@@ -17,6 +17,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'w0rp/ale'
   Plug 'sbdchd/neoformat'
 
+  Plug 'hashivim/vim-terraform', {'for' : 'terraform' }
   Plug 'plasticboy/vim-markdown', {'for' : 'markdown' }
   Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
   Plug 'rust-lang/rust.vim', {'for' : 'rust' }
@@ -29,18 +30,19 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'evanleck/vim-svelte', { 'for' : 'svelte' }
   Plug 'jparise/vim-graphql', { 'for': 'graphql' }
 
-  Plug 'lepture/vim-jinja'
   Plug 'junegunn/goyo.vim'
   Plug 'tpope/vim-fugitive'
 
   " My own
   Plug 'felipesere/vim-open-readme'
   Plug 'felipesere/search'
+
+  " needs to be last
+  Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 scriptencoding utf-8
-set encoding=utf-8
-
+set encoding=utf-8                " ensures the devicons work
 set hidden                        " for rust racer, for now...
 set shell=sh                      " avoid major fuck up with fish shell
 syntax on                         " show syntax highlighting
