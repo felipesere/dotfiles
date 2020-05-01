@@ -7,7 +7,7 @@
   user = felipesere
 
 [core]
-  pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = delta --theme="base16"
   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
   autocrlf = input
   safecrlf = true
@@ -15,6 +15,9 @@
   ignorecase = false
   quotepath = false
   editor = "nvim"
+
+[interactive]
+  diffFilter = delta --color-only
 
 [web]
   browser = open
