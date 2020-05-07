@@ -119,3 +119,15 @@ mkcd() {
   mkdir $1;
   cd $1;
 }
+
+font_size() {
+  sd 'size: \d+' "size: $1" ~/.config/alacritty/alacritty.yml 
+}
+
+presentation_mode() {
+  font_size 24
+}
+
+normal_mode() {
+  font_size 16
+}
