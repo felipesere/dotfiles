@@ -17,7 +17,7 @@
   editor = "nvim"
 
 [interactive]
-  diffFilter = delta --color-only
+  diffFilter = delta --color-only --theme="base16"
 
 [web]
   browser = open
