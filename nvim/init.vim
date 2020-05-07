@@ -104,9 +104,9 @@ noremap gk k
 
 command! Q execute "qa!"
 
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-let NERDTreeQuitOnOpen=1
+let NERDTreeMinimalUI  = 1
+let NERDTreeDirArrows  = 1
+let NERDTreeQuitOnOpen = 1
 
 let NERDTreeMapOpenInTab='<c-t>'
 
