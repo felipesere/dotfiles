@@ -115,6 +115,7 @@ let maplocalleader = ";"
 
 map <c-p> :execute 'FZF'<CR>
 nmap <silent> <Leader>s :execute 'FindUnderCursor'<CR>
+vmap <silent> <Leader>s :call FindText()<CR>
 
 "  eliminate white space
 nnoremap <leader>; mz:%s/\s\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>
