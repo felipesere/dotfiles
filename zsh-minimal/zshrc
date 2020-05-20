@@ -128,3 +128,11 @@ presentation_mode() {
 normal_mode() {
   font_size 16
 }
+
+laptop_mode() {
+  font_size 14
+}
+
+dots() {
+  cd ~/.dotfiles
+}
