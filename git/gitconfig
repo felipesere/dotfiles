@@ -7,7 +7,7 @@
   user = felipesere
 
 [core]
-  pager = delta --theme="Nord"
+  pager = delta --theme="Nord" --plus-color="#37591B" --plus-emph-color="#6B8C4F" --minus-color="#60141B" --minus-emph-color="#88323A"
   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
   autocrlf = input
   safecrlf = true
@@ -17,8 +17,7 @@
   editor = "nvim"
 
 [interactive]
-  diffFilter = delta --color-only --theme="Nord"
-
+  diffFilter = delta --color-only --theme="Nord" --plus-color="#37591B" --plus-emph-color="#6B8C4F" --minus-color="#60141B" --minus-emph-color="#88323A"
 [web]
   browser = open
 
