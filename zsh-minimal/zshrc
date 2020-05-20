@@ -70,9 +70,6 @@ eval "$(rbenv init -)"
 # Go
 eval "$(direnv hook zsh)"
 
-# Erlang
-. $HOME/.kerl/21.2/activate
-
 # Kiex
 [ -f ~/.kiex/scripts/kiex ] && source "$HOME/.kiex/scripts/kiex"
 
