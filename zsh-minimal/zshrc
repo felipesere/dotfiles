@@ -2,7 +2,6 @@ export ZDOTDIR=$HOME
 export LANG="en_US.UTF-8"
 export EDITOR=vim
 export CLICOLOR=1
-export LSCOLORS=exfxbxdxexegedabagacad
 export HISTFILE=~/.histfile
 export HISTSIZE=10000
 export SAVEHIST=1000
@@ -13,6 +12,8 @@ export BAT_CONFIG_PATH=~/.bat
 export FZF_DEFAULT_COMMAND="rg --files"
 export FZF_CTRL_T_COMMAND="rg --files"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
+
+test -r "~/.dotfiles/dir_colors/dir_colors" && eval $(gdircolors ~/.dotfiles/dir_colors/dir_colors)
 
 HOMEBREW_BINARIES=/usr/local/bin
 CARGO_BINARIES=$HOME/.cargo/bin
@@ -33,10 +34,6 @@ zstyle ':completion:*:*:*:*:*' menu select
 source "$HOME/.dotfiles/zsh-minimal/plugins-static.sh"
 source "$HOME/.dotfiles/zsh-minimal/theme.zsh"
 source "$HOME/.dotfiles/zsh-minimal/options.zsh"
-
-# Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && [ -s "$BASE16_SHELL/profile_helper.sh" ] && eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 bindkey -e
 bindkey "[3~" delete-char

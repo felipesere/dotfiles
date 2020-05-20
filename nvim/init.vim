@@ -3,9 +3,8 @@ let g:python3_host_prog='/usr/local/bin/python3'
 
  "Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
-  Plug 'chriskempson/base16-vim'
+  Plug 'arcticicestudio/nord-vim'
   Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
 
   Plug 'preservim/nerdtree'
   Plug 'ervandew/supertab'
@@ -80,12 +79,7 @@ set grepprg=rg\ --vimgrep        " use ripgrep when grepping in vim
 set exrc                         " Allow project specif vim configs
 set secure                       " Prevent :autocmd, shell and write commands from being run inside project-specific .vimrc files unless they’re owned by you.
 set termguicolors
-
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
-
+colorscheme nord
 
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1

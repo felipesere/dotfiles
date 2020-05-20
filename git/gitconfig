@@ -7,7 +7,7 @@
   user = felipesere
 
 [core]
-  pager = delta --theme="base16"
+  pager = delta --theme="Nord"
   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
   autocrlf = input
   safecrlf = true
@@ -17,7 +17,7 @@
   editor = "nvim"
 
 [interactive]
-  diffFilter = delta --color-only --theme="base16"
+  diffFilter = delta --color-only --theme="Nord"
 
 [web]
   browser = open
@@ -87,5 +87,3 @@
 
 [credential]
   helper = osxkeychain
-[diff-so-fancy]
-  markEmptyLines = false
