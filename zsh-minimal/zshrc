@@ -87,7 +87,7 @@ c() {
   fi
 }
 
-title() {
+set_title() {
     if [ -z "$TMUX" ]; then
       echo -ne "\033]0;"$*"\007"
     else
@@ -95,19 +95,19 @@ title() {
     fi
 }
 
-adjust_title_to_iterm() {
+title() {
  IN_REPO=$(command git rev-parse --is-inside-work-tree 2&> /dev/null)
   if [ "$IN_REPO" = "true" ]; then
     PATH_IN_GIT=$(command git root)
-    title $(basename $PATH_IN_GIT)
+    set_title $(basename $PATH_IN_GIT)
   else
-    title $(basename $PWD)
+    set_title $(basename $PWD)
   fi
 }
 
-chpwd_functions+=adjust_title_to_iterm
+chpwd_functions+=title
 
-adjust_title_to_iterm
+title
 
 mkcd() {
   mkdir $1;
@@ -115,7 +115,7 @@ mkcd() {
 }
 
 font_size() {
-  sd 'size: \d+' "size: $1" ~/.config/alacritty/alacritty.yml 
+  sd 'size: [\d\.]+' "size: $1" ~/.config/alacritty/alacritty.yml
 }
 
 presentation_mode() {
