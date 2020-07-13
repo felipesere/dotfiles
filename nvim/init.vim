@@ -17,6 +17,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'sbdchd/neoformat'
 
   Plug 'hashivim/vim-terraform', {'for' : 'terraform' }
+
   Plug 'plasticboy/vim-markdown', {'for' : 'markdown' }
   Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
   Plug 'rust-lang/rust.vim', {'for' : 'rust' }
@@ -29,8 +30,13 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'evanleck/vim-svelte', { 'for' : 'svelte' }
   Plug 'jparise/vim-graphql', { 'for': 'graphql' }
 
+  Plug 'vim-scripts/tComment'
+
   Plug 'junegunn/goyo.vim'
   Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-surround'
+
+  Plug 'https://gitlab.com/gi1242/vim-emoji-ab'
 
   " My own
   Plug 'felipesere/vim-open-readme'
@@ -118,6 +124,9 @@ map <silent> <leader>, :nohl<cr>
 nnoremap <silent> <leader>f :NERDTreeToggle<CR>
 nnoremap <silent> <leader>F :NERDTreeFind<CR>
 
+let g:terraform_fmt_on_save=1
+let g:terraform_align=1
+
 " Only use eslint for linting
 let g:ale_linters = {
       \   'javascript': ['eslint'],
@@ -131,3 +140,21 @@ vnoremap . :norm.<cr>
 " Ale
 nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>j <Plug>(ale_next_wrap)
+
+au FileType html,markdown,mmd,text,gitcommit runtime macros/emoji-ab.vim
+
+:iab :!: ❗
+:iab :?: ❓
+:iab :*: 🌟
+:iab :t: 🏆
+:iab :[]: 🔳
+:iab :[x]: ✅
+
+let g:vim_markdown_conceal_code_blocks = 0
+
+" Not sure why I need to use guifg. I'd also much rather just do this for
+" Markdown
+hi Bold gui=bold guifg=#EBCB8B
+hi Comment gui=bold guifg=#bca26f
+
+au BufNewFile,BufRead *.txt,*.md,*.mkd,*.markdown,*.mdwn set concealcursor=nc conceallevel=2
