@@ -133,3 +133,6 @@ laptop_mode() {
 dots() {
   cd ~/.dotfiles
 }
+watchy() {
+ watchexec --clear -- "if $1; then noti -m ✅; else noti -m ❌; fi"  
+}
