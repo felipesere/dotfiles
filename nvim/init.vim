@@ -20,8 +20,10 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'plasticboy/vim-markdown', {'for' : 'markdown' }
   Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
-  Plug 'rust-lang/rust.vim', {'for' : 'rust' }
   Plug 'elixir-editors/vim-elixir',  {'for' : ['elixir', 'eelixir'] }
+
+  Plug 'rust-lang/rust.vim', {'for' : 'rust' }
+  Plug 'neoclide/coc.nvim', {'branch': 'release', 'for' : 'rust'}
 
   Plug 'pangloss/vim-javascript', {'for' : 'javascript' }
   Plug 'mxw/vim-jsx', { 'for' : 'javascript' }
@@ -94,6 +96,7 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:jsx_ext_required = 0
 let g:vim_json_syntax_conceal = 0
 let g:goyo_width = 160
+let g:neoformat_only_msg_on_error = 1
 
 let g:airline#extensions#branch#enabled = 0
 
