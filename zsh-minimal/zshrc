@@ -133,6 +133,11 @@ laptop_mode() {
 dots() {
   cd ~/.dotfiles
 }
+
 watchy() {
  watchexec --clear -- "if $1; then noti -m ✅; else noti -m ❌; fi"  
 }
+
+if [[ -f "$HOME/.custom-client-functions" ]]; then
+  source "$HOME/.custom-client-functions";
+fi
