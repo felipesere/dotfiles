@@ -23,14 +23,11 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'elixir-editors/vim-elixir',  {'for' : ['elixir', 'eelixir'] }
 
   Plug 'rust-lang/rust.vim', {'for' : 'rust' }
-  Plug 'neoclide/coc.nvim', {'branch': 'release', 'for' : 'rust'}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
   Plug 'pangloss/vim-javascript', {'for' : 'javascript' }
   Plug 'mxw/vim-jsx', { 'for' : 'javascript' }
   Plug 'elzr/vim-json', { 'for' : 'json' }
-
-  Plug 'evanleck/vim-svelte', { 'for' : 'svelte' }
-  Plug 'jparise/vim-graphql', { 'for': 'graphql' }
 
   Plug 'vim-scripts/tComment'
 
@@ -161,3 +158,12 @@ hi Bold gui=bold guifg=#EBCB8B
 hi Comment gui=bold guifg=#bca26f
 
 au BufNewFile,BufRead *.txt,*.md,*.mkd,*.markdown,*.mdwn set concealcursor=nc conceallevel=2
+
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <leader>rn <Plug>(coc-rename)
+nmap <silent> <leader>h call CocAction('doHover')<CR>
