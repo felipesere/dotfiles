@@ -1,0 +1,32 @@
+format="""
+$directory$env_var$git_branch$git_state$git_status
+$jobs$status$character\
+"""
+
+add_newline = true
+
+[character]
+success_symbol = "[❯](bold blue)"
+error_symbol = "[❯](bold red)"
+
+[directory]
+style = "blue"
+
+[git_branch]
+style = "bold yellow"
+
+[git_status]
+format = "[($staged)](yellow)[($untracked)](blue)[($deleted)](red)[($modified)](green) "
+conflicted = "✘"
+untracked  = "●"
+modified   = "●"
+staged     = "●"
+deleted    = "●"
+
+[jobs]
+symbol = "!!"
+style = "bold red"
+
+[env_var]
+variable = "DP_ENV"
+style = "fg:6"
