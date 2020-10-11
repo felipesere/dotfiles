@@ -157,9 +157,6 @@ let g:vim_markdown_conceal_code_blocks = 0
 hi Bold gui=bold guifg=#EBCB8B
 hi Comment gui=bold guifg=#bca26f
 
-au BufNewFile,BufRead *.txt,*.md,*.mkd,*.markdown,*.mdwn set concealcursor=nc conceallevel=2
-
-
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
