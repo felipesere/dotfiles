@@ -10,6 +10,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'ervandew/supertab'
   Plug 'airblade/vim-gitgutter'
 
+  Plug 'niftylettuce/vim-jinja'
+
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
