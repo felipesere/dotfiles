@@ -83,6 +83,7 @@
   conflicts = diff --name-only --diff-filter=U
   sha = rev-parse --short HEAD
   root = rev-parse --show-toplevel
+  unstage = restore --staged
 
 [credential]
   helper = osxkeychain
