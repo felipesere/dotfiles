@@ -58,6 +58,7 @@ alias vi="nvim"
 alias ls="exa -l"
 alias tf="terraform"
 alias bex="bundle exec"
+alias typora="open -a typora"
 
 # Node env
 eval "$(nodenv init -)"
