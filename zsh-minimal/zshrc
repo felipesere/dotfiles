@@ -34,22 +34,6 @@ zstyle ':completion:*:*:*:*:*' menu select
 source "$HOME/.dotfiles/zsh-minimal/plugins-static.sh"
 source "$HOME/.dotfiles/zsh-minimal/options.zsh"
 
-bindkey -e
-bindkey "[3~" delete-char
-bindkey "^[[3~" delete-char
-bindkey "^[3;5~" delete-char
-bindkey "\e[3~" delete-char
-
-# [Backspace] - delete backward
-bindkey '^?' backward-delete-char
-bindkey '^w' backward-kill-word
-
-# [Ctrl-RightArrow] - move forward one word
-bindkey '^[[1;5C' forward-word
-
-# [Ctrl-LeftArrow] - move backward one word
-bindkey '^[[1;5D' backward-word
-
 zstyle :compinstall filename "$HOME/.zshrc"
 
 alias vim="nvim"
