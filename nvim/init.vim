@@ -3,6 +3,7 @@ let g:python3_host_prog='/usr/local/bin/python3'
 
  "Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
+
   Plug 'arcticicestudio/nord-vim'
   Plug 'vim-airline/vim-airline'
 
@@ -22,7 +23,6 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'plasticboy/vim-markdown', {'for' : 'markdown' }
   Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
-  Plug 'elixir-editors/vim-elixir',  {'for' : ['elixir', 'eelixir'] }
 
   Plug 'rust-lang/rust.vim', {'for' : 'rust' }
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -32,10 +32,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'elzr/vim-json', { 'for' : 'json' }
 
   Plug 'vim-scripts/tComment'
-
-  Plug 'junegunn/goyo.vim'
-  Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-surround'
 
   Plug 'https://gitlab.com/gi1242/vim-emoji-ab'
 
