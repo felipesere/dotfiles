@@ -97,11 +97,6 @@ chpwd_functions+=title
 
 title
 
-mkcd() {
-  mkdir $1;
-  cd $1;
-}
-
 font_size() {
   sd 'size: [\d\.]+' "size: $1" ~/.config/alacritty/alacritty.yml
 }
