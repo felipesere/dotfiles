@@ -13,7 +13,7 @@ export FZF_DEFAULT_COMMAND="rg --files"
 export FZF_CTRL_T_COMMAND="rg --files"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
 
-test -r "~/.dotfiles/dir_colors/dir_colors" && eval $(gdircolors ~/.dotfiles/dir_colors/dir_colors)
+[ -f ~/.dotfiles/dir_colors/dir_colors ] && eval $(gdircolors ~/.dotfiles/dir_colors/dir_colors)
 
 GO_BINARIES=$HOME/go/bin
 HOMEBREW_BINARIES=/usr/local/bin
