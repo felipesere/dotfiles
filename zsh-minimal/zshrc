@@ -39,6 +39,10 @@ zstyle :compinstall filename "$HOME/.zshrc"
 bindkey -e
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+bindkey "[3~" delete-char
+bindkey "^[[3~" delete-char
+bindkey "^[3;5~" delete-char
+bindkey "\e[3~" delete-char
 
 alias vim="nvim"
 alias vi="nvim"
