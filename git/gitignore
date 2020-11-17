@@ -69,3 +69,4 @@ gradle-app.setting
 .DS_Store
 
 zzz-felipe
+.envrc
