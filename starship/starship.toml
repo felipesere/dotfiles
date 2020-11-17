@@ -1,5 +1,5 @@
 format="""
-$directory$env_var$git_branch$git_state$git_status
+$directory$terraform$env_var$git_branch$git_state$git_status
 $jobs$status$character\
 """
 
@@ -30,3 +30,7 @@ style = "bold red"
 [env_var]
 variable = "DP_ENV"
 style = "fg:6"
+
+[terraform]
+symbol = "🪐 "
+style = "green"
