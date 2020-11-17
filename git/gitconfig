@@ -6,7 +6,7 @@
   user = felipesere
 
 [core]
-  pager = delta --side-by-side --theme="Nord" --plus-color="#37591B" --plus-emph-color="#6B8C4F" --minus-color="#60141B" --minus-emph-color="#88323A"
+  pager = delta --theme="Nord" --plus-color="#37591B" --plus-emph-color="#6B8C4F" --minus-color="#60141B" --minus-emph-color="#88323A"
 
   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
   autocrlf = input
