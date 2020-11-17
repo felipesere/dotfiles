@@ -3,15 +3,12 @@ let g:python3_host_prog='/usr/local/bin/python3'
 
  "Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
-
   Plug 'arcticicestudio/nord-vim'
   Plug 'vim-airline/vim-airline'
 
   Plug 'preservim/nerdtree'
   Plug 'ervandew/supertab'
   Plug 'airblade/vim-gitgutter'
-
-  Plug 'niftylettuce/vim-jinja'
 
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
@@ -30,8 +27,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'pangloss/vim-javascript', {'for' : 'javascript' }
   Plug 'mxw/vim-jsx', { 'for' : 'javascript' }
   Plug 'elzr/vim-json', { 'for' : 'json' }
-
-  Plug 'vim-scripts/tComment'
 
   Plug 'https://gitlab.com/gi1242/vim-emoji-ab'
 
