@@ -4,7 +4,6 @@
 
 [github]
   user = felipesere
-
 [core]
   pager = delta --theme="Nord" --plus-color="#37591B" --plus-emph-color="#6B8C4F" --minus-color="#60141B" --minus-emph-color="#88323A"
 
@@ -16,41 +15,22 @@
   quotepath = false
   editor = "nvim"
 
+[pull]
+	rebase = true
+
 [interactive]
   diffFilter = delta --color-only --theme="Nord" --plus-color="#37591B" --plus-emph-color="#6B8C4F" --minus-color="#60141B" --minus-emph-color="#88323A"
 
 [web]
   browser = open
 
-[push]
-  config = default
-  default = current
-
-[rebase]
-  autosquash = true
-
-[merge]
-  summary = true
-
 [color]
   interactive = auto
   ui = true
   pager = true
 
-[color "grep"]
-  filename = blue
-  linenumber = green
-
 [color "branch"]
-  current = yellow reverse
-  local   = yellow
-  remote  = green
-
-[color "diff"]
-  meta = blue
-  frag = magenta
-  old  = red
-  new  = green
+  current = yellow
 
 [color "status"]
   added = yellow
@@ -58,27 +38,19 @@
   untracked = blue
   deleted = red
 
-[grep]
-  linenumber = true
-
 [alias]
   a   = add -u
   b   = branch
-  bb  = !git-br
   aa  = add --all :/
   c   = commit -v
-  co  = !echo "use restore or switch"
   d   = diff
   ds  = diff --staged
-  dw  = diff --color-words
   s   = status -s -b
-  w   = whatchanged --decorate -p
   l   = !git ll -20
   tab = log --pretty='format:%C(yellow)%h%x09%C(blue)%ad%x09%C(reset)%<(90,trunc)%s%x09%C(green)%an%C(reset),%x09%C(cyan)%ar%x09' --date=short --abbrev-commit --color
   ll  = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short
   ld  = !git ll --since 1.days.ago
   lw  = !git ll --since 1.weeks.ago
-  lg  = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   incoming   = !git ll ..@{u}
   outgoing   = !git ll @{u}..
   conflicts = diff --name-only --diff-filter=U
@@ -89,7 +61,5 @@
 [credential]
   helper = osxkeychain
 
-[pull]
-	rebase = true
 [init]
 	defaultBranch = main
