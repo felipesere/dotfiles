@@ -43,11 +43,11 @@ set encoding=utf-8                " ensures the devicons work
 set hidden                        " for rust racer, for now...
 set shell=sh                      " avoid major fuck up with fish shell
 syntax on                         " show syntax highlighting
-filetype plugin indent on
+filetype plugin indent on         "
 set backspace=indent,eol,start    " respect backspace
 set autoindent                    " set auto indent
 set tabstop=2                     " set indent to 2 spaces
-set shiftwidth=2
+set shiftwidth=2                  " when indenting with `>` use two spaces
 set expandtab                     " use spaces, not tab characters
 set number                        " show the absolute number as well
 set showmatch                     " show bracket matches
@@ -64,31 +64,36 @@ set scrolloff=5                   " minimum lines above/below cursor
 set laststatus=2                  " always show status bar
 set clipboard=unnamed             " use the system clipboard
 set wildmenu                      " enable bash style tab completion
-set wildmode=list:longest,full
-set shortmess+=Ic
-set noswapfile
-set noshowcmd                    " Don't show the command as it is being typed in the bottom right
+set wildmode=list:longest,full    " how the tab-completion menu behaves: show the list, then the longest match, finally all matches
+set shortmess+=Ic                 " `I` don't give an intro when opening vim. `c` don't give messages about completion (n of k matched) etc
+set noswapfile                    " No need for a swap file
+set noshowcmd                     " Don't show the command as it is being typed in the bottom right
 set shell=/usr/local/bin/zsh
-set foldmethod=indent            " Fold code based on indentation. Maybe switch to 'syntax'?
-set foldlevel=20                 " Don't actually fold when opening a file, file by choice :D
-set updatetime=250
-set list listchars=tab:»\ ,trail:· " change  the way empty trailing whitespace and tabs look
-set grepprg=rg\ --vimgrep        " use ripgrep when grepping in vim
-set exrc                         " Allow project specif vim configs
-set secure                       " Prevent :autocmd, shell and write commands from being run inside project-specific .vimrc files unless they’re owned by you.
+set foldmethod=indent             " Fold code based on indentation. Maybe switch to 'syntax'?
+set foldlevel=20                  " Don't actually fold when opening a file, file by choice :D
+set updatetime=250                " How long to wait after a write before vim triggers plugins
+set list listchars=tab:»\ ,trail:· " change the way empty trailing whitespace and tabs look
+set grepprg=rg\ --vimgrep         " use ripgrep when grepping in vim
+set secure                        " Prevent :autocmd, shell and write commands from being run inside project-specific .vimrc files unless they’re owned by you.
 set termguicolors
+
 colorscheme nord
 
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 let g:netrw_banner       = 0
 let g:SuperTabDefaultCompletionType = "<c-n>"
+
 let g:jsx_ext_required = 0
 let g:vim_json_syntax_conceal = 0
-let g:goyo_width = 160
 let g:neoformat_only_msg_on_error = 1
 
 let g:airline#extensions#branch#enabled = 0
+
+let g:terraform_fmt_on_save=1
+let g:terraform_align=1
+
+let g:vim_markdown_conceal_code_blocks = 0
 
 noremap j gj
 noremap k gk
@@ -97,11 +102,11 @@ noremap gk k
 
 command! Q execute "qa!"
 
-let NERDTreeMinimalUI  = 1
-let NERDTreeDirArrows  = 1
-let NERDTreeQuitOnOpen = 1
-
-let NERDTreeMapOpenInTab='<c-t>'
+let NERDTreeMinimalUI  = 1        " Skip the little help menu and ...
+let NERDTreeQuitOnOpen = 1        " When opening a file, close nerdtree
+let NERDTreeMapOpenInTab='<c-t>'  " Open file as tab hitting Ctrl-T
+nnoremap <silent> <leader>f :NERDTreeToggle<CR>
+nnoremap <silent> <leader>F :NERDTreeFind<CR>
 
 let mapleader = "\<Space>"
 let maplocalleader = ";"
@@ -114,39 +119,14 @@ vmap <silent> <Leader>s :call FindText()<CR>
 nnoremap <leader>; mz:%s/\s\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>
 map <silent> <leader>, :nohl<cr>
 
-nnoremap <silent> <leader>f :NERDTreeToggle<CR>
-nnoremap <silent> <leader>F :NERDTreeFind<CR>
-
-let g:terraform_fmt_on_save=1
-let g:terraform_align=1
-
-" Only use eslint for linting
-let g:ale_linters = {
-      \   'javascript': ['eslint'],
-      \   'ruby': ['standardrb'],
-      \   'elixir': ['credo'],
-      \}
-
-" map . in visual mode
-vnoremap . :norm.<cr>
-
 " Ale
 nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>j <Plug>(ale_next_wrap)
 
-au FileType html,markdown,mmd,text,gitcommit runtime macros/emoji-ab.vim
+" map . in visual mode
+vnoremap . :norm.<cr>
 
-:iab :!: ❗
-:iab :?: ❓
-:iab :*: 🌟
-:iab :t: 🏆
-:iab :[]: 🔳
-:iab :[x]: ✅
-
-let g:vim_markdown_conceal_code_blocks = 0
-
-" Not sure why I need to use guifg. I'd also much rather just do this for
-" Markdown
+" Not sure why I need to use guifg. I'd also much rather just do this for Markdown
 hi Bold gui=bold guifg=#EBCB8B
 hi Comment gui=bold guifg=#bca26f
 
