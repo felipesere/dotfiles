@@ -6,7 +6,11 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'arcticicestudio/nord-vim'
   Plug 'vim-airline/vim-airline'
 
-  Plug 'preservim/nerdtree'
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'kyazdani42/nvim-tree.lua' " replace nerdtree
+
   Plug 'ervandew/supertab'
   Plug 'airblade/vim-gitgutter'
 
@@ -32,10 +36,9 @@ call plug#begin('~/.config/nvim/plugged')
 
   " My own
   Plug 'felipesere/vim-open-readme'
-  Plug 'felipesere/search'
 
   " needs to be last
-  Plug 'ryanoasis/vim-devicons'
+  Plug 'kyazdani42/nvim-web-devicons'
 call plug#end()
 
 scriptencoding utf-8
@@ -79,6 +82,9 @@ set termguicolors
 
 colorscheme nord
 
+let mapleader = "\<Space>"
+let maplocalleader = ";"
+
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 let g:netrw_banner       = 0
@@ -95,6 +101,32 @@ let g:terraform_align=1
 
 let g:vim_markdown_conceal_code_blocks = 0
 
+lua << EOF
+require('nvim-web-devicons').setup {
+ default = true; -- globally enable default icons (default to false)
+}
+
+local actions = require('telescope.actions')
+require('telescope').setup{
+  defaults = {
+     mappings = {
+      i = {
+        -- I'm just sooo used to using j/k to navigate up and down
+        ["<c-j>"] = actions.move_selection_next,
+        ["<c-k>"] = actions.move_selection_previous,
+      }
+    }
+  }
+}
+
+vim.api.nvim_command("highlight! link TelescopeSelection Type")
+vim.api.nvim_command("highlight! link TelescopeMatching Statement")
+EOF
+
+nmap <c-p> :execute 'Telescope find_files'<CR>
+nmap <silent> <Leader>s :execute 'Telescope grep_string'<CR>
+nmap <silent> <Leader>S :execute 'Telescope live_grep'<CR>
+
 noremap j gj
 noremap k gk
 noremap gj j
@@ -102,18 +134,13 @@ noremap gk k
 
 command! Q execute "qa!"
 
-let NERDTreeMinimalUI  = 1        " Skip the little help menu and ...
-let NERDTreeQuitOnOpen = 1        " When opening a file, close nerdtree
-let NERDTreeMapOpenInTab='<c-t>'  " Open file as tab hitting Ctrl-T
-nnoremap <silent> <leader>f :NERDTreeToggle<CR>
-nnoremap <silent> <leader>F :NERDTreeFind<CR>
+let g:lua_tree_ignore = [ '.git', 'node_modules', '.cache' ] "empty by default
+let g:lua_tree_quit_on_open = 1
+let g:lua_tree_indent_markers = 1
 
-let mapleader = "\<Space>"
-let maplocalleader = ";"
-
-map <c-p> :execute 'FZF'<CR>
-nmap <silent> <Leader>s :execute 'FindUnderCursor'<CR>
-vmap <silent> <Leader>s :call FindText()<CR>
+nnoremap <silent> <leader>f :LuaTreeToggle<CR>
+nnoremap <silent> <leader>F :LuaTreeFind<CR>
+nnoremap <silent> <leader>r :LuaTreeRefresh<CR>
 
 "  eliminate white space
 nnoremap <leader>; mz:%s/\s\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>
