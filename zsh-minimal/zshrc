@@ -82,10 +82,15 @@ c() {
 }
 
 set_title() {
+    local title=$*
+    if [ -n "${PREFERRED_TITLE}" ]; then
+      title=$PREFERRED_TITLE
+    fi
+
     if [ -z "$TMUX" ]; then
-      echo -ne "\033]0;"$*"\007"
+      echo -ne "\033]0;"$title"\007"
     else
-      tmux rename-window $*
+      tmux rename-window $title
     fi
 }
 
