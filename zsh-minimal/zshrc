@@ -26,19 +26,19 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 
 autoload -Uz compinit && compinit -u
 autoload -Uz colors  && colors
-autoload -Uz vcs_info
 
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:*:*:*' menu select
 
-source "$HOME/.dotfiles/zsh-minimal/plugins-static.sh"
-source "$HOME/.dotfiles/zsh-minimal/options.zsh"
+source "$HOME/.dotfiles/zsh-minimal/plugins-static.sh"    # A small selection of plugins, loaded with antigen
+source "$HOME/.dotfiles/zsh-minimal/options.zsh"          # Core settings
+eval "$(starship init zsh)"                               # Themeing with starship
 
 zstyle :compinstall filename "$HOME/.zshrc"
 
 bindkey -e
-bindkey "^[[1;5C" forward-word
-bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word  # CTRL right_arrow to move a word forward
+bindkey "^[[1;5D" backward-word # CTRL left_arrow to move a word backward
 bindkey "[3~" delete-char
 bindkey "^[[3~" delete-char
 bindkey "^[3;5~" delete-char
@@ -65,8 +65,6 @@ eval "$(direnv hook zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Themeing with starship
-eval "$(starship init zsh)"
 
 rg() {
   if [ -t 1 ]; then
