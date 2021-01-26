@@ -18,11 +18,20 @@
   editor = "nvim"
 
 [delta]
-  syntax-theme      = Nord
-  plus-style        = "syntax #37591B"
-  plus-emph-style   = "syntax #6B8C4F"
-  minus-style       = "syntax #60141B"
-  minus-emph-style  = "syntax #88323A"
+  features = decorations
+
+  syntax-theme     = Nord
+  plus-style       = "syntax #2d4a16"
+  plus-emph-style  = "white  #6B8C4F"
+  minus-style      = "syntax #60141B"
+  minus-emph-style = "white  #88323A"
+
+[delta "decorations"]
+    commit-decoration-style      = "bold yellow box ul"
+    file-style                   = "bold yellow"
+    file-decoration-style        = "bold yellow box ul"
+    hunk-header-style            = "bold blue"
+    hunk-header-decoration-style = "blue box"
 
 [pull]
 	rebase = true
