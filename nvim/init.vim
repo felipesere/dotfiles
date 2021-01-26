@@ -9,13 +9,10 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
-  Plug 'kyazdani42/nvim-tree.lua' " replace nerdtree
+  Plug 'kyazdani42/nvim-tree.lua'
 
   Plug 'ervandew/supertab'
   Plug 'airblade/vim-gitgutter'
-
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim'
 
   Plug 'w0rp/ale'
   Plug 'sbdchd/neoformat'
@@ -31,8 +28,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'pangloss/vim-javascript', {'for' : 'javascript' }
   Plug 'mxw/vim-jsx', { 'for' : 'javascript' }
   Plug 'elzr/vim-json', { 'for' : 'json' }
-
-  Plug 'https://gitlab.com/gi1242/vim-emoji-ab'
 
   " My own
   Plug 'felipesere/vim-open-readme'
@@ -134,13 +129,13 @@ noremap gk k
 
 command! Q execute "qa!"
 
-let g:lua_tree_ignore = [ '.git', 'node_modules', '.cache' ] "empty by default
+let g:lua_tree_ignore = [ '.git', 'node_modules', '.cache' ] " empty by default
 let g:lua_tree_quit_on_open = 1
 let g:lua_tree_indent_markers = 1
 
-nnoremap <silent> <leader>f :LuaTreeToggle<CR>
-nnoremap <silent> <leader>F :LuaTreeFind<CR>
-nnoremap <silent> <leader>r :LuaTreeRefresh<CR>
+nnoremap <silent> <leader>f :NvimTreeToggle<CR>
+nnoremap <silent> <leader>F :NvimTreeFind<CR>
+nnoremap <silent> <leader>r :NvimTreeRefresh<CR>
 
 "  eliminate white space
 nnoremap <leader>; mz:%s/\s\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>
