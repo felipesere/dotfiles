@@ -4,6 +4,7 @@
 
 [github]
   user = felipesere
+
 [core]
   pager = delta --theme="Nord" --plus-color="#37591B" --plus-emph-color="#6B8C4F" --minus-color="#60141B" --minus-emph-color="#88323A"
 

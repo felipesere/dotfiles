@@ -30,9 +30,6 @@ pom.xml.next
 
 ## Plugin-specific files:
 
-# IntelliJ
-out/
-
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
@@ -70,3 +67,4 @@ gradle-app.setting
 
 zzz-felipe
 .envrc
+.story
