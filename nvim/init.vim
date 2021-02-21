@@ -13,6 +13,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'ervandew/supertab'
   Plug 'airblade/vim-gitgutter'
+  Plug 'rhysd/git-messenger.vim'
 
   Plug 'w0rp/ale'
   Plug 'sbdchd/neoformat'
@@ -95,6 +96,9 @@ let g:terraform_fmt_on_save=1
 let g:terraform_align=1
 
 let g:vim_markdown_conceal_code_blocks = 0
+
+" Jump into Git Messanger popup when opening
+let g:git_messenger_always_into_popup = v:true
 
 lua << EOF
 require('nvim-web-devicons').setup {
