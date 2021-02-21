@@ -13,6 +13,24 @@ export FZF_DEFAULT_COMMAND="rg --files"
 export FZF_CTRL_T_COMMAND="rg --files"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
 
+# Experimental
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+zplug "willghatch/zsh-cdr"
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "b4b4r07/enhancd"
+zplug "olets/zsh-abbr"
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+zplug load
 
 GO_BINARIES=$HOME/go/bin
 HOMEBREW_BINARIES="/usr/local/bin:/usr/local/sbin"
@@ -30,7 +48,6 @@ autoload -Uz colors  && colors
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:*:*:*' menu select
 
-source "$HOME/.dotfiles/zsh-minimal/plugins-static.sh"    # A small selection of plugins, loaded with antigen
 source "$HOME/.dotfiles/zsh-minimal/options.zsh"          # Core settings
 eval "$(starship init zsh)"                               # Themeing with starship
 

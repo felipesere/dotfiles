@@ -1,4 +1,0 @@
-willghatch/zsh-cdr
-zsh-users/zsh-syntax-highlighting
-b4b4r07/enhancd
-olets/zsh-abbr
