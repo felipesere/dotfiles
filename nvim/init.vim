@@ -6,10 +6,13 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'arcticicestudio/nord-vim'
   Plug 'vim-airline/vim-airline'
 
-  Plug 'nvim-lua/popup.nvim'
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim'
+  " Plug 'nvim-lua/popup.nvim'
+  " Plug 'nvim-lua/plenary.nvim'
+  " Plug 'nvim-telescope/telescope.nvim'
   Plug 'kyazdani42/nvim-tree.lua'
+
+  Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all' }
+  Plug 'junegunn/fzf.vim'
 
   Plug 'ervandew/supertab'
   Plug 'airblade/vim-gitgutter'
@@ -32,6 +35,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   " My own
   Plug 'felipesere/vim-open-readme'
+  Plug 'felipesere/search'
 
   " needs to be last
   Plug 'kyazdani42/nvim-web-devicons'
@@ -105,26 +109,29 @@ require('nvim-web-devicons').setup {
  default = true; -- globally enable default icons (default to false)
 }
 
-local actions = require('telescope.actions')
-require('telescope').setup{
-  defaults = {
-     mappings = {
-      i = {
-        -- I'm just sooo used to using j/k to navigate up and down
-        ["<c-j>"] = actions.move_selection_next,
-        ["<c-k>"] = actions.move_selection_previous,
-      }
-    }
-  }
-}
-
-vim.api.nvim_command("highlight! link TelescopeSelection Type")
-vim.api.nvim_command("highlight! link TelescopeMatching Statement")
+-- local actions = require('telescope.actions')
+-- require('telescope').setup{
+--   defaults = {
+--      mappings = {
+--       i = {
+--         -- I'm just sooo used to using j/k to navigate up and down
+--         ["<c-j>"] = actions.move_selection_next,
+--         ["<c-k>"] = actions.move_selection_previous,
+--       }
+--     }
+--   }
+-- }
+-- 
+-- vim.api.nvim_command("highlight! link TelescopeSelection Type")
+-- vim.api.nvim_command("highlight! link TelescopeMatching Statement")
 EOF
 
-nmap <c-p> :execute 'Telescope find_files'<CR>
-nmap <silent> <Leader>s :execute 'Telescope grep_string'<CR>
-nmap <silent> <Leader>S :execute 'Telescope live_grep'<CR>
+" nmap <c-p> :execute 'Telescope find_files'<CR>
+" nmap <silent> <Leader>s :execute 'Telescope grep_string'<CR>
+" nmap <silent> <Leader>S :execute 'Telescope live_grep'<CR>
+map <c-p> :execute 'FZF'<CR>
+nmap <silent> <Leader>s :execute 'FindUnderCursor'<CR>
+vmap <silent> <Leader>s :call FindText()<CR>
 
 noremap j gj
 noremap k gk
