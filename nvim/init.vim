@@ -27,7 +27,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
 
   Plug 'rust-lang/rust.vim', {'for' : 'rust' }
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
   Plug 'pangloss/vim-javascript', {'for' : 'javascript' }
   Plug 'mxw/vim-jsx', { 'for' : 'javascript' }
