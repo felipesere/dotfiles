@@ -4,18 +4,20 @@ let g:python3_host_prog='/usr/local/bin/python3'
  "Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
   Plug 'arcticicestudio/nord-vim'
+
   Plug 'vim-airline/vim-airline'
 
-  " Plug 'nvim-lua/popup.nvim'
-  " Plug 'nvim-lua/plenary.nvim'
-  " Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
   Plug 'kyazdani42/nvim-tree.lua'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'lukas-reineke/indent-blankline.nvim', { 'branch' : 'lua' }
 
   Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all' }
   Plug 'junegunn/fzf.vim'
 
   Plug 'ervandew/supertab'
-  Plug 'airblade/vim-gitgutter'
+  Plug 'lewis6991/gitsigns.nvim', 
   Plug 'rhysd/git-messenger.vim'
 
   Plug 'w0rp/ale'
@@ -27,7 +29,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
 
   Plug 'rust-lang/rust.vim', {'for' : 'rust' }
-  "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
   Plug 'pangloss/vim-javascript', {'for' : 'javascript' }
   Plug 'mxw/vim-jsx', { 'for' : 'javascript' }
@@ -79,6 +81,7 @@ set list listchars=tab:»\ ,trail:· " change the way empty trailing whitespace 
 set grepprg=rg\ --vimgrep         " use ripgrep when grepping in vim
 set secure                        " Prevent :autocmd, shell and write commands from being run inside project-specific .vimrc files unless they’re owned by you.
 set termguicolors
+set colorcolumn="99999" " Currently needed a a workaround for the blankline plugin
 
 colorscheme nord
 
@@ -108,22 +111,15 @@ lua << EOF
 require('nvim-web-devicons').setup {
  default = true; -- globally enable default icons (default to false)
 }
-
--- local actions = require('telescope.actions')
--- require('telescope').setup{
---   defaults = {
---      mappings = {
---       i = {
---         -- I'm just sooo used to using j/k to navigate up and down
---         ["<c-j>"] = actions.move_selection_next,
---         ["<c-k>"] = actions.move_selection_previous,
---       }
---     }
---   }
--- }
--- 
--- vim.api.nvim_command("highlight! link TelescopeSelection Type")
--- vim.api.nvim_command("highlight! link TelescopeMatching Statement")
+require('gitsigns').setup()
+require('indent_blankline').setup()
+local g = vim.g
+g.indentLine_char = '│'
+g.indent_blankline_use_treesitter = true
+g.indentLine_faster = 1
+g.indentLine_fileTypeExclude = {'tex', 'markdown', 'txt', 'startify', 'packer'}
+g.indent_blankline_show_first_indent_level = false
+g.indent_blankline_show_trailing_blankline_indent = false
 EOF
 
 " nmap <c-p> :execute 'Telescope find_files'<CR>
