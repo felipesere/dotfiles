@@ -4,8 +4,7 @@ let g:python3_host_prog='/usr/local/bin/python3'
  "Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
   Plug 'arcticicestudio/nord-vim'
-
-  Plug 'vim-airline/vim-airline'
+  Plug 'hoob3rt/lualine.nvim'
 
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
@@ -17,7 +16,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'junegunn/fzf.vim'
 
   Plug 'ervandew/supertab'
-  Plug 'lewis6991/gitsigns.nvim', 
+  Plug 'lewis6991/gitsigns.nvim',
   Plug 'rhysd/git-messenger.vim'
 
   Plug 'w0rp/ale'
@@ -97,8 +96,6 @@ let g:jsx_ext_required = 0
 let g:vim_json_syntax_conceal = 0
 let g:neoformat_only_msg_on_error = 1
 
-let g:airline#extensions#branch#enabled = 0
-
 let g:terraform_fmt_on_save=1
 let g:terraform_align=1
 
@@ -117,9 +114,17 @@ local g = vim.g
 g.indentLine_char = '│'
 g.indent_blankline_use_treesitter = true
 g.indentLine_faster = 1
-g.indentLine_fileTypeExclude = {'tex', 'markdown', 'txt', 'startify', 'packer'}
 g.indent_blankline_show_first_indent_level = false
-g.indent_blankline_show_trailing_blankline_indent = false
+
+
+require('lualine').setup({
+  options = {
+    theme = "oceanicnext",
+  },
+  sections = {
+    lualine_x = { 'filetype' },
+  },
+})
 EOF
 
 " nmap <c-p> :execute 'Telescope find_files'<CR>
