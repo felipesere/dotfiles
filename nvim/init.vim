@@ -160,10 +160,6 @@ nmap <silent> <Leader>j <Plug>(ale_next_wrap)
 " map . in visual mode
 vnoremap . :norm.<cr>
 
-" Not sure why I need to use guifg. I'd also much rather just do this for Markdown
-hi Bold gui=bold guifg=#EBCB8B
-hi Comment gui=bold guifg=#bca26f
-
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
