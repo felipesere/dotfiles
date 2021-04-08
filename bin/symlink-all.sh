@@ -1,7 +1,10 @@
+mkdir -p $HOME/.config/alacritty
 ln -sf $HOME/.dotfiles/alacritty/alacritty.yml    $HOME/.config/alacritty/alacritty.yml
 ln -sf $HOME/.dotfiles/bat/bat                    $HOME/.bat
 ln -sf $HOME/.dotfiles/git/gitconfig              $HOME/.gitconfig
 ln -sf $HOME/.dotfiles/git/gitignore              $HOME/.gitignore
+mkdir -p $HOME/.config/nvim
+mkdir -p $HOME/.config/starship
 ln -sf $HOME/.dotfiles/nvim/init.vim              $HOME/.config/nvim/init.vim
 ln -sf $HOME/.dotfiles/nvim/autoload              $HOME/.config/nvim/autoload
 ln -sf $HOME/.dotfiles/starship/starship.toml     $HOME/.config/starship.toml
