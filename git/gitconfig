@@ -8,14 +8,14 @@
 
 [core]
   pager = delta
-
   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
   autocrlf = input
   safecrlf = true
-  excludesfile = /Users/felipesere/.gitignore
+  excludesfile = ~/.gitignore
   ignorecase = false
   quotepath = false
   editor = "nvim"
+  fileMode = false
 
 [delta]
   features = decorations
@@ -34,7 +34,7 @@
     hunk-header-decoration-style = "blue box"
 
 [pull]
-	rebase = true
+  rebase = true
 
 [interactive]
   diffFilter = delta --color-only
@@ -80,4 +80,4 @@
   helper = osxkeychain
 
 [init]
-	defaultBranch = main
+  defaultBranch = main
