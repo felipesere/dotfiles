@@ -1,3 +1,5 @@
+mkdir -p ~/.config/alacritty ~/.config/nvim
+
 ln -sf $HOME/.dotfiles/alacritty/alacritty.yml    $HOME/.config/alacritty/alacritty.yml
 ln -sf $HOME/.dotfiles/bat/bat                    $HOME/.bat
 ln -sf $HOME/.dotfiles/git/gitconfig              $HOME/.gitconfig

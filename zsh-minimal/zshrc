@@ -14,7 +14,13 @@ export FZF_CTRL_T_COMMAND="rg --files"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
 
 # Experimental
-export ZPLUG_HOME=/usr/local/opt/zplug
+if [[ `uname` == "Linux" ]]; then
+  export ZPLUG_HOME=/usr/share/zplug
+elif [[ `uname` == "Darwin" ]]; then
+  export ZPLUG_HOME=/usr/local/opt/zplug
+else
+  echo "Unknown OS!"
+fi
 source $ZPLUG_HOME/init.zsh
 
 zplug "willghatch/zsh-cdr"
