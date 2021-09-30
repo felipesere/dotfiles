@@ -83,7 +83,7 @@ font:
     # The `style` can be specified to pick a specific face.
 
   # Point size
-  size: 12
+  size: 10
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -346,7 +346,6 @@ live_config_reload: true
 #   - AppKeypad
 key_bindings:
   - { key: N,        mods: Command, action: SpawnNewInstance             }
-  - { key: 36,       mods: Command, action: ToggleSimpleFullscreen       }
   - { key: V,        mods: Command, action: Paste                        }
   - { key: C,        mods: Command, action: Copy                         }
   - { key: Paste,                   action: Paste                        }

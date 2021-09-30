@@ -4,7 +4,7 @@ let g:python3_host_prog='/usr/local/bin/python3'
  "Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
   Plug 'arcticicestudio/nord-vim'
-  Plug 'vim-airline/vim-airline'
+  Plug 'hoob3rt/lualine.nvim'
 
   " Plug 'nvim-lua/popup.nvim'
   " Plug 'nvim-lua/plenary.nvim'
@@ -14,11 +14,14 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all' }
   Plug 'junegunn/fzf.vim'
 
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/lsp_extensions.nvim'
+  Plug 'nvim-lua/completion-nvim'
+
   Plug 'ervandew/supertab'
   Plug 'airblade/vim-gitgutter'
   Plug 'rhysd/git-messenger.vim'
 
-  Plug 'w0rp/ale'
   Plug 'sbdchd/neoformat'
 
   Plug 'hashivim/vim-terraform', {'for' : 'terraform' }
@@ -27,7 +30,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
 
   Plug 'rust-lang/rust.vim', {'for' : 'rust' }
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'cespare/vim-toml', { 'branch': 'main' }
 
   Plug 'pangloss/vim-javascript', {'for' : 'javascript' }
   Plug 'mxw/vim-jsx', { 'for' : 'javascript' }
@@ -71,7 +74,6 @@ set wildmode=list:longest,full    " how the tab-completion menu behaves: show th
 set shortmess+=Ic                 " `I` don't give an intro when opening vim. `c` don't give messages about completion (n of k matched) etc
 set noswapfile                    " No need for a swap file
 set noshowcmd                     " Don't show the command as it is being typed in the bottom right
-set shell=/usr/local/bin/zsh
 set foldmethod=indent             " Fold code based on indentation. Maybe switch to 'syntax'?
 set foldlevel=20                  " Don't actually fold when opening a file, file by choice :D
 set updatetime=250                " How long to wait after a write before vim triggers plugins
@@ -79,6 +81,7 @@ set list listchars=tab:»\ ,trail:· " change the way empty trailing whitespace 
 set grepprg=rg\ --vimgrep         " use ripgrep when grepping in vim
 set secure                        " Prevent :autocmd, shell and write commands from being run inside project-specific .vimrc files unless they’re owned by you.
 set termguicolors
+set completeopt=menuone,noinsert,noselect
 
 colorscheme nord
 
@@ -104,31 +107,99 @@ let g:vim_markdown_conceal_code_blocks = 0
 " Jump into Git Messanger popup when opening
 let g:git_messenger_always_into_popup = v:true
 
-lua << EOF
+" LSP configuration
+lua << END
+require('nvim-tree').setup {
+  disable_netrw = true,
+  open_on_setup = false,
+}
+
 require('nvim-web-devicons').setup {
  default = true; -- globally enable default icons (default to false)
 }
 
--- local actions = require('telescope.actions')
--- require('telescope').setup{
---   defaults = {
---      mappings = {
---       i = {
---         -- I'm just sooo used to using j/k to navigate up and down
---         ["<c-j>"] = actions.move_selection_next,
---         ["<c-k>"] = actions.move_selection_previous,
---       }
---     }
---   }
--- }
--- 
--- vim.api.nvim_command("highlight! link TelescopeSelection Type")
--- vim.api.nvim_command("highlight! link TelescopeMatching Statement")
-EOF
+require('lualine').setup({
+  options = {
+    theme = "oceanicnext",
+  },
+  sections = {
+    lualine_x = { 'filetype' },
+  }
+})
 
-" nmap <c-p> :execute 'Telescope find_files'<CR>
-" nmap <silent> <Leader>s :execute 'Telescope grep_string'<CR>
-" nmap <silent> <Leader>S :execute 'Telescope live_grep'<CR>
+local nvim_lsp = require('lspconfig')
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '<space>k', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', '<space>j', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+
+  -- Forward to other plugins
+  require'completion'.on_attach(client)
+end
+
+local servers = { "rust_analyzer" }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+      },
+    settings = {
+      ["rust-analyzer"] = {
+        assist = {
+          importGranularity = "module",
+          importPrefix = "by_self",
+        },
+        cargo = {
+          loadOutDirsFromCheck = true
+        },
+        procMacro = {
+          enable = false
+        },
+        checkOnSave = {
+          extraArgs = {
+            "--target-dir", "/tmp/rust-analyzer-check"
+            }
+        }
+      }
+    }
+  }
+end
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = true,
+    signs = true,
+    update_in_insert = true,
+  }
+)
+END
+
+hi TypeHighlight gui=bold guifg=#6F89BC
+" Enable type inlay hints
+autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
+\ lua require'lsp_extensions'.inlay_hints{ prefix = '', alinged = true, highlight = "TypeHighlight", enabled = { "TypeHint", "ChainingHint", "ParameterHint"} }
+
 map <c-p> :execute 'FZF'<CR>
 nmap <silent> <Leader>s :execute 'FindUnderCursor'<CR>
 vmap <silent> <Leader>s :call FindText()<CR>
@@ -140,9 +211,9 @@ noremap gk k
 
 command! Q execute "qa!"
 
-let g:lua_tree_ignore = [ '.git', 'node_modules', '.cache' ] " empty by default
-let g:lua_tree_quit_on_open = 1
-let g:lua_tree_indent_markers = 1
+let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] " empty by default
+let g:nvim_tree_quit_on_open = 1
+let g:nvim_tree_indent_markers = 1
 
 nnoremap <silent> <leader>f :NvimTreeToggle<CR>
 nnoremap <silent> <leader>F :NvimTreeFind<CR>
@@ -152,25 +223,9 @@ nnoremap <silent> <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>; mz:%s/\s\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>
 map <silent> <leader>, :nohl<cr>
 
-" Ale
-nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
-nmap <silent> <Leader>j <Plug>(ale_next_wrap)
-
 " map . in visual mode
 vnoremap . :norm.<cr>
 
 " Not sure why I need to use guifg. I'd also much rather just do this for Markdown
 hi Bold gui=bold guifg=#EBCB8B
 hi Comment gui=bold guifg=#bca26f
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <leader>rn <Plug>(coc-rename)
-nmap <silent> <leader>h :call CocAction('doHover')<CR>
-nmap <silent> <leader>a <Plug>(coc-codeaction-selected)<CR>
-
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)

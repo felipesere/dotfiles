@@ -42,14 +42,18 @@ GO_BINARIES=$HOME/go/bin
 HOMEBREW_BINARIES="/usr/local/bin:/usr/local/sbin"
 CARGO_BINARIES=$HOME/.cargo/bin
 PERSONAL_BINARIES=$HOME/bin
+EXTRAS="/usr/local/bin/aws_completer"
 
 # Local binaries
-export PATH=$PATH:$HOMEBREW_BINARIES:$CARGO_BINARIES:$PERSONAL_BINARIES:$GO_BINARIES
+export PATH=$PATH:$HOMEBREW_BINARIES:$CARGO_BINARIES:$PERSONAL_BINARIES:$GO_BINARIES:$EXTRAS
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
+autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit -u
 autoload -Uz colors  && colors
+
+complete -C '/usr/local/bin/aws_completer' aws
 
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:*:*:*' menu select
@@ -58,6 +62,7 @@ source "$HOME/.dotfiles/zsh-minimal/options.zsh"          # Core settings
 eval "$(starship init zsh)"                               # Themeing with starship
 
 zstyle :compinstall filename "$HOME/.zshrc"
+
 
 bindkey -e
 bindkey "^[[1;5C" forward-word  # CTRL right_arrow to move a word forward
@@ -73,9 +78,6 @@ alias ls="exa -l"
 alias tf="terraform"
 alias bex="bundle exec"
 alias typora="open -a typora"
-
-# Node env
-eval "$(nodenv init -)"
 
 # Ruby
 eval "$(rbenv init -)"
@@ -162,3 +164,5 @@ unaws() {
 if [[ -f "$HOME/.custom-client-functions" ]]; then
   source "$HOME/.custom-client-functions";
 fi
+
+source <(kubectl completion zsh)
