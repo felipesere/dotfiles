@@ -1,6 +1,7 @@
-export ZDOTDIR=$HOME
 export LANG="en_US.UTF-8"
 export EDITOR=vim
+source "$HOME/.dotfiles/zsh-minimal/options.zsh"
+
 export CLICOLOR=1
 export HISTFILE=~/.histfile
 export HISTSIZE=10000
@@ -13,30 +14,8 @@ export FZF_DEFAULT_COMMAND="rg --files"
 export FZF_CTRL_T_COMMAND="rg --files"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
 
-# Experimental
-if [[ `uname` == "Linux" ]]; then
-  export ZPLUG_HOME=/usr/share/zplug
-elif [[ `uname` == "Darwin" ]]; then
-  export ZPLUG_HOME=/usr/local/opt/zplug
-else
-  echo "Unknown OS!"
-fi
-source $ZPLUG_HOME/init.zsh
 
-zplug "willghatch/zsh-cdr"
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "b4b4r07/enhancd"
-zplug "olets/zsh-abbr"
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-zplug load
+source "$HOME/.dotfiles/zsh-minimal/zplug.zsh"
 
 GO_BINARIES=$HOME/go/bin
 HOMEBREW_BINARIES="/usr/local/bin:/usr/local/sbin"
