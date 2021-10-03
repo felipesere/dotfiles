@@ -14,6 +14,8 @@ export SAVEHIST=1000
 export WORDCHARS=''
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
 
+# Install homebrew!
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 source "$HOME/.dotfiles/zsh-minimal/zplug.zsh"
 
@@ -32,16 +34,16 @@ autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit -u
 autoload -Uz colors  && colors
 
-complete -C '/usr/local/bin/aws_completer' aws
+# Add the AWS completions
+complete -C aws_completer aws
 
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:*:*:*' menu select
 
-source "$HOME/.dotfiles/zsh-minimal/options.zsh"          # Core settings
-eval "$(starship init zsh)"                               # Themeing with starship
-
 zstyle :compinstall filename "$HOME/.zshrc"
 
+# Themeing with starship
+eval "$(starship init zsh)"
 
 bindkey -e
 bindkey "^[[1;5C" forward-word  # CTRL right_arrow to move a word forward
@@ -54,21 +56,10 @@ bindkey "\e[3~" delete-char
 alias vim="nvim"
 alias vi="nvim"
 alias ls="exa -l"
-alias tf="terraform"
-alias bex="bundle exec"
 alias typora="open -a typora"
-
-# Ruby
-eval "$(rbenv init -)"
 
 # Direnv hooking
 eval "$(direnv hook zsh)"
-
-# Kiex
-[ -f ~/.kiex/scripts/kiex ] && source "$HOME/.kiex/scripts/kiex"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 
 rg() {
   if [ -t 1 ]; then
@@ -143,5 +134,3 @@ unaws() {
 if [[ -f "$HOME/.custom-client-functions" ]]; then
   source "$HOME/.custom-client-functions";
 fi
-
-source <(kubectl completion zsh)
