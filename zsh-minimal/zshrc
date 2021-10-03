@@ -1,17 +1,17 @@
-export LANG="en_US.UTF-8"
-export EDITOR=vim
 source "$HOME/.dotfiles/zsh-minimal/options.zsh"
 
+export BAT_CONFIG_PATH=~/.bat
 export CLICOLOR=1
+export EDITOR=vim
+export ENHANCD_DISABLE_DOT=1
+export FZF_CTRL_T_COMMAND="rg --files"
+export FZF_DEFAULT_COMMAND="rg --files"
 export HISTFILE=~/.histfile
 export HISTSIZE=10000
+export LANG="en_US.UTF-8"
+export RIPGREP_CONFIG_PATH=~/.ripgrep
 export SAVEHIST=1000
 export WORDCHARS=''
-export ENHANCD_DISABLE_DOT=1
-export RIPGREP_CONFIG_PATH=~/.ripgrep
-export BAT_CONFIG_PATH=~/.bat
-export FZF_DEFAULT_COMMAND="rg --files"
-export FZF_CTRL_T_COMMAND="rg --files"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
 
 
