@@ -6,9 +6,9 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'arcticicestudio/nord-vim'
   Plug 'hoob3rt/lualine.nvim'
 
-  " Plug 'nvim-lua/popup.nvim'
-  " Plug 'nvim-lua/plenary.nvim'
-  " Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'kyazdani42/nvim-tree.lua'
 
   Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all' }
@@ -38,7 +38,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   " My own
   Plug 'felipesere/vim-open-readme'
-  Plug 'felipesere/search'
+  " Plug 'felipesere/search'
 
   " needs to be last
   Plug 'kyazdani42/nvim-web-devicons'
@@ -47,9 +47,6 @@ call plug#end()
 scriptencoding utf-8
 set encoding=utf-8                " ensures the devicons work
 set hidden                        " for rust racer, for now...
-set shell=sh                      " avoid major fuck up with fish shell
-syntax on                         " show syntax highlighting
-filetype plugin indent on         "
 set backspace=indent,eol,start    " respect backspace
 set autoindent                    " set auto indent
 set tabstop=2                     " set indent to 2 spaces
@@ -82,6 +79,8 @@ set grepprg=rg\ --vimgrep         " use ripgrep when grepping in vim
 set secure                        " Prevent :autocmd, shell and write commands from being run inside project-specific .vimrc files unless they’re owned by you.
 set termguicolors
 set completeopt=menuone,noinsert,noselect
+syntax on                         " show syntax highlighting
+filetype plugin indent on         "
 
 colorscheme nord
 
@@ -127,37 +126,30 @@ require('lualine').setup({
   }
 })
 
+local opts = {noremap = true, silent = true}
+local map = vim.api.nvim_set_keymap
+
 local nvim_lsp = require('lspconfig')
 local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   --Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
-
+  -- Only hook these mappings up when there is a LSP client attached
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '<space>k', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', '<space>j', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  map('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  map('n', '<leader>q', "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>", opts)
 
   -- Forward to other plugins
   require'completion'.on_attach(client)
 end
 
-local servers = { "rust_analyzer" }
+local servers = { "rust_analyzer", "yamlls" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -193,6 +185,42 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     update_in_insert = true,
   }
 )
+
+local actions = require "telescope.actions"
+require('telescope').setup{
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-h>"] = "which_key",
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+      }
+    }
+  }
+}
+
+map('n',  '<C-p>', "<cmd>lua require('telescope.builtin').find_files()<cr>", opts)
+map('n',  '<leader>s', "<cmd>lua require('telescope.builtin').grep_string()<cr>", opts)
+map('n',  '<leader>S', "<cmd>lua require('telescope.builtin').live_grep()<cr>", opts)
+
+map('n', '<leader>f',  ':NvimTreeToggle<cr>', opts)
+map('n', '<leader>F',  ':NvimTreeFind<cr>', opts)
+map('n', '<leader>r',  ':NvimTreeRefresh<cr>', opts)
+map('n', 'j', 'gj', opts)
+map('n', 'k', 'gk', opts)
+map('n', 'gj', 'j', opts)
+map('n', 'gk', 'k', opts)
+
+--  eliminate white space
+map('n', '<leader>;', "mz:%s/\\s\\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>", opts)
+
+
+-- for tab completion
+map('i', '<C-Space>', '<C-x><C-o>', opts)
+map('i', '<C-@>', '<C-x><C-o>', opts)
+
+
+map('', '<leader>,', ':nohl<cr>', opts)
 END
 
 hi TypeHighlight gui=bold guifg=#6F89BC
@@ -200,31 +228,11 @@ hi TypeHighlight gui=bold guifg=#6F89BC
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
 \ lua require'lsp_extensions'.inlay_hints{ prefix = '', alinged = true, highlight = "TypeHighlight", enabled = { "TypeHint", "ChainingHint", "ParameterHint"} }
 
-map <c-p> :execute 'FZF'<CR>
-nmap <silent> <Leader>s :execute 'FindUnderCursor'<CR>
-vmap <silent> <Leader>s :call FindText()<CR>
-
-noremap j gj
-noremap k gk
-noremap gj j
-noremap gk k
-
 command! Q execute "qa!"
 
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] " empty by default
 let g:nvim_tree_quit_on_open = 1
 let g:nvim_tree_indent_markers = 1
-
-nnoremap <silent> <leader>f :NvimTreeToggle<CR>
-nnoremap <silent> <leader>F :NvimTreeFind<CR>
-nnoremap <silent> <leader>r :NvimTreeRefresh<CR>
-
-"  eliminate white space
-nnoremap <leader>; mz:%s/\s\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>
-map <silent> <leader>, :nohl<cr>
-
-" map . in visual mode
-vnoremap . :norm.<cr>
 
 " Not sure why I need to use guifg. I'd also much rather just do this for Markdown
 hi Bold gui=bold guifg=#EBCB8B
