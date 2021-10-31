@@ -111,6 +111,9 @@ lua << END
 require('nvim-tree').setup {
   disable_netrw = true,
   open_on_setup = false,
+  filters = {
+    custom = { '.git', 'node_modules', '.cache' }
+  }
 }
 
 require('nvim-web-devicons').setup {
@@ -230,7 +233,6 @@ autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
 
 command! Q execute "qa!"
 
-let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] " empty by default
 let g:nvim_tree_quit_on_open = 1
 let g:nvim_tree_indent_markers = 1
 
