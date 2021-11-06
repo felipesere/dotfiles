@@ -16,9 +16,10 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/lsp_extensions.nvim'
-  Plug 'nvim-lua/completion-nvim'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/nvim-cmp'
 
-  Plug 'ervandew/supertab'
   Plug 'airblade/vim-gitgutter'
   Plug 'rhysd/git-messenger.vim'
 
@@ -78,7 +79,7 @@ set list listchars=tab:»\ ,trail:· " change the way empty trailing whitespace 
 set grepprg=rg\ --vimgrep         " use ripgrep when grepping in vim
 set secure                        " Prevent :autocmd, shell and write commands from being run inside project-specific .vimrc files unless they’re owned by you.
 set termguicolors
-set completeopt=menuone,noinsert,noselect
+set completeopt=menu,menuone,noinsert
 syntax on                         " show syntax highlighting
 filetype plugin indent on         "
 
@@ -90,7 +91,6 @@ let maplocalleader = ";"
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 let g:netrw_banner       = 0
-let g:SuperTabDefaultCompletionType = "<c-n>"
 
 let g:jsx_ext_required = 0
 let g:vim_json_syntax_conceal = 0
@@ -105,6 +105,10 @@ let g:vim_markdown_conceal_code_blocks = 0
 
 " Jump into Git Messanger popup when opening
 let g:git_messenger_always_into_popup = v:true
+
+let g:nvim_tree_quit_on_open = 1
+let g:nvim_tree_indent_markers = 1
+
 
 " LSP configuration
 lua << END
@@ -129,10 +133,34 @@ require('lualine').setup({
   }
 })
 
+
+local cmp = require('cmp')
+
+cmp.setup({
+    mapping = {
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping({
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      }),
+      ['<Tab>'] = cmp.mapping.select_next_item(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    },
+
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+    }, {
+      { name = 'buffer' },
+    })
+})
+
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 local opts = {noremap = true, silent = true}
 local map = vim.api.nvim_set_keymap
 
 local nvim_lsp = require('lspconfig')
+
 local on_attach = function(client, bufnr)
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -141,20 +169,21 @@ local on_attach = function(client, bufnr)
 
   -- Only hook these mappings up when there is a LSP client attached
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  map('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<cr>', opts)
+  map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
+  map('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<cr>', opts)
+  map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+  map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
   map('n', '<leader>q', "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>", opts)
-
-  -- Forward to other plugins
-  require'completion'.on_attach(client)
+  map('n', '<leader>k', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
+  map('n', '<leader>j', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
+  -- map('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
 end
 
 local servers = { "rust_analyzer", "yamlls" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
+    capabilities = capabilities, -- Hooked up to nvim-cmp
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
@@ -183,9 +212,8 @@ end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
     signs = true,
-    update_in_insert = true,
+    update_in_insert = false,
   }
 )
 
@@ -217,12 +245,6 @@ map('n', 'gk', 'k', opts)
 --  eliminate white space
 map('n', '<leader>;', "mz:%s/\\s\\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>", opts)
 
-
--- for tab completion
-map('i', '<C-Space>', '<C-x><C-o>', opts)
-map('i', '<C-@>', '<C-x><C-o>', opts)
-
-
 map('', '<leader>,', ':nohl<cr>', opts)
 END
 
@@ -232,9 +254,6 @@ autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
 \ lua require'lsp_extensions'.inlay_hints{ prefix = '', alinged = true, highlight = "TypeHighlight", enabled = { "TypeHint", "ChainingHint", "ParameterHint"} }
 
 command! Q execute "qa!"
-
-let g:nvim_tree_quit_on_open = 1
-let g:nvim_tree_indent_markers = 1
 
 " Not sure why I need to use guifg. I'd also much rather just do this for Markdown
 hi Bold gui=bold guifg=#EBCB8B
