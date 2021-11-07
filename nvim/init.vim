@@ -19,6 +19,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'hrsh7th/vim-vsnip-integ'
 
   Plug 'airblade/vim-gitgutter'
   Plug 'rhysd/git-messenger.vim'
@@ -137,6 +139,12 @@ require('lualine').setup({
 local cmp = require('cmp')
 
 cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+    end,
+    },
     mapping = {
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping({
@@ -144,7 +152,11 @@ cmp.setup({
         c = cmp.mapping.close(),
       }),
       ['<Tab>'] = cmp.mapping.select_next_item(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+      ['<CR>'] = cmp.mapping.confirm({
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true,
+      })
     },
 
     sources = cmp.config.sources({
@@ -177,7 +189,6 @@ local on_attach = function(client, bufnr)
   map('n', '<leader>q', "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>", opts)
   map('n', '<leader>k', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
   map('n', '<leader>j', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
-  -- map('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
 end
 
 local servers = { "rust_analyzer", "yamlls" }
@@ -235,7 +246,7 @@ map('n',  '<leader>s', "<cmd>lua require('telescope.builtin').grep_string()<cr>"
 map('n',  '<leader>S', "<cmd>lua require('telescope.builtin').live_grep()<cr>", opts)
 
 map('n', '<leader>f',  ':NvimTreeToggle<cr>', opts)
-map('n', '<leader>F',  ':NvimTreeFind<cr>', opts)
+map('n', '<leader>F',  ':NvimTreeFindFile<cr>', opts)
 map('n', '<leader>r',  ':NvimTreeRefresh<cr>', opts)
 map('n', 'j', 'gj', opts)
 map('n', 'k', 'gk', opts)
