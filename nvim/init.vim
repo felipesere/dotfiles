@@ -21,18 +21,18 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/vim-vsnip'
   Plug 'hrsh7th/vim-vsnip-integ'
+  Plug 'rust-lang/rust.vim', {'for' : 'rust' }
 
   Plug 'airblade/vim-gitgutter'
   Plug 'rhysd/git-messenger.vim'
 
   Plug 'sbdchd/neoformat'
+  Plug 'vmchale/just-vim'
 
   Plug 'hashivim/vim-terraform', {'for' : 'terraform' }
 
   Plug 'plasticboy/vim-markdown', {'for' : 'markdown' }
   Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
-
-  Plug 'rust-lang/rust.vim', {'for' : 'rust' }
   Plug 'cespare/vim-toml', { 'branch': 'main' }
 
   Plug 'pangloss/vim-javascript', {'for' : 'javascript' }
@@ -135,7 +135,6 @@ require('lualine').setup({
   }
 })
 
-
 local cmp = require('cmp')
 
 cmp.setup({
@@ -185,7 +184,8 @@ local on_attach = function(client, bufnr)
   map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
   map('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<cr>', opts)
   map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-  map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+  map('n', '<leader>d', "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
+  map('n', '<leader>a', "<cmd>lua require('telescope.builtin').lsp_code_actions()<cr>", opts)
   map('n', '<leader>q', "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>", opts)
   map('n', '<leader>k', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
   map('n', '<leader>j', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
@@ -215,6 +215,10 @@ for _, lsp in ipairs(servers) do
           extraArgs = {
             "--target-dir", "/tmp/rust-analyzer-check"
             }
+        },
+        diagnostics = {
+          enable = true,
+          disabled = {"unresolved-proc-macro"},
         }
       }
     }
