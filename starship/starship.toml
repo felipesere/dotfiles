@@ -1,6 +1,6 @@
 format="""
-$directory$terraform$env_var$git_branch$git_state$git_status
-$jobs$status$character\
+$directory$git_branch$git_state$git_status
+$status$character\
 """
 
 add_newline = true
@@ -22,15 +22,3 @@ untracked  = "•"
 modified   = "•"
 staged     = "•"
 deleted    = "•"
-
-[jobs]
-symbol = "!!"
-style = "bold red"
-
-[env_var]
-variable = "DP_ENV"
-style = "fg:6"
-
-[terraform]
-symbol = "🪐 "
-style = "green"
