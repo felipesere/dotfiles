@@ -12,10 +12,8 @@ fi
 if [[ -v ZPLUG_HOME ]]; then
   source $ZPLUG_HOME/init.zsh
   
-  zplug "willghatch/zsh-cdr"
   zplug "zsh-users/zsh-syntax-highlighting"
   zplug "b4b4r07/enhancd"
-  zplug "olets/zsh-abbr"
   
   # Install plugins if there are plugins that have not been installed
   if ! zplug check --verbose; then
