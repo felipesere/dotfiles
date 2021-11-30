@@ -1,6 +1,6 @@
 format="""
 $directory$git_branch$git_state$git_status
-$status$character\
+$jobs$character\
 """
 
 add_newline = true
@@ -22,3 +22,8 @@ untracked  = "•"
 modified   = "•"
 staged     = "•"
 deleted    = "•"
+
+[jobs]
+symbol = "●"
+style = "blue"
+format = "[$number$symbol]($style) "
