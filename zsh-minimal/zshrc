@@ -50,10 +50,7 @@ eval "$(starship init zsh)"
 bindkey -e
 bindkey "^[[1;5C" forward-word  # CTRL right_arrow to move a word forward
 bindkey "^[[1;5D" backward-word # CTRL left_arrow to move a word backward
-bindkey "[3~" delete-char
-bindkey "^[[3~" delete-char
-bindkey "^[3;5~" delete-char
-bindkey "\e[3~" delete-char
+bindkey '\e[3~'   delete-char
 
 alias vim="nvim"
 alias vi="nvim"
@@ -62,6 +59,18 @@ alias typora="open -a typora"
 
 # Direnv hooking
 eval "$(direnv hook zsh)"
+
+# Setup kubectl completions
+eval "$(kubectl completion zsh)"
+[ -f ~/.config/minikube/completion.zsh ] && source ~/.config/minikube/completion.zsh
+
+# Fast-Node-Manager
+eval "$(fnm env)"
+[ -f ~/.config/fnm/completion.bash ] && source ~/.config/fnm/completion.bash
+
+# Fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 
 rg() {
   if [ -t 1 ]; then
@@ -130,7 +139,7 @@ watchy() {
 }
 
 unaws() {
-  unset AWS_ACCESS_KEY_ID AWS_ACCOUNT_ID AWS_DEFAULT_REGION AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN DP_ENV
+  unset AWS_ACCESS_KEY_ID AWS_ACCOUNT_ID AWS_DEFAULT_REGION AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
 }
 
 if [[ -f "$HOME/.custom-client-functions" ]]; then
