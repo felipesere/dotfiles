@@ -128,7 +128,7 @@ require('nvim-web-devicons').setup {
 
 require('lualine').setup({
   options = {
-    theme = "oceanicnext",
+    theme = "OceanicNext",
   },
   sections = {
     lualine_x = { 'filetype' },
