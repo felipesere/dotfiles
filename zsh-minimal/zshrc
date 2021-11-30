@@ -14,19 +14,21 @@ export SAVEHIST=1000
 export WORDCHARS=''
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
 
-# Install homebrew!
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
 source "$HOME/.dotfiles/zsh-minimal/zplug.zsh"
 
 GO_BINARIES=$HOME/go/bin
-HOMEBREW_BINARIES="/usr/local/bin:/usr/local/sbin"
 CARGO_BINARIES=$HOME/.cargo/bin
 PERSONAL_BINARIES=$HOME/bin
 EXTRAS="/usr/local/bin/aws_completer"
+HOMEBREW="/opt/homebrew/bin"
 
 # Local binaries
-export PATH=$PATH:$HOMEBREW_BINARIES:$CARGO_BINARIES:$PERSONAL_BINARIES:$GO_BINARIES:$EXTRAS
+export PATH=$HOMEBREW:$CARGO_BINARIES:$PERSONAL_BINARIES:$GO_BINARIES:$EXTRAS:$PATH
+
+if [[ "$(uname)" == "Darwin" ]]; then
+  # Install homebrew!
+  eval "$(brew shellenv)"
+fi
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
