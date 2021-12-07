@@ -152,10 +152,7 @@ cmp.setup({
       }),
       ['<Tab>'] = cmp.mapping.select_next_item(),
       ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-      ['<CR>'] = cmp.mapping.confirm({
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = true,
-      })
+      ['<CR>'] = cmp.mapping.confirm({ select = true, })
     },
 
     sources = cmp.config.sources({
