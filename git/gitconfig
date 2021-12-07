@@ -39,6 +39,9 @@
 [interactive]
   diffFilter = delta --color-only
 
+[merge]
+  conflictStyle = diff3
+
 [web]
   browser = open
 
