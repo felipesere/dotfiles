@@ -33,7 +33,6 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'plasticboy/vim-markdown', {'for' : 'markdown' }
   Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
-  Plug 'cespare/vim-toml', { 'branch': 'main' }
 
   Plug 'pangloss/vim-javascript', {'for' : 'javascript' }
   Plug 'mxw/vim-jsx', { 'for' : 'javascript' }
@@ -188,39 +187,36 @@ local on_attach = function(client, bufnr)
   map('n', '<leader>j', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
 end
 
-local servers = { "rust_analyzer", "yamlls" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    capabilities = capabilities, -- Hooked up to nvim-cmp
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
+nvim_lsp["rust_analyzer"].setup {
+  capabilities = capabilities, -- Hooked up to nvim-cmp
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  settings = {
+    ["rust-analyzer"] = {
+      assist = {
+        importGranularity = "module",
+        importPrefix = "by_self",
       },
-    settings = {
-      ["rust-analyzer"] = {
-        assist = {
-          importGranularity = "module",
-          importPrefix = "by_self",
-        },
-        cargo = {
-          loadOutDirsFromCheck = true
-        },
-        procMacro = {
-          enable = false
-        },
-        checkOnSave = {
-          extraArgs = {
-            "--target-dir", "/tmp/rust-analyzer-check"
-            }
-        },
-        diagnostics = {
-          enable = true,
-          disabled = {"unresolved-proc-macro"},
+      cargo = {
+        loadOutDirsFromCheck = true
+      },
+      procMacro = {
+        enable = false
+      },
+      checkOnSave = {
+        extraArgs = {
+          "--target-dir", "/tmp/rust-analyzer-check"
         }
+      },
+      diagnostics = {
+        enable = true,
+        disabled = {"unresolved-proc-macro"},
       }
     }
   }
-end
+}
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -242,9 +238,9 @@ require('telescope').setup{
   }
 }
 
-map('n',  '<C-p>', "<cmd>lua require('telescope.builtin').find_files()<cr>", opts)
-map('n',  '<leader>s', "<cmd>lua require('telescope.builtin').grep_string()<cr>", opts)
-map('n',  '<leader>S', "<cmd>lua require('telescope.builtin').live_grep()<cr>", opts)
+map('n',  '<C-p>',      "<cmd>lua require('telescope.builtin').find_files()<cr>", opts)
+map('n',  '<leader>s',  "<cmd>lua require('telescope.builtin').grep_string()<cr>", opts)
+map('n',  '<leader>S',  "<cmd>lua require('telescope.builtin').live_grep()<cr>", opts)
 
 map('n', '<leader>f',  ':NvimTreeToggle<cr>', opts)
 map('n', '<leader>F',  ':NvimTreeFindFile<cr>', opts)
