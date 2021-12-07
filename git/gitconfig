@@ -27,11 +27,11 @@
   minus-emph-style = "white  #88323A"
 
 [delta "decorations"]
-    commit-decoration-style      = "bold yellow box ul"
-    file-style                   = "bold yellow"
-    file-decoration-style        = "bold yellow box ul"
-    hunk-header-style            = "bold blue"
-    hunk-header-decoration-style = "blue box"
+  commit-decoration-style      = "bold yellow box ul"
+  file-style                   = "bold yellow"
+  file-decoration-style        = "bold yellow box ul"
+  hunk-header-style            = "bold blue"
+  hunk-header-decoration-style = "blue box"
 
 [pull]
 	rebase = true
