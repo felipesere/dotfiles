@@ -15,9 +15,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'kyazdani42/nvim-tree.lua'
 
-  Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all' }
-  Plug 'junegunn/fzf.vim'
-
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/lsp_extensions.nvim'
   Plug 'hrsh7th/cmp-nvim-lsp'
