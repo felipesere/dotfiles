@@ -48,7 +48,6 @@ call plug#begin('~/.config/nvim/plugged')
 call plug#end()
 
 set autoindent                    " set auto indent
-set backspace=indent,eol,start    " respect backspace
 set clipboard=unnamed             " use the system clipboard
 set completeopt=menu,menuone,noinsert
 set cursorline                    " highlight current line
@@ -61,7 +60,7 @@ set mouse=a
 set nofoldenable                  " disable code folding
 set noswapfile                    " No need for a swap file
 set number                        " show the absolute number as well
-set scrolloff=8                   " Keep the cursors 
+set scrolloff=15                   " Keep the cursors
 set shiftwidth=2                  " when indenting with `>` use two spaces
 set shortmess+=Ic                 " `I` don't give an intro when opening vim. `c` don't give messages about completion (n of k matched) etc
 set showmatch                     " highlight matching brackes
@@ -73,17 +72,11 @@ set updatetime=250                " How long to wait after a write before vim tr
 set visualbell
 set wildmode=list:longest,full    " how the tab-completion menu behaves: show the list, then the longest match, finally all matches
 syntax on                         " show syntax highlighting
-filetype plugin indent on         "
+filetype plugin indent on
 
 colorscheme nord
 
 let mapleader = "\<Space>"
-
-let g:jsx_ext_required = 0
-let g:vim_json_syntax_conceal = 0
-let g:neoformat_only_msg_on_error = 1
-
-let g:vim_markdown_conceal_code_blocks = 0
 
 " Jump into Git Messanger popup when opening
 let g:git_messenger_always_into_popup = v:true
