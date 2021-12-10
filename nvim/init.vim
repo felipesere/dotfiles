@@ -1,7 +1,7 @@
 " some of the plugins need python which gets confused in virtualenv
 let g:python3_host_prog='/usr/local/bin/python3'
 
- "Install basic plugins
+" Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
   Plug 'hoob3rt/lualine.nvim'
 
@@ -25,23 +25,16 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/vim-vsnip'
   Plug 'hrsh7th/vim-vsnip-integ'
-  Plug 'rust-lang/rust.vim', {'for' : 'rust' }
 
   Plug 'airblade/vim-gitgutter'
   Plug 'rhysd/git-messenger.vim'
 
   Plug 'sbdchd/neoformat'
 
-  Plug 'plasticboy/vim-markdown', {'for' : 'markdown' }
-  Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
-
-  Plug 'pangloss/vim-javascript', {'for' : 'javascript' }
-  Plug 'mxw/vim-jsx', { 'for' : 'javascript' }
-  Plug 'elzr/vim-json', { 'for' : 'json' }
+  Plug 'sheerun/vim-polyglot'
 
   " My own
   Plug 'felipesere/vim-open-readme'
-  " Plug 'felipesere/search'
 
   " needs to be last
   Plug 'kyazdani42/nvim-web-devicons'
@@ -55,7 +48,6 @@ set encoding=utf-8                " ensures the devicons work
 set expandtab                     " use spaces, not tab characters
 set hidden                        " for rust racer, for now...
 set ignorecase                    " ignore case in search when just typing lowercase
-set list listchars=tab:»\ ,trail:· " change the way empty trailing whitespace and tabs look
 set mouse=a
 set nofoldenable                  " disable code folding
 set noswapfile                    " No need for a swap file
@@ -71,8 +63,6 @@ set termguicolors
 set updatetime=250                " How long to wait after a write before vim triggers plugins
 set visualbell
 set wildmode=list:longest,full    " how the tab-completion menu behaves: show the list, then the longest match, finally all matches
-syntax on                         " show syntax highlighting
-filetype plugin indent on
 
 colorscheme nord
 
