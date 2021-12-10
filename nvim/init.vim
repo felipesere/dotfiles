@@ -3,8 +3,12 @@ let g:python3_host_prog='/usr/local/bin/python3'
 
  "Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
-  Plug 'arcticicestudio/nord-vim'
   Plug 'hoob3rt/lualine.nvim'
+
+  Plug 'shaunsingh/nord.nvim'
+
+  Plug 'christoomey/vim-sort-motion'
+  Plug 'vim-test/vim-test'
 
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
@@ -27,9 +31,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'rhysd/git-messenger.vim'
 
   Plug 'sbdchd/neoformat'
-  Plug 'vmchale/just-vim'
-
-  Plug 'hashivim/vim-terraform', {'for' : 'terraform' }
 
   Plug 'plasticboy/vim-markdown', {'for' : 'markdown' }
   Plug 'stephpy/vim-yaml', {'for' : ['yaml', 'yml']}
@@ -109,6 +110,7 @@ let g:git_messenger_always_into_popup = v:true
 
 let g:nvim_tree_quit_on_open = 1
 let g:nvim_tree_indent_markers = 1
+let g:nord_contrast = v:true
 
 
 " LSP configuration
@@ -127,7 +129,7 @@ require('nvim-web-devicons').setup {
 
 require('lualine').setup({
   options = {
-    theme = "OceanicNext",
+    theme = "nord",
   },
   sections = {
     lualine_x = { 'filetype' },
