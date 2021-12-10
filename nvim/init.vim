@@ -47,31 +47,31 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'kyazdani42/nvim-web-devicons'
 call plug#end()
 
-set encoding=utf-8                " ensures the devicons work
-set hidden                        " for rust racer, for now...
-set backspace=indent,eol,start    " respect backspace
 set autoindent                    " set auto indent
-set tabstop=2                     " set indent to 2 spaces
-set shiftwidth=2                  " when indenting with `>` use two spaces
-set expandtab                     " use spaces, not tab characters
-set number                        " show the absolute number as well
-set showmatch                     " highlight matching brackes
-set ignorecase                    " ignore case in search when just typing lowercase
-set smartcase                     " pay attention to case when mixing
-set cursorline                    " highlight current line
-set nofoldenable                  " disable code folding
-set visualbell
-set signcolumn=yes:1              " Git and diagnostics use the sign column
-set scrolloff=8                   " Keep the cursors 
+set backspace=indent,eol,start    " respect backspace
 set clipboard=unnamed             " use the system clipboard
-set wildmode=list:longest,full    " how the tab-completion menu behaves: show the list, then the longest match, finally all matches
-set shortmess+=Ic                 " `I` don't give an intro when opening vim. `c` don't give messages about completion (n of k matched) etc
-set noswapfile                    " No need for a swap file
-set updatetime=250                " How long to wait after a write before vim triggers plugins
-set list listchars=tab:»\ ,trail:· " change the way empty trailing whitespace and tabs look
-set termguicolors
 set completeopt=menu,menuone,noinsert
+set cursorline                    " highlight current line
+set encoding=utf-8                " ensures the devicons work
+set expandtab                     " use spaces, not tab characters
+set hidden                        " for rust racer, for now...
+set ignorecase                    " ignore case in search when just typing lowercase
+set list listchars=tab:»\ ,trail:· " change the way empty trailing whitespace and tabs look
 set mouse=a
+set nofoldenable                  " disable code folding
+set noswapfile                    " No need for a swap file
+set number                        " show the absolute number as well
+set scrolloff=8                   " Keep the cursors 
+set shiftwidth=2                  " when indenting with `>` use two spaces
+set shortmess+=Ic                 " `I` don't give an intro when opening vim. `c` don't give messages about completion (n of k matched) etc
+set showmatch                     " highlight matching brackes
+set signcolumn=yes:1              " Git and diagnostics use the sign column
+set smartcase                     " pay attention to case when mixing
+set tabstop=2                     " set indent to 2 spaces
+set termguicolors
+set updatetime=250                " How long to wait after a write before vim triggers plugins
+set visualbell
+set wildmode=list:longest,full    " how the tab-completion menu behaves: show the list, then the longest match, finally all matches
 syntax on                         " show syntax highlighting
 filetype plugin indent on         "
 
