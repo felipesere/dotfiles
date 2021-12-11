@@ -1,21 +1,20 @@
 # vi: ft=gitconfig
 [user]
   name = Felipe Sere
-  email = felipesere@gmail.com
+  email = github@felipesere.com
 
 [github]
   user = felipesere
 
 [core]
-  pager = delta
-
-  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
   autocrlf = input
-  safecrlf = true
-  excludesfile = /Users/felipesere/.gitignore
-  ignorecase = false
-  quotepath = false
   editor = "nvim"
+  excludesfile = ~/.gitignore
+  ignorecase = false
+  pager = delta
+  quotepath = false
+  safecrlf = true
+  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 
 [delta]
   features = decorations
@@ -41,9 +40,6 @@
 
 [merge]
   conflictStyle = diff3
-
-[web]
-  browser = open
 
 [color]
   interactive = auto
