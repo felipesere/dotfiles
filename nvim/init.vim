@@ -75,6 +75,12 @@ let g:nord_contrast = v:true
 
 " LSP configuration
 lua << END
+require('nvim-treesitter.configs').setup {
+   highlight = {
+    enable = true,
+   },
+}
+
 require('nvim-tree').setup {
   disable_netrw = true,
   open_on_setup = false,
