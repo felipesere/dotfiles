@@ -65,14 +65,12 @@ scrolling:
 font:
   # Normal (roman) font face
   normal:
-    # family: Menlo
-    family: JetbrainsMono Nerd Font Mono
+    family: Iosevka Nerd Font Mono 
     style: Regular
-    # The `style` can be specified to pick a specific face.
 
   # Italic font face
   bold:
-    family: RobotoMono Nerd Font
+    family: Iosevka Nerd Font Mono 
     style: Bold
     # family: Menlo
     # The `style` can be specified to pick a specific face.
@@ -80,7 +78,7 @@ font:
 
   # Italic font face
   italic:
-    family: RobotoMono Nerd Font
+    family: Iosevka Nerd Font Mono 
     style: Italic
     # family: Menlo
     # The `style` can be specified to pick a specific face.
