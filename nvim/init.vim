@@ -3,10 +3,11 @@ let g:python3_host_prog='/usr/local/bin/python3'
 
 " Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
+  Plug 'shaunsingh/nord.nvim'
+
   Plug 'hoob3rt/lualine.nvim'
   Plug 'stevearc/dressing.nvim'
 
-  Plug 'shaunsingh/nord.nvim'
 
   Plug 'christoomey/vim-sort-motion'
   Plug 'vim-test/vim-test'
@@ -63,8 +64,6 @@ set updatetime=250                " How long to wait after a write before vim tr
 set visualbell
 set wildmode=list:longest,full    " how the tab-completion menu behaves: show the list, then the longest match, finally all matches
 
-colorscheme nord
-
 let mapleader = "\<Space>"
 
 " Jump into Git Messanger popup when opening
@@ -74,13 +73,16 @@ let g:git_messenger_floating_win_opts = { 'border': 'single' }
 let g:nvim_tree_quit_on_open = 1
 let g:nvim_tree_indent_markers = 1
 let g:nord_contrast = v:true
+let g:nord_borders = v:true
+
+colorscheme nord
 
 command! Q execute "qa!"
 
 " Not sure why I need to use guifg. I'd also much rather just do this for Markdown
 hi Comment gui=bold guifg=#bca26f
-
 hi TypeHighlight gui=bold guifg=#6F89BC
+
 " Enable type inlay hints
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
 \ lua require('lsp_extensions').inlay_hints{ prefix = '', alinged = true, highlight = "TypeHighlight", enabled = { "TypeHint", "ChainingHint", "ParameterHint"} }
@@ -119,8 +121,6 @@ require('lualine').setup({
     'nvim-tree',
   }
 })
-
-
 
 local cmp = require('cmp')
 local nvim_lsp = require('lspconfig')
@@ -243,4 +243,3 @@ map('n', '<leader>;', "mz:%s/\\s\\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>", opts)
 map('', '<leader>,', ':nohl<cr>', opts)
 
 END
-
