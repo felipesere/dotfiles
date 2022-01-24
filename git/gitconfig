@@ -60,6 +60,7 @@
   b   = branch
   aa  = add --all :/
   c   = commit -v
+  recommit = commit --amend --no-edit
   d   = diff
   ds  = diff --staged
   s   = status -s -b
@@ -75,7 +76,7 @@
   unstage = restore --staged
 
 [credential]
-  helper = osxkeychain
+	helper = store
 
 [init]
 	defaultBranch = main
