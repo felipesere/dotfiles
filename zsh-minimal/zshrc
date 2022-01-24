@@ -115,7 +115,11 @@ chpwd_functions+=title
 title
 
 font_size() {
-  sd 'size: [\d\.]+' "size: $1" ~/.config/alacritty/alacritty.yml
+  if [[ "$1" == "" ]]; then
+    yq e '.font.size'         $HOME/.dotfiles/alacritty/alacritty.yml
+  else
+    yq -e e ".font.size = $1" -i $HOME/.dotfiles/alacritty/alacritty.yml
+  fi
 }
 
 presentation_mode() {
