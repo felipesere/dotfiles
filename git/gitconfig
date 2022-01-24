@@ -1,82 +1,82 @@
 # vi: ft=gitconfig
 [user]
-  name = Felipe Sere
-  email = github@felipesere.com
+name = Felipe Sere
+email = github@felipesere.com
 
 [github]
-  user = felipesere
+user = felipesere
 
 [core]
-  autocrlf = input
-  editor = "nvim"
-  excludesfile = ~/.gitignore
-  ignorecase = false
-  pager = delta
-  quotepath = false
-  safecrlf = true
-  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+autocrlf = input
+editor = "nvim"
+excludesfile = ~/.gitignore
+ignorecase = false
+pager = delta
+quotepath = false
+safecrlf = true
+whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 
 [delta]
-  features = decorations
+features = decorations
 
-  syntax-theme     = Nord
-  plus-style       = "syntax #2d4a16"
-  plus-emph-style  = "white  #6B8C4F"
-  minus-style      = "syntax #60141B"
-  minus-emph-style = "white  #88323A"
+syntax-theme     = Nord
+plus-style       = "syntax #2d4a16"
+plus-emph-style  = "white  #6B8C4F"
+minus-style      = "syntax #60141B"
+minus-emph-style = "white  #88323A"
 
 [delta "decorations"]
-  commit-decoration-style      = "bold yellow box ul"
-  file-style                   = "bold yellow"
-  file-decoration-style        = "bold yellow box ul"
-  hunk-header-style            = "bold blue"
-  hunk-header-decoration-style = "blue box"
+commit-decoration-style      = "bold yellow box ul"
+file-style                   = "bold yellow"
+file-decoration-style        = "bold yellow box ul"
+hunk-header-style            = "bold blue"
+hunk-header-decoration-style = "blue box"
 
 [pull]
-	rebase = true
+rebase = true
 
 [interactive]
-  diffFilter = delta --color-only
+diffFilter = delta --color-only
 
 [merge]
-  conflictStyle = diff3
+conflictStyle = diff3
 
 [color]
-  interactive = auto
-  ui = true
-  pager = true
+interactive = auto
+ui = true
+pager = true
 
 [color "branch"]
-  current = yellow
+current = yellow
 
 [color "status"]
-  added = yellow
-  changed = green
-  untracked = blue
-  deleted = red
+added = yellow
+changed = green
+untracked = blue
+deleted = red
 
 [alias]
-  a   = add -u
-  b   = branch
-  aa  = add --all :/
-  c   = commit -v
-  recommit = commit --amend --no-edit
-  d   = diff
-  ds  = diff --staged
-  s   = status -s -b
-  l   = !git ll -20
-  ll  = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short
-  ld  = !git ll --since 1.days.ago
-  lw  = !git ll --since 1.weeks.ago
-  incoming   = !git ll ..@{u}
-  outgoing   = !git ll @{u}..
-  conflicts = diff --name-only --diff-filter=U
-  sha = rev-parse --short HEAD
-  root = rev-parse --show-toplevel
-  unstage = restore --staged
+a   = add -u
+b   = branch
+aa  = add --all :/
+c   = commit -v
+recommit = commit --amend --no-edit
+d   = diff
+ds  = diff --staged
+s   = status -s -b
+l   = !git ll -20
+ll  = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short
+ld  = !git ll --since 1.days.ago
+lw  = !git ll --since 1.weeks.ago
+incoming   = !git ll ..@{u}
+outgoing   = !git ll @{u}..
+conflicts = diff --name-only --diff-filter=U
+sha = rev-parse --short HEAD
+root = rev-parse --show-toplevel
+unstage = restore --staged
 
 [credential]
-	helper = store
+helper = store
 
 [init]
-	defaultBranch = main
+defaultBranch = main
