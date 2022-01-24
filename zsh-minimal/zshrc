@@ -9,10 +9,10 @@ export FZF_DEFAULT_COMMAND="rg --files"
 export HISTFILE=~/.histfile
 export HISTSIZE=10000
 export LANG="en_US.UTF-8"
-export RIPGREP_CONFIG_PATH=~/.ripgrep
 export SAVEHIST=1000
 export WORDCHARS=''
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 source "$HOME/.dotfiles/zsh-minimal/zplug.zsh"
 
@@ -64,21 +64,11 @@ eval "$(direnv hook zsh)"
 eval "$(kubectl completion zsh)"
 [ -f ~/.config/minikube/completion.zsh ] && source ~/.config/minikube/completion.zsh
 
-# Fast-Node-Manager
-eval "$(fnm env)"
-[ -f ~/.config/fnm/completion.bash ] && source ~/.config/fnm/completion.bash
+# Setup k3d completion
+[ -f ~/.config/k3d/completion.zsh ] && source ~/.config/k3d/completion.zsh
 
 # Fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-
-rg() {
-  if [ -t 1 ]; then
-    command rg -p "$@" | less -RFX
-  else
-    command rg "$@"
-  fi
-}
 
 c() {
   IN_REPO=$(command git rev-parse --is-inside-work-tree 2&> /dev/null)
