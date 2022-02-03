@@ -10,3 +10,4 @@ ln -sf $HOME/.dotfiles/starship/starship.toml     $HOME/.config/starship.toml
 ln -sf $HOME/.dotfiles/tmux/tmux.conf             $HOME/.tmux.conf
 ln -sf $HOME/.dotfiles/zsh-minimal/zshrc          $HOME/.zshrc
 ln -sf $HOME/.dotfiles/ripgreprc                  $HOME/.ripgreprc
+ln -sf $HOME/.dotfiles/lazygit.yaml               $HOME/.lazygit.yaml
