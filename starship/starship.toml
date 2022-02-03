@@ -1,5 +1,5 @@
 format="""
-$directory$git_branch$git_state$git_status
+$directory$kubernetes$git_branch$git_state$git_status
 $jobs$character\
 """
 
@@ -27,3 +27,8 @@ deleted    = "●"
 symbol = "●"
 style = "blue"
 format = "[$number$symbol]($style) "
+
+[kubernetes]
+disabled = false
+symbol = "☸ "
+format = '($symbol)cx:$context @ ns:$namespace '
