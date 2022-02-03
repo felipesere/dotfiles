@@ -7,7 +7,8 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'hoob3rt/lualine.nvim'
   Plug 'stevearc/dressing.nvim'
-
+  Plug 'j-hui/fidget.nvim'
+  Plug 'simrat39/symbols-outline.nvim'
 
   Plug 'christoomey/vim-sort-motion'
   Plug 'vim-test/vim-test'
@@ -90,6 +91,13 @@ autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
 " LSP configuration
 lua << END
 require('dressing').setup()
+require("fidget").setup()
+
+vim.g.symbols_outline = {
+    auto_preview = false,
+    width = 60,
+    show_symbol_details = false,
+}
 
 require('nvim-treesitter.configs').setup {
    highlight = {
