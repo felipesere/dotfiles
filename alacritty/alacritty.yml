@@ -1,5 +1,7 @@
-# Configuration for Alacritty, the GPU enhanced terminal emulator.
+import:
+  - ~/.alacritty-font-size.yml
 
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
@@ -75,7 +77,7 @@ font:
     # family: Menlo
     # The `style` can be specified to pick a specific face.
   # Point size
-  size: 24
+  # size: 16 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:

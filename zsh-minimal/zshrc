@@ -107,10 +107,14 @@ title
 
 font_size() {
   if [[ "$1" == "" ]]; then
-    yq e '.font.size'         $HOME/.dotfiles/alacritty/alacritty.yml
+    yq e '.font.size' $HOME/.alacritty-font-size.yml
   else
-    yq -e e ".font.size = $1" -i $HOME/.dotfiles/alacritty/alacritty.yml
+    yq -e e ".font.size = $1" -i $HOME/.alacritty-font-size.yml
   fi
+}
+
+super_size() {
+  font_size 32
 }
 
 presentation_mode() {
