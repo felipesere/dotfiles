@@ -90,8 +90,6 @@ autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
 
 " LSP configuration
 lua << END
-<<<<<<< HEAD
-require('dressing').setup()
 require("fidget").setup()
 
 vim.g.symbols_outline = {
@@ -99,15 +97,12 @@ vim.g.symbols_outline = {
     width = 60,
     show_symbol_details = false,
 }
-||||||| parent of 8f3c39c (Make "rename ui" go directly to insert mode)
-require('dressing').setup()
-=======
+
 require('dressing').setup({
   input = {
     insert_only = true,
   },
 })
->>>>>>> 8f3c39c (Make "rename ui" go directly to insert mode)
 
 require('nvim-treesitter.configs').setup {
    highlight = {
