@@ -281,6 +281,9 @@ map('n',  '<C-p>',      "<cmd>lua require('telescope.builtin').find_files()<cr>"
 map('n',  '<leader>s',  "<cmd>lua require('telescope.builtin').grep_string()<cr>", opts)
 map('n',  '<leader>S',  "<cmd>lua require('telescope.builtin').live_grep()<cr>", opts)
 
+map('n',  '<leader>l',  ":TestLast<cr>", opts)
+map('n',  '<leader>n',  ":TestNearest<cr>", opts)
+
 map('n', '<leader>f',  ':NvimTreeToggle<cr>', opts)
 map('n', '<leader>F',  ':NvimTreeFindFile<cr>', opts)
 map('n', '<leader>r',  ':NvimTreeRefresh<cr>', opts)
