@@ -8,7 +8,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'hoob3rt/lualine.nvim'
   Plug 'stevearc/dressing.nvim'
   Plug 'j-hui/fidget.nvim'
-  Plug 'simrat39/symbols-outline.nvim'
+  Plug 'stevearc/aerial.nvim'
 
   Plug 'christoomey/vim-sort-motion'
   Plug 'vim-test/vim-test'
@@ -90,13 +90,17 @@ autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
 
 " LSP configuration
 lua << END
+local opts = {noremap = true, silent = true}
+local map = vim.api.nvim_set_keymap
+
 require("fidget").setup()
 
-vim.g.symbols_outline = {
-    auto_preview = false,
-    width = 60,
-    show_symbol_details = false,
-}
+require("aerial").setup({
+ backends = { "treesitter" },
+ default_direction = "prefer_right",
+})
+map('n', '<leader>o',          '<cmd>:AerialToggle<cr>', opts)
+
 
 require('dressing').setup({
   input = {
@@ -164,10 +168,6 @@ cmp.setup({
 })
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-local opts = {noremap = true, silent = true}
-local map = vim.api.nvim_set_keymap
-
 
 local on_attach = function(client, bufnr)
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
