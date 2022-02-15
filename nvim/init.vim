@@ -19,6 +19,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'kyazdani42/nvim-tree.lua'
 
   Plug 'neovim/nvim-lspconfig'
+  Plug 'norcalli/nvim_utils'
   Plug 'nvim-lua/lsp_extensions.nvim'
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-nvim-lsp'
@@ -83,10 +84,6 @@ command! Q execute "qa!"
 " Not sure why I need to use guifg. I'd also much rather just do this for Markdown
 hi Comment gui=bold guifg=#bca26f
 hi TypeHighlight gui=bold guifg=#6F89BC
-
-" Enable type inlay hints
-autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
-\ lua require('lsp_extensions').inlay_hints{ prefix = '', alinged = true, highlight = "TypeHighlight", enabled = { "TypeHint", "ChainingHint", "ParameterHint"} }
 
 " LSP configuration
 lua << END
@@ -171,6 +168,26 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 
 local on_attach = function(client, bufnr)
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  INLAY_HINTS = {
+  	set = function()
+      local lsp_extensions = require('lsp_extensions');
+      lsp_extensions.inlay_hints { prefix = '', alinged = true, highlight = "TypeHighlight", enabled = { "TypeHint", "ChainingHint", "ParameterHint"} };
+    end;
+  }
+
+  local autocmds = {
+    highlighting = {
+      {"CursorMoved",  "*", "lua INLAY_HINTS.set()" },
+      {"InsertLeave",  "*", "lua INLAY_HINTS.set()" },
+      {"BufEnter",     "*", "lua INLAY_HINTS.set()" },
+      {"BufWinEnter",  "*", "lua INLAY_HINTS.set()" },
+      {"TabEnter",     "*", "lua INLAY_HINTS.set()" },
+      {"BufWritePost", "*", "lua INLAY_HINTS.set()" },
+    },
+  }
+  require('nvim_utils')
+  nvim_create_augroups(autocmds)
 
   --Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
