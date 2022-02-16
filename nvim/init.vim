@@ -19,6 +19,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'kyazdani42/nvim-tree.lua'
 
   Plug 'neovim/nvim-lspconfig'
+  " Used for setting autocommands from within LUA and get correct type highlights
   Plug 'norcalli/nvim_utils'
   Plug 'nvim-lua/lsp_extensions.nvim'
 
