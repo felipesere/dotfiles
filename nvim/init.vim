@@ -21,11 +21,12 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'neovim/nvim-lspconfig'
   Plug 'norcalli/nvim_utils'
   Plug 'nvim-lua/lsp_extensions.nvim'
-  Plug 'hrsh7th/cmp-buffer'
+
+  Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-path'
   Plug 'hrsh7th/cmp-vsnip'
-  Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/vim-vsnip'
 
   Plug 'airblade/vim-gitgutter'
@@ -138,7 +139,6 @@ require('lualine').setup({
 
 local cmp = require('cmp')
 local nvim_lsp = require('lspconfig')
-
 cmp.setup({
     snippet = {
       -- REQUIRED - you must specify a snippet engine. Remove it when possible
