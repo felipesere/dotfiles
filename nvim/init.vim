@@ -34,6 +34,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'rhysd/git-messenger.vim'
 
   Plug 'sheerun/vim-polyglot'
+  Plug 'towolf/vim-helm'
 
   " My own
   Plug 'felipesere/vim-open-readme'
