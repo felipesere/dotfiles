@@ -32,8 +32,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'airblade/vim-gitgutter'
   Plug 'rhysd/git-messenger.vim'
 
-  Plug 'sbdchd/neoformat'
-
   Plug 'sheerun/vim-polyglot'
 
   " My own
