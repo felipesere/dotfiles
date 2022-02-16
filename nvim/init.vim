@@ -81,9 +81,8 @@ colorscheme nord
 
 command! Q execute "qa!"
 
-" Not sure why I need to use guifg. I'd also much rather just do this for Markdown
-hi Comment gui=bold guifg=#bca26f
-hi TypeHighlight gui=bold guifg=#6F89BC
+" Not sure why I need to use guifg
+hi TypeHighlight guifg=#B48EAD
 
 " LSP configuration
 lua << END
