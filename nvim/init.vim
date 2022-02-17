@@ -4,8 +4,8 @@ let g:python3_host_prog='/usr/local/bin/python3'
 " Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
   Plug 'shaunsingh/nord.nvim'
-
   Plug 'hoob3rt/lualine.nvim'
+
   Plug 'stevearc/dressing.nvim'
   Plug 'j-hui/fidget.nvim'
   Plug 'stevearc/aerial.nvim'
@@ -194,7 +194,7 @@ local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   map('n', 'gd',          '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
   map('n', 'gi',          '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-  map('n', 'K',           '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+  map('n', '?',           '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
   map('n', '<leader>rn',  '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
   map('n', '<leader>a',   "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
   map('n', '<leader>r',   "<cmd>lua tele.lsp_references()<cr>", opts)
@@ -204,7 +204,30 @@ local on_attach = function(client, bufnr)
   map('n', '<leader>j',   '<cmd>lua vim.diagnostic.goto_next()<cr>', opts)
 end
 
+local nord = require("nord.colors")
+
+-- vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#2e3440 ]]
+-- vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=#ebcb8b guibg=#2e3440 ]]
+
+local border = {
+      {"╭", "FloatBorder"},
+      {"─", "FloatBorder"},
+      {"╮", "FloatBorder"},
+      {"│", "FloatBorder"},
+      {"╯", "FloatBorder"},
+      {"─", "FloatBorder"},
+      {"╰", "FloatBorder"},
+      {"│", "FloatBorder"},
+}
+
+-- LSP settings (for overriding per client)
+local handlers =  {
+  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
+  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
+}
+
 nvim_lsp["rust_analyzer"].setup {
+  handlers = handlers,
   capabilities = capabilities, -- Hooked up to nvim-cmp
   on_attach = on_attach,
   flags = {
