@@ -3,7 +3,7 @@ let g:python3_host_prog='/usr/local/bin/python3'
 
 " Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
-  Plug 'shaunsingh/nord.nvim'
+  " Plug 'shaunsingh/nord.nvim'
   Plug 'hoob3rt/lualine.nvim'
 
   Plug 'stevearc/dressing.nvim'
@@ -37,6 +37,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'towolf/vim-helm'
 
   " My own
+  Plug 'felipesere/nord.nvim'
   Plug 'felipesere/vim-open-readme'
 
   " needs to be last
@@ -136,6 +137,60 @@ require('lualine').setup({
   }
 })
 
+local kind_icons = {
+  Text = "",
+  Method = "",
+  Function = "",
+  Constructor = "",
+  Field = "",
+  Variable = "",
+  Class = "ﴯ",
+  Interface = "",
+  Module = "",
+  Property = "ﰠ",
+  Unit = "",
+  Value = "",
+  Enum = "",
+  Keyword = "",
+  Snippet = "",
+  Color = "",
+  File = "",
+  Reference = "",
+  Folder = "",
+  EnumMember = "",
+  Constant = "",
+  Struct = "",
+  Event = "",
+  Operator = "",
+  TypeParameter = ""
+}
+
+local lspkind_comparator = function(conf)
+  local lsp_types = require('cmp.types').lsp
+  return function(entry1, entry2)
+    if entry1.source.name ~= 'nvim_lsp' then
+      if entry2.source.name == 'nvim_lsp' then
+        return false
+      else
+        return nil
+      end
+    end
+    local kind1 = lsp_types.CompletionItemKind[entry1:get_kind()]
+    local kind2 = lsp_types.CompletionItemKind[entry2:get_kind()]
+
+    local priority1 = conf.kind_priority[kind1] or 0
+    local priority2 = conf.kind_priority[kind2] or 0
+    if priority1 == priority2 then
+      return nil
+    end
+    return priority2 < priority1
+  end
+end
+
+local label_comparator = function(entry1, entry2)
+  return entry1.completion_item.label < entry2.completion_item.label
+end
+
 local cmp = require('cmp')
 local nvim_lsp = require('lspconfig')
 cmp.setup({
@@ -156,10 +211,67 @@ cmp.setup({
       { name = 'buffer' },
     }),
 
+    formatting = {
+       format = function(entry, vim_item)
+         -- Kind icons
+         vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+         -- Source
+         vim_item.menu = ({
+           buffer = "[Buffer]",
+           path = "[Path]",
+           nvim_lsp = "[LSP]",
+         })[entry.source.name]
+         return vim_item
+       end
+    },
+
+    sorting = {
+      comparators = {
+        lspkind_comparator({
+          kind_priority = {
+            Field = 11,
+            Property = 11,
+            Constant = 10,
+            Enum = 10,
+            EnumMember = 10,
+            Event = 10,
+            Function = 10,
+            Method = 10,
+            Operator = 10,
+            Reference = 10,
+            Struct = 10,
+            Variable = 9,
+            File = 8,
+            Folder = 8,
+            Class = 5,
+            Color = 5,
+            Module = 5,
+            Keyword = 2,
+            Constructor = 1,
+            Interface = 1,
+            Snippet = 0,
+            Text = 1,
+            TypeParameter = 1,
+            Unit = 1,
+            Value = 1,
+          },
+        }),
+        label_comparator,
+      }
+    },
+
     experimental = {
       ghost_text = true,
     },
 })
+
+
+local nord = require("nord.colors")
+vim.cmd("highlight! CmpItemKindMethod guifg=" .. nord.blue)
+vim.cmd("highlight! CmpItemKindField guifg=" .. nord.orange)
+vim.cmd("highlight! CmpItemKindStruct guifg=" .. nord.yellow)
+vim.cmd("highlight! CmpItemKindFunction guifg=" .. nord.off_blue)
+vim.cmd("highlight! CmpItemKindEnum guifg=" .. nord.teal)
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
@@ -205,7 +317,6 @@ local on_attach = function(client, bufnr)
   map('n', '<leader>j',   '<cmd>lua vim.diagnostic.goto_next()<cr>', opts)
 end
 
-local nord = require("nord.colors")
 
 -- vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#2e3440 ]]
 -- vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=#ebcb8b guibg=#2e3440 ]]
