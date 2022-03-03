@@ -1,24 +1,4 @@
-local kind_icons = {
-  Text = "",
-  Method = "",
-  Function = "",
-  Field = "",
-  Variable = "",
-  Class = "ﴯ",
-  Interface = "",
-  Module = "",
-  Property = "ﰠ",
-  Unit = "",
-  Value = "",
-  Enum = "",
-  Keyword = "",
-  File = "",
-  Folder = "",
-  EnumMember = "",
-  Constant = "",
-  Struct = "",
-  TypeParameter = ""
-}
+local kind_icons = require("icons");
 
 local lspkind_comparator = function(conf)
   local lsp_types = require('cmp.types').lsp
@@ -60,9 +40,9 @@ cmp.setup({
     },
 
     sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
+      { name = 'nvim_lsp', keyword_length = 3 },
       { name = 'path' },
-      { name = 'buffer' },
+      { name = 'buffer', keyword_length = 5 },
     }),
 
     formatting = {
