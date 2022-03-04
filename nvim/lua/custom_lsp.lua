@@ -19,6 +19,7 @@ local on_attach = function(client, bufnr)
   map('n', '<leader>r',   "<cmd>lua tele.lsp_references()<cr>", opts)
   map('n', '<leader>d',   "<cmd>lua tele.lsp_document_symbols()<cr>", opts)
   map('n', '<leader>q',   "<cmd>lua tele.lsp_workspace_symbols()<cr>", opts)
+  map('n', '<leader>Q',   "<cmd>lua tele.lsp_dynamic_workspace_symbols()<cr>", opts)
   map('n', '<leader>k',   '<cmd>lua vim.diagnostic.goto_prev()<cr>', opts)
   map('n', '<leader>j',   '<cmd>lua vim.diagnostic.goto_next()<cr>', opts)
 end
