@@ -5,6 +5,7 @@ let g:python3_host_prog='/usr/local/bin/python3'
 call plug#begin('~/.config/nvim/plugged')
   " Plug 'shaunsingh/nord.nvim'
   Plug 'hoob3rt/lualine.nvim'
+  Plug 'akinsho/bufferline.nvim'
 
   Plug 'stevearc/dressing.nvim'
   Plug 'j-hui/fidget.nvim'
@@ -108,6 +109,25 @@ require('dressing').setup({
   input = {
     insert_only = true,
   },
+})
+
+require("bufferline").setup({
+  options = {
+    mode = "tabs",
+    numbers = function(opts)
+      return string.format('%s·', opts.raise(opts.ordinal))
+    end,
+    diagnostics = "nvim_lsp",
+    offsets = {
+      {
+        filetype = "NvimTree",
+        text = "Directory:",
+        highlight = "Directory",
+        text_align = "left"
+      }
+    },
+    separator_style = "slant"
+  }
 })
 
 require('nvim-treesitter.configs').setup {
