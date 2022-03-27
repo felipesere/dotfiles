@@ -131,8 +131,14 @@ require("bufferline").setup({
 })
 
 require('nvim-treesitter.configs').setup {
+   ignore_install = {
+     "elm"
+   },
    highlight = {
     enable = true,
+    disable = {
+      "elm"
+    },
    },
 }
 
