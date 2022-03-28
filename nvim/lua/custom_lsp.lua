@@ -1,10 +1,5 @@
-local kind_icons = require("icons");
-
 local opts = {noremap = true, silent = true}
 local map = vim.api.nvim_set_keymap
-
-local nvim_lsp = require('lspconfig')
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local on_attach = function(client, bufnr)
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -69,6 +64,8 @@ local handlers =  {
   ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
 }
 
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local nvim_lsp = require('lspconfig')
 nvim_lsp["rust_analyzer"].setup {
   handlers = handlers,
   capabilities = capabilities, -- Hooked up to nvim-cmp
@@ -98,6 +95,30 @@ nvim_lsp["rust_analyzer"].setup {
       }
     }
   }
+}
+nvim_lsp["tsserver"].setup {
+  handlers = handlers,
+  capabilities = capabilities, -- Hooked up to nvim-cmp
+  init_options = require("nvim-lsp-ts-utils").init_options,
+  on_attach = function(client, bufnr)
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+        local ts_utils = require("nvim-lsp-ts-utils")
+        ts_utils.setup({
+
+        })
+        ts_utils.setup_client(client)
+
+        -- Attach generic macps, then apply ours
+        on_attach(client, bufnr)
+
+        map("n", "<leader>O", ":TSLspOrganize<CR>", opts)
+        map("n", "<leader>rn", ":TSLspRenameFile<CR>", opts)
+        map("n", "<leader>i", ":TSLspImportAll<CR>", opts)
+  end,
+  flags = {
+    debounce_text_changes = 150,
+  },
 }
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
