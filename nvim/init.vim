@@ -190,6 +190,7 @@ require('telescope').setup{
 map('n',  '<C-p>',      "<cmd>lua require('telescope.builtin').find_files()<cr>", opts)
 map('n',  '<leader>s',  "<cmd>lua require('telescope.builtin').grep_string()<cr>", opts)
 map('n',  '<leader>S',  "<cmd>lua require('telescope.builtin').live_grep()<cr>", opts)
+map('v',  '<leader>s',  "zy<cmd>exec 'Telescope grep_string default_text=' . escape(@z, ' ')<cr>", opts)
 
 map('n',  '<leader>l',  ":TestLast<cr>", opts)
 map('n',  '<leader>n',  ":TestNearest<cr>", opts)
