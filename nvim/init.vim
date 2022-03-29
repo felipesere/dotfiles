@@ -112,6 +112,8 @@ map('n', '<leader>o',          '<cmd>:AerialToggle<cr>', opts)
 require('dressing').setup({
   input = {
     insert_only = true,
+    max_width = { 150, 0.9 },
+    min_width = { 100, 0.2 },
   },
 })
 
