@@ -39,6 +39,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'sheerun/vim-polyglot'
   Plug 'towolf/vim-helm'
+  Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
   " My own
   Plug 'felipesere/nord.nvim'
