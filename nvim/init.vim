@@ -23,9 +23,6 @@ call plug#begin('~/.config/nvim/plugged')
   " Used for setting autocommands from within LUA and get correct type highlights
   Plug 'norcalli/nvim_utils'
   Plug 'nvim-lua/lsp_extensions.nvim'
-  " Helpers that make Typescript a bit easier to handle
-  Plug 'jose-elias-alvarez/null-ls.nvim'
-  Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
