@@ -6,10 +6,10 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'shaunsingh/nord.nvim'
   Plug 'hoob3rt/lualine.nvim'
   Plug 'akinsho/bufferline.nvim'
-
   Plug 'stevearc/dressing.nvim'
   Plug 'j-hui/fidget.nvim'
   Plug 'stevearc/aerial.nvim'
+  Plug 'rcarriga/nvim-notify'
 
   Plug 'christoomey/vim-sort-motion'
   Plug 'vim-test/vim-test'
@@ -91,6 +91,8 @@ hi TypeHighlight guifg=#B48EAD
 lua << END
 local opts = {noremap = true, silent = true}
 local map = vim.api.nvim_set_keymap
+
+vim.notify = require("notify")
 
 -- Extracted configuration for cmp and lsp intro
 -- separate modules as it was getting... hefty
