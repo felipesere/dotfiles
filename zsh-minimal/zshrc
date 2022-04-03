@@ -149,6 +149,10 @@ unaws() {
   unset AWS_ACCESS_KEY_ID AWS_ACCOUNT_ID AWS_DEFAULT_REGION AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
 }
 
+unkube() {
+  kubectl config unset current-context
+}
+
 if [[ -f "$HOME/.custom-client-functions" ]]; then
   source "$HOME/.custom-client-functions";
 fi
