@@ -34,10 +34,10 @@ cmp.setup({
         vim.fn["vsnip#anonymous"](args.body)
       end,
     },
-    mapping = {
+    mapping = cmp.mapping.preset.insert({
       ['<Tab>'] = cmp.mapping.confirm({ select = true }),
       ['<CR>'] = cmp.mapping.confirm({ select = true })
-    },
+    }),
 
     sources = cmp.config.sources({
       { name = 'nvim_lsp', keyword_length = 3 },
@@ -93,8 +93,8 @@ cmp.setup({
 
 
 local nord = require("nord.colors")
-vim.cmd("highlight! CmpItemKindMethod guifg=" .. nord.blue)
-vim.cmd("highlight! CmpItemKindField guifg=" .. nord.orange)
-vim.cmd("highlight! CmpItemKindStruct guifg=" .. nord.yellow)
-vim.cmd("highlight! CmpItemKindFunction guifg=" .. nord.off_blue)
-vim.cmd("highlight! CmpItemKindEnum guifg=" .. nord.teal)
+vim.api.nvim_set_hl(0, "CmpItemKindMethod", {fg=nord.blue})
+vim.api.nvim_set_hl(0, "CmpItemKindField", {fg=nord.orange})
+vim.api.nvim_set_hl(0, "CmpItemKindStruct", {fg=nord.yellow})
+vim.api.nvim_set_hl(0, "CmpItemKindFunction", {fg=nord.off_blue})
+vim.api.nvim_set_hl(0, "CmpItemKindEnum", {fg=nord.teal})
