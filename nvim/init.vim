@@ -10,6 +10,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'j-hui/fidget.nvim'
   Plug 'stevearc/aerial.nvim'
   Plug 'rcarriga/nvim-notify'
+  Plug 'rainbowhxch/beacon.nvim'
 
   Plug 'christoomey/vim-sort-motion'
   Plug 'vim-test/vim-test'
@@ -83,13 +84,13 @@ colorscheme nord
 
 command! Q execute "qa!"
 
-" Not sure why I need to use guifg
-hi TypeHighlight guifg=#B48EAD
-
 " LSP configuration
 lua << END
 local opts = {noremap = true, silent = true}
 local map = vim.api.nvim_set_keymap
+
+vim.api.nvim_set_hl(0, "TypeHighlight", {fg="#B48EAD"})
+vim.api.nvim_set_hl(0, "Beacon", {bg="#EBCB8B"})
 
 vim.notify = require("notify")
 
@@ -133,6 +134,9 @@ require("bufferline").setup({
     separator_style = "slant"
   }
 })
+
+require('beacon').setup({})
+map('n', '<leader><leader>',          '<cmd>:Beacon<cr>', opts)
 
 require('nvim-treesitter.configs').setup {
    ignore_install = {
