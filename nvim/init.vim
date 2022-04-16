@@ -76,7 +76,6 @@ let mapleader = "\<Space>"
 let g:git_messenger_always_into_popup = v:true
 let g:git_messenger_floating_win_opts = { 'border': 'single' }
 
-let g:nvim_tree_indent_markers = 1
 let g:nord_contrast = v:true
 let g:nord_borders = v:true
 
@@ -153,6 +152,11 @@ require('nvim-tree').setup {
   open_on_setup = false,
   filters = {
     custom = { '.git', 'node_modules', '.cache' }
+  },
+  renderer = {
+    indent_markers = {
+      enable = true,
+    }
   }
 }
 
