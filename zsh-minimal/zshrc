@@ -57,6 +57,7 @@ alias vim="nvim"
 alias vi="nvim"
 alias ls="exa -l"
 alias typora="open -a typora"
+alias next="cargo nextest run"
 
 # Direnv hooking
 eval "$(direnv hook zsh)"
