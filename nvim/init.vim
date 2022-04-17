@@ -21,9 +21,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'kyazdani42/nvim-tree.lua'
 
   Plug 'neovim/nvim-lspconfig'
-  " Used for setting autocommands from within LUA and get correct type highlights
-  Plug 'norcalli/nvim_utils'
-  Plug 'nvim-lua/lsp_extensions.nvim'
+  Plug 'simrat39/rust-tools.nvim'
 
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
@@ -89,8 +87,6 @@ lua << END
 local opts = {noremap = true, silent = true}
 local map = vim.api.nvim_set_keymap
 
-vim.api.nvim_set_hl(0, "TypeHighlight", {fg="#B48EAD"})
-vim.api.nvim_set_hl(0, "Beacon", {bg="#EBCB8B"})
 
 vim.notify = require("notify")
 
@@ -136,7 +132,8 @@ require("bufferline").setup({
 })
 
 require('beacon').setup({})
-map('n', '<leader><leader>',          '<cmd>:Beacon<cr>', opts)
+map('n', '<leader><leader>', '<cmd>:Beacon<cr>', opts)
+vim.api.nvim_set_hl(0, "Beacon", {bg="#EBCB8B"})
 
 require('nvim-treesitter.configs').setup {
    ignore_install = {

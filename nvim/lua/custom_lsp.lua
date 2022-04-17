@@ -3,34 +3,11 @@ local kind_icons = require("icons");
 local opts = {noremap = true, silent = true}
 local map = vim.api.nvim_set_keymap
 
-local nvim_lsp = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local on_attach = function(client, bufnr)
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  INLAY_HINTS = {
-  	set = function()
-      local lsp_extensions = require('lsp_extensions');
-      lsp_extensions.inlay_hints { prefix = '', alinged = true, highlight = "TypeHighlight", enabled = { "TypeHint", "ChainingHint", "ParameterHint"} };
-    end;
-  }
-
-  local autocmds = {
-    highlighting = {
-      {"CursorMoved",  "*", "lua INLAY_HINTS.set()" },
-      {"InsertLeave",  "*", "lua INLAY_HINTS.set()" },
-      {"BufEnter",     "*", "lua INLAY_HINTS.set()" },
-      {"BufWinEnter",  "*", "lua INLAY_HINTS.set()" },
-      {"TabEnter",     "*", "lua INLAY_HINTS.set()" },
-      {"BufWritePost", "*", "lua INLAY_HINTS.set()" },
-    },
-  }
-  require('nvim_utils')
-  nvim_create_augroups(autocmds)
-
   --Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   tele = require('telescope.builtin')
 
@@ -49,8 +26,8 @@ local on_attach = function(client, bufnr)
 end
 
 
--- vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#2e3440 ]]
--- vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=#ebcb8b guibg=#2e3440 ]]
+vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#2e3440 ]]
+vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=#ebcb8b guibg=#2e3440 ]]
 
 local border = {
       {"╭", "FloatBorder"},
@@ -63,42 +40,52 @@ local border = {
       {"│", "FloatBorder"},
 }
 
--- LSP settings (for overriding per client)
 local handlers =  {
   ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
   ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
 }
 
-nvim_lsp["rust_analyzer"].setup {
-  handlers = handlers,
-  capabilities = capabilities, -- Hooked up to nvim-cmp
-  on_attach = on_attach,
-  flags = {
-    debounce_text_changes = 150,
+vim.api.nvim_set_hl(0, "TypeHighlight", {fg="#B48EAD"})
+
+require('rust-tools').setup({
+  tools = {
+    inlay_hints = {
+      other_hints_prefix = "➤ ",
+      show_parameter_hints = false,
+      highlight = "TypeHighlight",
+    }
   },
-  settings = {
-    ["rust-analyzer"] = {
-      assist = {
-        importGranularity = "module",
-      },
-      cargo = {
-        loadOutDirsFromCheck = true
-      },
-      procMacro = {
-        enable = false
-      },
-      checkOnSave = {
-        extraArgs = {
-          "--target-dir", "/tmp/rust-analyzer-check"
+  server = {
+    handlers = handlers,
+    capabilities = capabilities, -- Hooked up to nvim-cmp
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    },
+    settings = {
+      ["rust-analyzer"] = {
+        assist = {
+          importGranularity = "module",
+        },
+        cargo = {
+          loadOutDirsFromCheck = true
+        },
+        procMacro = {
+          enable = false
+        },
+        checkOnSave = {
+          extraArgs = {
+            "--target-dir", "/tmp/rust-analyzer-check"
+          }
+        },
+        diagnostics = {
+          enable = true,
+          disabled = {"unresolved-proc-macro"},
         }
-      },
-      diagnostics = {
-        enable = true,
-        disabled = {"unresolved-proc-macro"},
       }
     }
   }
-}
+})
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
