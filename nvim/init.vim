@@ -1,6 +1,3 @@
-" some of the plugins need python which gets confused in virtualenv
-let g:python3_host_prog='/usr/local/bin/python3'
-
 " Install basic plugins
 call plug#begin('~/.config/nvim/plugged')
   " Plug 'shaunsingh/nord.nvim'
