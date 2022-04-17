@@ -3,8 +3,6 @@ local kind_icons = require("icons");
 local opts = {noremap = true, silent = true}
 local map = vim.api.nvim_set_keymap
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
 local on_attach = function(client, bufnr)
   --Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -25,26 +23,6 @@ local on_attach = function(client, bufnr)
   map('n', '<leader>j',   '<cmd>lua vim.diagnostic.goto_next()<cr>', opts)
 end
 
-
-vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#2e3440 ]]
-vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=#ebcb8b guibg=#2e3440 ]]
-
-local border = {
-      {"╭", "FloatBorder"},
-      {"─", "FloatBorder"},
-      {"╮", "FloatBorder"},
-      {"│", "FloatBorder"},
-      {"╯", "FloatBorder"},
-      {"─", "FloatBorder"},
-      {"╰", "FloatBorder"},
-      {"│", "FloatBorder"},
-}
-
-local handlers =  {
-  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
-  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
-}
-
 vim.api.nvim_set_hl(0, "TypeHighlight", {fg="#B48EAD"})
 
 require('rust-tools').setup({
@@ -56,12 +34,8 @@ require('rust-tools').setup({
     }
   },
   server = {
-    handlers = handlers,
-    capabilities = capabilities, -- Hooked up to nvim-cmp
     on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    },
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()), -- Hooked up to nvim-cmp
     settings = {
       ["rust-analyzer"] = {
         assist = {
