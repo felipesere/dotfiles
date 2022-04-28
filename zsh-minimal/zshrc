@@ -78,7 +78,9 @@ if command -v fnm &> /dev/null; then
 fi
 
 # Setup atuin
-eval "$(atuin init zsh)"
+if command -v atuin &> /dev/null; then
+  eval $(atuin init zsh)
+fi
 
 c() {
   IN_REPO=$(command git rev-parse --is-inside-work-tree 2&> /dev/null)
