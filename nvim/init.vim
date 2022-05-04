@@ -70,21 +70,20 @@ set updatetime=250                " How long to wait after a write before vim tr
 set visualbell
 set wildmode=list:longest,full    " how the tab-completion menu behaves: show the list, then the longest match, finally all matches
 
-let mapleader = "\<Space>"
-
-" Jump into Git Messanger popup when opening
-let g:git_messenger_always_into_popup = v:true
-let g:git_messenger_floating_win_opts = { 'border': 'single' }
-
-let g:nord_contrast = v:true
-let g:nord_borders = v:true
-
-colorscheme nord
-
-command! Q execute "qa!"
-
 " LSP configuration
 lua << END
+vim.g.mapleader = ' '
+
+vim.g.nord_contract = true
+vim.g.nord_borders = true
+vim.cmd('colorscheme nord')
+
+-- Jump into Git Messanger popup when opening
+vim.g.git_messenger_always_into_popup = true
+vim.g.git_messenger_floating_win_opts = { border = "single" }
+
+vim.api.nvim_create_user_command('Q', "qa!", { desc = "Quit all" })
+
 local opts = {noremap = true, silent = true}
 local map = vim.api.nvim_set_keymap
 
