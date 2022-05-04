@@ -26,13 +26,51 @@ end
 
 vim.api.nvim_set_hl(0, "TypeHighlight", {fg="#B48EAD"})
 
+local dap, dapui = require("dap"), require("dapui")
+dapui.setup({})
+dap.listeners.after.event_initialized["dapui_config"] = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated["dapui_config"] = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+  dapui.close()
+end
+
+vim.keymap.set('n', '<leader>B', function() dap.toggle_breakpoint() end)
+vim.keymap.set('n', '<leader>C', function() dap.continue() end)
+
+-- configure the adapter for Rust Debugging
+dap.configurations.rust = {
+    {
+        name = 'Launch Debug',
+        type = 'rt_lldb',
+        request = "launch",
+        program = function()
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/' .. '')
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+        args = {},
+        initCommand = {},
+        runInTerminal = false
+    }
+}
+
+local extension_path = vim.env.HOME .. '/bin/extension'
+local codelldb_path = extension_path .. '/adapter/codelldb'
+local liblldb_path = extension_path .. '/lldb/lib/liblldb.dylib'
 require('rust-tools').setup({
   tools = {
     inlay_hints = {
       other_hints_prefix = "➤ ",
       show_parameter_hints = false,
       highlight = "TypeHighlight",
-    }
+    },
+    hover_actions = {
+      auto_focus = true
+    },
   },
   server = {
     on_attach = on_attach,
@@ -59,6 +97,9 @@ require('rust-tools').setup({
         }
       }
     }
+  },
+  dap = {
+    adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path)
   }
 })
 
