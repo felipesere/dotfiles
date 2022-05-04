@@ -112,9 +112,7 @@ require('dressing').setup({
 require("bufferline").setup({
   options = {
     mode = "tabs",
-    numbers = function(opts)
-      return string.format('%s·', opts.raise(opts.ordinal))
-    end,
+    numbers = "ordinal",
     diagnostics = "nvim_lsp",
     offsets = {
       {
@@ -145,9 +143,13 @@ require('nvim-treesitter.configs').setup {
 }
 
 require('nvim-tree').setup {
-  quit_on_open = true,
   disable_netrw = true,
   open_on_setup = false,
+  actions = {
+    open_file = {
+      quit_on_open = true,
+    },
+  },
   filters = {
     custom = { '.git', 'node_modules', '.cache' }
   },
@@ -203,6 +205,8 @@ map('n', 'j', 'gj', opts)
 map('n', 'k', 'gk', opts)
 map('n', 'gj', 'j', opts)
 map('n', 'gk', 'k', opts)
+map('n', 'gt', ':BufferLineCycleNext<cr>', opts)
+map('n', 'gT', ':BufferLineCyclePrev<cr>', opts)
 
 --  eliminate white space
 map('n', '<leader>;', "mz:%s/\\s\\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>", opts)
