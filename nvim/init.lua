@@ -9,6 +9,8 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'stevearc/aerial.nvim'
   Plug 'rcarriga/nvim-notify'
   Plug 'rainbowhxch/beacon.nvim'
+  Plug('nvim-neo-tree/neo-tree.nvim', { branch = "v2.x" })
+  Plug 'MunifTanjim/nui.nvim'
 
   Plug 'christoomey/vim-sort-motion'
   Plug 'vim-test/vim-test'
@@ -16,7 +18,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
-  Plug 'kyazdani42/nvim-tree.lua'
+  --Plug 'kyazdani42/nvim-tree.lua'
 
   Plug 'neovim/nvim-lspconfig'
   Plug 'simrat39/rust-tools.nvim'
@@ -121,23 +123,23 @@ require('nvim-treesitter.configs').setup {
    },
 }
 
-require('nvim-tree').setup {
-  disable_netrw = true,
-  open_on_setup = false,
-  actions = {
-    open_file = {
-      quit_on_open = true,
-    },
-  },
-  filters = {
-    custom = { '.git', 'node_modules', '.cache' }
-  },
-  renderer = {
-    indent_markers = {
-      enable = true,
-    }
-  }
-}
+--require('nvim-tree').setup {
+--  disable_netrw = true,
+--  open_on_setup = false,
+--  actions = {
+--    open_file = {
+--      quit_on_open = true,
+--    },
+--  },
+--  filters = {
+--    custom = { '.git', 'node_modules', '.cache' }
+--  },
+--  renderer = {
+--    indent_markers = {
+--      enable = true,
+--    }
+--  }
+--}
 
 require('nvim-web-devicons').setup {
  default = true; -- globally enable default icons (default to false)
@@ -151,9 +153,9 @@ require('lualine').setup({
     lualine_b = { 'branch', 'diff', 'diagnostics'},
     lualine_x = { 'filetype' },
   },
-  extensions = {
-    'nvim-tree',
-  }
+  --extensions = {
+  --  'nvim-tree',
+  --}
 })
 
 local actions = require "telescope.actions"
@@ -178,9 +180,8 @@ vim.keymap.set("n", '<leader>S',  function() builtin.live_grep() end)
 
 vim.keymap.set('n', '<leader>l',  ":TestLast<cr>")
 vim.keymap.set('n', '<leader>n',  ":TestNearest<cr>")
-vim.keymap.set('n', '<leader>f',  ":NvimTreeToggle<cr>")
-vim.keymap.set('n', '<leader>F',  ":NvimTreeFindFile<cr>")
-vim.keymap.set('n', '<leader>r',  ":NvimTreeRefresh<cr>")
+vim.keymap.set('n', '<leader>f',  ":Neotree focus toggle<cr>")
+vim.keymap.set('n', '<leader>F',  ":NeoTreeRevealToggle<cr>")
 vim.keymap.set('n', 'j', 'gj')
 vim.keymap.set('n', 'k', 'gk')
 vim.keymap.set('n', 'gj', 'j')
