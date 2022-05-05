@@ -38,8 +38,10 @@ dap.listeners.before.event_exited["dapui_config"] = function()
   dapui.close()
 end
 
-vim.keymap.set('n', '<leader>B', function() dap.toggle_breakpoint() end)
-vim.keymap.set('n', '<leader>C', function() dap.continue() end)
+vim.keymap.set('n', '<leader>b', function() dap.toggle_breakpoint() end)
+vim.keymap.set('n', '<leader>c', function() dap.continue() end)
+vim.keymap.set('n', '<leader>dso', function() dap.step_over() end)
+vim.keymap.set('n', '<leader>dsi', function() dap.step_into() end)
 
 -- configure the adapter for Rust Debugging
 dap.configurations.rust = {
