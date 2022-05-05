@@ -96,7 +96,6 @@ require("aerial").setup({
  backends = { "treesitter" },
  default_direction = "prefer_right",
 })
-vim.keymap.set('n', '<leader>o',          '<cmd>:AerialToggle<cr>')
 
 require('dressing').setup({
   input = {
@@ -124,7 +123,6 @@ require("bufferline").setup({
 })
 
 require('beacon').setup({})
-vim.keymap.set('n', '<leader><leader>', '<cmd>:Beacon<cr>')
 vim.api.nvim_set_hl(0, "Beacon", {bg="#EBCB8B"})
 
 require('nvim-treesitter.configs').setup {
@@ -187,6 +185,8 @@ require('telescope').setup{
   }
 }
 
+vim.keymap.set('n', '<leader>o',        ':AerialToggle<cr>')
+vim.keymap.set('n', '<leader><leader>', ':Beacon<cr>')
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", '<C-p>',      function() builtin.find_files() end)
 vim.keymap.set("n", '<leader>s',  function() builtin.grep_string()end)
