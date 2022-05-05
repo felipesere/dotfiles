@@ -1,6 +1,7 @@
-" Install basic plugins
-call plug#begin('~/.config/nvim/plugged')
-  " Plug 'shaunsingh/nord.nvim'
+-- Install basic plugins
+local Plug = vim.fn['plug#']
+vim.call('plug#begin', '~/.config/nvim/plugged')
+  -- Plug 'shaunsingh/nord.nvim'
   Plug 'hoob3rt/lualine.nvim'
   Plug 'akinsho/bufferline.nvim'
   Plug 'stevearc/dressing.nvim'
@@ -14,7 +15,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
   Plug 'kyazdani42/nvim-tree.lua'
 
   Plug 'neovim/nvim-lspconfig'
@@ -36,17 +37,15 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'sheerun/vim-polyglot'
   Plug 'towolf/vim-helm'
-  Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
+  Plug('RRethy/vim-hexokinase', { ['do'] = 'make hexokinase' })
 
-  " My own
+  -- My own
   Plug 'felipesere/nord.nvim'
   Plug 'felipesere/vim-open-readme'
 
-  " needs to be last
+  -- needs to be last
   Plug 'kyazdani42/nvim-web-devicons'
-call plug#end()
-
-lua << END
+vim.call('plug#end')
 
 vim.opt.autoindent = true             -- set auto indent
 vim.opt.clipboard = "unnamed"         -- use the system clipboard
@@ -208,5 +207,3 @@ vim.keymap.set('n', 'gT', ':BufferLineCyclePrev<cr>')
 --  eliminate white space
 vim.keymap.set('n', '<leader>;', "mz:%s/\\s\\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>")
 vim.keymap.set('', '<leader>,', ':nohl<cr>')
-
-END
