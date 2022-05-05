@@ -3,7 +3,7 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.config/nvim/plugged')
   -- Plug 'shaunsingh/nord.nvim'
   Plug 'hoob3rt/lualine.nvim'
-  Plug 'akinsho/bufferline.nvim'
+  Plug 'alvarosevilla95/luatab.nvim'
   Plug 'stevearc/dressing.nvim'
   Plug 'j-hui/fidget.nvim'
   Plug 'stevearc/aerial.nvim'
@@ -105,23 +105,7 @@ require('dressing').setup({
   },
 })
 
-require("bufferline").setup({
-  options = {
-    mode = "tabs",
-    numbers = "ordinal",
-    diagnostics = "nvim_lsp",
-    offsets = {
-      {
-        filetype = "NvimTree",
-        text = "Directory:",
-        highlight = "Directory",
-        text_align = "left"
-      }
-    },
-    separator_style = "slant"
-  }
-})
-
+require('luatab').setup{}
 require('beacon').setup({})
 vim.api.nvim_set_hl(0, "Beacon", {bg="#EBCB8B"})
 
@@ -201,8 +185,6 @@ vim.keymap.set('n', 'j', 'gj')
 vim.keymap.set('n', 'k', 'gk')
 vim.keymap.set('n', 'gj', 'j')
 vim.keymap.set('n', 'gk', 'k')
-vim.keymap.set('n', 'gt', ':BufferLineCycleNext<cr>')
-vim.keymap.set('n', 'gT', ':BufferLineCyclePrev<cr>')
 
 --  eliminate white space
 vim.keymap.set('n', '<leader>;', "mz:%s/\\s\\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>")
