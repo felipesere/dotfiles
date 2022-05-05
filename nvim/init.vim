@@ -84,10 +84,6 @@ vim.g.git_messenger_floating_win_opts = { border = "single" }
 
 vim.api.nvim_create_user_command('Q', "qa!", { desc = "Quit all" })
 
-local opts = {noremap = true, silent = true}
-local map = vim.api.nvim_set_keymap
-
-
 vim.notify = require("notify")
 
 -- Extracted configuration for cmp and lsp intro
@@ -101,8 +97,7 @@ require("aerial").setup({
  backends = { "treesitter" },
  default_direction = "prefer_right",
 })
-map('n', '<leader>o',          '<cmd>:AerialToggle<cr>', opts)
-
+vim.keymap.set('n', '<leader>o',          '<cmd>:AerialToggle<cr>')
 
 require('dressing').setup({
   input = {
@@ -130,7 +125,7 @@ require("bufferline").setup({
 })
 
 require('beacon').setup({})
-map('n', '<leader><leader>', '<cmd>:Beacon<cr>', opts)
+vim.keymap.set('n', '<leader><leader>', '<cmd>:Beacon<cr>')
 vim.api.nvim_set_hl(0, "Beacon", {bg="#EBCB8B"})
 
 require('nvim-treesitter.configs').setup {
@@ -193,27 +188,25 @@ require('telescope').setup{
   }
 }
 
-map('n',  '<C-p>',      "<cmd>lua require('telescope.builtin').find_files()<cr>", opts)
-map('n',  '<leader>s',  "<cmd>lua require('telescope.builtin').grep_string()<cr>", opts)
-map('n',  '<leader>S',  "<cmd>lua require('telescope.builtin').live_grep()<cr>", opts)
-map('v',  '<leader>s',  "zy<cmd>exec 'Telescope grep_string default_text=' . escape(@z, ' ')<cr>", opts)
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", '<C-p>',      function() builtin.find_files() end)
+vim.keymap.set("n", '<leader>s',  function() builtin.grep_string()end)
+vim.keymap.set("n", '<leader>S',  function() builtin.live_grep() end)
 
-map('n',  '<leader>l',  ":TestLast<cr>", opts)
-map('n',  '<leader>n',  ":TestNearest<cr>", opts)
-
-map('n', '<leader>f',  ':NvimTreeToggle<cr>', opts)
-map('n', '<leader>F',  ':NvimTreeFindFile<cr>', opts)
-map('n', '<leader>r',  ':NvimTreeRefresh<cr>', opts)
-map('n', 'j', 'gj', opts)
-map('n', 'k', 'gk', opts)
-map('n', 'gj', 'j', opts)
-map('n', 'gk', 'k', opts)
-map('n', 'gt', ':BufferLineCycleNext<cr>', opts)
-map('n', 'gT', ':BufferLineCyclePrev<cr>', opts)
+vim.keymap.set('n', '<leader>l',  ":TestLast<cr>")
+vim.keymap.set('n', '<leader>n',  ":TestNearest<cr>")
+vim.keymap.set('n', '<leader>f',  ":NvimTreeToggle<cr>")
+vim.keymap.set('n', '<leader>F',  ":NvimTreeFindFile<cr>")
+vim.keymap.set('n', '<leader>r',  ":NvimTreeRefresh<cr>")
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'k', 'gk')
+vim.keymap.set('n', 'gj', 'j')
+vim.keymap.set('n', 'gk', 'k')
+vim.keymap.set('n', 'gt', ':BufferLineCycleNext<cr>')
+vim.keymap.set('n', 'gT', ':BufferLineCyclePrev<cr>')
 
 --  eliminate white space
-map('n', '<leader>;', "mz:%s/\\s\\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>", opts)
-
-map('', '<leader>,', ':nohl<cr>', opts)
+vim.keymap.set('n', '<leader>;', "mz:%s/\\s\\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>")
+vim.keymap.set('', '<leader>,', ':nohl<cr>')
 
 END
