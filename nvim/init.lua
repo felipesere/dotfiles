@@ -140,6 +140,23 @@ require('nvim-treesitter.configs').setup {
 --    }
 --  }
 --}
+local neo_tree = require("neo-tree")
+neo_tree.setup({
+  event_handlers = {
+    {
+      event = "file_opened",
+      handler = function(file_path)
+        --auto close
+        require("neo-tree").close_all()
+      end
+    },
+  },
+  window = {
+    mappings = {
+      ["o"] = "open",
+    }
+  }
+})
 
 require('nvim-web-devicons').setup {
  default = true; -- globally enable default icons (default to false)
