@@ -107,7 +107,10 @@ require('dressing').setup({
   },
 })
 
-require('luatab').setup{}
+require('luatab').setup({
+  windowCount = function() return '' end,
+})
+
 require('beacon').setup({})
 vim.api.nvim_set_hl(0, "Beacon", {bg="#EBCB8B"})
 
