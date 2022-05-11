@@ -11,17 +11,17 @@ local on_attach = function(client, bufnr)
 
   -- Only hook these mappings up when there is a LSP client attached
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set('n', 'gd',          vim.lsp.buf.definition)
-  vim.keymap.set('n', 'gi',          vim.lsp.buf.implementation)
-  vim.keymap.set('n', '?',           vim.lsp.buf.hover)
-  vim.keymap.set('n', '<leader>rn',  vim.lsp.buf.rename)
-  vim.keymap.set('n', '<leader>a',   vim.lsp.buf.code_action)
-  vim.keymap.set('n', '<leader>r',   tele.lsp_references)
-  vim.keymap.set('n', '<leader>d',   tele.lsp_document_symbols)
-  vim.keymap.set('n', '<leader>q',   tele.lsp_workspace_symbols)
-  vim.keymap.set('n', '<leader>Q',   tele.lsp_dynamic_workspace_symbols)
-  vim.keymap.set('n', '<leader>k',   vim.diagnostic.goto_prev)
-  vim.keymap.set('n', '<leader>j',   vim.diagnostic.goto_next)
+  vim.keymap.set('n', 'gd',          vim.lsp.buf.definition, opts)
+  vim.keymap.set('n', 'gi',          vim.lsp.buf.implementation, opts)
+  vim.keymap.set('n', '?',           vim.lsp.buf.hover, opts)
+  vim.keymap.set('n', '<leader>rn',  vim.lsp.buf.rename, opts)
+  vim.keymap.set('n', '<leader>a',   vim.lsp.buf.code_action, opts)
+  vim.keymap.set('n', '<leader>r',   tele.lsp_references, opts)
+  vim.keymap.set('n', '<leader>d',   tele.lsp_document_symbols, opts)
+  vim.keymap.set('n', '<leader>q',   tele.lsp_workspace_symbols, opts)
+  vim.keymap.set('n', '<leader>Q',   tele.lsp_dynamic_workspace_symbols, opts)
+  vim.keymap.set('n', '<leader>k',   vim.diagnostic.goto_prev, opts)
+  vim.keymap.set('n', '<leader>j',   vim.diagnostic.goto_next, opts)
 end
 
 vim.api.nvim_set_hl(0, "TypeHighlight", {fg="#B48EAD"})
@@ -38,10 +38,10 @@ dap.listeners.before.event_exited["dapui_config"] = function()
   dapui.close()
 end
 
-vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint)
-vim.keymap.set('n', '<leader>c', dap.continue)
-vim.keymap.set('n', '<leader>dso',dap.step_over)
-vim.keymap.set('n', '<leader>dsi', dap.step_into)
+vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, opts)
+vim.keymap.set('n', '<leader>c', dap.continue, opts)
+vim.keymap.set('n', '<leader>dso',dap.step_over, opts)
+vim.keymap.set('n', '<leader>dsi', dap.step_into, opts)
 
 -- configure the adapter for Rust Debugging
 dap.configurations.rust = {

@@ -126,23 +126,6 @@ require('nvim-treesitter.configs').setup {
    },
 }
 
---require('nvim-tree').setup {
---  disable_netrw = true,
---  open_on_setup = false,
---  actions = {
---    open_file = {
---      quit_on_open = true,
---    },
---  },
---  filters = {
---    custom = { '.git', 'node_modules', '.cache' }
---  },
---  renderer = {
---    indent_markers = {
---      enable = true,
---    }
---  }
---}
 local neo_tree = require("neo-tree")
 neo_tree.setup({
   event_handlers = {
@@ -191,22 +174,23 @@ require('telescope').setup{
   }
 }
 
-vim.keymap.set('n', '<leader>o',        ':AerialToggle<cr>')
-vim.keymap.set('n', '<leader><leader>', ':Beacon<cr>')
+local opts = {noremap = true, silent = true}
+vim.keymap.set('n', '<leader>o',        ':AerialToggle<cr>', opts)
+vim.keymap.set('n', '<leader><leader>', ':Beacon<cr>', opts)
 local builtin = require("telescope.builtin")
-vim.keymap.set("n", '<C-p>',      function() builtin.find_files() end)
-vim.keymap.set("n", '<leader>s',  function() builtin.grep_string()end)
-vim.keymap.set("n", '<leader>S',  function() builtin.live_grep() end)
+vim.keymap.set("n", '<C-p>',      function() builtin.find_files() end, opts)
+vim.keymap.set("n", '<leader>s',  function() builtin.grep_string() end, opts)
+vim.keymap.set("n", '<leader>S',  function() builtin.live_grep() end, opts)
 
-vim.keymap.set('n', '<leader>l',  ":TestLast<cr>")
-vim.keymap.set('n', '<leader>n',  ":TestNearest<cr>")
-vim.keymap.set('n', '<leader>f',  ":Neotree focus toggle<cr>")
-vim.keymap.set('n', '<leader>F',  ":NeoTreeRevealToggle<cr>")
-vim.keymap.set('n', 'j', 'gj')
-vim.keymap.set('n', 'k', 'gk')
-vim.keymap.set('n', 'gj', 'j')
-vim.keymap.set('n', 'gk', 'k')
+vim.keymap.set('n', '<leader>l',  ":TestLast<cr>", opts)
+vim.keymap.set('n', '<leader>n',  ":TestNearest<cr>", opts)
+vim.keymap.set('n', '<leader>f',  ":Neotree focus toggle<cr>", opts)
+vim.keymap.set('n', '<leader>F',  ":NeoTreeRevealToggle<cr>", opts)
+vim.keymap.set('n', 'j', 'gj', opts)
+vim.keymap.set('n', 'k', 'gk', opts)
+vim.keymap.set('n', 'gj', 'j', opts)
+vim.keymap.set('n', 'gk', 'k', opts)
 
 --  eliminate white space
-vim.keymap.set('n', '<leader>;', "mz:%s/\\s\\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>")
-vim.keymap.set('', '<leader>,', ':nohl<cr>')
+vim.keymap.set('n', '<leader>;', "mz:%s/\\s\\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>", opts)
+vim.keymap.set('', '<leader>,', ':nohl<cr>', opts)
