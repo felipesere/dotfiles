@@ -1,7 +1,6 @@
 -- Install basic plugins
 local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.config/nvim/plugged')
-  -- Plug 'shaunsingh/nord.nvim'
   Plug 'hoob3rt/lualine.nvim'
   Plug 'alvarosevilla95/luatab.nvim'
   Plug 'stevearc/dressing.nvim'
@@ -18,7 +17,6 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
-  --Plug 'kyazdani42/nvim-tree.lua'
 
   Plug 'neovim/nvim-lspconfig'
   Plug 'simrat39/rust-tools.nvim'
@@ -42,6 +40,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('RRethy/vim-hexokinase', { ['do'] = 'make hexokinase' })
 
   -- My own
+  -- Plug 'shaunsingh/nord.nvim'
   Plug 'felipesere/nord.nvim'
   Plug 'felipesere/vim-open-readme'
 
@@ -52,7 +51,6 @@ vim.call('plug#end')
 vim.opt.autoindent = true             -- set auto indent
 vim.opt.clipboard = "unnamed"         -- use the system clipboard
 vim.opt.completeopt = { "menu", 'menuone', 'noinsert'}
-vim.opt.cursorline = true             -- highlight current line
 vim.opt.encoding = "utf-8"            -- ensures the devicons work
 vim.opt.expandtab = true              -- use spaces, not tab characters
 vim.opt.hidden = true                 -- for rust racer, for now...
@@ -81,7 +79,17 @@ vim.cmd('colorscheme nord')
 
 -- Jump into Git Messanger popup when opening
 vim.g.git_messenger_always_into_popup = true
-vim.g.git_messenger_floating_win_opts = { border = "single" }
+vim.g.git_messenger_floating_win_opts = { border = "rounded" }
+
+local nord = require("nord.colors")
+
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = nord.dark_gray, fg= nord.blue})
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = nord.dark_gray})
+vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = nord.dark_gray})
+vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = nord.dark_gray})
+vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { bg = nord.dark_gray, fg = nord.green})
+vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = nord.dark_gray, fg = nord.blue})
+vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { bg = nord.dark_gray, fg = nord.yellow})
 
 vim.api.nvim_create_user_command('Q', "qa!", { desc = "Quit all" })
 
@@ -112,7 +120,7 @@ require('luatab').setup({
 })
 
 require('beacon').setup({})
-vim.api.nvim_set_hl(0, "Beacon", {bg="#EBCB8B"})
+vim.api.nvim_set_hl(0, "Beacon", { bg = nord.yellow})
 
 require('nvim-treesitter.configs').setup {
    ignore_install = {
@@ -156,9 +164,6 @@ require('lualine').setup({
     lualine_b = { 'branch', 'diff', 'diagnostics'},
     lualine_x = { 'filetype' },
   },
-  --extensions = {
-  --  'nvim-tree',
-  --}
 })
 
 local actions = require "telescope.actions"
