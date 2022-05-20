@@ -1,10 +1,10 @@
-local kind_icons = require("icons");
+local kind_icons = require("icons")
 
 local lspkind_comparator = function(conf)
-  local lsp_types = require('cmp.types').lsp
+  local lsp_types = require("cmp.types").lsp
   return function(entry1, entry2)
-    if entry1.source.name ~= 'nvim_lsp' then
-      if entry2.source.name == 'nvim_lsp' then
+    if entry1.source.name ~= "nvim_lsp" then
+      if entry2.source.name == "nvim_lsp" then
         return false
       else
         return nil
@@ -26,75 +26,92 @@ local label_comparator = function(entry1, entry2)
   return entry1.completion_item.label < entry2.completion_item.label
 end
 
-local cmp = require('cmp')
+local cmp = require("cmp")
 cmp.setup({
-    snippet = {
-      -- REQUIRED - you must specify a snippet engine. Remove it when possible
-      expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body)
-      end,
-    },
-    mapping = cmp.mapping.preset.insert({
-      ['<Tab>'] = cmp.mapping.confirm({ select = true }),
-      ['<CR>'] = cmp.mapping.confirm({ select = true })
+  snippet = {
+    -- REQUIRED - you must specify a snippet engine. Remove it when possible
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({
+    ["<Tab>"] = cmp.mapping.confirm({
+      select = true,
     }),
-
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp', keyword_length = 3 },
-      { name = 'path' },
-      { name = 'buffer', keyword_length = 5 },
+    ["<CR>"] = cmp.mapping.confirm({
+      select = true,
     }),
+  }),
 
-    formatting = {
-       format = function(entry, vim_item)
-         -- Kind icons
-         local icon = kind_icons[vim_item.kind] or " "
-         vim_item.kind = string.format('%s %s', icon, vim_item.kind) -- This concatonates the icons with the name of the item kind
-         -- Source
-         vim_item.menu = ({
-           buffer = "[Buffer]",
-           path = "[Path]",
-           nvim_lsp = "[LSP]",
-         })[entry.source.name]
-         return vim_item
-       end
+  sources = cmp.config.sources({
+    {
+      name = "nvim_lsp",
+      keyword_length = 3,
     },
+    {
+      name = "path",
+    },
+    {
+      name = "buffer",
+      keyword_length = 5,
+    },
+  }),
 
-    sorting = {
-      comparators = {
-        lspkind_comparator({
-          kind_priority = {
-            Field = 11,
-            Property = 11,
-            Constant = 10,
-            Enum = 10,
-            EnumMember = 10,
-            Function = 10,
-            Method = 10,
-            Struct = 10,
-            Variable = 9,
-            File = 8,
-            Folder = 8,
-            Class = 5,
-            Module = 5,
-            Keyword = 2,
-            Interface = 1,
-            Value = 1,
-          },
-        }),
-        label_comparator,
-      }
-    },
+  formatting = {
+    format = function(entry, vim_item)
+      -- Kind icons
+      local icon = kind_icons[vim_item.kind] or " "
+      vim_item.kind = string.format("%s %s", icon, vim_item.kind) -- This concatonates the icons with the name of the item kind
+      -- Source
+      vim_item.menu = ({
+        buffer = "[Buffer]",
+        path = "[Path]",
+        nvim_lsp = "[LSP]",
+      })[entry.source.name]
+      return vim_item
+    end,
+  },
 
-    experimental = {
-      ghost_text = true,
+  sorting = {
+    comparators = {
+      lspkind_comparator({
+        kind_priority = {
+          Field = 11,
+          Property = 11,
+          Constant = 10,
+          Enum = 10,
+          EnumMember = 10,
+          Function = 10,
+          Method = 10,
+          Struct = 10,
+          Variable = 9,
+          File = 8,
+          Folder = 8,
+          Class = 5,
+          Module = 5,
+          Keyword = 2,
+          Interface = 1,
+          Value = 1,
+        },
+      }),
+      label_comparator,
     },
+  },
+
+  experimental = {
+    ghost_text = true,
+  },
 })
 
-
 local nord = require("nord.colors")
-vim.api.nvim_set_hl(0, "CmpItemKindMethod", {fg=nord.blue})
-vim.api.nvim_set_hl(0, "CmpItemKindField", {fg=nord.orange})
-vim.api.nvim_set_hl(0, "CmpItemKindStruct", {fg=nord.yellow})
-vim.api.nvim_set_hl(0, "CmpItemKindFunction", {fg=nord.off_blue})
-vim.api.nvim_set_hl(0, "CmpItemKindEnum", {fg=nord.teal})
+vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = nord.blue })
+vim.api.nvim_set_hl(0, "CmpItemKindField", {
+  fg = nord.orange,
+})
+vim.api.nvim_set_hl(0, "CmpItemKindStruct", {
+  fg = nord.yellow,
+})
+vim.api.nvim_set_hl(0, "CmpItemKindFunction", {
+  fg = nord.off_blue,
+})
+vim.api.nvim_set_hl(0, "CmpItemKindEnum", { fg = nord.teal })
