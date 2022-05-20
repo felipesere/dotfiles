@@ -83,13 +83,18 @@ vim.g.git_messenger_floating_win_opts = { border = "rounded" }
 
 local nord = require("nord.colors")
 
-vim.api.nvim_set_hl(0, "FloatBorder", { bg = nord.dark_gray, fg= nord.blue})
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = nord.dark_gray, fg= nord.glacier})
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = nord.dark_gray})
 vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = nord.dark_gray})
 vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = nord.dark_gray})
 vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { bg = nord.dark_gray, fg = nord.green})
-vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = nord.dark_gray, fg = nord.blue})
-vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { bg = nord.dark_gray, fg = nord.yellow})
+vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = nord.dark_gray, fg = nord.glacier})
+vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { bg = nord.dark_gray, fg = nord.teal})
+
+vim.api.nvim_set_hl(0, "NeoTreeGitStaged", { fg = nord.yellow})
+vim.api.nvim_set_hl(0, "NeoTreeGitUnstaged", { fg = nord.green})
+vim.api.nvim_set_hl(0, "NeoTreeGitUntracked", { fg = nord.blue})
+vim.api.nvim_set_hl(0, "NeoTreeGitModified", { fg = nord.glacier})
 
 vim.api.nvim_create_user_command('Q', "qa!", { desc = "Quit all" })
 
@@ -99,6 +104,46 @@ vim.notify = require("notify")
 -- separate modules as it was getting... hefty
 require("custom_cmp_config")
 require("custom_lsp")
+
+vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+
+local dot = ""
+local neotree = require("neo-tree")
+neotree.setup({
+	close_if_last_window = false,
+	enable_modified_markers = false,
+	use_popups_for_input = false,
+	default_component_configs = {
+		git_status = {
+			symbols = {
+				added     = "",
+				deleted   = dot,
+				modified  = dot,
+				renamed   = "",
+				untracked = dot,
+				ignored   = dot,
+				unstaged  = "",
+				staged    = dot,
+				conflict  = dot,
+			},
+			align = "right",
+		},
+	},
+  event_handlers = {
+    {
+      event = "file_opened",
+      handler = function(file_path)
+        --auto close
+        neotree.close_all()
+      end
+    },
+  },
+  window = {
+    mappings = {
+      ["o"] = "open",
+    }
+  }
+})
 
 require("fidget").setup()
 
@@ -133,24 +178,6 @@ require('nvim-treesitter.configs').setup {
     },
    },
 }
-
-local neo_tree = require("neo-tree")
-neo_tree.setup({
-  event_handlers = {
-    {
-      event = "file_opened",
-      handler = function(file_path)
-        --auto close
-        require("neo-tree").close_all()
-      end
-    },
-  },
-  window = {
-    mappings = {
-      ["o"] = "open",
-    }
-  }
-})
 
 require('nvim-web-devicons').setup {
  default = true; -- globally enable default icons (default to false)
