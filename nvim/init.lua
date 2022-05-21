@@ -22,7 +22,7 @@ Plug("nvim-treesitter/nvim-treesitter", {
 
 Plug("neovim/nvim-lspconfig")
 Plug("simrat39/rust-tools.nvim")
-Plug 'SmiteshP/nvim-gps'
+Plug("SmiteshP/nvim-gps")
 
 Plug("mfussenegger/nvim-dap")
 Plug("rcarriga/nvim-dap-ui")
@@ -189,16 +189,16 @@ require("nvim-web-devicons").setup({
 
 local gps = require("nvim-gps")
 gps.setup()
-require('lualine').setup({
+require("lualine").setup({
   options = {
     theme = "nord",
   },
   sections = {
-    lualine_b = { 'branch', 'diff', 'diagnostics'},
+    lualine_b = { "branch", "diff", "diagnostics" },
     lualine_c = {
-				{ gps.get_location, cond = gps.is_available },
-		},
-    lualine_x = { 'filetype' },
+      { gps.get_location, cond = gps.is_available },
+    },
+    lualine_x = { "filetype" },
   },
 })
 
