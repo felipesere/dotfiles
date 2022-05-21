@@ -41,8 +41,8 @@ end
 
 vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint, opts)
 vim.keymap.set("n", "<leader>c", dap.continue, opts)
-vim.keymap.set("n", "<leader>dso", dap.step_over, opts)
-vim.keymap.set("n", "<leader>dsi", dap.step_into, opts)
+vim.keymap.set("n", "<F7>", dap.step_over, opts)
+vim.keymap.set("n", "<F8>", dap.step_into, opts)
 
 -- configure the adapter for Rust Debugging
 dap.configurations.rust = {
