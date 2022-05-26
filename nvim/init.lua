@@ -234,7 +234,7 @@ end, opts)
 vim.keymap.set("n", "<leader>l", ":TestLast<cr>", opts)
 vim.keymap.set("n", "<leader>n", ":TestNearest<cr>", opts)
 vim.keymap.set("n", "<leader>f", ":Neotree focus toggle<cr>", opts)
-vim.keymap.set("n", "<leader>F", ":NeoTreeRevealToggle<cr>", opts)
+vim.keymap.set("n", "<leader>F", ":Neotree reveal toggle<cr>", opts)
 
 vim.keymap.set("n", "<leader>h", function()
   vim.lsp.buf.hover()
