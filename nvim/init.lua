@@ -39,7 +39,6 @@ Plug("airblade/vim-gitgutter")
 Plug("rhysd/git-messenger.vim")
 
 Plug("sheerun/vim-polyglot")
-Plug("towolf/vim-helm")
 Plug("RRethy/vim-hexokinase", {
   ["do"] = "make hexokinase",
 })
