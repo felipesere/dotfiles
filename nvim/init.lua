@@ -88,6 +88,8 @@ vim.g.git_messenger_floating_win_opts = { border = "rounded" }
 
 local nord = require("nord.colors")
 
+vim.api.nvim_set_hl(0, "TypeHighlight", { fg = nord.yellow })
+
 vim.api.nvim_set_hl(0, "FloatBorder", { bg = nord.dark_gray, fg = nord.glacier })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = nord.dark_gray })
 vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = nord.dark_gray })

@@ -27,7 +27,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>j", vim.diagnostic.goto_next, opts)
 end
 
-vim.api.nvim_set_hl(0, "TypeHighlight", { fg = "#B48EAD" })
 
 local dap, dapui = require("dap"), require("dapui")
 dapui.setup({})
