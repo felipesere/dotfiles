@@ -103,7 +103,7 @@ cmp.setup({
   },
 })
 
-local nord = require("nord.colors")
+local nord = require("nord.named_colors")
 vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = nord.blue })
 vim.api.nvim_set_hl(0, "CmpItemKindField", {
   fg = nord.orange,

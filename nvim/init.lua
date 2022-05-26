@@ -78,15 +78,15 @@ vim.opt.wildmode = { "list:longest", "full" } -- how the tab-completion menu beh
 
 vim.g.mapleader = " "
 
-vim.g.nord_contract = true
+vim.g.nord_contrast = true
 vim.g.nord_borders = true
-vim.cmd("colorscheme nord")
+require('nord').set()
 
 -- Jump into Git Messanger popup when opening
 vim.g.git_messenger_always_into_popup = true
 vim.g.git_messenger_floating_win_opts = { border = "rounded" }
 
-local nord = require("nord.colors")
+local nord = require("nord.named_colors")
 
 vim.api.nvim_set_hl(0, "TypeHighlight", { fg = nord.yellow })
 
