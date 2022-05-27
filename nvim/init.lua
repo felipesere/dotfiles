@@ -1,7 +1,7 @@
 -- Install basic plugins
 local Plug = vim.fn["plug#"]
 vim.call("plug#begin", "~/.config/nvim/plugged")
-Plug 'shaunsingh/nord.nvim'
+Plug("shaunsingh/nord.nvim")
 
 Plug("hoob3rt/lualine.nvim")
 Plug("alvarosevilla95/luatab.nvim")
@@ -79,7 +79,7 @@ vim.g.mapleader = " "
 
 vim.g.nord_contrast = true
 vim.g.nord_borders = true
-require('nord').set()
+require("nord").set()
 
 -- Jump into Git Messanger popup when opening
 vim.g.git_messenger_always_into_popup = true

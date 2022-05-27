@@ -27,7 +27,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>j", vim.diagnostic.goto_next, opts)
 end
 
-
 local dap, dapui = require("dap"), require("dapui")
 dapui.setup({})
 dap.listeners.after.event_initialized["dapui_config"] = function()
