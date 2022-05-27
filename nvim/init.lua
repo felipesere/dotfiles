@@ -1,6 +1,8 @@
 -- Install basic plugins
 local Plug = vim.fn["plug#"]
 vim.call("plug#begin", "~/.config/nvim/plugged")
+Plug 'shaunsingh/nord.nvim'
+
 Plug("hoob3rt/lualine.nvim")
 Plug("alvarosevilla95/luatab.nvim")
 Plug("stevearc/dressing.nvim")
@@ -44,8 +46,6 @@ Plug("RRethy/vim-hexokinase", {
 })
 
 -- My own
--- Plug 'shaunsingh/nord.nvim'
-Plug("felipesere/nord.nvim")
 Plug("felipesere/vim-open-readme")
 
 -- needs to be last
