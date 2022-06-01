@@ -87,7 +87,7 @@ require("rust-tools").setup({
           loadOutDirsFromCheck = true,
         },
         procMacro = {
-          enable = false,
+          enable = true,
         },
         checkOnSave = {
           extraArgs = {
