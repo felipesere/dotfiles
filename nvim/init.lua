@@ -44,6 +44,9 @@ Plug("sheerun/vim-polyglot")
 Plug("RRethy/vim-hexokinase", {
   ["do"] = "make hexokinase",
 })
+Plug("pantharshit00/vim-prisma")
+Plug("jose-elias-alvarez/null-ls.nvim")
+Plug("jose-elias-alvarez/nvim-lsp-ts-utils")
 
 -- My own
 Plug("felipesere/vim-open-readme")
