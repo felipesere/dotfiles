@@ -216,33 +216,58 @@ require("telescope").setup({
   },
 })
 
-local opts = { noremap = true, silent = true }
-vim.keymap.set("n", "<leader>o", ":AerialToggle<cr>", opts)
-vim.keymap.set("n", "<leader><leader>", ":Beacon<cr>", opts)
+local opts = function(opts)
+  local opts = opts or {}
+  local defaults = { noremap = true, silent = true }
+
+  for k, v in pairs(opts) do
+    defaults[k] = v
+  end
+  return defaults
+end
+
+--local opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<leader>o", ":AerialToggle<cr>", opts())
+vim.keymap.set("n", "<leader><leader>", ":Beacon<cr>", opts())
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<C-p>", function()
   builtin.find_files()
-end, opts)
+end, opts())
 vim.keymap.set("n", "<leader>s", function()
   builtin.grep_string()
-end, opts)
+end, opts())
 vim.keymap.set("n", "<leader>S", function()
   builtin.live_grep()
-end, opts)
+end, opts())
 
-vim.keymap.set("n", "<leader>l", ":TestLast<cr>", opts)
-vim.keymap.set("n", "<leader>n", ":TestNearest<cr>", opts)
-vim.keymap.set("n", "<leader>f", ":Neotree focus toggle<cr>", opts)
-vim.keymap.set("n", "<leader>F", ":Neotree reveal toggle<cr>", opts)
+vim.keymap.set("n", "<leader>l", ":TestLast<cr>", opts({ desc = "Re-run the last test" }))
+vim.keymap.set(
+  "n",
+  "<leader>n",
+  ":TestNearest<cr>",
+  opts({ desc = "Run the nearest test to the cursor based on context" })
+)
+vim.keymap.set("n", "<leader>f", ":Neotree focus toggle<cr>", opts({ desc = "Show the current file in the explorer" }))
+vim.keymap.set("n", "<leader>F", ":Neotree reveal toggle<cr>", opts({ desc = "Toggle the file explorer" }))
+vim.keymap.set(
+  "n",
+  "<leader>c",
+  ":Telescope command_history<cr>",
+  opts({ desc = "Show the command histopry in Telescope" })
+)
 
 vim.keymap.set("n", "<leader>h", function()
   vim.lsp.buf.hover()
-end, opts)
-vim.keymap.set("n", "j", "gj", opts)
-vim.keymap.set("n", "k", "gk", opts)
-vim.keymap.set("n", "gj", "j", opts)
-vim.keymap.set("n", "gk", "k", opts)
+end, opts({ desc = "Show the hover information" }))
+vim.keymap.set("n", "j", "gj", opts())
+vim.keymap.set("n", "k", "gk", opts())
+vim.keymap.set("n", "gj", "j", opts())
+vim.keymap.set("n", "gk", "k", opts())
 
 --  eliminate white space
-vim.keymap.set("n", "<leader>;", "mz:%s/\\s\\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>", opts)
-vim.keymap.set("", "<leader>,", ":nohl<cr>", opts)
+vim.keymap.set("n", "<leader>;", "mz:%s/\\s\\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>", opts())
+vim.keymap.set("", "<leader>,", ":nohl<cr>", opts())
+
+function reload(package_name)
+  require("plenary.reload").reload_module(package_name, true)
+end
