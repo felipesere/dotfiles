@@ -17,7 +17,9 @@ Plug("christoomey/vim-sort-motion")
 Plug("vim-test/vim-test")
 
 Plug("nvim-lua/plenary.nvim")
+Plug("s1n7ax/nvim-window-picker")
 Plug("nvim-telescope/telescope.nvim")
+Plug("xiyaowong/telescope-emoji.nvim")
 Plug("nvim-treesitter/nvim-treesitter", {
   ["do"] = ":TSUpdate",
 })
@@ -152,6 +154,9 @@ neotree.setup({
     },
   },
 })
+require("window-picker").setup({
+    other_win_hl_color = nord.glacier,
+  })
 
 require("fidget").setup()
 
@@ -207,7 +212,8 @@ require("lualine").setup({
 })
 
 local actions = require("telescope.actions")
-require("telescope").setup({
+local telescope = require("telescope")
+telescope.setup({
   defaults = {
     mappings = {
       i = {
@@ -218,6 +224,7 @@ require("telescope").setup({
     },
   },
 })
+telescope.load_extension("emoji")
 
 local opts = function(opts)
   local opts = opts or {}
