@@ -236,7 +236,7 @@ local opts = function(opts)
   return defaults
 end
 
---local opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<leader>e", ":Telescope emoji<cr>", opts())
 vim.keymap.set("n", "<leader>o", ":AerialToggle<cr>", opts())
 vim.keymap.set("n", "<leader><leader>", ":Beacon<cr>", opts())
 local builtin = require("telescope.builtin")
