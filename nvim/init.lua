@@ -274,6 +274,10 @@ vim.keymap.set("n", "k", "gk", opts())
 vim.keymap.set("n", "gj", "j", opts())
 vim.keymap.set("n", "gk", "k", opts())
 
+vim.keymap.set("n", "<leader><esc>", function()
+  require("notify").dismiss()
+end, opts())
+
 --  eliminate white space
 vim.keymap.set("n", "<leader>;", "mz:%s/\\s\\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>", opts())
 vim.keymap.set("", "<leader>,", ":nohl<cr>", opts())
