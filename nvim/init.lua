@@ -259,12 +259,6 @@ vim.keymap.set(
 )
 vim.keymap.set("n", "<leader>f", ":Neotree focus toggle<cr>", opts({ desc = "Show the current file in the explorer" }))
 vim.keymap.set("n", "<leader>F", ":Neotree reveal toggle<cr>", opts({ desc = "Toggle the file explorer" }))
-vim.keymap.set(
-  "n",
-  "<leader>c",
-  ":Telescope command_history<cr>",
-  opts({ desc = "Show the command histopry in Telescope" })
-)
 
 vim.keymap.set("n", "<leader>h", function()
   vim.lsp.buf.hover()
