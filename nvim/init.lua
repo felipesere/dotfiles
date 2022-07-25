@@ -24,6 +24,8 @@ Plug("nvim-treesitter/nvim-treesitter", {
   ["do"] = ":TSUpdate",
 })
 
+Plug("elixir-editors/vim-elixir")
+
 Plug("neovim/nvim-lspconfig")
 Plug("simrat39/rust-tools.nvim")
 Plug("SmiteshP/nvim-gps")
