@@ -210,7 +210,7 @@ require("lualine").setup({
     theme = "nord",
   },
   sections = {
-    lualine_b = { "branch", "diff", "diagnostics" },
+    lualine_b = {  "filename",  "branch", "diff", "diagnostics" },
     lualine_c = {
       { gps.get_location, cond = gps.is_available },
     },
