@@ -23,6 +23,7 @@ Plug("xiyaowong/telescope-emoji.nvim")
 Plug("nvim-treesitter/nvim-treesitter", {
   ["do"] = ":TSUpdate",
 })
+Plug("xiyaowong/telescope-emoji.nvim")
 
 Plug("elixir-editors/vim-elixir")
 
@@ -45,6 +46,7 @@ Plug("hrsh7th/vim-vsnip")
 
 Plug("airblade/vim-gitgutter")
 Plug("rhysd/git-messenger.vim")
+Plug("rhysd/conflict-marker.vim")
 
 Plug("sheerun/vim-polyglot")
 Plug("RRethy/vim-hexokinase", {
@@ -193,7 +195,7 @@ require("nvim-treesitter.configs").setup({
   ignore_install = { "elm" },
   highlight = {
     enable = true,
-    disable = { "elm" },
+    disable = { "elm",},
   },
 })
 
@@ -216,6 +218,8 @@ require("lualine").setup({
   },
 })
 
+local telescope = require("telescope")
+telescope.load_extension("emoji")
 local actions = require("telescope.actions")
 local telescope = require("telescope")
 telescope.setup({
@@ -255,6 +259,7 @@ end, opts())
 vim.keymap.set("n", "<leader>S", function()
   builtin.live_grep()
 end, opts())
+vim.keymap.set("n", "<leader>e", ":Telescope emoji<cr>", opts())
 
 vim.keymap.set("n", "<leader>l", ":TestLast<cr>", opts({ desc = "Re-run the last test" }))
 vim.keymap.set(
