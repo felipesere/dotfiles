@@ -45,6 +45,7 @@ vim.keymap.set("n", "<leader>c", dap.continue, opts)
 vim.keymap.set("n", "<F7>", dap.step_over, opts)
 vim.keymap.set("n", "<F8>", dap.step_into, opts)
 
+
 -- configure the adapter for Rust Debugging
 dap.configurations.rust = {
   {
@@ -109,25 +110,11 @@ require("rust-tools").setup({
     adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
   },
 })
-local buf_map = function(bufnr, mode, lhs, rhs, opts)
-  vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
-    silent = true,
-  })
-end
-
-lspconfig.tsserver.setup({
-  on_attach = function(client, bufnr)
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
-    local ts_utils = require("nvim-lsp-ts-utils")
-    ts_utils.setup({})
-    ts_utils.setup_client(client)
-    buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>")
-    buf_map(bufnr, "n", "gi", ":TSLspRenameFile<CR>")
-    buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
-    on_attach(client, bufnr)
-  end,
-})
+require('lspconfig').elixirls.setup {
+  cmd = { 'elixir-ls' },
+  on_attach = on_attach,
+  capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()), -- Hooked up to nvim-cmp
+}
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   signs = true,

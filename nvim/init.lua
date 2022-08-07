@@ -26,7 +26,9 @@ Plug("nvim-treesitter/nvim-treesitter", {
 
 Plug("elixir-editors/vim-elixir")
 
+Plug("williamboman/mason.nvim")
 Plug("neovim/nvim-lspconfig")
+Plug("williamboman/mason-lspconfig.nvim")
 Plug("simrat39/rust-tools.nvim")
 Plug("SmiteshP/nvim-gps")
 
@@ -48,10 +50,6 @@ Plug("sheerun/vim-polyglot")
 Plug("RRethy/vim-hexokinase", {
   ["do"] = "make hexokinase",
 })
-Plug("pantharshit00/vim-prisma")
-Plug("jose-elias-alvarez/null-ls.nvim")
-Plug("jose-elias-alvarez/nvim-lsp-ts-utils")
-
 -- My own
 Plug("felipesere/vim-open-readme")
 
@@ -111,6 +109,11 @@ vim.api.nvim_set_hl(0, "NeoTreeGitModified", { fg = nord.glacier })
 
 vim.api.nvim_create_user_command("Q", "qa!", { desc = "Quit all" })
 vim.notify = require("notify")
+
+require("mason").setup({})
+require("mason-lspconfig").setup({
+    ensure_installed = { "rust_analyzer", "elixir-ls" }
+})
 
 -- Extracted configuration for cmp and lsp intro
 -- separate modules as it was getting... hefty
