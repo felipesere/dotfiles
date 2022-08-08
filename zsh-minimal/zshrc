@@ -82,6 +82,10 @@ if command -v atuin &> /dev/null; then
   eval $(atuin init zsh)
 fi
 
+if command -v gpg &> /dev/null; then
+  export GPG_TTY=$(tty)
+fi
+
 c() {
   IN_REPO=$(command git rev-parse --is-inside-work-tree 2&> /dev/null)
   if [ "$IN_REPO" = "true" ]; then
@@ -113,7 +117,6 @@ title() {
 }
 
 chpwd_functions+=title
-
 title
 
 font_size() {
