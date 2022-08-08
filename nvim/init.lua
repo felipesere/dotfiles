@@ -2,6 +2,8 @@
 local Plug = vim.fn["plug#"]
 vim.call("plug#begin", "~/.config/nvim/plugged")
 Plug("shaunsingh/nord.nvim")
+Plug("cocopon/iceberg.vim")
+Plug('f-person/auto-dark-mode.nvim')
 
 Plug("hoob3rt/lualine.nvim")
 Plug("alvarosevilla95/luatab.nvim")
@@ -92,9 +94,26 @@ vim.opt.wildmode = { "list:longest", "full" } -- how the tab-completion menu beh
 
 vim.g.mapleader = " "
 
+
+local auto_dark_mode = require('auto-dark-mode')
+
 vim.g.nord_contrast = true
 vim.g.nord_borders = true
-require("nord").set()
+local nord = require("nord");
+
+auto_dark_mode.setup({
+	update_interval =  3000,
+	set_dark_mode = function()
+    vim.api.nvim_set_option('background', 'dark')
+    vim.cmd('colorscheme nord')
+    nord.set()
+  end,
+  set_light_mode = function()
+    vim.api.nvim_set_option('background', 'light')
+    vim.cmd('colorscheme iceberg')
+  end
+})
+auto_dark_mode.init()
 
 -- Jump into Git Messanger popup when opening
 vim.g.git_messenger_always_into_popup = true
@@ -118,20 +137,20 @@ vim.g.zettel_format = "%title.md"
 
 local nord = require("nord.named_colors")
 
-vim.api.nvim_set_hl(0, "TypeHighlight", { fg = nord.yellow })
-
-vim.api.nvim_set_hl(0, "FloatBorder", { bg = nord.dark_gray, fg = nord.glacier })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = nord.dark_gray })
-vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = nord.dark_gray })
-vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = nord.dark_gray })
-vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { bg = nord.dark_gray, fg = nord.green })
-vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = nord.dark_gray, fg = nord.glacier })
-vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { bg = nord.dark_gray, fg = nord.teal })
-
-vim.api.nvim_set_hl(0, "NeoTreeGitStaged", { fg = nord.yellow })
-vim.api.nvim_set_hl(0, "NeoTreeGitUnstaged", { fg = nord.green })
-vim.api.nvim_set_hl(0, "NeoTreeGitUntracked", { fg = nord.blue })
-vim.api.nvim_set_hl(0, "NeoTreeGitModified", { fg = nord.glacier })
+-- vim.api.nvim_set_hl(0, "TypeHighlight", { fg = nord.yellow })
+--
+-- vim.api.nvim_set_hl(0, "FloatBorder", { bg = nord.dark_gray, fg = nord.glacier })
+-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = nord.dark_gray })
+-- vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = nord.dark_gray })
+-- vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = nord.dark_gray })
+-- vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { bg = nord.dark_gray, fg = nord.green })
+-- vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = nord.dark_gray, fg = nord.glacier })
+-- vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { bg = nord.dark_gray, fg = nord.teal })
+--
+-- vim.api.nvim_set_hl(0, "NeoTreeGitStaged", { fg = nord.yellow })
+-- vim.api.nvim_set_hl(0, "NeoTreeGitUnstaged", { fg = nord.green })
+-- vim.api.nvim_set_hl(0, "NeoTreeGitUntracked", { fg = nord.blue })
+-- vim.api.nvim_set_hl(0, "NeoTreeGitModified", { fg = nord.glacier })
 
 vim.api.nvim_create_user_command("Q", "qa!", { desc = "Quit all" })
 vim.notify = require("notify")
@@ -146,7 +165,7 @@ require("mason-lspconfig").setup({
 require("custom_cmp_config")
 require("custom_lsp")
 
-vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+vim.g.neo_tree_remove_legacy_commands = 1
 
 local dot = ""
 local neotree = require("neo-tree")
@@ -211,9 +230,9 @@ require("luatab").setup({
 })
 
 require("beacon").setup({})
-vim.api.nvim_set_hl(0, "Beacon", {
-  bg = nord.yellow,
-})
+-- vim.api.nvim_set_hl(0, "Beacon", {
+--   bg = nord.yellow,
+-- })
 
 require("nvim-treesitter.configs").setup({
   ignore_install = { "elm" },
@@ -229,9 +248,7 @@ require("nvim-web-devicons").setup({
 
 local navic = require("nvim-navic")
 require("lualine").setup({
-  options = {
-    theme = "nord",
-  },
+	theme = 'auto',
   sections = {
     lualine_b = {  "filename",  "branch", "diff", "diagnostics" },
     lualine_c = {
