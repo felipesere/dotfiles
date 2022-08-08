@@ -52,6 +52,14 @@ Plug("sheerun/vim-polyglot")
 Plug("RRethy/vim-hexokinase", {
   ["do"] = "make hexokinase",
 })
+Plug("pantharshit00/vim-prisma")
+Plug("jose-elias-alvarez/null-ls.nvim")
+Plug("jose-elias-alvarez/nvim-lsp-ts-utils")
+
+Plug('vimwiki/vimwiki')
+Plug('ElPiloto/telescope-vimwiki.nvim')
+Plug('michal-h21/vim-zettel')
+
 -- My own
 Plug("felipesere/vim-open-readme")
 
@@ -91,6 +99,22 @@ require("nord").set()
 -- Jump into Git Messanger popup when opening
 vim.g.git_messenger_always_into_popup = true
 vim.g.git_messenger_floating_win_opts = { border = "rounded" }
+
+vim.g.vimwiki_list = {
+  {
+    path = vim.fn.expand("~") .. "/Development/brain",
+    syntax = 'markdown',
+    ext = '.md',
+  }
+}
+vim.g.zettel_options = {
+  {
+    template = "~/.dotfiles/zettel.tpl",
+    disable_front_matter = 1,
+  }
+}
+vim.g.zettel_format = "%title.md"
+
 
 local nord = require("nord.named_colors")
 
@@ -220,8 +244,8 @@ require("lualine").setup({
 
 local telescope = require("telescope")
 telescope.load_extension("emoji")
+telescope.load_extension("vimwiki")
 local actions = require("telescope.actions")
-local telescope = require("telescope")
 telescope.setup({
   defaults = {
     mappings = {
@@ -233,7 +257,6 @@ telescope.setup({
     },
   },
 })
-telescope.load_extension("emoji")
 
 local opts = function(opts)
   local opts = opts or {}
