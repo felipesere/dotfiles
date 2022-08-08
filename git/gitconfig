@@ -80,3 +80,6 @@ helper = store
 
 [init]
 defaultBranch = main
+
+[includeIf "gitdir:~/Development/truelayer/"]
+  path = ~/.gitconfig-truelayer
