@@ -31,7 +31,7 @@ Plug("williamboman/mason.nvim")
 Plug("neovim/nvim-lspconfig")
 Plug("williamboman/mason-lspconfig.nvim")
 Plug("simrat39/rust-tools.nvim")
-Plug("SmiteshP/nvim-gps")
+Plug("SmiteshP/nvim-navic")
 
 Plug("mfussenegger/nvim-dap")
 Plug("rcarriga/nvim-dap-ui")
@@ -138,7 +138,7 @@ vim.notify = require("notify")
 
 require("mason").setup({})
 require("mason-lspconfig").setup({
-    ensure_installed = { "rust_analyzer", "elixir-ls" }
+    ensure_installed = { "rust_analyzer", "elixir-ls", "yamlls" }
 })
 
 -- Extracted configuration for cmp and lsp intro
@@ -227,8 +227,7 @@ require("nvim-web-devicons").setup({
   default = true, -- globally enable default icons (default to false)
 })
 
-local gps = require("nvim-gps")
-gps.setup()
+local navic = require("nvim-navic")
 require("lualine").setup({
   options = {
     theme = "nord",
@@ -236,7 +235,7 @@ require("lualine").setup({
   sections = {
     lualine_b = {  "filename",  "branch", "diff", "diagnostics" },
     lualine_c = {
-      { gps.get_location, cond = gps.is_available },
+      { navic.get_location, cond = navic.is_available},
     },
     lualine_x = { "filetype" },
   },

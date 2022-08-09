@@ -1,4 +1,5 @@
 local lspconfig = require("lspconfig")
+local navic = require("nvim-navic")
 local kind_icons = require("icons")
 
 local opts = {
@@ -26,6 +27,8 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>Q", tele.lsp_dynamic_workspace_symbols, opts)
   vim.keymap.set("n", "<leader>k", vim.diagnostic.goto_prev, opts)
   vim.keymap.set("n", "<leader>j", vim.diagnostic.goto_next, opts)
+
+  navic.attach(client, bufnr)
 end
 
 local dap, dapui = require("dap"), require("dapui")
@@ -110,8 +113,16 @@ require("rust-tools").setup({
     adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
   },
 })
-require('lspconfig').elixirls.setup {
+
+local lspconfig = require("lspconfig")
+
+lspconfig.elixirls.setup {
   cmd = { 'elixir-ls' },
+  on_attach = on_attach,
+  capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()), -- Hooked up to nvim-cmp
+}
+lspconfig.yamlls.setup {
+  cmd = { 'yaml-language-server', '--stdio' },
   on_attach = on_attach,
   capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()), -- Hooked up to nvim-cmp
 }
