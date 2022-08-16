@@ -47,6 +47,7 @@ Plug("hrsh7th/vim-vsnip")
 Plug("airblade/vim-gitgutter")
 Plug("rhysd/git-messenger.vim")
 Plug("rhysd/conflict-marker.vim")
+Plug("lukas-reineke/indent-blankline.nvim")
 
 Plug("sheerun/vim-polyglot")
 Plug("RRethy/vim-hexokinase", {
@@ -202,6 +203,10 @@ require("dressing").setup({
     max_width = { 150, 0.9 },
     min_width = { 100, 0.2 },
   },
+})
+
+require("indent_blankline").setup({
+  show_current_context = true,
 })
 
 require("luatab").setup({
