@@ -155,9 +155,13 @@ neotree.setup({
   close_if_last_window = false,
   enable_modified_markers = false,
   use_popups_for_input = false,
-  always_show = {
-    "zzz-felipe",
-    ".circleci",
+  filesystem = {
+    filtered_items = {
+      always_show = {
+        ".circleci",
+        "zzz-felipe",
+      }
+    }
   },
   default_component_configs = {
     git_status = {
