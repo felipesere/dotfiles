@@ -182,7 +182,7 @@ custom_cursor_colors: false
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 #
-colors: *light
+colors: *dark
 # Visual Bell
 #
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
