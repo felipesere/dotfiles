@@ -102,16 +102,3 @@ cmp.setup({
     ghost_text = true,
   },
 })
-
-local nord = require("nord.named_colors")
-vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = nord.blue })
-vim.api.nvim_set_hl(0, "CmpItemKindField", {
-  fg = nord.orange,
-})
-vim.api.nvim_set_hl(0, "CmpItemKindStruct", {
-  fg = nord.yellow,
-})
-vim.api.nvim_set_hl(0, "CmpItemKindFunction", {
-  fg = nord.off_blue,
-})
-vim.api.nvim_set_hl(0, "CmpItemKindEnum", { fg = nord.teal })

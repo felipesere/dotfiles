@@ -2,6 +2,8 @@
 local Plug = vim.fn["plug#"]
 vim.call("plug#begin", "~/.config/nvim/plugged")
 Plug("shaunsingh/nord.nvim")
+Plug("rktjmp/lush.nvim")
+Plug("mcchrish/zenbones.nvim")
 
 Plug("hoob3rt/lualine.nvim")
 Plug("alvarosevilla95/luatab.nvim")
@@ -95,7 +97,9 @@ vim.g.mapleader = " "
 
 vim.g.nord_contrast = true
 vim.g.nord_borders = true
-require("nord").set()
+--require("nord").set()
+vim.opt.background = "light"
+vim.cmd("colorscheme rosebones")
 
 -- Jump into Git Messanger popup when opening
 vim.g.git_messenger_always_into_popup = true
@@ -115,24 +119,6 @@ vim.g.zettel_options = {
   }
 }
 vim.g.zettel_format = "%title.md"
-
-
-local nord = require("nord.named_colors")
-
-vim.api.nvim_set_hl(0, "TypeHighlight", { fg = nord.yellow })
-
-vim.api.nvim_set_hl(0, "FloatBorder", { bg = nord.dark_gray, fg = nord.glacier })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = nord.dark_gray })
-vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = nord.dark_gray })
-vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = nord.dark_gray })
-vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { bg = nord.dark_gray, fg = nord.green })
-vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = nord.dark_gray, fg = nord.glacier })
-vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { bg = nord.dark_gray, fg = nord.teal })
-
-vim.api.nvim_set_hl(0, "NeoTreeGitStaged", { fg = nord.yellow })
-vim.api.nvim_set_hl(0, "NeoTreeGitUnstaged", { fg = nord.green })
-vim.api.nvim_set_hl(0, "NeoTreeGitUntracked", { fg = nord.blue })
-vim.api.nvim_set_hl(0, "NeoTreeGitModified", { fg = nord.glacier })
 
 vim.api.nvim_create_user_command("Q", "qa!", { desc = "Quit all" })
 vim.notify = require("notify")
@@ -190,9 +176,7 @@ neotree.setup({
     },
   },
 })
-require("window-picker").setup({
-    other_win_hl_color = nord.glacier,
-  })
+require("window-picker").setup()
 
 require("fidget").setup()
 
@@ -220,9 +204,6 @@ require("luatab").setup({
 })
 
 require("beacon").setup({})
-vim.api.nvim_set_hl(0, "Beacon", {
-  bg = nord.yellow,
-})
 
 require("nvim-treesitter.configs").setup({
   ignore_install = { "elm" },
@@ -238,9 +219,6 @@ require("nvim-web-devicons").setup({
 
 local navic = require("nvim-navic")
 require("lualine").setup({
-  options = {
-    theme = "nord",
-  },
   sections = {
     lualine_b = {  "filename",  "branch", "diff", "diagnostics" },
     lualine_c = {
