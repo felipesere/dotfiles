@@ -17,20 +17,20 @@ safecrlf = true
 whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 
 [delta]
-features = light-mode
+# Changing this variable toggles the light/dark mode
+features = light
 
-[delta "decorations"]
 commit-decoration-style      = "bold yellow box ul"
 file-style                   = "bold yellow"
 file-decoration-style        = "bold yellow box ul"
 hunk-header-style            = "bold blue"
 hunk-header-decoration-style = "blue box"
 
-[delta "light-mode"]
+[delta "light"]
 light = false
 syntax-theme = Monokai Extended Light
 
-[delta "dark-mode"]
+[delta "dark"]
 light = false
 syntax-theme = Nord
 

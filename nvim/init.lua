@@ -63,6 +63,9 @@ Plug('vimwiki/vimwiki')
 Plug('ElPiloto/telescope-vimwiki.nvim')
 Plug('michal-h21/vim-zettel')
 
+-- Watch a file!
+Plug('rktjmp/fwatch.nvim')
+
 -- My own
 Plug("felipesere/vim-open-readme")
 
@@ -95,11 +98,20 @@ vim.opt.wildmode = { "list:longest", "full" } -- how the tab-completion menu beh
 
 vim.g.mapleader = " "
 
-vim.g.nord_contrast = true
-vim.g.nord_borders = true
---require("nord").set()
-vim.opt.background = "light"
-vim.cmd("colorscheme rosebones")
+require("color_switcher").setup({
+    on_dark = function()
+      print("Switching to dark")
+      vim.opt.background = "dark"
+      vim.g.nord_contrast = true
+      vim.g.nord_borders = true
+      require("nord").set()
+    end,
+    on_light = function()
+      print("Switching to light")
+      vim.opt.background = "light"
+      vim.cmd("colorscheme rosebones")
+    end,
+})
 
 -- Jump into Git Messanger popup when opening
 vim.g.git_messenger_always_into_popup = true
