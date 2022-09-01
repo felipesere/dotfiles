@@ -17,13 +17,7 @@ safecrlf = true
 whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 
 [delta]
-features = decorations
-
-syntax-theme     = Nord
-plus-style       = "syntax #2d4a16"
-plus-emph-style  = "white  #6B8C4F"
-minus-style      = "syntax #60141B"
-minus-emph-style = "white  #88323A"
+features = light-mode
 
 [delta "decorations"]
 commit-decoration-style      = "bold yellow box ul"
@@ -31,6 +25,14 @@ file-style                   = "bold yellow"
 file-decoration-style        = "bold yellow box ul"
 hunk-header-style            = "bold blue"
 hunk-header-decoration-style = "blue box"
+
+[delta "light-mode"]
+light = false
+syntax-theme = Monokai Extended Light
+
+[delta "dark-mode"]
+light = false
+syntax-theme = Nord
 
 [pull]
 rebase = true
