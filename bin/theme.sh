@@ -23,6 +23,9 @@ tmux source-file ~/.dotfiles/tmux/${mode}.tmux
 ## Delta
 sd '^features = .*' "features = ${mode}" ~/.dotfiles/git/gitconfig
 
+## Vim
+echo $mode > ~/.theme
+
 ## Bat
 bat_theme=""
 if [[ "$mode" = "light" ]]; then

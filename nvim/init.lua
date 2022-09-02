@@ -1,7 +1,7 @@
 -- Install basic plugins
 local Plug = vim.fn["plug#"]
 vim.call("plug#begin", "~/.config/nvim/plugged")
-Plug("shaunsingh/nord.nvim")
+Plug("arcticicestudio/nord-vim")
 Plug("rktjmp/lush.nvim")
 Plug("mcchrish/zenbones.nvim")
 
@@ -100,14 +100,10 @@ vim.g.mapleader = " "
 
 require("color_switcher").setup({
     on_dark = function()
-      print("Switching to dark")
       vim.opt.background = "dark"
-      vim.g.nord_contrast = true
-      vim.g.nord_borders = true
-      require("nord").set()
+      vim.cmd("colorscheme nord")
     end,
     on_light = function()
-      print("Switching to light")
       vim.opt.background = "light"
       vim.cmd("colorscheme rosebones")
     end,
