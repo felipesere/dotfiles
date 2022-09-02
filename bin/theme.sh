@@ -1,12 +1,5 @@
 #! /usr/bin/env bash
 
-# Things that need toggling
-# - Alacritty
-# - Tmux
-# - Delta
-# - Vim
-# - Bat
-
 case $1 in
     light|dark) ;;
     *) echo "Can only toggle between light and dark, not '$1'"; exit -1 ;;

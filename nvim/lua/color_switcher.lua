@@ -1,5 +1,4 @@
 local fwatch = require('fwatch')
-local a = require('plenary.async')
 
 local theme_file = vim.fn.expand('~/.theme')
 
@@ -21,9 +20,7 @@ function lines_from(file)
 end
 
 local setup = function(opts)
-
   local lines = lines_from(theme_file)
-
   if(lines[1] == "light") then
     opts.on_light()
   else
@@ -36,6 +33,7 @@ local setup = function(opts)
           -- 🚧 we schedule the on_* callback so we have
           -- full access to neovim API withim them
           vim.schedule_wrap(opts.on_light)()
+
         else
           vim.schedule_wrap(opts.on_dark)()
         end
