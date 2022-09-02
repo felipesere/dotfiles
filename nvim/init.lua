@@ -31,6 +31,7 @@ Plug("williamboman/mason.nvim")
 Plug("neovim/nvim-lspconfig")
 Plug("williamboman/mason-lspconfig.nvim")
 Plug("simrat39/rust-tools.nvim")
+Plug("Saecki/crates.nvim")
 Plug("SmiteshP/nvim-navic")
 
 Plug("mfussenegger/nvim-dap")
@@ -137,6 +138,7 @@ vim.api.nvim_set_hl(0, "NeoTreeGitModified", { fg = nord.glacier })
 vim.api.nvim_create_user_command("Q", "qa!", { desc = "Quit all" })
 vim.notify = require("notify")
 
+require('crates').setup()
 require("mason").setup({})
 require("mason-lspconfig").setup({
     ensure_installed = { "rust_analyzer", "elixir-ls", "yamlls" }
