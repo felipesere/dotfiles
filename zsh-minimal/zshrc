@@ -147,6 +147,14 @@ dots() {
   cd ~/.dotfiles
 }
 
+dark() {
+  $HOME/.dotfiles/bin/theme.sh dark
+}
+
+light() {
+  $HOME/.dotfiles/bin/theme.sh light
+}
+
 watchy() {
   watchexec --clear -- "if $@; then noti -m ✅; else noti -m ❌; fi"
 }
