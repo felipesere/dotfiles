@@ -101,10 +101,12 @@ vim.g.mapleader = " "
 require("color_switcher").setup({
     on_dark = function()
       vim.opt.background = "dark"
+      vim.api.nvim_set_hl(0, "TypeHighlight", { fg = '#EBCB8B' })
       vim.cmd("colorscheme nord")
     end,
     on_light = function()
       vim.opt.background = "light"
+      vim.api.nvim_set_hl(0, "TypeHighlight", { fg = '#819B69' })
       vim.cmd("colorscheme rosebones")
     end,
 })
