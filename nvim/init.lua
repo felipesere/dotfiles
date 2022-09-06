@@ -1,7 +1,9 @@
 -- Install basic plugins
 local Plug = vim.fn["plug#"]
 vim.call("plug#begin", "~/.config/nvim/plugged")
-Plug("shaunsingh/nord.nvim")
+Plug("arcticicestudio/nord-vim")
+Plug("rktjmp/lush.nvim")
+Plug("mcchrish/zenbones.nvim")
 
 Plug("hoob3rt/lualine.nvim")
 Plug("alvarosevilla95/luatab.nvim")
@@ -62,6 +64,9 @@ Plug('vimwiki/vimwiki')
 Plug('ElPiloto/telescope-vimwiki.nvim')
 Plug('michal-h21/vim-zettel')
 
+-- Watch a file!
+Plug('rktjmp/fwatch.nvim')
+
 -- My own
 Plug("felipesere/vim-open-readme")
 
@@ -94,9 +99,18 @@ vim.opt.wildmode = { "list:longest", "full" } -- how the tab-completion menu beh
 
 vim.g.mapleader = " "
 
-vim.g.nord_contrast = true
-vim.g.nord_borders = true
-require("nord").set()
+require("color_switcher").setup({
+    on_dark = function()
+      vim.opt.background = "dark"
+      vim.api.nvim_set_hl(0, "TypeHighlight", { fg = '#EBCB8B' })
+      vim.cmd("colorscheme nord")
+    end,
+    on_light = function()
+      vim.opt.background = "light"
+      vim.api.nvim_set_hl(0, "TypeHighlight", { fg = '#819B69' })
+      vim.cmd("colorscheme rosebones")
+    end,
+})
 
 -- Jump into Git Messanger popup when opening
 vim.g.git_messenger_always_into_popup = true
@@ -116,24 +130,6 @@ vim.g.zettel_options = {
   }
 }
 vim.g.zettel_format = "%title.md"
-
-
-local nord = require("nord.named_colors")
-
-vim.api.nvim_set_hl(0, "TypeHighlight", { fg = nord.yellow })
-
-vim.api.nvim_set_hl(0, "FloatBorder", { bg = nord.dark_gray, fg = nord.glacier })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = nord.dark_gray })
-vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = nord.dark_gray })
-vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = nord.dark_gray })
-vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { bg = nord.dark_gray, fg = nord.green })
-vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = nord.dark_gray, fg = nord.glacier })
-vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { bg = nord.dark_gray, fg = nord.teal })
-
-vim.api.nvim_set_hl(0, "NeoTreeGitStaged", { fg = nord.yellow })
-vim.api.nvim_set_hl(0, "NeoTreeGitUnstaged", { fg = nord.green })
-vim.api.nvim_set_hl(0, "NeoTreeGitUntracked", { fg = nord.blue })
-vim.api.nvim_set_hl(0, "NeoTreeGitModified", { fg = nord.glacier })
 
 vim.api.nvim_create_user_command("Q", "qa!", { desc = "Quit all" })
 vim.notify = require("notify")
@@ -196,9 +192,7 @@ neotree.setup({
     },
   },
 })
-require("window-picker").setup({
-    other_win_hl_color = nord.glacier,
-  })
+require("window-picker").setup()
 
 require("fidget").setup()
 
@@ -226,9 +220,6 @@ require("luatab").setup({
 })
 
 require("beacon").setup({})
-vim.api.nvim_set_hl(0, "Beacon", {
-  bg = nord.yellow,
-})
 
 require("nvim-treesitter.configs").setup({
   ignore_install = { "elm" },
@@ -244,9 +235,6 @@ require("nvim-web-devicons").setup({
 
 local navic = require("nvim-navic")
 require("lualine").setup({
-  options = {
-    theme = "nord",
-  },
   sections = {
     lualine_b = {  "filename",  "branch", "diff", "diagnostics" },
     lualine_c = {
@@ -287,15 +275,9 @@ vim.keymap.set("n", "<leader>G", ":Telescope git_status<cr>", opts())
 vim.keymap.set("n", "<leader>o", ":AerialToggle<cr>", opts())
 vim.keymap.set("n", "<leader><leader>", ":Beacon<cr>", opts())
 local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<C-p>", function()
-  builtin.find_files()
-end, opts())
-vim.keymap.set("n", "<leader>s", function()
-  builtin.grep_string()
-end, opts())
-vim.keymap.set("n", "<leader>S", function()
-  builtin.live_grep()
-end, opts())
+vim.keymap.set("n", "<C-p>", builtin.find_files, opts())
+vim.keymap.set("n", "<leader>s", builtin.grep_string, opts())
+vim.keymap.set("n", "<leader>S", builtin.live_grep,  opts())
 vim.keymap.set("n", "<leader>e", ":Telescope emoji<cr>", opts())
 
 vim.keymap.set("n", "<leader>l", ":TestLast<cr>", opts({ desc = "Re-run the last test" }))
@@ -307,18 +289,15 @@ vim.keymap.set(
 )
 vim.keymap.set("n", "<leader>f", ":Neotree focus toggle<cr>", opts({ desc = "Show the current file in the explorer" }))
 vim.keymap.set("n", "<leader>F", ":Neotree reveal toggle<cr>", opts({ desc = "Toggle the file explorer" }))
+vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover, opts({ desc = "Show the hover information" }))
 
-vim.keymap.set("n", "<leader>h", function()
-  vim.lsp.buf.hover()
-end, opts({ desc = "Show the hover information" }))
 vim.keymap.set("n", "j", "gj", opts())
 vim.keymap.set("n", "k", "gk", opts())
 vim.keymap.set("n", "gj", "j", opts())
 vim.keymap.set("n", "gk", "k", opts())
 
-vim.keymap.set("n", "<leader><esc>", function()
-  require("notify").dismiss()
-end, opts())
+local notify = require("notify")
+vim.keymap.set("n", "<leader><esc>", notify.dismiss, opts())
 
 --  eliminate white space
 vim.keymap.set("n", "<leader>;", "mz:%s/\\s\\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>", opts())

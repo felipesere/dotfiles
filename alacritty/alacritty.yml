@@ -1,6 +1,81 @@
 import:
   - ~/.alacritty-font-size.yml
 
+colorschemes:
+  rosebones_light: &light
+    primary:
+      foreground: '#724341'
+      background: '#FBF6F0'
+    cursor:
+      cursor: '#724341'
+      text: '#FBF6F0'
+    normal:
+      black:   '#FBF6F0'
+      red:     '#B5637A'
+      green:   '#286A84'
+      yellow:  '#EC9D33'
+      blue:    '#5795A0'
+      magenta: '#917BA9'
+      cyan:    '#5795A0'
+      white:   '#724341'
+    bright:
+      black:   '#E8C48B'
+      red:     '#A54A66'
+      green:   '#1C5970'
+      yellow:  '#C68223'
+      blue:    '#407D88'
+      magenta: '#855AAC'
+      cyan:    '#407D88'
+      white:   '#A4635F'
+  nord: &dark
+    primary:
+      background: '#2e3440'
+      foreground: '#d8dee9'
+      dim_foreground: '#a5abb6'
+    cursor:
+      text: '#2e3440'
+      cursor: '#d8dee9'
+    vi_mode_cursor:
+      text: '#2e3440'
+      cursor: '#d8dee9'
+    selection:
+      text: CellForeground
+      background: '#4c566a'
+    search:
+      matches:
+        foreground: CellBackground
+        background: '#88c0d0'
+      bar:
+        background: '#434c5e'
+        foreground: '#d8dee9'
+    normal:
+      black: '#3b4252'
+      red: '#bf616a'
+      green: '#a3be8c'
+      yellow: '#ebcb8b'
+      blue: '#81a1c1'
+      magenta: '#b48ead'
+      cyan: '#88c0d0'
+      white: '#e5e9f0'
+    bright:
+      black: '#4c566a'
+      red: '#bf616a'
+      green: '#a3be8c'
+      yellow: '#ebcb8b'
+      blue: '#81a1c1'
+      magenta: '#b48ead'
+      cyan: '#8fbcbb'
+      white: '#eceff4'
+    dim:
+      black: '#373e4d'
+      red: '#94545d'
+      green: '#809575'
+      yellow: '#b29e75'
+      blue: '#68809a'
+      magenta: '#8c738c'
+      cyan: '#6d96a5'
+      white: '#aeb3bb'
+
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
@@ -107,61 +182,7 @@ custom_cursor_colors: false
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 #
-colors:
-  primary:
-    background: '#2e3440'
-    foreground: '#d8dee9'
-    dim_foreground: '#a5abb6'
-  cursor:
-    text: '#2e3440'
-    cursor: '#d8dee9'
-  vi_mode_cursor:
-    text: '#2e3440'
-    cursor: '#d8dee9'
-  selection:
-    text: CellForeground
-    background: '#4c566a'
-  search:
-    matches:
-      foreground: CellBackground
-      background: '#88c0d0'
-    bar:
-      background: '#434c5e'
-      foreground: '#d8dee9'
-  normal:
-    black: '#3b4252'
-    red: '#bf616a'
-    green: '#a3be8c'
-    yellow: '#ebcb8b'
-    blue: '#81a1c1'
-    magenta: '#b48ead'
-    cyan: '#88c0d0'
-    white: '#e5e9f0'
-  bright:
-    black: '#4c566a'
-    red: '#bf616a'
-    green: '#a3be8c'
-    yellow: '#ebcb8b'
-    blue: '#81a1c1'
-    magenta: '#b48ead'
-    cyan: '#8fbcbb'
-    white: '#eceff4'
-  dim:
-    black: '#373e4d'
-    red: '#94545d'
-    green: '#809575'
-    yellow: '#b29e75'
-    blue: '#68809a'
-    magenta: '#8c738c'
-    cyan: '#6d96a5'
-    white: '#aeb3bb'
-    # Indexed Colors
-    #
-    # The indexed colors include all colors from 16 to 256.
-    # When these are not set, they're filled with sensible defaults.
-    #
-    #indexed_colors:
-    #  - { index: 16, color: '0x000000' }
+colors: *dark
 # Visual Bell
 #
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
