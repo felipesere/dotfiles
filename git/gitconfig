@@ -18,7 +18,7 @@ whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 
 [delta]
 # Changing this variable toggles the light/dark mode
-features = light
+features = dark
 
 commit-decoration-style      = "bold yellow box ul"
 file-style                   = "bold yellow"
