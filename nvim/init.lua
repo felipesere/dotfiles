@@ -248,10 +248,13 @@ local opts = function(opts)
 end
 
 vim.api.nvim_create_user_command("Q", "qa!", { desc = "Quit all" })
+vim.api.nvim_create_user_command("Light", function() os.execute('$HOME/.dotfiles/bin/theme.sh light') end, { desc = "Change to light mode" })
+vim.api.nvim_create_user_command("Dark", function() os.execute('$HOME/.dotfiles/bin/theme.sh dark') end, { desc = "Change to Dark mode" })
 vim.keymap.set("n", "<leader>e", ":Telescope emoji<cr>", opts())
 vim.keymap.set("n", "<leader>G", ":Telescope git_status<cr>", opts())
 vim.keymap.set("n", "<leader>o", ":AerialToggle<cr>", opts())
 vim.keymap.set("n", "<leader><leader>", ":Beacon<cr>", opts())
+
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<C-p>", builtin.find_files, opts())
 vim.keymap.set("n", "<leader>s", builtin.grep_string, opts())
