@@ -2,6 +2,7 @@
 local Plug = vim.fn["plug#"]
 vim.call("plug#begin", "~/.config/nvim/plugged")
 Plug("arcticicestudio/nord-vim")
+-- Both needed for zenbones
 Plug("rktjmp/lush.nvim")
 Plug("mcchrish/zenbones.nvim")
 
@@ -9,9 +10,7 @@ Plug("hoob3rt/lualine.nvim")
 Plug("alvarosevilla95/luatab.nvim")
 Plug("stevearc/dressing.nvim")
 Plug("j-hui/fidget.nvim")
-Plug("stevearc/aerial.nvim")
 Plug("rcarriga/nvim-notify")
-Plug("rainbowhxch/beacon.nvim")
 Plug("nvim-neo-tree/neo-tree.nvim", { branch = "v2.x" })
 Plug("MunifTanjim/nui.nvim")
 
@@ -25,7 +24,6 @@ Plug("xiyaowong/telescope-emoji.nvim")
 Plug("nvim-treesitter/nvim-treesitter", {
   ["do"] = ":TSUpdate",
 })
-Plug("xiyaowong/telescope-emoji.nvim")
 
 Plug("elixir-editors/vim-elixir")
 
@@ -56,9 +54,6 @@ Plug("sheerun/vim-polyglot")
 Plug("RRethy/vim-hexokinase", {
   ["do"] = "make hexokinase",
 })
-Plug("pantharshit00/vim-prisma")
-Plug("jose-elias-alvarez/null-ls.nvim")
-Plug("jose-elias-alvarez/nvim-lsp-ts-utils")
 
 Plug('vimwiki/vimwiki')
 Plug('ElPiloto/telescope-vimwiki.nvim')
@@ -193,13 +188,7 @@ neotree.setup({
   },
 })
 require("window-picker").setup()
-
 require("fidget").setup()
-
-require("aerial").setup({
-  backends = { "treesitter" },
-  default_direction = "prefer_right",
-})
 
 require("dressing").setup({
   input = {
@@ -218,8 +207,6 @@ require("luatab").setup({
     return ""
   end,
 })
-
-require("beacon").setup({})
 
 require("nvim-treesitter.configs").setup({
   ignore_install = { "elm" },
