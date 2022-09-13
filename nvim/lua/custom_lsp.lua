@@ -29,44 +29,6 @@ local on_attach = function(client, bufnr)
   navic.attach(client, bufnr)
 end
 
-local dap, dapui = require("dap"), require("dapui")
-dapui.setup({})
-dap.listeners.after.event_initialized["dapui_config"] = function()
-  dapui.open()
-end
-dap.listeners.before.event_terminated["dapui_config"] = function()
-  dapui.close()
-end
-dap.listeners.before.event_exited["dapui_config"] = function()
-  dapui.close()
-end
-
-vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint, opts)
-vim.keymap.set("n", "<leader>c", dap.continue, opts)
-vim.keymap.set("n", "<F7>", dap.step_over, opts)
-vim.keymap.set("n", "<F8>", dap.step_into, opts)
-
-
--- configure the adapter for Rust Debugging
-dap.configurations.rust = {
-  {
-    name = "Launch Debug",
-    type = "rt_lldb",
-    request = "launch",
-    program = function()
-      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/" .. "")
-    end,
-    cwd = "${workspaceFolder}",
-    stopOnEntry = false,
-    args = {},
-    initCommand = {},
-    runInTerminal = false,
-  },
-}
-
-local extension_path = vim.env.HOME .. "/bin/extension"
-local codelldb_path = extension_path .. "/adapter/codelldb"
-local liblldb_path = extension_path .. "/lldb/lib/liblldb.dylib"
 require("rust-tools").setup({
   tools = {
     inlay_hints = {
@@ -106,9 +68,6 @@ require("rust-tools").setup({
         },
       },
     },
-  },
-  dap = {
-    adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
   },
 })
 
