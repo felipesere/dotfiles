@@ -93,12 +93,15 @@ vim.opt.visualbell = true
 vim.opt.wildmode = { "list:longest", "full" } -- how the tab-completion menu behaves: show the list, then the longest match, finally all matches
 
 vim.g.mapleader = " "
+vim.g.git_messenger_always_into_popup = true  -- Jump into Git Messanger popup when opening
+vim.g.git_messenger_floating_win_opts = { border = "rounded" }
+vim.g.neo_tree_remove_legacy_commands = 1
 
 require("color_switcher").setup({
     on_dark = function()
       vim.opt.background = "dark"
-      vim.api.nvim_set_hl(0, "TypeHighlight", { fg = '#EBCB8B' })
       vim.cmd("colorscheme nord")
+      vim.api.nvim_set_hl(0, "TypeHighlight", { fg = '#EBCB8B' })
     end,
     on_light = function()
       vim.opt.background = "light"
@@ -106,10 +109,6 @@ require("color_switcher").setup({
       vim.cmd("colorscheme rosebones")
     end,
 })
-
--- Jump into Git Messanger popup when opening
-vim.g.git_messenger_always_into_popup = true
-vim.g.git_messenger_floating_win_opts = { border = "rounded" }
 
 vim.g.vimwiki_list = {
   {
@@ -126,7 +125,6 @@ vim.g.zettel_options = {
 }
 vim.g.zettel_format = "%title.md"
 
-vim.api.nvim_create_user_command("Q", "qa!", { desc = "Quit all" })
 vim.notify = require("notify")
 
 require('crates').setup()
@@ -140,13 +138,10 @@ require("mason-lspconfig").setup({
 require("custom_cmp_config")
 require("custom_lsp")
 
-vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
 local dot = ""
 local neotree = require("neo-tree")
 neotree.setup({
-  close_if_last_window = false,
-  enable_modified_markers = false,
   use_popups_for_input = false,
   filesystem = {
     filtered_items = {
@@ -209,10 +204,9 @@ require("luatab").setup({
 })
 
 require("nvim-treesitter.configs").setup({
-  ignore_install = { "elm" },
   highlight = {
     enable = true,
-    disable = { "elm",},
+    additional_vim_regex_highlighting = { "markdown" },
   },
 })
 
@@ -223,7 +217,7 @@ require("nvim-web-devicons").setup({
 local navic = require("nvim-navic")
 require("lualine").setup({
   sections = {
-    lualine_b = {  "filename",  "branch", "diff", "diagnostics" },
+    lualine_b = { "branch", "diff", "filename", "diagnostics" },
     lualine_c = {
       { navic.get_location, cond = navic.is_available},
     },
@@ -257,6 +251,7 @@ local opts = function(opts)
   return defaults
 end
 
+vim.api.nvim_create_user_command("Q", "qa!", { desc = "Quit all" })
 vim.keymap.set("n", "<leader>e", ":Telescope emoji<cr>", opts())
 vim.keymap.set("n", "<leader>G", ":Telescope git_status<cr>", opts())
 vim.keymap.set("n", "<leader>o", ":AerialToggle<cr>", opts())
@@ -289,7 +284,3 @@ vim.keymap.set("n", "<leader><esc>", notify.dismiss, opts())
 --  eliminate white space
 vim.keymap.set("n", "<leader>;", "mz:%s/\\s\\+$//<cr>:let @/=''<cr>`z<cr>:w<cr>", opts())
 vim.keymap.set("", "<leader>,", ":nohl<cr>", opts())
-
-function reload(package_name)
-  require("plenary.reload").reload_module(package_name, true)
-end
