@@ -1,6 +1,5 @@
 local lspconfig = require("lspconfig")
 local navic = require("nvim-navic")
-local kind_icons = require("icons")
 
 local opts = {
   noremap = true,
@@ -27,7 +26,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>Q", tele.lsp_dynamic_workspace_symbols, opts)
   vim.keymap.set("n", "<leader>k", vim.diagnostic.goto_prev, opts)
   vim.keymap.set("n", "<leader>j", vim.diagnostic.goto_next, opts)
-
   navic.attach(client, bufnr)
 end
 
