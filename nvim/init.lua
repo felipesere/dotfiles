@@ -93,6 +93,13 @@ vim.g.git_messenger_always_into_popup = true  -- Jump into Git Messanger popup w
 vim.g.git_messenger_floating_win_opts = { border = "rounded" }
 vim.g.neo_tree_remove_legacy_commands = 1
 
+vim.api.nvim_create_augroup("OnlyOnGit", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    group   = "OnlyOnGit",
+    pattern = { "gitcommit" },
+    command = "exec 'norm gg' | startinsert!",
+})
+
 require("color_switcher").setup({
     on_dark = function()
       vim.opt.background = "dark"
