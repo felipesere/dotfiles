@@ -1,5 +1,5 @@
 format="""
-$directory$kubernetes$git_branch$git_state$git_status
+$directory${custom.story}$kubernetes$git_branch$git_state$git_status
 $jobs$character\
 """
 
@@ -32,3 +32,9 @@ format = "[$number$symbol]($style) "
 disabled = false
 symbol = "☸ "
 format = '($symbol)cx:$context @ ns:$namespace '
+
+[custom.story]
+command = "story current"
+when = "story current"
+detect_files = [".story"]
+ignore_timeout = true
