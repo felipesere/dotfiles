@@ -244,6 +244,26 @@ telescope.setup({
   },
 })
 
+local changed_on_branch = function()
+    local previewers = require('telescope.previewers')
+    local pickers = require('telescope.pickers')
+    local sorters = require('telescope.sorters')
+    local finders = require('telescope.finders')
+
+    local git_branch_modified = '/Users/felipesere/bin/git-branch-modified.sh'
+
+    pickers.new {
+        results_title = 'Modified on current branch',
+        finder = finders.new_oneshot_job({ git_branch_modified, 'list'}),
+        sorter = sorters.get_fuzzy_file(),
+        previewer = previewers.new_termopen_previewer {
+            get_command = function(entry)
+                return { git_branch_modified, 'diff', entry.value}
+            end
+        },
+    }:find()
+end
+
 local opts = function(opts)
   local opts = opts or {}
   local defaults = { noremap = true, silent = true }
@@ -258,7 +278,8 @@ vim.api.nvim_create_user_command("Q", "qa!", { desc = "Quit all" })
 vim.api.nvim_create_user_command("Light", function() os.execute('$HOME/.dotfiles/bin/theme.sh light') end, { desc = "Change to light mode" })
 vim.api.nvim_create_user_command("Dark", function() os.execute('$HOME/.dotfiles/bin/theme.sh dark') end, { desc = "Change to Dark mode" })
 vim.keymap.set("n", "<leader>e", ":Telescope emoji<cr>", opts())
-vim.keymap.set("n", "<leader>G", ":Telescope git_status<cr>", opts())
+vim.keymap.set("n", "<leader>g", ":Telescope git_status<cr>", opts())
+vim.keymap.set("n", "<leader>G", changed_on_branch, opts())
 vim.keymap.set("n", "<leader>o", ":AerialToggle<cr>", opts())
 vim.keymap.set("n", "<leader><leader>", ":Beacon<cr>", opts())
 
