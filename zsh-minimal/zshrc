@@ -122,20 +122,16 @@ font_size() {
   fi
 }
 
-super_size() {
+presentation_mode() {
   font_size 32
 }
 
-presentation_mode() {
+normal_mode() {
   font_size 24
 }
 
-normal_mode() {
-  font_size 16
-}
-
 laptop_mode() {
-  font_size 14
+  font_size 16
 }
 
 dots() {
