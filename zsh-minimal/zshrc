@@ -31,7 +31,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
   eval "$(brew shellenv)"
 fi
 
-fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=(/usr/local/share/zsh-completions /opt/homebrew/share/zsh/site-functions $fpath)
 
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit -u
