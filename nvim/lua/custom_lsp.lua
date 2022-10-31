@@ -40,7 +40,7 @@ require("rust-tools").setup({
   },
   server = {
     on_attach = on_attach,
-    capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()), -- Hooked up to nvim-cmp
+    capabilities = require("cmp_nvim_lsp").default_capabilities(),
     settings = {
       ["rust-analyzer"] = {
         assist = {
@@ -71,15 +71,10 @@ require("rust-tools").setup({
 
 local lspconfig = require("lspconfig")
 
-lspconfig.elixirls.setup {
-  cmd = { 'elixir-ls' },
-  on_attach = on_attach,
-  capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()), -- Hooked up to nvim-cmp
-}
 lspconfig.yamlls.setup {
   cmd = { 'yaml-language-server', '--stdio' },
   on_attach = on_attach,
-  capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()), -- Hooked up to nvim-cmp
+  capabilities = require("cmp_nvim_lsp").default_capabilities(),
 }
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {

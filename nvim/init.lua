@@ -25,8 +25,7 @@ Plug("nvim-treesitter/nvim-treesitter", {
   ["do"] = ":TSUpdate",
 })
 
-Plug("elixir-editors/vim-elixir")
-
+Plug('NoahTheDuke/vim-just')
 Plug("williamboman/mason.nvim")
 Plug("neovim/nvim-lspconfig")
 Plug("williamboman/mason-lspconfig.nvim")
@@ -133,7 +132,7 @@ vim.notify = require("notify")
 require('crates').setup()
 require("mason").setup({})
 require("mason-lspconfig").setup({
-    ensure_installed = { "rust_analyzer", "elixir-ls", "yamlls" }
+    ensure_installed = { "rust_analyzer", "yamlls" }
 })
 
 -- Extracted configuration for cmp and lsp intro
@@ -249,8 +248,9 @@ local changed_on_branch = function()
     local pickers = require('telescope.pickers')
     local sorters = require('telescope.sorters')
     local finders = require('telescope.finders')
+    local home = os.getenv( "HOME" )
 
-    local git_branch_modified = '/Users/felipesere/bin/git-branch-modified.sh'
+    local git_branch_modified = home .. '/bin/git-branch-modified.sh'
 
     pickers.new {
         results_title = 'Modified on current branch',
