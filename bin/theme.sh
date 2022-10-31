@@ -6,6 +6,10 @@ case $1 in
 esac
 
 mode=$1
+case $mode in
+    dark) is_dark="true" ;;
+    light) is_dark="false" ;;
+esac
 
 ## Alacritty
 sd '^colors: .*' "colors: *${mode}" ~/.dotfiles/alacritty/alacritty.yml 
@@ -27,3 +31,7 @@ else
     bat_theme="Nord"
 fi
 sd -- '^--theme.*' "--theme=\"${bat_theme}\"" ~/.dotfiles/bat/bat
+
+## OSX
+osascript -e "tell app \"System Events\" to tell appearance preferences to set dark mode to ${is_dark}"
+
