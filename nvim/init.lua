@@ -1,68 +1,78 @@
--- Install basic plugins
-local Plug = vim.fn["plug#"]
-vim.call("plug#begin", "~/.config/nvim/plugged")
-Plug("arcticicestudio/nord-vim")
--- Both needed for zenbones
-Plug("rktjmp/lush.nvim")
-Plug("mcchrish/zenbones.nvim")
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "--single-branch",
+    "git@github.com:folke/lazy.nvim.git",
+    lazypath,
+  })
+end
+vim.opt.runtimepath:prepend(lazypath)
 
-Plug("hoob3rt/lualine.nvim")
-Plug("alvarosevilla95/luatab.nvim")
-Plug("stevearc/dressing.nvim")
-Plug("j-hui/fidget.nvim")
-Plug("rcarriga/nvim-notify")
-Plug("nvim-neo-tree/neo-tree.nvim", { branch = "v2.x" })
-Plug("MunifTanjim/nui.nvim")
-
-Plug("christoomey/vim-sort-motion")
-Plug("vim-test/vim-test")
-
-Plug("nvim-lua/plenary.nvim")
-Plug("s1n7ax/nvim-window-picker")
-Plug("nvim-telescope/telescope.nvim")
-Plug("xiyaowong/telescope-emoji.nvim")
-Plug("nvim-treesitter/nvim-treesitter", {
-  ["do"] = ":TSUpdate",
+require("lazy").setup({
+   -- Install basic plugins
+   "arcticicestudio/nord-vim",
+   -- Both needed for zenbones
+   "rktjmp/lush.nvim",
+   "mcchrish/zenbones.nvim",
+   
+   "hoob3rt/lualine.nvim",
+   "alvarosevilla95/luatab.nvim",
+   "stevearc/dressing.nvim",
+   "j-hui/fidget.nvim",
+   "rcarriga/nvim-notify",
+   { "nvim-neo-tree/neo-tree.nvim", branch = "v2.x" },
+   "MunifTanjim/nui.nvim",
+   
+   "christoomey/vim-sort-motion",
+   "vim-test/vim-test",
+   
+   "nvim-lua/plenary.nvim",
+   "s1n7ax/nvim-window-picker",
+   "nvim-telescope/telescope.nvim",
+   "xiyaowong/telescope-emoji.nvim",
+   { "nvim-treesitter/nvim-treesitter", build = function() 
+       vim.cmd(":TSUpdate")
+     end
+   },
+   
+   "NoahTheDuke/vim-just",
+   "williamboman/mason.nvim",
+   "neovim/nvim-lspconfig",
+   "williamboman/mason-lspconfig.nvim",
+   "simrat39/rust-tools.nvim",
+   "Saecki/crates.nvim",
+   "SmiteshP/nvim-navic",
+   
+   "hrsh7th/nvim-cmp",
+   "hrsh7th/cmp-nvim-lsp",
+   "hrsh7th/cmp-buffer",
+   "hrsh7th/cmp-path",
+   "hrsh7th/cmp-vsnip",
+   "hrsh7th/vim-vsnip",
+   
+   "airblade/vim-gitgutter",
+   "rhysd/git-messenger.vim",
+   "rhysd/conflict-marker.vim",
+   "lukas-reineke/indent-blankline.nvim",
+   
+   "sheerun/vim-polyglot",
+   
+   "vimwiki/vimwiki",
+   "ElPiloto/telescope-vimwiki.nvim",
+   "michal-h21/vim-zettel",
+   
+   -- Watch a file!
+   "rktjmp/fwatch.nvim",
+   
+   -- My own
+   "felipesere/vim-open-readme",
+   
+   -- needs to be last
+   "kyazdani42/nvim-web-devicons",
 })
-
-Plug('NoahTheDuke/vim-just')
-Plug("williamboman/mason.nvim")
-Plug("neovim/nvim-lspconfig")
-Plug("williamboman/mason-lspconfig.nvim")
-Plug("simrat39/rust-tools.nvim")
-Plug("Saecki/crates.nvim")
-Plug("SmiteshP/nvim-navic")
-
-Plug("hrsh7th/nvim-cmp")
-Plug("hrsh7th/cmp-nvim-lsp")
-Plug("hrsh7th/cmp-buffer")
-Plug("hrsh7th/cmp-path")
-Plug("hrsh7th/cmp-vsnip")
-Plug("hrsh7th/vim-vsnip")
-
-Plug("airblade/vim-gitgutter")
-Plug("rhysd/git-messenger.vim")
-Plug("rhysd/conflict-marker.vim")
-Plug("lukas-reineke/indent-blankline.nvim")
-
-Plug("sheerun/vim-polyglot")
-Plug("RRethy/vim-hexokinase", {
-  ["do"] = "make hexokinase",
-})
-
-Plug('vimwiki/vimwiki')
-Plug('ElPiloto/telescope-vimwiki.nvim')
-Plug('michal-h21/vim-zettel')
-
--- Watch a file!
-Plug('rktjmp/fwatch.nvim')
-
--- My own
-Plug("felipesere/vim-open-readme")
-
--- needs to be last
-Plug("kyazdani42/nvim-web-devicons")
-vim.call("plug#end")
 
 vim.opt.autoindent = true -- set auto indent
 vim.opt.clipboard = "unnamed" -- use the system clipboard
