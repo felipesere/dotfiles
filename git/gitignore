@@ -5,8 +5,6 @@
 
 jsconfig.json
 
-tags
-
 ### Maven ###
 target/
 pom.xml.tag
