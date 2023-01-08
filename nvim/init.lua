@@ -61,15 +61,9 @@ require("lazy").setup({
    "folke/trouble.nvim",
 
    "airblade/vim-gitgutter",
+   "f-person/git-blame.nvim",
    {
-      "f-person/git-blame.nvim",
-      init = function()
-         vim.g.gitblame_date_format = '%r'
-         vim.g.gitblame_message_template = ' <author> - <sha> - <date> - <summary>'
-         vim.g.gitblame_enabled = 0
-      end,
-   },
-   { "rhysd/git-messenger.vim", config = function ()
+      "rhysd/git-messenger.vim", config = function ()
       vim.g.git_messenger_always_into_popup = true
       end
    },
@@ -162,6 +156,12 @@ require("mason-lspconfig").setup({
 -- separate modules as it was getting... hefty
 require("custom_cmp_config")
 require("custom_lsp")
+
+require("gitblame").setup({
+   enabled = false,
+   date_format = '%r',
+   message_template = ' <author> - <sha> - <date> - <summary>',
+})
 
 
 local dot = ""
