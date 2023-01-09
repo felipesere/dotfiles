@@ -85,6 +85,7 @@ outgoing   = !git ll @{u}..
 conflicts = diff --name-only --diff-filter=U
 sha = rev-parse --short HEAD
 root = rev-parse --show-toplevel
+prs = !GH_FORCE_TTY="100%" gh pr list | fzf --ansi --header-lines 3 | awk '{print $1}' | xargs gh pr checkout
 unstage = restore --staged
 
 [credential]
