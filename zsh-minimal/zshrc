@@ -114,10 +114,18 @@ title
 
 font_size() {
   if [[ "$1" == "" ]]; then
-    yq e '.font.size' $HOME/.alacritty-font-size.yml
-  else
-    yq -e e ".font.size = $1" -i $HOME/.alacritty-font-size.yml
+    yq '.font.size' $HOME/.alacritty-font-size.yml
+    exit
   fi
+
+  if [[ "$(yq --version)" =~ "mikefarah" ]]; then
+    # go impl of yq
+    OPTS="-i"
+  else
+    # python impl of yq
+    OPTS="-yi"
+  fi
+  yq $OPTS ".font.size = $1" $HOME/.alacritty-font-size.yml
 }
 
 presentation_mode() {
