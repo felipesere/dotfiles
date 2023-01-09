@@ -21,13 +21,15 @@ GO_BINARIES=$HOME/go/bin
 CARGO_BINARIES=$HOME/.cargo/bin
 PERSONAL_BINARIES=$HOME/bin
 EXTRAS="/usr/local/bin/aws_completer"
+HOMEBREW="/opt/homebrew/bin"
+
+# Local binaries
+export PATH=$HOMEBREW:$CARGO_BINARIES:$PERSONAL_BINARIES:$GO_BINARIES:$EXTRAS:$PATH
 
 if [[ "$(uname)" == "Darwin" ]]; then
   # Install homebrew!
   eval "$(brew shellenv)"
 fi
-
-export PATH=$CARGO_BINARIES:$PERSONAL_BINARIES:$GO_BINARIES:$EXTRAS:$PATH
 
 fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
 
