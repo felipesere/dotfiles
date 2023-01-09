@@ -161,7 +161,7 @@ unaws() {
 }
 
 unkube() {
-  kubectl config unset current-context
+  echo unset KUBECONFIG
 }
 
 if [[ -f "$HOME/.custom-client-functions" ]]; then
