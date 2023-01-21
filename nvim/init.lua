@@ -191,6 +191,7 @@ neotree.setup({
   window = {
     mappings = {
       ["o"] = "open",
+      ["l"] = false,
     },
   },
 })
