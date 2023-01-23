@@ -304,13 +304,6 @@ vim.keymap.set("n", "<leader>s", builtin.grep_string, opts())
 vim.keymap.set("n", "<leader>S", builtin.live_grep,  opts())
 vim.keymap.set("n", "<leader>e", ":Telescope emoji<cr>", opts())
 
-vim.keymap.set("n", "<leader>l", ":TestLast<cr>", opts({ desc = "Re-run the last test" }))
-vim.keymap.set(
-  "n",
-  "<leader>n",
-  ":TestNearest<cr>",
-  opts({ desc = "Run the nearest test to the cursor based on context" })
-)
 vim.keymap.set("n", "<leader>f", ":Neotree focus toggle<cr>", opts({ desc = "Show the current file in the explorer" }))
 vim.keymap.set("n", "<leader>F", ":Neotree reveal toggle<cr>", opts({ desc = "Toggle the file explorer" }))
 vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover, opts({ desc = "Show the hover information" }))
