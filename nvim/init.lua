@@ -68,6 +68,7 @@ require("lazy").setup({
    "rktjmp/fwatch.nvim",
    
    -- My own
+   "felipesere/xit.nvim",
    "felipesere/vim-open-readme",
    
    -- needs to be last
@@ -219,10 +220,12 @@ require("luatab").setup({
 
 require("nvim-treesitter.configs").setup({
   highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = { "markdown" },
+    enable = true
   },
 })
+
+-- requires treesittter, so needs to come after?
+require("xit").setup({})
 
 require("nvim-web-devicons").setup({
   default = true, -- globally enable default icons (default to false)
