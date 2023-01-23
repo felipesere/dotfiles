@@ -119,6 +119,7 @@ require("color_switcher").setup({
     on_light = function()
       vim.opt.background = "light"
       vim.api.nvim_set_hl(0, "TypeHighlight", { fg = '#819B69' })
+      vim.api.nvim_set_hl(0, "IndentBlankLineContextChar", { fg = '#9893a5' })
       vim.cmd("colorscheme rosebones")
     end,
 })
