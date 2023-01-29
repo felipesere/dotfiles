@@ -226,7 +226,12 @@ require("nvim-treesitter.configs").setup({
 })
 
 -- requires treesittter, so needs to come after?
-require("xit").setup({})
+require("xit").setup({
+      keymaps = {
+         ['<C-t>'] = "toggle_checkbox",
+         ['<C-S-t>'] = "toggle_checkbox_reverse",
+      }
+   })
 
 require("nvim-web-devicons").setup({
   default = true, -- globally enable default icons (default to false)
