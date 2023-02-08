@@ -16,3 +16,4 @@ ln -sf $HOME/.dotfiles/ripgreprc              $HOME/.ripgreprc
 ln -sf $HOME/.dotfiles/lazygit.yaml           $HOME/.lazygit.yaml
 ln -sf $HOME/.dotfiles/atuin/config.toml      $HOME/.config/atuin/config.toml
 ln -sf $HOME/.dotfiles/gh/config.yml          $HOME/.config/gh/config.yml
+ln -sf $HOME/.dotfiles/hammerspoon            $HOME/.hammerspoon
