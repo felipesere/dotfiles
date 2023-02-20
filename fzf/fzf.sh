@@ -7,10 +7,8 @@ fail() {
 fzf="$(command -v fzf 2> /dev/null)" || fzf="$(dirname "$0")/fzf"
 [[ -x "$fzf" ]] || fail 'fzf executable not found'
 
-args=()
-
 # --height option is not allowed. CTRL-Z is also disabled.
-args=("${args[@]}" "--no-height" "--bind=ctrl-z:ignore")
+args=("--no-height" "--bind=ctrl-z:ignore")
 
 set -e
 
@@ -32,7 +30,10 @@ trap 'cleanup 1' SIGUSR1
 trap 'cleanup' EXIT
 
 envs="export TERM=$TERM "
-[[ -n "$FZF_DEFAULT_OPTS"    ]] && envs="$envs FZF_DEFAULT_OPTS=$(printf %q "$FZF_DEFAULT_OPTS")"
+if [[ -f ~/.fzf-theme.env ]]; then
+  # This will override the style
+  readarray -t args < ~/.fzf-theme.env
+fi
 [[ -n "$FZF_DEFAULT_COMMAND" ]] && envs="$envs FZF_DEFAULT_COMMAND=$(printf %q "$FZF_DEFAULT_COMMAND")"
 echo "$envs;" > "$argsf"
 
