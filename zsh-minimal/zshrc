@@ -45,6 +45,9 @@ zstyle ':completion:*:*:*:*:*' menu select
 
 zstyle :compinstall filename "$HOME/.zshrc"
 
+# Fix comment highlighting
+export ZSH_HIGHLIGHT_STYLES[comment]='fg=yellow,bold'
+
 # Themeing with starship
 eval "$(starship init zsh)"
 
