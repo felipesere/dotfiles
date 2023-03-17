@@ -89,3 +89,6 @@ font:
     family: Iosevka Nerd Font Mono
     style: Italic
 colors: *dark
+
+window:
+  option_as_alt: Both
