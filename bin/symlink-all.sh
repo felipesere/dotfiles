@@ -5,6 +5,7 @@ cp $HOME/.dotfiles/alacritty/alacritty-font-size.yml $HOME/.alacritty-font-size.
 
 ln -sf $HOME/.dotfiles/bin/fzf.sh             $HOME/bin/fzf
 ln -sf $HOME/.dotfiles/bin/theme.sh           $HOME/bin/theme
+ln -sf $HOME/.dotfiles/bin/branch-prune       $HOME/bin/branch-prune
 ln -sf $HOME/.dotfiles/bat/bat                $HOME/.bat
 ln -sf $HOME/.dotfiles/git/gitconfig          $HOME/.gitconfig
 ln -sf $HOME/.dotfiles/git/gitignore          $HOME/.gitignore

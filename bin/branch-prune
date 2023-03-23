@@ -1,0 +1,29 @@
+#! /bin/sh
+
+git_color_text () {
+  gum style --foreground=1 "$1"
+}
+
+get_branches () {
+  if [ ${1+x} ]; then
+    gum choose --selected.foreground=3 --cursor.foreground=2 --limit="$1" $(git branch --format="%(refname:short)" | rg -v main)
+  else
+    gum choose --selected.foreground=3 --cursor.foreground=2 --no-limit $(git branch --format="%(refname:short)" | rg -v main)
+  fi
+}
+
+git rev-parse --git-dir > /dev/null 2>&1
+
+if [ $? -ne 0 ];
+then
+  echo "$(git_color_text "!!") Must be run in a $(git_color_text "git") repo" 
+  exit 1
+fi
+
+echo "Choose $(git_color_text 'branches') to operate on:"
+branches=$(get_branches)
+
+echo $branches | tr " " "\n" | while read -r branch
+do
+  git branch -D "$branch"
+done
