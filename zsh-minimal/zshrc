@@ -97,10 +97,12 @@ set_title() {
       title=$PREFERRED_TITLE
     fi
 
-    if [ -z "$TMUX" ]; then
-      echo -ne "\033]0;"$title"\007"
+    if [[ -v "${TMUX+}" ]]; then
+      tmux rename-window "$title"
+    elif [[ "${ZELLIJ}" = "0" ]]; then
+      zellij action rename-tab "$title"
     else
-      tmux rename-window $title
+      echo -ne "\033]0;"$title"\007"
     fi
 }
 
