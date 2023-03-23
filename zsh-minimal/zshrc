@@ -52,9 +52,9 @@ export ZSH_HIGHLIGHT_STYLES[comment]='fg=yellow,bold'
 eval "$(starship init zsh)"
 
 bindkey -e
-bindkey "^[[1;5C" forward-word  # CTRL right_arrow to move a word forward
-bindkey "^[[1;5D" backward-word # CTRL left_arrow to move a word backward
-bindkey '\e[3~'   delete-char
+bindkey "^[[1;2C" forward-word  # ctrl + right_arrow to move a word forwards
+bindkey "^[[1;2D" backward-word # ctrl + left_arrow to move a word backwards
+bindkey "\e[3~" delete-char
 
 alias vim="nvim"
 alias vi="nvim"
