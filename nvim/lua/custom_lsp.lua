@@ -75,6 +75,11 @@ lspconfig.yamlls.setup({
   cmd = { "yaml-language-server", "--stdio" },
   on_attach = on_attach,
   capabilities = require("cmp_nvim_lsp").default_capabilities(),
+  settings = {
+    yaml = {
+      keyOrdering = false,
+    }
+  },
 })
 lspconfig.gopls.setup({
   cmd = { "gopls", "serve" },
