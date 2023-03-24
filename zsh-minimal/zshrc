@@ -1,3 +1,11 @@
+# Suggestion from Eirik:
+#
+# move some stuff out into zshenv for sourcing evars,
+# keep this here so that running sub-shells do not get all my fancy goo
+# #!/bin/zsh
+# If not running interactively, don't do anything
+#[[ $- == *i* ]] || return 0
+
 source "$HOME/.dotfiles/zsh-minimal/options.zsh"
 
 export BAT_CONFIG_PATH=~/.bat
