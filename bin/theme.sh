@@ -19,7 +19,9 @@ ln -s ~/.dotfiles/fzf/${mode}.env ~/.fzf-theme.env
 sd '^colors: .*' "colors: *${mode}" ~/.dotfiles/alacritty/alacritty.yml 
 
 ## Tmux
-tmux source-file ~/.dotfiles/tmux/${mode}.tmux
+if [[ -v "${TMUX+}" ]]; then
+  tmux source-file ~/.dotfiles/tmux/${mode}.tmux
+fi
 
 ## Delta
 sd '^features = .*' "features = ${mode}" ~/.dotfiles/git/gitconfig
