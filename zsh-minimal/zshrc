@@ -2,7 +2,7 @@ source "$HOME/.dotfiles/zsh-minimal/options.zsh"
 
 export BAT_CONFIG_PATH=~/.bat
 export CLICOLOR=1
-export EDITOR=vim
+export EDITOR=/opt/homebrew/bin/nvim
 export ENHANCD_DISABLE_DOT=1
 export FZF_CTRL_T_COMMAND="rg --files"
 export FZF_DEFAULT_COMMAND="rg --files"
