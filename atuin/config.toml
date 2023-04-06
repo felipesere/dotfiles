@@ -1,3 +1,4 @@
 dialect = "uk"
 auto_sync = false
 search_mode = "fuzzy"
+inline_height = "20"
