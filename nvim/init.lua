@@ -29,6 +29,8 @@ require("lazy").setup({
    "christoomey/vim-sort-motion",
    "vim-test/vim-test",
    
+   "stevearc/aerial.nvim",
+
    "nvim-lua/plenary.nvim",
    "s1n7ax/nvim-window-picker",
    "nvim-telescope/telescope.nvim",
@@ -199,6 +201,11 @@ neotree.setup({
 })
 require("window-picker").setup()
 require("fidget").setup()
+
+require("aerial").setup({
+  backends = { "treesitter" },
+  default_direction = "prefer_right",
+})
 
 require("dressing").setup({
   input = {
