@@ -6,7 +6,13 @@ local opts = {
   silent = true,
 }
 local on_attach = function(client, bufnr)
-  --Enable completion triggered by <c-x><c-o>
+
+  --  Shwo navication
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
+
+  -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   tele = require("telescope.builtin")
@@ -24,7 +30,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>Q", tele.lsp_dynamic_workspace_symbols, opts)
   vim.keymap.set("n", "<leader>k", vim.diagnostic.goto_prev, opts)
   vim.keymap.set("n", "<leader>j", vim.diagnostic.goto_next, opts)
-  navic.attach(client, bufnr)
 end
 
 require("rust-tools").setup({
