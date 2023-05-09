@@ -66,6 +66,7 @@ alias vi="nvim"
 alias ls="exa -l --icons"
 alias typora="open -a typora"
 alias next="cargo nextest run"
+alias todo="zellij run --close-on-exit --floating -- nvim ~/Development/todo.xit"
 
 # Direnv hooking
 eval "$(direnv hook zsh)"
