@@ -85,7 +85,6 @@ vim.opt.expandtab = true -- use spaces, not tab characters
 vim.opt.hidden = true -- for rust racer, for now...
 vim.opt.ignorecase = true -- ignore case in search when just typing lowercase
 vim.opt.mouse = "a"
-vim.opt.foldenable = false -- disable code folding
 vim.opt.swapfile = false -- No need for a swap file
 vim.opt.number = true -- show the absolute number as well
 vim.opt.scrolloff = 15 -- Keep the cursors
@@ -100,10 +99,22 @@ vim.opt.updatetime = 250 -- How long to wait after a write before vim triggers p
 vim.opt.visualbell = true
 vim.opt.wildmode = { "list:longest", "full" } -- how the tab-completion menu behaves: show the list, then the longest match, finally all matches
 
+-- vim.opt.foldenable = false -- disable code folding
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
 vim.g.mapleader = " "
 vim.g.git_messenger_always_into_popup = true  -- Jump into Git Messanger popup when opening
 vim.g.git_messenger_floating_win_opts = { border = "rounded" }
 vim.g.neo_tree_remove_legacy_commands = 1
+vim.g.rustfmt_autosave = 1
+
+-- vim.api.nvim_create_augroup("OpenFolds", { clear = true })
+-- vim.api.nvim_create_autocmd("BufReadPost,FileReadPost", {
+--       group = "OpenFolds",
+--       pattern = "*",
+--       command = "normal zR",
+-- })
 
 vim.api.nvim_create_augroup("OnlyOnGit", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
