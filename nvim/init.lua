@@ -336,7 +336,6 @@ vim.keymap.set("n", "<leader>e", ":Telescope emoji<cr>", opts())
 vim.keymap.set("n", "<leader>g", ":Telescope git_status<cr>", opts())
 vim.keymap.set("n", "<leader>G", changed_on_branch, opts())
 vim.keymap.set("n", "<leader>o", ":AerialToggle<cr>", opts())
-vim.keymap.set("n", "<leader><leader>", ":Beacon<cr>", opts())
 
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<C-p>", builtin.find_files, opts())
