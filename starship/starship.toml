@@ -17,11 +17,11 @@ style = "bold yellow"
 
 [git_status]
 format = "[($staged)](yellow)[($untracked)](blue)[($deleted)](red)[($modified)](green) "
-conflicted = "✘ "
-untracked  = "● "
-modified   = "● "
-staged     = "● "
-deleted    = "● "
+conflicted = "✘"
+untracked  = "◍"
+modified   = "◍"
+staged     = "◍"
+deleted    = "◍"
 
 [jobs]
 symbol = "▧ "
