@@ -17,7 +17,7 @@ require("lazy").setup({
    -- Both needed for zenbones
    "rktjmp/lush.nvim",
    "mcchrish/zenbones.nvim",
-   
+
    "hoob3rt/lualine.nvim",
    "alvarosevilla95/luatab.nvim",
    "stevearc/dressing.nvim",
@@ -25,21 +25,21 @@ require("lazy").setup({
    "rcarriga/nvim-notify",
    { "nvim-neo-tree/neo-tree.nvim", branch = "v2.x" },
    "MunifTanjim/nui.nvim",
-   
+
    "christoomey/vim-sort-motion",
    "vim-test/vim-test",
-   
+
    "stevearc/aerial.nvim",
 
    "nvim-lua/plenary.nvim",
    "s1n7ax/nvim-window-picker",
    "nvim-telescope/telescope.nvim",
    "xiyaowong/telescope-emoji.nvim",
-   { "nvim-treesitter/nvim-treesitter", build = function() 
+   { "nvim-treesitter/nvim-treesitter", build = function()
        vim.cmd(":TSUpdate")
      end
    },
-   
+
    "NoahTheDuke/vim-just",
    "williamboman/mason.nvim",
    "neovim/nvim-lspconfig",
@@ -47,32 +47,28 @@ require("lazy").setup({
    "simrat39/rust-tools.nvim",
    "Saecki/crates.nvim",
    "SmiteshP/nvim-navic",
-   
+
    "hrsh7th/nvim-cmp",
    "hrsh7th/cmp-nvim-lsp",
    "hrsh7th/cmp-buffer",
    "hrsh7th/cmp-path",
    "hrsh7th/cmp-vsnip",
    "hrsh7th/vim-vsnip",
-   
+
    "airblade/vim-gitgutter",
    "rhysd/git-messenger.vim",
    "rhysd/conflict-marker.vim",
    "lukas-reineke/indent-blankline.nvim",
-   
+
    "sheerun/vim-polyglot",
-   
-   "vimwiki/vimwiki",
-   "ElPiloto/telescope-vimwiki.nvim",
-   "michal-h21/vim-zettel",
-   
+
    -- Watch a file!
    "rktjmp/fwatch.nvim",
-   
+
    -- My own
    "felipesere/xit.nvim",
    "felipesere/vim-open-readme",
-   
+
    -- needs to be last
    "kyazdani42/nvim-web-devicons",
 })
@@ -136,21 +132,6 @@ require("color_switcher").setup({
       vim.cmd("colorscheme rosebones")
     end,
 })
-
-vim.g.vimwiki_list = {
-  {
-    path = vim.fn.expand("~") .. "/Development/brain",
-    syntax = 'markdown',
-    ext = '.md',
-  }
-}
-vim.g.zettel_options = {
-  {
-    template = "~/.dotfiles/zettel.tpl",
-    disable_front_matter = 1,
-  }
-}
-vim.g.zettel_format = "%title.md"
 
 vim.notify = require("notify")
 
@@ -269,11 +250,11 @@ require("lualine").setup({
   sections = {
     lualine_b = { "branch", "diff", "filename", "diagnostics" },
     lualine_c = {
-      { 
+      {
          function()
             return navic.get_location()
-         end, 
-         cond = function() 
+         end,
+         cond = function()
             return navic.is_available()
          end
       },
@@ -284,7 +265,6 @@ require("lualine").setup({
 
 local telescope = require("telescope")
 telescope.load_extension("emoji")
-telescope.load_extension("vimwiki")
 local actions = require("telescope.actions")
 telescope.setup({
   defaults = {
