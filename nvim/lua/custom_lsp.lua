@@ -91,21 +91,6 @@ lspconfig.yamlls.setup({
     }
   },
 })
-lspconfig.gopls.setup({
-  cmd = { "gopls", "serve" },
-  filetypes = { "go", "gomod" },
-  on_attach = on_attach,
-  capabilities = require("cmp_nvim_lsp").default_capabilities(),
-  settings = {
-    gopls = {
-      analyses = {
-        unusedparams = true,
-      },
-      staticcheck = true,
-    },
-  },
-})
-
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   signs = true,
   update_in_insert = false,
