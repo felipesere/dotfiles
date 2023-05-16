@@ -76,6 +76,11 @@ require("rust-tools").setup({
 
 local lspconfig = require("lspconfig")
 
+lspconfig.marksman.setup({
+  on_attach = on_attach,
+  capabilities = require("cmp_nvim_lsp").default_capabilities(),
+})
+
 lspconfig.yamlls.setup({
   cmd = { "yaml-language-server", "--stdio" },
   on_attach = on_attach,

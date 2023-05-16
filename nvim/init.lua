@@ -138,7 +138,7 @@ vim.notify = require("notify")
 require('crates').setup()
 require("mason").setup({})
 require("mason-lspconfig").setup({
-    ensure_installed = { "rust_analyzer", "yamlls" }
+    ensure_installed = { "rust_analyzer", "yamlls", "marksman" }
 })
 
 -- Extracted configuration for cmp and lsp intro
