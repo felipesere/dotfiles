@@ -33,8 +33,23 @@ require("lazy").setup({
 
    "nvim-lua/plenary.nvim",
    "s1n7ax/nvim-window-picker",
-   "nvim-telescope/telescope.nvim",
-   "xiyaowong/telescope-emoji.nvim",
+   {
+       "nvim-telescope/telescope.nvim",
+       cmd = "Telescope",
+       opts = function()
+         return require("custom_telescope")
+       end,
+       dependencies = {
+         "xiyaowong/telescope-emoji.nvim",
+       },
+       config = function(_, opts)
+         local telescope = require "telescope"
+         telescope.setup(opts)
+   
+         -- load extensions
+         telescope.load_extension("emoji")
+       end,
+     },
    { "nvim-treesitter/nvim-treesitter", build = function()
        vim.cmd(":TSUpdate")
      end
@@ -257,20 +272,6 @@ require("lualine").setup({
   },
 })
 
-local telescope = require("telescope")
-telescope.load_extension("emoji")
-local actions = require("telescope.actions")
-telescope.setup({
-  defaults = {
-    mappings = {
-      i = {
-        ["<C-h>"] = "which_key",
-        ["<C-j>"] = actions.move_selection_next,
-        ["<C-k>"] = actions.move_selection_previous,
-      },
-    },
-  },
-})
 
 local changed_on_branch = function()
     local previewers = require('telescope.previewers')
