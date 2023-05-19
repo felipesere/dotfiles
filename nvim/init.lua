@@ -139,7 +139,7 @@ require("color_switcher").setup({
       }
       require('onedark').load()
       vim.cmd("colorscheme onedark")
-      vim.api.nvim_set_hl(0, "TypeHighlight", { fg = '#EBCB8B' })
+      vim.api.nvim_set_hl(0, "TypeHighlight", { fg = '#8a7751' })
       vim.api.nvim_set_hl(0, "MsgArea", { fg = 'white', bg = '#4E5668' })
     end,
     on_light = function()
