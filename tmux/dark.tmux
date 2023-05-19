@@ -3,9 +3,9 @@ set -gu status-style
 set -gu window-status-current-style
 
 # 👇 this controls the actual background of the status bar
-set -g status-style bg=colour8
+set -g status-style bg=colour236
 
 # 👇 this controls the active tab, fg=white is really black because Alacritty remaps the color
-set -g window-status-current-style fg=white,bg=colour4
+set -g window-status-current-style fg=black,bg=colour9
 
 set -g status-right '#[fg=colour233,bg=colour4] %d/%m #[fg=colour233,bg=colour10] Local %H:%M #[fg=colour239]'

@@ -13,7 +13,8 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup({
    -- Install basic plugins
-   "arcticicestudio/nord-vim",
+   -- "arcticicestudio/nord-vim",
+   "navarasu/onedark.nvim",
    -- Both needed for zenbones
    "rktjmp/lush.nvim",
    "mcchrish/zenbones.nvim",
@@ -133,7 +134,11 @@ vim.api.nvim_create_autocmd("FileType", {
 require("color_switcher").setup({
     on_dark = function()
       vim.opt.background = "dark"
-      vim.cmd("colorscheme nord")
+      require('onedark').setup {
+          style = 'cool'
+      }
+      require('onedark').load()
+      vim.cmd("colorscheme onedark")
       vim.api.nvim_set_hl(0, "TypeHighlight", { fg = '#EBCB8B' })
       vim.api.nvim_set_hl(0, "MsgArea", { fg = 'white', bg = '#4E5668' })
     end,

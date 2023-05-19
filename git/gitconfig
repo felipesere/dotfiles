@@ -32,11 +32,11 @@ syntax-theme = Monokai Extended Light
 
 [delta "dark"]
 light            = false
-syntax-theme     = Nord
-plus-style       = "syntax #2d4a16"
-plus-emph-style  = "white  #6B8C4F"
-minus-style      = "syntax #60141B"
-minus-emph-style = "white  #88323A"
+syntax-theme     = DarkNeon
+# plus-style       = "syntax #2d4a16"
+# plus-emph-style  = "white  #6B8C4F"
+# minus-style      = "syntax #60141B"
+# minus-emph-style = "white  #88323A"
 
 [pull]
 rebase = true
