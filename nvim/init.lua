@@ -133,11 +133,13 @@ require("color_switcher").setup({
       vim.opt.background = "dark"
       vim.cmd("colorscheme nord")
       vim.api.nvim_set_hl(0, "TypeHighlight", { fg = '#EBCB8B' })
+      vim.api.nvim_set_hl(0, "MsgArea", { fg = 'white', bg = '#4E5668' })
     end,
     on_light = function()
       vim.opt.background = "light"
       vim.api.nvim_set_hl(0, "TypeHighlight", { fg = '#819B69' })
       vim.api.nvim_set_hl(0, "IndentBlankLineContextChar", { fg = '#9893a5' })
+      vim.api.nvim_set_hl(0, "MsgArea", { fg = 'black', bg = '#E2C592' })
       vim.cmd("colorscheme rosebones")
     end,
 })
