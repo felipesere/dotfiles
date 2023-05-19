@@ -28,62 +28,34 @@ colorschemes:
       cyan:    '#407D88'
       white:   '#A4635F'
   onedark: &dark
-    # Default colors
-    primary:
-      background: '0x1e2127'
-      foreground: '0xabb2bf'
-
-      # Bright and dim foreground colors
-      #
-      # The dimmed foreground color is calculated automatically if it is not present.
-      # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
-      # is `false`, the normal foreground color will be used.
-      #dim_foreground: '0x9a9a9a'
-      bright_foreground: '0xe6efff'
-
-    # Cursor colors
-    #
-    # Colors which should be used to draw the terminal cursor. If these are unset,
-    # the cursor color will be the inverse of the cell color.
-    #cursor:
-    #  text: '0x000000'
-    #  cursor: '0xffffff'
-
-    # Normal colors
-    normal:
-      black:   '0x1e2127'
-      red:     '0xe06c75'
-      green:   '0x98c379'
-      yellow:  '0xd19a66'
-      blue:    '0x61afef'
-      magenta: '0xc678dd'
-      cyan:    '0x56b6c2'
-      white:   '0x828791'
-
-    # Bright colors
+    # Colors (Mariana)
     bright:
-      black:   '0x5c6370'
-      red:     '0xe06c75'
-      green:   '0x98c379'
-      yellow:  '0xd19a66'
-      blue:    '0x61afef'
-      magenta: '0xc678dd'
-      cyan:    '0x56b6c2'
-      white:   '0xe6efff'
-
-    # Dim colors
-    #
-    # If the dim colors are not set, they will be calculated automatically based
-    # on the `normal` colors.
-    dim:
-      black:   '0x1e2127'
-      red:     '0xe06c75'
-      green:   '0x98c379'
-      yellow:  '0xd19a66'
-      blue:    '0x61afef'
-      magenta: '0xc678dd'
-      cyan:    '0x56b6c2'
-      white:   '0x828791'
+      black: '#333333'
+      blue: '#85add6'
+      cyan: '#82c4c4'
+      green: '#acd1a8'
+      magenta: '#d8b6d8'
+      red: '#f97b58'
+      white: '#ffffff'
+      yellow: '#fac761'
+    cursor:
+      cursor: '#fcbb6a'
+      text: '#ffffff'
+    normal:
+      black: '#000000'
+      blue: '#6699cc'
+      cyan: '#5fb4b4'
+      green: '#99c794'
+      magenta: '#c695c6'
+      red: '#ec5f66'
+      white: '#f7f7f7'
+      yellow: '#f9ae58'
+    primary:
+      background: '#343d46'
+      foreground: '#d8dee9'
+    selection:
+      background: '#4e5a65'
+      text: '#d8dee9'
 env:
   TERM: xterm-256color
 font:
