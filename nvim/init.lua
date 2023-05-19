@@ -121,6 +121,8 @@ vim.g.mapleader = " "
 vim.g.neo_tree_remove_legacy_commands = 1
 vim.g.rustfmt_autosave = 1
 
+vim.o.cmdheight = 0
+
 vim.api.nvim_create_augroup("OnlyOnGit", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
     group   = "OnlyOnGit",
