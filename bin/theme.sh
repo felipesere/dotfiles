@@ -19,7 +19,7 @@ ln -s ~/.dotfiles/fzf/${mode}.env ~/.fzf-theme.env
 sd '^colors: .*' "colors: *${mode}" ~/.dotfiles/alacritty/alacritty.yml 
 
 ## Tmux
-if [[ -v "${TMUX+}" ]]; then
+if [[ -v TMUX ]]; then
   tmux source-file ~/.dotfiles/tmux/${mode}.tmux
 fi
 
