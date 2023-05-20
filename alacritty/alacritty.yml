@@ -26,36 +26,40 @@ colorschemes:
       blue:    '#407D88'
       magenta: '#855AAC'
       cyan:    '#407D88'
-      white:   '#A4635F'
-  onedark: &dark
-    # Colors (Mariana)
-    bright:
-      black: '#333333'
-      blue: '#85add6'
-      cyan: '#82c4c4'
-      green: '#acd1a8'
-      magenta: '#d8b6d8'
-      red: '#f97b58'
-      white: '#ffffff'
-      yellow: '#fac761'
-    cursor:
-      cursor: '#fcbb6a'
-      text: '#ffffff'
-    normal:
-      black: '#000000'
-      blue: '#6699cc'
-      cyan: '#5fb4b4'
-      green: '#99c794'
-      magenta: '#c695c6'
-      red: '#ec5f66'
-      white: '#f7f7f7'
-      yellow: '#f9ae58'
+# TokyoNight Alacritty Colors
+  tokyo_night: &dark
+    # Default colors
     primary:
-      background: '#343d46'
-      foreground: '#d8dee9'
-    selection:
-      background: '#4e5a65'
-      text: '#d8dee9'
+      background: '0x24283b'
+      foreground: '0xc0caf5'
+  
+    # Normal colors
+    normal:
+      black:   '0x1d202f'
+      red:     '0xf7768e'
+      green:   '0x9ece6a'
+      yellow:  '0xe0af68'
+      blue:    '0x7aa2f7'
+      magenta: '0xbb9af7'
+      cyan:    '0x7dcfff'
+      white:   '0xa9b1d6'
+  
+    # Bright colors
+    bright:
+      black:   '0x414868'
+      red:     '0xf7768e'
+      green:   '0x9ece6a'
+      yellow:  '0xe0af68'
+      blue:    '0x7aa2f7'
+      magenta: '0xbb9af7'
+      cyan:    '0x7dcfff'
+      white:   '0xc0caf5'
+  
+    indexed_colors:
+      - { index: 16, color: '0xff9e64' }
+      - { index: 17, color: '0xdb4b4b' }
+      
+  
 env:
   TERM: xterm-256color
 font:
