@@ -6,7 +6,7 @@ set -gu window-status-format
 # 👇 this controls the actual background of the status bar
 set -g status-style bg=colour236
 
-setw -g window-status-current-format  '#[fg=black,bg=colour214] #I #[bg=colour11] #W '
-setw -g window-status-format          '#[fg=colour239,bg=colour246 ] #I #[bg=colour252] #W '
+setw -g window-status-current-format  '#[fg=black,bg=colour8] #I #[bg=colour12] #W '
+setw -g window-status-format          '#[fg=colour233,bg=colour238 ] #I #[bg=colour240] #W '
 
 set -g status-right '#[fg=colour4]#[fg=colour233,bg=colour4] %d/%m/%Y #[fg=colour7]#[fg=colour233,bg=colour7] Local %H:%M #[fg=colour12]'
