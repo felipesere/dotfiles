@@ -25,6 +25,7 @@ file-style                   = "bold yellow"
 file-decoration-style        = "bold yellow box ul"
 hunk-header-style            = "bold blue"
 hunk-header-decoration-style = "blue box"
+map-styles = bold purple => black tan, bold cyan => black yellow
 
 [delta "light"]
 light = false
@@ -33,10 +34,10 @@ syntax-theme = Monokai Extended Light
 [delta "dark"]
 light            = false
 syntax-theme     = DarkNeon
-# plus-style       = "syntax #2d4a16"
-# plus-emph-style  = "white  #6B8C4F"
-# minus-style      = "syntax #60141B"
-# minus-emph-style = "white  #88323A"
+plus-style       = "syntax seagreen"
+plus-emph-style  = "white  darkgreen"
+minus-style      = "syntax indianred"
+minus-emph-style = "white  darkred"
 
 [pull]
 rebase = true
@@ -94,3 +95,5 @@ defaultBranch = main
 
 [includeIf "gitdir:~/Development/truelayer/"]
   path = ~/.gitconfig-truelayer
+[diff]
+	colormoved = default
