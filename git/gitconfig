@@ -33,7 +33,7 @@ syntax-theme = Monokai Extended Light
 
 [delta "dark"]
 light            = false
-syntax-theme     = DarkNeon
+syntax-theme     = Nord
 plus-style       = "syntax seagreen"
 plus-emph-style  = "white  darkgreen"
 minus-style      = "syntax indianred"
