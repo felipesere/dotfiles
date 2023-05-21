@@ -13,8 +13,7 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup({
    -- Install basic plugins
-   "folke/tokyonight.nvim",
-
+   "arcticicestudio/nord-vim",
    -- Both needed for zenbones
    "rktjmp/lush.nvim",
    "mcchrish/zenbones.nvim",
@@ -134,8 +133,8 @@ vim.api.nvim_create_autocmd("FileType", {
 require("color_switcher").setup({
     on_dark = function()
       vim.opt.background = "dark"
-      vim.cmd.colorscheme 'tokyonight-storm'
-      vim.api.nvim_set_hl(0, "TypeHighlight", { fg = '#8a7751' })
+      vim.cmd("colorscheme nord")
+      vim.api.nvim_set_hl(0, "TypeHighlight", { fg = '#EBCB8B' })
       vim.api.nvim_set_hl(0, "MsgArea", { fg = 'white', bg = '#4E5668' })
     end,
     on_light = function()
