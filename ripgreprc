@@ -1,1 +1,2 @@
 --glob=!.git/
+--ignore-file=/Users/felipe.sere/.dotfiles/ripgrepignore
