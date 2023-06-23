@@ -21,7 +21,7 @@ require("lazy").setup({
    "hoob3rt/lualine.nvim",
    "alvarosevilla95/luatab.nvim",
    "stevearc/dressing.nvim",
-   "j-hui/fidget.nvim",
+   { "j-hui/fidget.nvim", tag = "legacy" },
    "rcarriga/nvim-notify",
    { "nvim-neo-tree/neo-tree.nvim", branch = "v2.x" },
    "MunifTanjim/nui.nvim",
