@@ -101,6 +101,12 @@ if command -v gpg &> /dev/null; then
   export GPG_TTY=$(tty)
 fi
 
+if command -v atuin &> /dev/null; then
+  export ATUIN_STYLE=compact
+  export ATUIN_SEARCH_MODE=fuzzy
+  eval "$(atuin init zsh)"
+fi
+
 c() {
   IN_REPO=$(command git rev-parse --is-inside-work-tree 2&> /dev/null)
   if [ "$IN_REPO" = "true" ]; then
@@ -188,8 +194,3 @@ if [[ -f "$HOME/.custom-client-functions" ]]; then
   source "$HOME/.custom-client-functions";
 fi
 
-export ATUIN_STYLE=compact
-export ATUIN_SEARCH_MODE=fuzzy
-if command -v atuin &> /dev/null; then
-  eval "$(atuin init zsh)"
-fi
