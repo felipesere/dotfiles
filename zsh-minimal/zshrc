@@ -38,9 +38,10 @@ PERSONAL_BINARIES=$HOME/bin
 PIPX_BINARIES=$HOME/.local/bin
 EXTRAS="/usr/local/bin/aws_completer"
 HOMEBREW="/opt/homebrew/bin"
+JETBRAINS="$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
 
 # Local binaries
-export PATH=$HOMEBREW:$CARGO_BINARIES:$PERSONAL_BINARIES:$PIPX_BINARIES:$GO_BINARIES:$EXTRAS:$PATH
+export PATH=$HOMEBREW:$CARGO_BINARIES:$PERSONAL_BINARIES:$PIPX_BINARIES:$GO_BINARIES:$EXTRAS:$JETBRAINS:$PATH
 
 if [[ "$(uname)" == "Darwin" ]]; then
   # Install homebrew!
