@@ -56,13 +56,13 @@ require("lazy").setup({
    "hrsh7th/vim-vsnip",
 
    "airblade/vim-gitgutter",
-   { "f-person/git-blame.nvim", config = function()
-      -- Slightly broken until git-blame actually implement a setup function
-      vim.g.gitblame_enable = 0
-      vim.g.gitblame_date_format = '%r'
-      vim.g.gitblame_message_template = ' <author> - <sha> - <date> - <summary>'
-      vim.cmd("GitBlameDisable")
-      end
+   {
+      "f-person/git-blame.nvim",
+      init = function()
+         vim.g.gitblame_date_format = '%r'
+         vim.g.gitblame_message_template = ' <author> - <sha> - <date> - <summary>'
+         vim.g.gitblame_enabled = 0
+      end,
    },
    "rhysd/conflict-marker.vim",
    "lukas-reineke/indent-blankline.nvim",
