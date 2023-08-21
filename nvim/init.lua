@@ -58,6 +58,8 @@ require("lazy").setup({
    "hrsh7th/cmp-vsnip",
    "hrsh7th/vim-vsnip",
 
+   "folke/trouble.nvim",
+
    "airblade/vim-gitgutter",
    {
       "f-person/git-blame.nvim",
@@ -66,6 +68,10 @@ require("lazy").setup({
          vim.g.gitblame_message_template = ' <author> - <sha> - <date> - <summary>'
          vim.g.gitblame_enabled = 0
       end,
+   },
+   { "rhysd/git-messenger.vim", config = function ()
+      vim.g.git_messenger_always_into_popup = true
+      end
    },
    "rhysd/conflict-marker.vim",
    "lukas-reineke/indent-blankline.nvim",
