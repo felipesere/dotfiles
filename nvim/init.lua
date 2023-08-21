@@ -44,7 +44,10 @@ require("lazy").setup({
    "williamboman/mason.nvim",
    "neovim/nvim-lspconfig",
    "williamboman/mason-lspconfig.nvim",
-   "simrat39/rust-tools.nvim",
+   -- The fork below has a bunch of fixes that have not been merged yet
+   -- "simrat39/rust-tools.nvim",
+   "MunifTanjim/rust-tools.nvim",
+
    "Saecki/crates.nvim",
    "SmiteshP/nvim-navic",
 
