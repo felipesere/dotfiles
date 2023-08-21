@@ -9,4 +9,4 @@ set -g status-style bg=colour236
 setw -g window-status-current-format  '#[fg=colour16,bg=colour8] #I #[bg=colour12] #W '
 setw -g window-status-format          '#[fg=colour233,bg=colour238 ] #I #[bg=colour240] #W '
 
-set -g status-right '#[fg=colour4]#[fg=colour233,bg=colour4] %d/%m/%Y #[fg=colour10]#[fg=colour233,bg=colour10] Local %H:%M #[fg=colour12]'
+set -g status-right '#[fg=colour4]#[fg=colour233,bg=colour4] %d/%m/%Y #[fg=colour10]#[fg=colour233,bg=colour10] Local %H:%M | Eirik: #(TZ="CEST" date +%%H:%%M) #[fg=colour12]'
