@@ -23,7 +23,7 @@ require("lazy").setup({
    "stevearc/dressing.nvim",
    { "j-hui/fidget.nvim", tag = "legacy" },
    "rcarriga/nvim-notify",
-   { "nvim-neo-tree/neo-tree.nvim", branch = "v2.x" },
+   { "nvim-neo-tree/neo-tree.nvim", branch = "v3.x" },
    "MunifTanjim/nui.nvim",
 
    "christoomey/vim-sort-motion",
@@ -178,7 +178,7 @@ neotree.setup({
       event = "file_opened",
       handler = function(file_path)
         --auto close
-        neotree.close_all()
+        require("neo-tree.command").execute({ action = "close" })
       end,
     },
   },
