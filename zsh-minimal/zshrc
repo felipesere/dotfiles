@@ -146,7 +146,13 @@ title
 font_size() {
   if [[ "$1" == "" ]]; then
     yq '.font.size' $HOME/.alacritty-font-size.yml
-    exit
+    return
+  fi
+
+  if [[ "$(yq --version)" =~ "whyq" ]]; then
+    BEFORE_YAML=$(cat $HOME/.alacritty-font-size.yml)
+    echo $(BEFORE_YAML) | yq -y ".font.size = $1" > $HOME/.alacritty-font-size.yml
+    return
   fi
 
   if [[ "$(yq --version)" =~ "mikefarah" ]]; then
