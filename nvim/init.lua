@@ -74,7 +74,11 @@ require("lazy").setup({
       end
    },
    "rhysd/conflict-marker.vim",
-   "lukas-reineke/indent-blankline.nvim",
+   {
+      "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {
+         indent = { char = "⁞" },
+      }
+   },
 
    "sheerun/vim-polyglot",
 
@@ -134,7 +138,7 @@ require("color_switcher").setup({
     on_light = function()
       vim.opt.background = "light"
       vim.api.nvim_set_hl(0, "TypeHighlight", { fg = '#819B69' })
-      vim.api.nvim_set_hl(0, "IndentBlankLineContextChar", { fg = '#9893a5' })
+      vim.api.nvim_set_hl(0, "IblScope", { fg = '#9893a5' })
       vim.api.nvim_set_hl(0, "MsgArea", { fg = 'black', bg = '#E2C592' })
       vim.cmd("colorscheme rosebones")
     end,
@@ -212,11 +216,6 @@ require("dressing").setup({
     max_width = { 150, 0.9 },
     min_width = { 100, 0.2 },
   },
-})
-
-require("indent_blankline").setup({
-   char = "⁞",
-  show_current_context = true,
 })
 
 require("luatab").setup({
