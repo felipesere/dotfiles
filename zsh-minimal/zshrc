@@ -19,7 +19,6 @@ export HISTSIZE=10000
 export LANG="en_US.UTF-8"
 export SAVEHIST=1000
 export WORDCHARS=''
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
 export LG_CONFIG_FILE=$HOME/.lazygit.yaml
 
 mkdir -p ~/.tmux/plugins
