@@ -12,85 +12,89 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup({
-   -- Install basic plugins
-   "arcticicestudio/nord-vim",
-   -- Both needed for zenbones
-   "rktjmp/lush.nvim",
-   "mcchrish/zenbones.nvim",
+  -- My dark theme
+  "arcticicestudio/nord-vim",
+  -- Both needed for zenbones
+  "rktjmp/lush.nvim",
+  -- My light theme
+  "mcchrish/zenbones.nvim",
 
-   "hoob3rt/lualine.nvim",
-   "alvarosevilla95/luatab.nvim",
-   "stevearc/dressing.nvim",
-   { "j-hui/fidget.nvim", tag = "legacy" },
-   "rcarriga/nvim-notify",
-   { "nvim-neo-tree/neo-tree.nvim", branch = "v3.x" },
-   "MunifTanjim/nui.nvim",
+  "hoob3rt/lualine.nvim",
+  "alvarosevilla95/luatab.nvim",
+  "stevearc/dressing.nvim",
+  { "j-hui/fidget.nvim", tag = "legacy" },
+  "rcarriga/nvim-notify",
+  { "nvim-neo-tree/neo-tree.nvim", branch = "v3.x" },
+  "MunifTanjim/nui.nvim",
 
-   "christoomey/vim-sort-motion",
-   "vim-test/vim-test",
+  "christoomey/vim-sort-motion",
+  "vim-test/vim-test",
 
-   "stevearc/aerial.nvim",
+  "stevearc/aerial.nvim",
 
-   "nvim-lua/plenary.nvim",
-   "s1n7ax/nvim-window-picker",
-   "nvim-telescope/telescope.nvim",
-   "xiyaowong/telescope-emoji.nvim",
-   { "nvim-treesitter/nvim-treesitter", build = function()
-       vim.cmd(":TSUpdate")
-     end
-   },
+  "nvim-lua/plenary.nvim",
+  "s1n7ax/nvim-window-picker",
+  "nvim-telescope/telescope.nvim",
+  "xiyaowong/telescope-emoji.nvim",
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = function()
+      vim.cmd(":TSUpdate")
+    end,
+  },
 
-   "NoahTheDuke/vim-just",
-   "williamboman/mason.nvim",
-   "neovim/nvim-lspconfig",
-   "williamboman/mason-lspconfig.nvim",
-   -- The fork below has a bunch of fixes that have not been merged yet
-   -- "simrat39/rust-tools.nvim",
-   "MunifTanjim/rust-tools.nvim",
+  "NoahTheDuke/vim-just",
+  "williamboman/mason.nvim",
+  "neovim/nvim-lspconfig",
+  "williamboman/mason-lspconfig.nvim",
+  -- The fork below has a bunch of fixes that have not been merged yet
+  -- "simrat39/rust-tools.nvim",
+  "MunifTanjim/rust-tools.nvim",
 
-   "Saecki/crates.nvim",
-   "SmiteshP/nvim-navic",
+  "Saecki/crates.nvim",
+  "SmiteshP/nvim-navic",
 
-   "hrsh7th/nvim-cmp",
-   "hrsh7th/cmp-nvim-lsp",
-   "hrsh7th/cmp-buffer",
-   "hrsh7th/cmp-path",
-   "hrsh7th/cmp-vsnip",
-   "hrsh7th/vim-vsnip",
+  "hrsh7th/nvim-cmp",
+  "hrsh7th/cmp-nvim-lsp",
+  "hrsh7th/cmp-buffer",
+  "hrsh7th/cmp-path",
+  "hrsh7th/cmp-vsnip",
+  "hrsh7th/vim-vsnip",
 
-   "folke/trouble.nvim",
+  "folke/trouble.nvim",
 
    "airblade/vim-gitgutter",
    "f-person/git-blame.nvim",
    {
       "rhysd/git-messenger.vim", config = function ()
       vim.g.git_messenger_always_into_popup = true
-      end
-   },
-   "rhysd/conflict-marker.vim",
-   {
-      "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {
-         indent = {
-            char = "⁞",
-         },
-         scope = {
+    end,
+  },
+  "rhysd/conflict-marker.vim",
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {
+      indent = { char = "⁞" ,
+    },
+  scope = {
             show_start = false,
             show_end = false,
          },
       }
    },
 
-   "sheerun/vim-polyglot",
+  "sheerun/vim-polyglot",
 
-   -- Watch a file!
-   "rktjmp/fwatch.nvim",
+  -- Watch a file!
+  "rktjmp/fwatch.nvim",
 
-   -- My own
-   "felipesere/xit.nvim",
-   "felipesere/vim-open-readme",
+  -- My own
+  "felipesere/xit.nvim",
+  "felipesere/vim-open-readme",
 
-   -- needs to be last
-   "kyazdani42/nvim-web-devicons",
+  -- needs to be last
+  "kyazdani42/nvim-web-devicons",
 })
 
 vim.opt.autoindent = true -- set auto indent
@@ -123,33 +127,33 @@ vim.o.cmdheight = 0
 
 vim.api.nvim_create_augroup("OnlyOnGit", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-    group   = "OnlyOnGit",
-    pattern = { "gitcommit" },
-    command = "exec 'norm gg' | startinsert!",
+  group = "OnlyOnGit",
+  pattern = { "gitcommit" },
+  command = "exec 'norm gg' | startinsert!",
 })
 
 require("color_switcher").setup({
-    on_dark = function()
-      vim.opt.background = "dark"
-      vim.cmd("colorscheme nord")
-      vim.api.nvim_set_hl(0, "TypeHighlight", { fg = '#EBCB8B' })
-      vim.api.nvim_set_hl(0, "MsgArea", { fg = 'white', bg = '#4E5668' })
-    end,
-    on_light = function()
-      vim.opt.background = "light"
-      vim.api.nvim_set_hl(0, "TypeHighlight", { fg = '#819B69' })
-      vim.api.nvim_set_hl(0, "IblScope", { fg = '#9893a5' })
-      vim.api.nvim_set_hl(0, "MsgArea", { fg = 'black', bg = '#E2C592' })
-      vim.cmd("colorscheme rosebones")
-    end,
+  on_dark = function()
+    vim.opt.background = "dark"
+    vim.cmd("colorscheme nord")
+    vim.api.nvim_set_hl(0, "TypeHighlight", { fg = "#EBCB8B" })
+    vim.api.nvim_set_hl(0, "MsgArea", { fg = "white", bg = "#4E5668" })
+  end,
+  on_light = function()
+    vim.opt.background = "light"
+    vim.api.nvim_set_hl(0, "TypeHighlight", { fg = "#819B69" })
+    vim.api.nvim_set_hl(0, "IblScope", { fg = "#9893a5" })
+    vim.api.nvim_set_hl(0, "MsgArea", { fg = "black", bg = "#E2C592" })
+    vim.cmd("colorscheme rosebones")
+  end,
 })
 
 vim.notify = require("notify")
 
-require('crates').setup()
+require("crates").setup()
 require("mason").setup({})
 require("mason-lspconfig").setup({
-    ensure_installed = { "rust_analyzer", "yamlls", "marksman" }
+  ensure_installed = { "rust_analyzer", "yamlls", "marksman" },
 })
 
 -- Extracted configuration for cmp and lsp intro
@@ -173,8 +177,8 @@ neotree.setup({
       always_show = {
         ".circleci",
         "zzz-felipe",
-      }
-    }
+      },
+    },
   },
   default_component_configs = {
     git_status = {
@@ -232,26 +236,26 @@ require("luatab").setup({
 
 require("nvim-treesitter.configs").setup({
   highlight = {
-    enable = true
+    enable = true,
   },
   incremental_selection = {
-     enable = true,
-     keymaps = {
-        init_selection = "gnn", -- set to `false` to disable one of the mappings
-        node_decremental = "<A-j>",
-        node_incremental = "<A-k>",
-        scope_incremental = "<A-l>",
-     },
+    enable = true,
+    keymaps = {
+      init_selection = "gnn", -- set to `false` to disable one of the mappings
+      node_decremental = "<A-j>",
+      node_incremental = "<A-k>",
+      scope_incremental = "<A-l>",
+    },
   },
 })
 
 -- requires treesittter, so needs to come after?
 require("xit").setup({
-      keymaps = {
-         ['<C-t>'] = "toggle_checkbox",
-         ['<C-S-t>'] = "toggle_checkbox_reverse",
-      }
-   })
+  keymaps = {
+    ["<C-t>"] = "toggle_checkbox",
+    ["<C-S-t>"] = "toggle_checkbox_reverse",
+  },
+})
 
 require("nvim-web-devicons").setup({
   default = true, -- globally enable default icons (default to false)
@@ -263,12 +267,12 @@ require("lualine").setup({
     lualine_b = { "branch", "diff", "filename", "diagnostics" },
     lualine_c = {
       {
-         function()
-            return navic.get_location()
-         end,
-         cond = function()
-            return navic.is_available()
-         end
+        function()
+          return navic.get_location()
+        end,
+        cond = function()
+          return navic.is_available()
+        end,
       },
     },
     lualine_x = { "filetype" },
@@ -291,24 +295,24 @@ telescope.setup({
 })
 
 local changed_on_branch = function()
-    local previewers = require('telescope.previewers')
-    local pickers = require('telescope.pickers')
-    local sorters = require('telescope.sorters')
-    local finders = require('telescope.finders')
-    local home = os.getenv( "HOME" )
+  local previewers = require("telescope.previewers")
+  local pickers = require("telescope.pickers")
+  local sorters = require("telescope.sorters")
+  local finders = require("telescope.finders")
+  local home = os.getenv("HOME")
 
-    local git_branch_modified = home .. '/bin/git-branch-modified.sh'
+  local git_branch_modified = home .. "/bin/git-branch-modified.sh"
 
-    pickers.new {
-        results_title = 'Modified on current branch',
-        finder = finders.new_oneshot_job({ git_branch_modified, 'list'}),
-        sorter = sorters.get_fuzzy_file(),
-        previewer = previewers.new_termopen_previewer {
-            get_command = function(entry)
-                return { git_branch_modified, 'diff', entry.value}
-            end
-        },
-    }:find()
+  pickers.new({
+    results_title = "Modified on current branch",
+    finder = finders.new_oneshot_job({ git_branch_modified, "list" }),
+    sorter = sorters.get_fuzzy_file(),
+    previewer = previewers.new_termopen_previewer({
+      get_command = function(entry)
+        return { git_branch_modified, "diff", entry.value }
+      end,
+    }),
+  }):find()
 end
 
 local opts = function(opts)
@@ -322,10 +326,14 @@ local opts = function(opts)
 end
 
 vim.api.nvim_create_user_command("Q", "qa!", { desc = "Quit all" })
-vim.api.nvim_create_user_command("Light", function() os.execute('$HOME/.dotfiles/bin/theme.sh light') end, { desc = "Change to light mode" })
-vim.api.nvim_create_user_command("Dark", function() os.execute('$HOME/.dotfiles/bin/theme.sh dark') end, { desc = "Change to Dark mode" })
+vim.api.nvim_create_user_command("Light", function()
+  os.execute("$HOME/.dotfiles/bin/theme.sh light")
+end, { desc = "Change to light mode" })
+vim.api.nvim_create_user_command("Dark", function()
+  os.execute("$HOME/.dotfiles/bin/theme.sh dark")
+end, { desc = "Change to Dark mode" })
 vim.api.nvim_create_user_command("Docs", "RustOpenExternalDocs", { desc = "Open the rust docs under the cursor" })
-vim.api.nvim_create_user_command("JsonFmt", "%!jq '.'", { desc = "Format JSON with jq"})
+vim.api.nvim_create_user_command("JsonFmt", "%!jq '.'", { desc = "Format JSON with jq" })
 vim.keymap.set("n", "<leader>g", ":Telescope git_status<cr>", opts())
 vim.keymap.set("n", "<leader>G", changed_on_branch, opts())
 vim.keymap.set("n", "<leader>o", ":AerialToggle<cr>", opts())
@@ -333,7 +341,7 @@ vim.keymap.set("n", "<leader>o", ":AerialToggle<cr>", opts())
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<C-p>", builtin.find_files, opts())
 vim.keymap.set("n", "<leader>s", builtin.grep_string, opts())
-vim.keymap.set("n", "<leader>S", builtin.live_grep,  opts())
+vim.keymap.set("n", "<leader>S", builtin.live_grep, opts())
 vim.keymap.set("n", "<leader>e", ":Telescope emoji<cr>", opts())
 
 vim.keymap.set("n", "<leader>f", ":Neotree focus toggle<cr>", opts({ desc = "Show the current file in the explorer" }))

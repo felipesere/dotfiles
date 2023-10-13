@@ -88,7 +88,7 @@ lspconfig.yamlls.setup({
   settings = {
     yaml = {
       keyOrdering = false,
-    }
+    },
   },
 })
 lspconfig.terraformls.setup({
