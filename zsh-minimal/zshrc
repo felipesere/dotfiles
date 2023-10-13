@@ -154,17 +154,11 @@ font_size() {
     return
   fi
 
-  if [[ "$(yq --version)" =~ "whyq" ]]; then
-    BEFORE_YAML=$(cat $HOME/.alacritty-font-size.yml)
-    echo $BEFORE_YAML | yq -y ".font.size = $1" > $HOME/.alacritty-font-size.yml
-    return
-  fi
-
   if [[ "$(yq --version)" =~ "mikefarah" ]]; then
     # go impl of yq
     OPTS="-i"
   else
-    # python impl of yq
+    # python impl of yq or whyq
     OPTS="-yi"
   fi
   yq $OPTS ".font.size = $1" $HOME/.alacritty-font-size.yml
