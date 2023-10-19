@@ -7,7 +7,7 @@ local opts = {
 }
 local on_attach = function(client, bufnr)
 
-  --  Shwo navication
+  --  Show navigation
   if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
   end

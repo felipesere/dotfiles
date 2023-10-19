@@ -326,7 +326,6 @@ vim.api.nvim_create_user_command("Light", function() os.execute('$HOME/.dotfiles
 vim.api.nvim_create_user_command("Dark", function() os.execute('$HOME/.dotfiles/bin/theme.sh dark') end, { desc = "Change to Dark mode" })
 vim.api.nvim_create_user_command("Docs", "RustOpenExternalDocs", { desc = "Open the rust docs under the cursor" })
 vim.api.nvim_create_user_command("JsonFmt", "%!jq '.'", { desc = "Format JSON with jq"})
-vim.keymap.set("n", "<leader>e", ":Telescope emoji<cr>", opts())
 vim.keymap.set("n", "<leader>g", ":Telescope git_status<cr>", opts())
 vim.keymap.set("n", "<leader>G", changed_on_branch, opts())
 vim.keymap.set("n", "<leader>o", ":AerialToggle<cr>", opts())
