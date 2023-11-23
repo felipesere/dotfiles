@@ -80,13 +80,13 @@ env:
   TERM: xterm-256color
 font:
   normal:
-    family: Iosevka Nerd Font Mono
+    family: MonaspiceNe NFM
     style: Regular
   bold:
-    family: Iosevka Nerd Font Mono
+    family: MonaspiceNe NFM
     style: Bold
   italic:
-    family: Iosevka Nerd Font Mono
+    family: MonaspiceNe NFM
     style: Italic
 colors: *light
 
