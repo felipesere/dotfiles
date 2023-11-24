@@ -89,6 +89,8 @@ font:
     family: MonaspiceNe NFM
     style: Italic
 colors: *light
+  offset:
+      y: 2 # needed for Monaspace
 
 window:
   option_as_alt: Both
