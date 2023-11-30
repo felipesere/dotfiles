@@ -1,18 +1,11 @@
-local on_attach = function(client, bufnr)
-  local navic = require("nvim-navic")
-  --  Show navication
-local lspconfig = require("lspconfig")
-local navic = require("nvim-navic")
-
 local opts = {
   noremap = true,
   silent = true,
 }
 local on_attach = function(client, bufnr)
-
   --  Show navigation
   if client.server_capabilities.documentSymbolProvider then
-    navic.attach(client, bufnr)
+    require("nvim-navic").attach(client, bufnr)
   end
 
   -- Enable completion triggered by <c-x><c-o>
