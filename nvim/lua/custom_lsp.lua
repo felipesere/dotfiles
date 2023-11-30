@@ -1,3 +1,6 @@
+local on_attach = function(client, bufnr)
+  local navic = require("nvim-navic")
+  --  Show navication
 local lspconfig = require("lspconfig")
 local navic = require("nvim-navic")
 
@@ -17,6 +20,10 @@ local on_attach = function(client, bufnr)
 
   tele = require("telescope.builtin")
 
+  local opts = {
+    noremap = true,
+    silent = true,
+  }
   -- Only hook these mappings up when there is a LSP client attached
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -31,6 +38,31 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>k", vim.diagnostic.goto_prev, opts)
   vim.keymap.set("n", "<leader>j", vim.diagnostic.goto_next, opts)
 end
+
+local server_settings = {
+  ["yaml-language-server"] = {
+    cmd = { "yaml-language-server", "--stdio" },
+    settings = {
+      yaml = {
+        keyOrdering = false,
+      },
+    },
+  },
+  terraformls = {
+    cmd = { "terraform-ls", "serve" },
+  },
+}
+
+require("mason-lspconfig").setup_handlers({
+  function(server_name) -- our default handler, applies to all servers
+    local settings = server_settings[server_name] or {}
+    require("lspconfig")[server_name].setup({
+      on_attach = on_attach,
+      capabilities = require("cmp_nvim_lsp").default_capabilities(),
+      settings = settings,
+    })
+  end,
+})
 
 require("rust-tools").setup({
   tools = {
@@ -72,29 +104,6 @@ require("rust-tools").setup({
       },
     },
   },
-})
-
-local lspconfig = require("lspconfig")
-
-lspconfig.marksman.setup({
-  on_attach = on_attach,
-  capabilities = require("cmp_nvim_lsp").default_capabilities(),
-})
-
-lspconfig.yamlls.setup({
-  cmd = { "yaml-language-server", "--stdio" },
-  on_attach = on_attach,
-  capabilities = require("cmp_nvim_lsp").default_capabilities(),
-  settings = {
-    yaml = {
-      keyOrdering = false,
-    },
-  },
-})
-lspconfig.terraformls.setup({
-  cmd = { "terraform-ls", "serve" },
-  on_attach = on_attach,
-  capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {

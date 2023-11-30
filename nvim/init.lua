@@ -43,7 +43,6 @@ require("lazy").setup({
     end,
   },
 
-  "NoahTheDuke/vim-just",
   "williamboman/mason.nvim",
   "neovim/nvim-lspconfig",
   "williamboman/mason-lspconfig.nvim",
@@ -61,12 +60,11 @@ require("lazy").setup({
   "hrsh7th/cmp-vsnip",
   "hrsh7th/vim-vsnip",
 
-  "folke/trouble.nvim",
-
-   "airblade/vim-gitgutter",
-   "f-person/git-blame.nvim",
-   {
-      "rhysd/git-messenger.vim", config = function ()
+  "airblade/vim-gitgutter",
+  "f-person/git-blame.nvim",
+  {
+    "rhysd/git-messenger.vim",
+    config = function()
       vim.g.git_messenger_always_into_popup = true
     end,
   },
@@ -148,6 +146,12 @@ require("color_switcher").setup({
   end,
 })
 
+require("gitblame").setup({
+    enabled = false,
+    date_format = "%r",
+    message_template = " <author> - <sha> - <date> - <summary>",
+})
+
 vim.notify = require("notify")
 
 require("crates").setup()
@@ -160,13 +164,6 @@ require("mason-lspconfig").setup({
 -- separate modules as it was getting... hefty
 require("custom_cmp_config")
 require("custom_lsp")
-
-require("gitblame").setup({
-   enabled = false,
-   date_format = '%r',
-   message_template = ' <author> - <sha> - <date> - <summary>',
-})
-
 
 local dot = ""
 local neotree = require("neo-tree")
