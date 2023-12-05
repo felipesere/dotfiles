@@ -73,7 +73,7 @@ bindkey "\e[3~" delete-char
 
 alias vim="nvim"
 alias vi="nvim"
-alias ls="eza -l --icons"
+alias ls="eza -l --icons=always"
 alias typora="open -a typora"
 alias next="cargo nextest run"
 alias todo="nvim ~/Development/todo.xit"
