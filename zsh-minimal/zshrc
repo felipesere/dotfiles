@@ -46,10 +46,11 @@ if [[ "$(uname)" == "Darwin" ]]; then
   eval "$(brew shellenv)"
 fi
 
-fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
+fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
 
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit -u
+
 autoload -Uz colors  && colors
 
 # Add the AWS completions
