@@ -77,16 +77,18 @@ require("lazy").setup({
   },
   "rhysd/conflict-marker.vim",
   {
+    "folke/trouble.nvim",
+  },
+  {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     opts = {
-      indent = { char = "⁞" ,
-    },
-  scope = {
-            show_start = false,
-            show_end = false,
-         },
-      }
+      indent = { char = "⁞" , },
+      scope = {
+         show_start = false,
+         show_end = false,
+      },
+    }
    },
 
   "sheerun/vim-polyglot",
