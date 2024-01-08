@@ -57,8 +57,15 @@ require("lazy").setup({
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-path",
-  "hrsh7th/cmp-vsnip",
-  "hrsh7th/vim-vsnip",
+  -- "hrsh7th/cmp-vsnip",
+  -- "hrsh7th/vim-vsnip",
+  {
+    "L3MON4D3/LuaSnip",
+    dependencies = {
+      "saadparwaiz1/cmp_luasnip",
+      "rafamadriz/friendly-snippets",
+    },
+  },
 
   "airblade/vim-gitgutter",
   "f-person/git-blame.nvim",
