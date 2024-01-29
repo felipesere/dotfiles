@@ -78,8 +78,6 @@ ds  = diff --staged
 s   = status -s -b
 l   = !git ll -20
 ll  = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short
-ld  = !git ll --since 1.days.ago
-lw  = !git ll --since 1.weeks.ago
 incoming   = !git ll ..@{u}
 outgoing   = !git ll @{u}..
 conflicts = diff --name-only --diff-filter=U
