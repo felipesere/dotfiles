@@ -46,6 +46,7 @@ rebase = true
 diffFilter = delta --color-only
 
 [push]
+default = upstream
 autoSetupRemote = true
 
 [merge]
@@ -93,7 +94,10 @@ helper = store
 [init]
 defaultBranch = main
 
-[includeIf "gitdir:~/Development/truelayer/"]
-  path = ~/.gitconfig-truelayer
 [diff]
 	colormoved = default
+
+[includeIf "gitdir:~/Development/truelayer/"]
+  path = ~/.gitconfig-truelayer
+[grep]
+	extendedRegexp = true
