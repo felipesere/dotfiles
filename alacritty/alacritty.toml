@@ -1,6 +1,6 @@
 import = [
-  "/Users/felipe.sere/.alacritty-font-size.toml",
-  "/Users/felipe.sere/.alacritty.theme.toml"
+  "~/.alacritty-font-size.toml",
+  "~/.alacritty.theme.toml"
 ]
 
 [env]

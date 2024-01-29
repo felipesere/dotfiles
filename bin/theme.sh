@@ -17,6 +17,7 @@ ln -s ~/.dotfiles/fzf/${mode}.env ~/.fzf-theme.env
 
 ## Alacritty
 ln -sf ~/.dotfiles/alacritty/alacritty.$mode.toml ~/.alacritty.theme.toml
+touch ~/.config/alacritty/alacritty.toml
 
 ## Tmux
 if [[ -v TMUX ]]; then
