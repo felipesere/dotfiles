@@ -10,6 +10,7 @@ pager:
 aliases:
     co: pr checkout
     my-prs: 'search prs archived:false --state=open --review-requested=@me --sort updated -L150 '
+    tl-prs: 'search prs archived:false --state=open --author=@me --owner=TrueLayer --sort updated -L150 '
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.
