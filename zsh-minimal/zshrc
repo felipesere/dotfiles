@@ -150,19 +150,7 @@ chpwd_functions+=title
 title
 
 font_size() {
-  if [[ "$1" == "" ]]; then
-    yq '.font.size' $HOME/.alacritty-font-size.yml
-    return
-  fi
-
-  if [[ "$(yq --version)" =~ "mikefarah" ]]; then
-    # go impl of yq
-    OPTS="-i"
-  else
-    # python impl of yq or whyq
-    OPTS="-yi"
-  fi
-  yq $OPTS ".font.size = $1" $HOME/.alacritty-font-size.yml
+  yq -it --input toml ".font.size = $1" $HOME/.alacritty-font-size.toml
 }
 
 presentation_mode() {

@@ -1,7 +1,8 @@
 mkdir -p ~/.config/alacritty ~/.config/nvim
 
-ln -f $HOME/.dotfiles/alacritty/alacritty.yml    $HOME/.config/alacritty/alacritty.yml
-cp $HOME/.dotfiles/alacritty/alacritty-font-size.yml $HOME/.alacritty-font-size.yml
+ln -f $HOME/.dotfiles/alacritty/alacritty.toml    $HOME/.config/alacritty/alacritty.toml
+cp $HOME/.dotfiles/alacritty/alacritty-font-size.toml $HOME/.alacritty-font-size.toml
+cp $HOME/.dotfiles/alacritty/alacritty.light.toml $HOME/.alacritty-theme.yml
 
 ln -sf $HOME/.dotfiles/bin/fzf.sh             $HOME/bin/fzf
 ln -sf $HOME/.dotfiles/bin/theme.sh           $HOME/bin/theme

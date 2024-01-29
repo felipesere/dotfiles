@@ -16,7 +16,7 @@ unlink ~/.fzf-theme.env 2> /dev/null
 ln -s ~/.dotfiles/fzf/${mode}.env ~/.fzf-theme.env
 
 ## Alacritty
-sd '^colors: .*' "colors: *${mode}" ~/.dotfiles/alacritty/alacritty.yml 
+ln -sf ~/.dotfiles/alacritty/alacritty.$mode.toml ~/.alacritty.theme.toml
 
 ## Tmux
 if [[ -v TMUX ]]; then

@@ -1,0 +1,25 @@
+import = [
+  "/Users/felipe.sere/.alacritty-font-size.toml",
+  "/Users/felipe.sere/.alacritty.theme.toml"
+]
+
+[env]
+TERM = "xterm-256color"
+
+[font.bold]
+family = "MonaspiceNe NFM"
+style = "Bold"
+
+[font.italic]
+family = "MonaspiceNe NFM"
+style = "Italic"
+
+[font.normal]
+family = "MonaspiceNe NFM"
+style = "Regular"
+
+[font.offset]
+y = 2
+
+[window]
+option_as_alt = "Both"
