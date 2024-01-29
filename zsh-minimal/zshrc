@@ -177,12 +177,7 @@ light() {
   $HOME/.dotfiles/bin/theme.sh light
 }
 
-watchy() {
-  watchexec --clear -- "if $@; then noti -m ✅; else noti -m ❌; fi"
-}
 
-unaws() {
-  unset AWS_ACCESS_KEY_ID AWS_ACCOUNT_ID AWS_DEFAULT_REGION AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
 }
 
 if [[ -f "$HOME/.custom-client-functions" ]]; then
