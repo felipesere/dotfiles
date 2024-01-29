@@ -177,7 +177,18 @@ light() {
   $HOME/.dotfiles/bin/theme.sh light
 }
 
+warp() {
+  if [[ "$1" == "up" ]]; then
+    warp-cli connect
+  fi
 
+  if [[ "$1" == "down" ]]; then
+    warp-cli disconnt
+  fi
+
+  if [[ "$1" == "status" || "$1" == "s" ]]; then
+    warp-cli status
+  fi
 }
 
 if [[ -f "$HOME/.custom-client-functions" ]]; then
