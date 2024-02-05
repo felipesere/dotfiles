@@ -9,4 +9,4 @@ set -g status-style bg=colour8
 setw -g window-status-current-format  '#[fg=black,bg=colour9] #I #[bg=colour1] #W '
 setw -g window-status-format          '#[fg=colour239,bg=colour246 ] #I #[bg=colour252] #W '
 
-set -g status-right '#[fg=colour11]#[bg=colour11,fg=black] %d/%m/%Y #[fg=colour9]#[bg=colour9,fg=black] Local %H:%M | Eirik: #(TZ="Asia/Bangkok" date +%%H:%%M) | Surya: #(TZ="Asia/Kolkata" date +%%H:%%M) '
+set -g status-right '#[fg=colour11]#[bg=colour11,fg=black] %d/%m/%Y #[fg=colour9]#[bg=colour9,fg=black] Local %H:%M | Surya: #(TZ="Asia/Kolkata" date +%%H:%%M) '
