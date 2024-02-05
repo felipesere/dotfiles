@@ -184,7 +184,7 @@ warp() {
   fi
 
   if [[ "$1" == "down" ]]; then
-    warp-cli disconnt
+    warp-cli disconnect
   fi
 
   if [[ "$1" == "status" || "$1" == "s" ]]; then
