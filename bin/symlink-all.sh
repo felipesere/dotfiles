@@ -4,7 +4,6 @@ ln -f $HOME/.dotfiles/alacritty/alacritty.toml    $HOME/.config/alacritty/alacri
 cp $HOME/.dotfiles/alacritty/alacritty-font-size.toml $HOME/.alacritty-font-size.toml
 cp $HOME/.dotfiles/alacritty/alacritty.light.toml $HOME/.alacritty-theme.yml
 
-ln -sf $HOME/.dotfiles/bin/fzf.sh             $HOME/bin/fzf
 ln -sf $HOME/.dotfiles/bin/theme.sh           $HOME/bin/theme
 ln -sf $HOME/.dotfiles/bin/branch-prune       $HOME/bin/branch-prune
 ln -sf $HOME/.dotfiles/bat/bat                $HOME/.bat

@@ -11,10 +11,6 @@ case $mode in
     light) is_dark="false" ;;
 esac
 
-## fzf
-unlink ~/.fzf-theme.env 2> /dev/null
-ln -s ~/.dotfiles/fzf/${mode}.env ~/.fzf-theme.env
-
 ## Alacritty
 ln -sf ~/.dotfiles/alacritty/alacritty.$mode.toml ~/.alacritty.theme.toml
 touch ~/.config/alacritty/alacritty.toml
