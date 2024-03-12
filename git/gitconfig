@@ -84,7 +84,7 @@ conflicts = diff --name-only --diff-filter=U
 sha = rev-parse --short HEAD
 root = rev-parse --show-toplevel
 prs = !GH_FORCE_TTY="100%" gh pr list | fzf --ansi --header-lines 4 --reverse | awk '{print $1}' | xargs gh pr checkout
-checks = !GH_FORCE_TTY=$((2**16)) gh pr checks | fzf --ansi --header-lines 4 --reverse | choose 3 | xargs open
+checks = !GH_FORCE_TTY=$((2**16)) gh pr checks | fzf --ansi --header-lines 4 --reverse | rg "^.*\\(https:\\/\\/.+\\)$" -r '$1' | xargs open
 check = !gh pr checks
 unstage = restore --staged
 
