@@ -195,6 +195,10 @@ warp() {
   fi
 }
 
+airpods() {
+  BluetoothConnector 2C-32-6A-F0-06-B9 --notify
+}
+
 if [[ -f "$HOME/.custom-client-functions" ]]; then
   source "$HOME/.custom-client-functions";
 fi
