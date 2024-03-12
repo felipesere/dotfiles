@@ -67,6 +67,9 @@ export ZSH_HIGHLIGHT_STYLES[comment]='fg=yellow,bold'
 # Themeing with starship
 eval "$(starship init zsh)"
 
+# Better `cd`
+eval "$(zoxide init zsh)"
+
 bindkey -e
 bindkey "^[[1;2C" forward-word  # ctrl + right_arrow to move a word forwards
 bindkey "^[[1;2D" backward-word # ctrl + left_arrow to move a word backwards

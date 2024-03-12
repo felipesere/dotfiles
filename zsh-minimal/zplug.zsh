@@ -13,7 +13,7 @@ if [[ -v ZPLUG_HOME ]]; then
   source $ZPLUG_HOME/init.zsh
   
   zplug "zsh-users/zsh-syntax-highlighting"
-  zplug "b4b4r07/enhancd"
+  # zplug "b4b4r07/enhancd"
   
   # Install plugins if there are plugins that have not been installed
   if ! zplug check --verbose; then
