@@ -203,3 +203,7 @@ if [[ -f "$HOME/.custom-client-functions" ]]; then
   source "$HOME/.custom-client-functions";
 fi
 
+
+today() {
+  date -u +%Y-%m-%d
+}
