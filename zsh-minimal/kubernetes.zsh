@@ -18,8 +18,11 @@ kc() {
 
 # namespace switcher
 kns() {
-  local -r ns="$(kg ns | choose 0 | tail -n +2 | fzf)"
   local -r ctx="$(kubectl config current-context)"
+  local ns="$1"
+  if [[ "$ns" == "" ]]; then
+    ns="$(kg ns | choose 0 | tail -n +2 | fzf)"
+  fi
   kubectl config set "contexts.$ctx.namespace" "$ns"
 }
 
@@ -56,6 +59,14 @@ kx() {
 
   gum confirm "Delete ${resource}/${name} ?" && kubectl delete ${resource}/${name}
 }
+
+ke() {
+  local -r resource="${1:-$(kubectl api-resources --no-headers | choose 0 | fzf)}"
+  local -r name="${2:-$(kubectl get "${resource}" --no-headers | choose 0 | fzf)}"
+
+  kubectl events --for ${resource}/${name}
+}
+
 
 alias kxp="kx pod"
 
