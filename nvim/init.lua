@@ -126,6 +126,8 @@ vim.opt.updatetime = 250 -- How long to wait after a write before vim triggers p
 vim.opt.visualbell = true
 vim.opt.wildmode = { "list:longest", "full" } -- how the tab-completion menu behaves: show the list, then the longest match, finally all matches
 
+vim.opt.splitright = true -- when opening vertical splits, open them to the _right_ of the current bufffer
+
 vim.g.mapleader = " "
 vim.g.neo_tree_remove_legacy_commands = 1
 vim.g.rustfmt_autosave = 1
