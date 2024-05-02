@@ -48,55 +48,17 @@ local server_settings = {
 
 require("mason-lspconfig").setup_handlers({
   function(server_name) -- our default handler, applies to all servers
+    -- we can skip rust_analyzeras its setup by rustaceanvim
+    if server_name == "rust_analyzer" then return end
+
     local settings = server_settings[server_name] or {}
+
     require("lspconfig")[server_name].setup({
       on_attach = on_attach,
       capabilities = require("cmp_nvim_lsp").default_capabilities(),
       settings = settings,
     })
   end,
-})
-
-require("rust-tools").setup({
-  tools = {
-    inlay_hints = {
-      other_hints_prefix = "➤ ",
-      show_parameter_hints = false,
-      highlight = "TypeHighlight",
-    },
-    hover_actions = {
-      auto_focus = true,
-    },
-  },
-  server = {
-    on_attach = on_attach,
-    capabilities = require("cmp_nvim_lsp").default_capabilities(),
-    settings = {
-      ["rust-analyzer"] = {
-        assist = {
-          importGranularity = "module",
-        },
-        cargo = {
-          loadOutDirsFromCheck = true,
-        },
-        procMacro = {
-          enable = true,
-        },
-        checkOnSave = {
-          extraArgs = {
-            "--target-dir",
-            "/tmp/rust-analyzer-check",
-          },
-        },
-        diagnostics = {
-          enable = true,
-          disabled = {
-            "unresolved-proc-macro",
-          },
-        },
-      },
-    },
-  },
 })
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
