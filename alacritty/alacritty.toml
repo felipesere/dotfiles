@@ -19,7 +19,7 @@ family = "MonaspiceNe NFM"
 style = "Regular"
 
 [font.offset]
-y = 2
+y = 6
 
 [window]
 option_as_alt = "Both"
