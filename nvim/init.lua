@@ -13,7 +13,8 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup({
   -- My dark theme
-  "arcticicestudio/nord-vim",
+  -- "arcticicestudio/nord-vim",
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   -- Both needed for zenbones
   "rktjmp/lush.nvim",
   -- My light theme
@@ -56,9 +57,11 @@ require("lazy").setup({
   "SmiteshP/nvim-navic",
 
   "hrsh7th/nvim-cmp",
+
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-path",
+  "hrsh7th/cmp-nvim-lsp",
   -- "hrsh7th/cmp-vsnip",
   -- "hrsh7th/vim-vsnip",
   {
@@ -136,6 +139,8 @@ vim.g.rustfmt_autosave = 1
 
 vim.o.cmdheight = 0
 
+-- vim.lsp.inlay_hint.enable(true)
+
 vim.api.nvim_create_augroup("OnlyOnGit", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
   group = "OnlyOnGit",
@@ -146,16 +151,14 @@ vim.api.nvim_create_autocmd("FileType", {
 require("color_switcher").setup({
   on_dark = function()
     vim.opt.background = "dark"
-    vim.cmd("colorscheme nord")
+    vim.cmd.colorscheme "catppuccin-frappe"
     vim.api.nvim_set_hl(0, "TypeHighlight", { fg = "#EBCB8B" })
-    vim.api.nvim_set_hl(0, "MsgArea", { fg = "white", bg = "#4E5668" })
   end,
   on_light = function()
     vim.opt.background = "light"
     vim.api.nvim_set_hl(0, "TypeHighlight", { fg = "#819B69" })
     vim.api.nvim_set_hl(0, "IblScope", { fg = "#9893a5" })
-    vim.api.nvim_set_hl(0, "MsgArea", { fg = "black", bg = "#E2C592" })
-    vim.cmd("colorscheme rosebones")
+    vim.cmd.colorscheme "rosebones"
   end,
 })
 
