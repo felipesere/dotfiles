@@ -1,0 +1,9 @@
+{
+  "extras": [
+    "lazyvim.plugins.extras.lang.rust"
+  ],
+  "news": {
+    "NEWS.md": "6296"
+  },
+  "version": 6
+}

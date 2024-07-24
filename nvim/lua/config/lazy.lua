@@ -14,11 +14,17 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local is_editing_git_commit = function()
+  return string.find(vim.api.nvim_buf_get_name(0), "COMMIT_EDITMSG")
+end
+
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import/override with your plugins
+    { import = "lazyvim.plugins.extras.lang.rust" },
+    { import = "lazyvim.plugins.extras.dap.core" },
     { import = "plugins" },
   },
   defaults = {
@@ -31,10 +37,7 @@ require("lazy").setup({
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
   install = { colorscheme = { "tokyonight", "habamax" } },
-  checker = {
-    enabled = true, -- check for plugin updates periodically
-    notify = false, -- notify on update
-  }, -- automatically check for plugin updates
+  checker = { enabled = not is_editing_git_commit() }, -- automatically check for plugin updates
   performance = {
     rtp = {
       -- disable some rtp plugins
