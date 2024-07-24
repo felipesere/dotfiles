@@ -1,3 +1,8 @@
-nvim
-.init.vim-rplugin*
-spell
+tt.*
+.tests
+doc/tags
+debug
+.repro
+foo.*
+*.log
+data
