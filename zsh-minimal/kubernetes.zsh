@@ -67,6 +67,14 @@ ke() {
   kubectl events --for ${resource}/${name}
 }
 
+kn() {
+  kubectl get node | choose 0:1 | column -s " " -t | sort | fzf --header-lines=1 | choose 0
+}
+
+pods_per_node() {
+  kubectl get pods --all-namespaces -o wide --field-selector spec.nodeName=$(kn)
+}
+
 
 alias kxp="kx pod"
 
