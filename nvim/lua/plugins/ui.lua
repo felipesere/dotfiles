@@ -9,8 +9,6 @@ return {
   },
   {
     "felipesere/darkmode.nvim",
-    dir = "/Users/felipesere/Development/vim/darkmode.nvim",
-    dev = true,
     dependencies = {
       "rktjmp/fwatch.nvim",
     },
