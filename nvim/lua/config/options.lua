@@ -25,6 +25,7 @@ vim.opt.updatetime = 250 -- How long to wait after a write before vim triggers p
 vim.opt.visualbell = true
 vim.opt.wildmode = { "list:longest", "full" } -- how the tab-completion menu behaves: show the list, then the longest match, finally all matches
 vim.opt.splitright = true -- when opening vertical splits, open them to the _right_ of the current bufffer
+vim.opt.wrap = true -- soft-wrapping because I hate scrolling to the right
 
 -- Switching off some of LazyVims defaults
 vim.opt.relativenumber = false
