@@ -80,7 +80,7 @@ alias vi="nvim"
 alias ls="eza -l --icons=always"
 alias typora="open -a typora"
 alias next="cargo nextest run"
-alias todo="nvim ~/Development/todo.xit"
+alias todo="set_title TODO; nvim ~/Development/todo.md"
 alias rg='rg --glob="!.git/"  --ignore-file '$HOME/.dotfiles/ripgrepignore
 alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
