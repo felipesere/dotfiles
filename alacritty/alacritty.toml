@@ -1,7 +1,5 @@
-import = [
-  "~/.alacritty-font-size.toml",
-  "~/.alacritty.theme.toml"
-]
+[general]
+import = ["~/.alacritty-font-size.toml", "~/.alacritty.theme.toml"]
 
 [env]
 TERM = "xterm-256color"
