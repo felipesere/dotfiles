@@ -3,7 +3,7 @@ return {
     "epilande/checkbox-cycle.nvim",
     ft = "markdown",
     opts = {
-      states = { "[ ]", "[/]", "[x]", "[~]" },
+      states = { "[ ]", "[r]", "[/]", "[x]", "[~]", "[?]" },
     },
     keys = {
       {
@@ -41,6 +41,7 @@ return {
           cons = { raw = "[c]", rendered = "󰔑", highlight = "RenderMarkdownError" },
           star = { raw = "[s]", rendered = "󰓎", highlight = "RenderMarkdownWarn" },
           f = { raw = "[f]", rendered = "󰈸", highlight = "RenderMarkdownH2" },
+          pull_request_ready = { raw = "[r]", rendered = "", highlight = "RenderMarkdownHint" },
         },
       },
     },

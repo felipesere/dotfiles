@@ -24,6 +24,7 @@ require("lazy").setup({
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import/override with your plugins
     { import = "lazyvim.plugins.extras.lang.rust" },
+    { import = "lazyvim.plugins.extras.lang.nushell" },
     { import = "lazyvim.plugins.extras.dap.core" },
     { import = "plugins" },
   },
@@ -37,7 +38,7 @@ require("lazy").setup({
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
   install = { colorscheme = { "tokyonight", "habamax" } },
-  checker = { enabled = not is_editing_git_commit() }, -- automatically check for plugin updates
+  checker = { enabled = not is_editing_git_commit(), frequency = 86400 }, -- automatically check for plugin updates every 24h
   performance = {
     rtp = {
       -- disable some rtp plugins
