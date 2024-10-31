@@ -69,7 +69,8 @@ deleted = red
 [alias]
 a   = add -u
 b   = branch
-bb  = !git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+bb  = !git bbb | tail -n 10
+bbb  = !git for-each-ref --color --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 aa  = add --all :/
 c   = commit -v
 recommit = commit --amend --no-edit
