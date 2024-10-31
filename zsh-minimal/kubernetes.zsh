@@ -164,6 +164,13 @@ kpfp() {
   kubectl port-forward "${pod}" "8000:${port}"
 }
 
+
+image-versions() {
+  local -r deployment=$(kubectl get deployment -o=jsonpath='{.items[*].metadata.name}' | tr -s ' ' '\n' | fzf)
+
+  kubectl get pod -l app=${deployment} -ojson | jq -r '.items[] | {image: .spec.containers[] | select(.name == "app") | .image, name: .metadata.name, status: .status.phase} | "\(.name)\t\(.image)\t\(.status)"'
+}
+
 podversion() {
   local -r pod="$(kubectl get pod --no-headers | choose 0 | fzf)"
 

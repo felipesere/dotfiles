@@ -195,6 +195,14 @@ warp() {
   fi
 }
 
+split-k8s() {
+  if [[ "$1" == "" ]]; then
+    echo "Need a path to a file"
+  else
+    yq -s "( .kind | downcase ) + \".\" + ( .metadata.name | downcase ) + \".yaml\"" $1
+  fi
+}
+
 airpods() {
   BluetoothConnector 2C-32-6A-F0-06-B9 --notify
 }
