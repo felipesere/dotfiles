@@ -18,3 +18,20 @@ def laptop [] { font_size 16 }
 def normal [] { font_size 24 }
 def presentatation [] { font_size 32 }
 
+def kc [
+  cluster?: string,
+  --unset (-u) # clear the current kubernetes context
+] {
+  match [$unset, $cluster] {
+    [true, _] => {
+      kubectl config unset current-context
+    },
+    [ _  , null] => {
+      let c = kubectl config get-contexts -o name | fzf
+      kubectl config use-context $c
+    },
+    [ _  , $namedCluster] => {
+      kubectl config use-context $namedCluster
+    }
+  }
+}
