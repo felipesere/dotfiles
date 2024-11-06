@@ -27,11 +27,31 @@ def kc [
       kubectl config unset current-context
     },
     [ _  , null] => {
-      let c = kubectl config get-contexts -o name | fzf
+      let c = kubectl config get-contexts | from ssv --aligned-columns | input list --fuzzy --display NAME | get NAME
       kubectl config use-context $c
     },
     [ _  , $namedCluster] => {
       kubectl config use-context $namedCluster
     }
   }
+}
+ 
+def kg [] { kubectl get }
+
+def kns [
+  namespace?: string,
+] {
+  let ctx = (kubectl config current-context)
+
+  let ns = match $namespace {
+    null => {
+      kubectl get ns
+                | from ssv --aligned-columns
+                | input list "Pick a namespace: " --fuzzy --display NAME
+                | get NAME
+    },
+    $n => $n
+  }
+
+  kubectl config set $"contexts.($ctx).namespace" $ns
 }
