@@ -36,12 +36,9 @@ disabled = false
 symbol = "☸ "
 format = '($symbol)cluster:[$context]($style) @ ns:$namespace '
 contexts = [
-  { context_pattern = "prod.*", context_alias = "prod", style = "bold red" },
-  { context_pattern = "sandbox.*", context_alias = "sbx", style = "orange" },
-  { context_pattern = "dev.*", context_alias = "dev", style = "green" },
-  { context_pattern = ".*eks-dev.*", context_alias = "eks-dev", style = "blue" },
-  { context_pattern = ".*eks-play.*", context_alias = "eks-play" },
-  { context_pattern = ".*eks-anal.*", context_alias = "eks-analytics" },
+  { context_pattern = ".*prod.*", context_alias = "prod", style = "bold red" },
+  { context_pattern = ".*sandbox.*", context_alias = "sbx", style = "bold yellow" },
+  { context_pattern = ".*dev.*", context_alias = "dev", style = "green" },
   { context_pattern = ".*" },
 ]
 
