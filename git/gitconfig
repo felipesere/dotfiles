@@ -28,7 +28,7 @@ hunk-header-decoration-style = "blue box"
 map-styles = bold purple => black tan, bold cyan => black yellow
 
 [delta "light"]
-light = false
+light = true
 syntax-theme = Monokai Extended Light
 
 [delta "dark"]
