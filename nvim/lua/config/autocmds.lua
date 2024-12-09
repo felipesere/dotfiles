@@ -14,3 +14,6 @@ end, { desc = "Change to Dark mode" })
 
 -- I never rememebr the incantation to format a buffer with jq
 vim.api.nvim_create_user_command("JsonFmt", "%!jq '.'", { desc = "Format JSON with jq" })
+
+-- Remove all trailing whitespace by pressing F5
+vim.api.nvim_create_user_command("Trim", [[%s/\s\+$//e]], { desc = "Trim trailing whitespace" })
