@@ -3,6 +3,9 @@
 -- Add any additional options here
 --
 
+-- TODO:giganting workaround for an issue running `:Inspect`
+vim.hl = vim.highlight
+
 vim.opt.autoindent = true -- set auto indent
 vim.opt.clipboard = "unnamed" -- use the system clipboard
 vim.opt.completeopt = { "menu", "menuone", "noinsert" }
@@ -31,4 +34,4 @@ vim.opt.wrap = true -- soft-wrapping because I hate scrolling to the right
 vim.opt.relativenumber = false
 
 -- Until I have my color switcher working!
-vim.opt.background = "light"
+-- vim.opt.background = "light"
