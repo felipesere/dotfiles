@@ -31,7 +31,6 @@ fi
 
 ## Delta
 sd '^features = .*' "features = ${mode}" ~/.dotfiles/git/gitconfig
-sd '^light\s+=\s+.*' "light = ${is_light}" ~/.dotfiles/git/gitconfig
 
 ## Vim
 echo $mode >~/.theme
