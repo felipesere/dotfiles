@@ -1,14 +1,23 @@
 #! /usr/bin/env bash
 
 case $1 in
-    light|dark) ;;
-    *) echo "Can only toggle between light and dark, not '$1'"; exit -1 ;;
+light | dark) ;;
+*)
+  echo "Can only toggle between light and dark, not '$1'"
+  exit -1
+  ;;
 esac
 
 mode=$1
 case $mode in
-    dark) is_dark="true" ;;
-    light) is_dark="false" ;;
+dark)
+  is_dark="true"
+  is_light="false"
+  ;;
+light)
+  is_dark="false"
+  is_light="true"
+  ;;
 esac
 
 ## Alacritty
@@ -22,19 +31,19 @@ fi
 
 ## Delta
 sd '^features = .*' "features = ${mode}" ~/.dotfiles/git/gitconfig
+sd '^light\s+=\s+.*' "light = ${is_light}" ~/.dotfiles/git/gitconfig
 
 ## Vim
-echo $mode > ~/.theme
+echo $mode >~/.theme
 
 ## Bat
 bat_theme=""
 if [[ "$mode" = "light" ]]; then
-    bat_theme="Monokai Extended Light"
+  bat_theme="Monokai Extended Light"
 else
-    bat_theme="Nord"
+  bat_theme="Nord"
 fi
 sd -- '^--theme.*' "--theme=\"${bat_theme}\"" ~/.dotfiles/bat/bat
 
 ## OSX
 osascript -e "tell app \"System Events\" to tell appearance preferences to set dark mode to ${is_dark}"
-
