@@ -21,6 +21,7 @@ export SAVEHIST=1000
 export WORDCHARS=''
 export LG_CONFIG_FILE=$HOME/.lazygit.yaml
 export JJ_CONFIG=$HOME/.config/jj/config.toml
+export K9S_CONFIG_DIR=$HOME/.config/k9s
 
 mkdir -p ~/.tmux/plugins
 
