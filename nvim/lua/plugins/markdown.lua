@@ -3,7 +3,7 @@ return {
     "epilande/checkbox-cycle.nvim",
     ft = "markdown",
     opts = {
-      states = { "[ ]", "[r]", "[/]", "[x]", "[~]", "[?]" },
+      states = { "[ ]", "[x]", "[r]", "[/]", "[~]", "[?]" },
     },
     keys = {
       {
