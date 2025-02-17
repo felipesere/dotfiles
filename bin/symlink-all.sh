@@ -1,4 +1,5 @@
-mkdir -p ~/.config/alacritty ~/.config/nvim
+mkdir -p $HOME/bin
+mkdir -p ~/.config/alacritty ~/.config/starship ~/.config/atuin ~/.config/gh
 
 ln -f $HOME/.dotfiles/alacritty/alacritty.toml    $HOME/.config/alacritty/alacritty.toml
 cp $HOME/.dotfiles/alacritty/alacritty-font-size.toml $HOME/.alacritty-font-size.toml
