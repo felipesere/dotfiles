@@ -111,6 +111,8 @@ fi
 
 # Fast node manager
 if command -v fnm &> /dev/null; then
+  # TODO: consider if I want to upgrade to something like
+  # eval $(fnm env --use-on-cd --version-file-strategy=recursive)
   eval $(fnm env)
 fi
 
