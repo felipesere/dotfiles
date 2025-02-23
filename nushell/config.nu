@@ -4,7 +4,11 @@ $env.config = {
 
 use ~/.dotfiles/starship/starship.nu
 
+alias nu-open = open
+alias open = ^open
+alias fg = job unfreeze
 alias vim = nvim
+
 
 def --env dots [] {
   cd ~/.dotfiles
