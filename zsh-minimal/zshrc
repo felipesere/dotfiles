@@ -162,7 +162,7 @@ chpwd_functions+=title
 title
 
 font_size() {
-  whyq -it --input toml ".font.size = $1" $HOME/.alacritty-font-size.toml
+  lq -it --input toml ".font.size = $1" $HOME/.alacritty-font-size.toml
   touch $HOME/.config/alacritty/alacritty.toml
 }
 
