@@ -98,6 +98,7 @@ defaultBranch = main
 
 [diff]
 	colormoved = default
+	algorithm = histogram
 
 [includeIf "gitdir:~/Development/truelayer/"]
   path = ~/.gitconfig-truelayer
