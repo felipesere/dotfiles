@@ -90,18 +90,6 @@ checks = !GH_FORCE_TTY=$((2**16)) gh pr checks | fzf --ansi --header-lines 4 --r
 check = !gh pr checks
 unstage = restore --staged
 
-[credential]
-helper = store
-
-[init]
-defaultBranch = main
-
-[diff]
-	colormoved = default
-	algorithm = histogram
-
-[includeIf "gitdir:~/Development/truelayer/"]
-  path = ~/.gitconfig-truelayer
 [grep]
 	extendedRegexp = true
 [column]
@@ -114,3 +102,16 @@ defaultBranch = main
 	prune = true
 	pruneTags = true
 	all = true
+
+[credential]
+helper = store
+
+[init]
+defaultBranch = main
+
+[diff]
+	colormoved = default
+	algorithm = histogram
+
+[includeIf "gitdir:~/Development/truelayer/"]
+  path = ~/.gitconfig-truelayer
