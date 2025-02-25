@@ -110,3 +110,7 @@ defaultBranch = main
 	sort = -committerdate
 [tag]
 	sort = version:refname
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
