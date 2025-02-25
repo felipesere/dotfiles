@@ -103,3 +103,7 @@ defaultBranch = main
   path = ~/.gitconfig-truelayer
 [grep]
 	extendedRegexp = true
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
