@@ -5,18 +5,7 @@ $env.config = {
 source ~/.zoxide.nu
 source ~/.dotfiles/nushell/atuin.nu
 source ~/.dotfiles/nushell/theme.nu
-
-$env.PATH = $env.PATH | append [
-  "/opt/homebrew/bin"
-  "/opt/homebrew/sbin"
-  "/Users/felipesere/bin"
-  "/Users/felipesere/.cargo/bin"
-  "/Users/felipesere/.local/bin"
-  "/Users/felipesere/go/bin"
-  "/Users/felipesere/Library/Application Support/JetBrains/Toolbox/scripts"
-]
-
-$env.SHELL = "nu"
+source ~/.cache/carapace/init.nu
 
 use ~/.dotfiles/starship/starship.nu
 

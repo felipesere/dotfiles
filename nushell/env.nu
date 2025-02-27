@@ -2,6 +2,9 @@
 #
 # version = "0.98.0"
 
+# Set the default shell early so other programs can access it
+$env.SHELL = $"($env.HOME)/bin/nu"
+
 def create_left_prompt [] {
     let dir = match (do --ignore-shell-errors { $env.PWD | path relative-to $nu.home-path }) {
         null => $env.PWD
@@ -96,6 +99,16 @@ $env.NU_PLUGIN_DIRS = [
 # path add ($env.CARGO_HOME | path join "bin")
 # path add ($env.HOME | path join ".local" "bin")
 # $env.PATH = ($env.PATH | uniq)
+$env.PATH = $env.PATH | append [
+  "/opt/homebrew/bin"
+  "/opt/homebrew/sbin"
+  "/Users/felipesere/bin"
+  "/Users/felipesere/.cargo/bin"
+  "/Users/felipesere/.local/bin"
+  "/Users/felipesere/go/bin"
+  "/Users/felipesere/Library/Application Support/JetBrains/Toolbox/scripts"
+]
+
 
 # To load from a custom file you can use:
 # source ($nu.default-config-dir | path join 'custom.nu')
