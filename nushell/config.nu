@@ -2,12 +2,30 @@ $env.config = {
   show_banner: false
 }
 
+source ~/.zoxide.nu
+source ~/.dotfiles/nushell/atuin.nu
+source ~/.dotfiles/nushell/theme.nu
+
+$env.PATH = $env.PATH | append [
+  "/opt/homebrew/bin"
+  "/opt/homebrew/sbin"
+  "/Users/felipesere/bin"
+  "/Users/felipesere/.cargo/bin"
+  "/Users/felipesere/.local/bin"
+  "/Users/felipesere/go/bin"
+  "/Users/felipesere/Library/Application Support/JetBrains/Toolbox/scripts"
+]
+
+$env.SHELL = "nu"
+
 use ~/.dotfiles/starship/starship.nu
 
 alias nu-open = open
 alias open = ^open
 alias fg = job unfreeze
 alias vim = nvim
+alias light = set-theme "light"
+alias dark = set-theme "dark"
 
 
 def --env dots [] {
@@ -40,3 +58,4 @@ def title [] {
     pwd | path basename | set-title
   }
 }
+
