@@ -1,6 +1,11 @@
-$env.config = {
-  show_banner: false
-}
+$env.config = ($env.config 
+  | upsert show_banner false
+  | upsert hooks {
+    env_change: {
+      PWD: [{|_,_| title }]
+    }
+  }
+)
 
 source ~/.zoxide.nu
 source ~/.dotfiles/nushell/atuin.nu
