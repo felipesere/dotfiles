@@ -10,6 +10,7 @@ $env.config = ($env.config
 source ~/.zoxide.nu
 source ~/.dotfiles/nushell/atuin.nu
 source ~/.dotfiles/nushell/theme.nu
+source ~/.dotfiles/nushell/fnm.nu
 source ~/.cache/carapace/init.nu
 
 use ~/.dotfiles/starship/starship.nu
