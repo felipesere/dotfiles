@@ -100,6 +100,7 @@ $env.NU_PLUGIN_DIRS = [
 # path add ($env.HOME | path join ".local" "bin")
 # $env.PATH = ($env.PATH | uniq)
 $env.PATH = $env.PATH | append [
+  "/usr/local/bin"
   "/opt/homebrew/bin"
   "/opt/homebrew/sbin"
   "/Users/felipesere/bin"
