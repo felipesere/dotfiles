@@ -14,6 +14,9 @@ return {
       { "<leader>ac", "<cmd>CodeCompanionChat<cr>", desc = "Chat" },
       { "<leader>aa", "<cmd>CodeCompanionActions<cr>", desc = "Actions" },
     },
+    init = function()
+      require("plugins.extensions.companion-notification").init()
+    end,
     config = function()
       require("codecompanion").setup({
         adapters = {
