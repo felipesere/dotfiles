@@ -42,10 +42,9 @@ def presentatation [] { font_size 32 }
 def set-title [title?: string] {
   let title = $title | default $env.PREFERRED_TITLE? | default "unknown"
 
-  match $env.TMUX {
-    null => {},
-    _ => (tmux rename-window $title)
-  }
+  if not ($env | get -i "TMUX" | is-empty ) {
+    tmux rename-window $title
+  } 
 }
 
 def title [] {
