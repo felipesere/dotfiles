@@ -6,6 +6,13 @@ return {
       per_filetype = {
         codecompanion = { "codecompanion" },
       },
+      providers = {
+        codecompanion = {
+          name = "CodeCompanion",
+          module = "codecompanion.providers.completion.blink",
+          enabled = true,
+        },
+      },
     },
   },
 }
