@@ -6,6 +6,14 @@
 -- TODO:giganting workaround for an issue running `:Inspect`
 vim.hl = vim.highlight
 
+-- vim.diagnostic.config({
+--   -- Use the default configuration
+--   virtual_lines = true,
+-- })
+
+-- remove this line when we need to debug LSP
+vim.lsp.set_log_level("off")
+
 vim.opt.autoindent = true -- set auto indent
 vim.opt.clipboard = "unnamed" -- use the system clipboard
 vim.opt.completeopt = { "menu", "menuone", "noinsert" }
