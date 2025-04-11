@@ -20,6 +20,9 @@ whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 # Changing this variable toggles the light/dark mode
 features = light
 
+hyperlinks = true
+line-numbers = true
+  navigate = true
 commit-decoration-style      = "bold yellow box ul"
 file-style                   = "bold yellow"
 file-decoration-style        = "bold yellow box ul"
