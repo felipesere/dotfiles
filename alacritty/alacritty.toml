@@ -2,7 +2,11 @@
 import = ["~/.alacritty-font-size.toml", "~/.alacritty.theme.toml"]
 
 [env]
+XDG_CONFIG_HOME = "/Users/felipesere/.config"
 TERM = "xterm-256color"
+
+[terminal]
+shell = { program = "/opt/homebrew/bin/nu" }
 
 [font.bold]
 family = "MonaspiceNe NFM"
