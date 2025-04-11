@@ -1,6 +1,6 @@
 local hostname = vim.fn.hostname()
 
-local is_personal_laptop = hostname == "Felipes-MacBook-Pro.local"
+local is_personal_laptop = hostname == "Mac"
 
 return {
   {
