@@ -106,7 +106,7 @@ eval "$(kubectl completion zsh)"
 
 # JJ/jujitsu a new take on `git`
 if command -v jj &> /dev/null; then
-  source <(jj util completion zsh)
+  source <(COMPLETE=zsh jj)
 fi
 
 # Fast node manager
