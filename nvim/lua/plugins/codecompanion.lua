@@ -45,7 +45,7 @@ return {
             slash_commands = {
               ["file"] = {
                 opts = {
-                  provider = "telescop",
+                  provider = "fzf_lua",
                 },
               },
             },
