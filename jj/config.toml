@@ -2,30 +2,34 @@
 name = "Felipe Sere"
 email = "github@felipesere.com"
 
-[aliases]
-l = ["log", "-r", "ancestors(@, 10)"]
+[ui]
+default-command = ["log", "--limit", "10"]
 
-# this is somehow like a fake git add -p
-# [ui]
-# diff-editor = "gitpatch"
-# 
-# [merge-tools.gitpatch]
-# program = "sh"
-# edit-args = ["-c", '''
-#   set -eu
-#   rm -f "$right/JJ-INSTRUCTIONS"
-#   git -C "$left" init -q
-#   git -C "$left" add -A
-#   git -C "$left" commit -q -m baseline --allow-empty
-#   mv "$left/.git" "$right"
-#   git -C "$right" add --intent-to-add -A
-#   git -C "$right" add -p
-#   git -C "$right" diff-index --quiet --cached HEAD && { echo "No changes done, aborting split."; exit 1; }
-#   git -C "$right" commit -q -m split
-#   git -C "$right" restore . # undo changes in modified files
-#   git -C "$right" reset .   # undo --intent-to-add
-#   git -C "$right" clean -q -df # remove untracked files
-# ''',
-# ]
-# merge-args = ["-c", "echo gitpatch cannot be used as a diff tool"]
-# diff-args = ["-c", "echo gitpatch cannot be used as a diff tool"]
+diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
+diff.format = "git"
+diff.tool = [
+  "delta",
+  "$left",
+  "$right",
+  "--file-transformation",
+  "s|.*/jj-diff-[^/]*[^/]*/||",
+]
+
+[merge-tools.delta]
+diff-expected-exit-codes = [0, 1]
+
+[template-aliases]
+'format_timestamp(timestamp)' = 'timestamp.ago()'
+'format_short_signature(signature)' = 'signature.email().local()'
+
+[git]
+sign-on-push = true
+
+[aliases]
+view-pr = ["util", "exec", "--", "bash", "-c", """
+#!/usr/bin/env bash
+gh pr view $(jj log --no-graph -r @ -T 'bookmarks' | sed 's/\\*//') -w
+""", ""]
+#    ^^
+# This last empty string will become "$0" in bash, so your actual arguments
+# are all included in "$@" and start at "$1" as expected.
