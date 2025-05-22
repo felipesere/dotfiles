@@ -10,6 +10,7 @@ source ~/.zoxide.nu
 source ~/.dotfiles/nushell/atuin.nu
 source ~/.dotfiles/nushell/theme.nu
 source ~/.dotfiles/nushell/fnm.nu
+source ~/.dotfiles/nushell/k8s.nu
 source ~/.cache/carapace/init.nu
 
 # conditionally source carapace
@@ -43,7 +44,7 @@ def set-title [title?: string] {
   let title = $title | default $env.PREFERRED_TITLE? | default "unknown"
 
   if not ($env | get -i "TMUX" | is-empty ) {
-    tmux rename-window $title
+    tmux rename-window $"($title) [nu]"
   } 
 }
 
