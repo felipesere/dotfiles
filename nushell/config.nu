@@ -13,11 +13,6 @@ source ~/.dotfiles/nushell/fnm.nu
 source ~/.dotfiles/nushell/k8s.nu
 source ~/.cache/carapace/init.nu
 
-# conditionally source carapace
-# const carapace = path self "~/.cache/carapace/init.nu"
-# const carapace = if ($carapace | path exists) { $carapace } else { null }
-# source $carapace
-
 use ~/.dotfiles/starship/starship.nu
 
 alias nu-open = open
@@ -26,6 +21,14 @@ alias fg = job unfreeze
 alias vim = nvim
 alias light = set-theme "light"
 alias dark = set-theme "dark"
+
+def --env c [] {
+  let in_repo = (git rev-parse --is-inside-work-tree | complete)
+
+  if $in_repo.exit_code == 0 {
+    cd (git root)
+  }
+}
 
 
 def --env dots [] {
