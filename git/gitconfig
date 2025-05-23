@@ -53,7 +53,7 @@ default = upstream
 autoSetupRemote = true
 
 [merge]
-conflictStyle = diff3
+conflictStyle = zdiff3
 
 [color]
 interactive = auto
