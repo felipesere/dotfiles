@@ -45,7 +45,11 @@ def --wrapped kg [
     kubectl get $actual_resource $name ...$rest
   }
 
-  $data | from ssv | update "AGE" {|row| $row.AGE | parse_age $in }
+  $data
+  | from ssv
+  | update "AGE" {|row| $row.AGE | parse_age $in }
+  | insert "any" {|row| $row.READY | parse_ready $in }
+  | flatten --all
 }
 
 def ky [ resource?: string, name?: string ] {
@@ -82,6 +86,10 @@ def kd [resource?: string, name?: string] {
 
     # Execute the kubectl describe command
     kubectl describe $actual_resource $actual_name
+}
+
+def parse_ready [ready: string] {
+  $ready | split column "/" actual desired
 }
 
 def parse_age [age: string] {

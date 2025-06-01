@@ -26,6 +26,8 @@ diff-expected-exit-codes = [0, 1]
 sign-on-push = true
 
 [aliases]
+l = ["log", "-n", "20"]
+ll = ["log", "-n", "20", "-r", "::trunk() | ::@"]
 view-pr = ["util", "exec", "--", "bash", "-c", """
 #!/usr/bin/env bash
 gh pr view $(jj log --no-graph -r @ -T 'bookmarks' | sed 's/\\*//') -w
@@ -33,3 +35,6 @@ gh pr view $(jj log --no-graph -r @ -T 'bookmarks' | sed 's/\\*//') -w
 #    ^^
 # This last empty string will become "$0" in bash, so your actual arguments
 # are all included in "$@" and start at "$1" as expected.
+
+[revset-aliases]
+bot_author = '(author(tl-renovate) | author(dependabot))'
