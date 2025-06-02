@@ -20,7 +20,7 @@ diff-expected-exit-codes = [0, 1]
 
 [template-aliases]
 'format_timestamp(timestamp)' = 'timestamp.ago()'
-'format_short_signature(signature)' = 'signature.email().local()'
+'format_short_signature(signature)' = 'if(self.mine(), raw_escape_sequence("\e[0;32m") ++ "Me"  ++ raw_escape_sequence("\e[0m"), signature.email())'
 
 [git]
 sign-on-push = true
