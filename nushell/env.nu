@@ -2,9 +2,6 @@
 #
 # version = "0.98.0"
 
-# Set the default shell early so other programs can access it
-$env.SHELL = $"($env.HOME)/bin/nu"
-
 def create_left_prompt [] {
     let dir = match (do --ignore-errors { $env.PWD | path relative-to $nu.home-path }) {
         null => $env.PWD
