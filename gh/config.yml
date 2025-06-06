@@ -9,7 +9,8 @@ pager:
 # Aliases allow you to create nicknames for gh commands
 aliases:
     co: pr checkout
-    my-prs: 'search prs archived:false --state=open --review-requested=@me --sort updated -L150 '
+    my-reviews: 'search prs archived:false --state=open --review-requested=@me --sort updated -L150 '
+    my-prs: 'search prs archived:false --state=open --author=@me --owner=TrueLayer --sort updated -L150 '
     tl-prs: 'search prs archived:false --state=open --author=@me --owner=TrueLayer --sort updated -L150 '
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
