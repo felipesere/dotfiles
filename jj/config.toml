@@ -3,11 +3,10 @@ name = "Felipe Sere"
 email = "github@felipesere.com"
 
 [ui]
+editor = "nvim"
 default-command = ["log", "--limit", "10"]
 
-diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
-diff.format = "git"
-diff.tool = [
+diff-formatter = [
   "delta",
   "$left",
   "$right",
@@ -21,6 +20,19 @@ diff-expected-exit-codes = [0, 1]
 [template-aliases]
 'format_timestamp(timestamp)' = 'timestamp.ago()'
 'format_short_signature(signature)' = 'if(self.mine(), raw_escape_sequence("\e[0;33m") ++ "Me"  ++ raw_escape_sequence("\e[0m"), signature.email())'
+
+[templates]
+draft_commit_description = '''
+concat(
+  coalesce(description, default_commit_description, "\n"),
+  surround(
+    "\nJJ: This commit contains the following changes:\n", "",
+    indent("JJ:     ", diff.stat(72)),
+  ),
+  "\nJJ: ignore-rest\n",
+  diff.git(),
+)
+'''
 
 [git]
 sign-on-push = true
