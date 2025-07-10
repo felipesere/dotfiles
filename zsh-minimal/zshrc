@@ -47,7 +47,9 @@ if [[ "$(uname)" == "Darwin" ]]; then
   eval "$(brew shellenv)"
 fi
 
+mkdir -p $HOME/.zshfunc
 fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
+fpath+=$HOME/.zshfunc
 
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit -u

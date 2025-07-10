@@ -143,23 +143,22 @@ kpfs() {
 kpfp() {
   local -r pod="${1:-$(kubectl get pod --no-headers | choose 0 | fzf)}"
   local -r data="$(kubectl get pod "${pod}" -ojson)"
-  if [[ "$(echo "${data}" | jq '.spec.containers | length')" = 1 ]]; then
-    container="$(echo "${data}" | jq ".spec.containers[0].name" -r)"
+  if [[ "$(jq '.spec.containers | length' <<< "${data}")" = 1 ]]; then
+    local -r cname="$(jq ".spec.containers[0].name" -r <<< "${data}")"
   else
-    # TODO: respect kubectl.kubernetes.io/default-container if set?
-    container="$(echo "${data}" | jq ".spec.containers[].name" -r | fzf --header='mutliple containers; please pick one')" # user choice
+    local -r cname="$(jq ".spec.containers[].name" -r <<< "${data}" | fzf --header='mutliple containers; please pick one')" # user choice
   fi
-  datajson="$(echo "${data}" | jq ".spec.containers[] | select(.name==\"${container}\")")"
-  if [[ "$(echo "${datajson}" | jq ".ports")" == "null" ]]; then
-    echo "No ports for $(tput bold)${container}$(tput sgr0) container in $(tput bold)${pod}$(tput sgr0)"
+  local -r container="$(jq ".spec.containers[] | select(.name==\"${cname}\")" <<< "${data}")"
+  if [[ "$(jq ".ports" <<< "${container}")" == "null" ]]; then
+    echo "No ports for $(tput bold)${cname}$(tput sgr0) container in $(tput bold)${pod}$(tput sgr0)"
     return 1
   fi
-  if [ "$(echo "${datajson}" | jq ".ports[]" -Mc | wc -l)" -gt 1 ]; then
-    portjson="$(echo "${datajson}" | jq ".ports[]" -Mc | fzf --header="pick a port object")"
+  if [ "$(jq ".ports[]" -Mc <<< "${container}" | wc -l)" -gt 1 ]; then
+    portjson="$(jq ".ports[]" -Mc <<< "${container}" | fzf --header="pick a port object")"
   else
-    portjson="$(echo "${datajson}" | jq ".ports[0]" -Mc)"
+    portjson="$(jq ".ports[0]" -Mc <<< "${cname}")"
   fi
-  port="$(echo "${portjson}" | jq ".containerPort" -r)"
+  port="$(jq ".containerPort" -r <<< "${portjson}")"
   echo "Forwarding to pod/${pod}:${port} via local 8000"
   kubectl port-forward "${pod}" "8000:${port}"
 }
