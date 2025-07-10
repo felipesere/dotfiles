@@ -44,6 +44,12 @@ return {
           pull_request_ready = { raw = "[r]", rendered = "", highlight = "RenderMarkdownHint" },
         },
       },
+      pipe_table = {
+        style = "trimmed",
+      },
+      anti_conceal = {
+        disabled_modes = { "n" },
+      },
     },
   },
 }
