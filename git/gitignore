@@ -68,3 +68,7 @@ zzz-felipe
 .story
 
 .jj
+
+# Manual place where I drop releaser stuff
+out/
+libraries.db
