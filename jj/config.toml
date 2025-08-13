@@ -17,6 +17,10 @@ diff-formatter = [
 [merge-tools.delta]
 diff-expected-exit-codes = [0, 1]
 
+[merge-tools.nvim]
+prgram = "nvim"
+edit-args = ["-c", "DiffEditor $left $right $output"]
+
 [template-aliases]
 'format_timestamp(timestamp)' = 'timestamp.ago()'
 'format_short_signature(signature)' = 'if(self.mine(), raw_escape_sequence("\e[0;33m") ++ "Me"  ++ raw_escape_sequence("\e[0m"), signature.email())'
@@ -40,6 +44,9 @@ sign-on-push = true
 [aliases]
 l = ["log", "-n", "20"]
 ll = ["log", "-n", "20", "-r", "::trunk() | ::@"]
+lll = ["log", "-r", "::trunk() | ::@"]
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@"]
+tug- = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
 view-pr = [
   "util",
   "exec",
