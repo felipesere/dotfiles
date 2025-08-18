@@ -1,0 +1,12 @@
+font-family = "MonaspiceNe NFM"
+theme = light:rose-pine-dawn,dark:nord
+
+shell-integration-features = no-cursor
+cursor-style = block
+cursor-style-blink = false
+
+link-url = true
+
+keybind = super+option+l=set_font_size:14
+keybind = super+option+m=set_font_size:18
+keybind = super+option+k=set_font_size:24
