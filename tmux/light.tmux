@@ -4,7 +4,8 @@ set -gu window-status-current-format
 set -gu window-status-format
 
 # 👇 this controls the actual background of the status bar
-set -g status-style bg=colour8
+# 180 works better for the theme on Ghostty
+set -g status-style bg=colour180
 
 setw -g window-status-current-format  '#[fg=black,bg=colour9] #I #[bg=colour1] #W '
 setw -g window-status-format          '#[fg=colour239,bg=colour246 ] #I #[bg=colour252] #W '
