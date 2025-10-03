@@ -1,5 +1,5 @@
 font-family = "MonaspiceNe NFM"
-theme = light:rose-pine-dawn,dark:nord
+theme = light:Rose Pine Dawn,dark:Nord
 
 shell-integration-features = no-cursor
 cursor-style = block
