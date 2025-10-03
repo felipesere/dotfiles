@@ -17,3 +17,11 @@ vim.api.nvim_create_user_command("JsonFmt", "%!jq '.'", { desc = "Format JSON wi
 
 -- Remove all trailing whitespace by pressing F5
 vim.api.nvim_create_user_command("Trim", [[%s/\s\+$//e]], { desc = "Trim trailing whitespace" })
+
+-- Disable spell-check in
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "txt" },
+  callback = function()
+    vim.opt_local.spell = false
+  end,
+})
