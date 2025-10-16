@@ -103,7 +103,9 @@ eval "$(kubectl completion zsh)"
 [ -f ~/.config/k3d/completion.zsh ] && source ~/.config/k3d/completion.zsh
 
 # Fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if command -v fzf &> /dev/null; then
+  source <(fzf --zsh)
+fi
 
 # JJ/jujitsu a new take on `git`
 if command -v jj &> /dev/null; then
