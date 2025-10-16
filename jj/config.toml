@@ -5,6 +5,7 @@ email = "github@felipesere.com"
 [ui]
 editor = "nvim"
 default-command = ["log", "--limit", "10"]
+diff-editor = ":builtin"
 
 diff-formatter = [
   "delta",
