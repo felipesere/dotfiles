@@ -23,7 +23,6 @@ edit-args = ["-c", "DiffEditor $left $right $output"]
 
 [template-aliases]
 'format_timestamp(timestamp)' = 'timestamp.ago()'
-'format_short_signature(signature)' = 'if(self.mine(), raw_escape_sequence("\e[0;33m") ++ "Me"  ++ raw_escape_sequence("\e[0m"), signature.email())'
 
 [templates]
 draft_commit_description = '''
@@ -47,6 +46,10 @@ ll = ["log", "-n", "20", "-r", "::trunk() | ::@"]
 lll = ["log", "-r", "::trunk() | ::@"]
 tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@"]
 tug- = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+up = ["util", "exec", "--", "bash", "-c", """
+#!/usr/bin/env bash
+jj git fetch && jj new trunk
+""", ""]
 view-pr = [
   "util",
   "exec",
@@ -67,3 +70,5 @@ gh pr view $(jj log --no-graph -r 'near_bookmark' -T 'bookmarks' | sed 's/\\*//'
 bot_author = '(author(tl-renovate) | author(dependabot))'
 trunk = 'trunk()'
 near_bookmark = 'latest(::@ & bookmarks())'
+proper_tags = 'tags(regex:"v\\d+.\\d+.\\d+$")'
+immutable_heads = "builtin_immutable_heads() && proper_tags()"
