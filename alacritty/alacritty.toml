@@ -3,10 +3,10 @@ import = ["~/.alacritty-font-size.toml", "~/.alacritty.theme.toml"]
 
 [env]
 TERM = "xterm-256color"
-SHELL = "/opt/homebrew/bin/nu"
+# SHELL = "/opt/homebrew/bin/nu"
 
-[terminal]
-shell = { program = "/opt/homebrew/bin/nu" }
+# [terminal]
+# shell = { program = "/opt/homebrew/bin/nu" }
 
 [font.bold]
 family = "MonaspiceNe NFM"
