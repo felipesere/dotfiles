@@ -7,7 +7,8 @@ set -gu window-status-format
 # 180 works better for the theme on Ghostty
 set -g status-style bg=colour180
 
-setw -g window-status-current-format  '#[fg=black,bg=colour9] #I #[bg=colour1] #W '
-setw -g window-status-format          '#[fg=colour239,bg=colour246 ] #I #[bg=colour252] #W '
+
+setw -g window-status-current-format  '#[fg=black,bg=colour9] #I #[bg=colour1] #W #{?window_zoomed_flag,*,}#{?#{>:#{window_panes},1},#{window_panes},} '
+setw -g window-status-format          '#[fg=colour239,bg=colour246 ] #I #[bg=colour252] #W #{?window_zoomed_flag,*,}#{?#{>:#{window_panes},1},#{window_panes},} '
 
 set -g status-right '#[fg=colour11]#[bg=colour11,fg=black] %d/%m/%Y #[fg=colour9]#[bg=colour9,fg=black] Local %H:%M '
