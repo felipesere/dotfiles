@@ -23,10 +23,4 @@ return {
       end,
     },
   },
-  -- {
-  --   "folke/edgy.nvim",
-  --   opts = function(_, opts)
-  --     table.insert(opts.animate, { enabled = false })
-  --   end,
-  -- },
 }
