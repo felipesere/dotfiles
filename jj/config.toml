@@ -7,16 +7,15 @@ editor = "nvim"
 default-command = ["log", "--limit", "10"]
 diff-editor = ":builtin"
 
-diff-formatter = [
-  "delta",
-  "$left",
-  "$right",
-  "--file-transformation",
-  "s|.*/jj-diff-[^/]*[^/]*/||",
-]
 
-[merge-tools.delta]
-diff-expected-exit-codes = [0, 1]
+[[--scope]]
+--when.commands = ["diff", "show"]
+
+[--scope.ui]
+# https://github.com/jj-vcs/jj/blob/v0.25.0/docs/config.md#processing-contents-to-be-paged
+pager = "delta"
+# NOTE: this is required when using `delta` as a pager
+diff-formatter = ":git"
 
 [merge-tools.nvim]
 prgram = "nvim"
