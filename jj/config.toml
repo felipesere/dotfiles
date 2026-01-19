@@ -7,19 +7,11 @@ editor = "nvim"
 default-command = ["log", "--limit", "10"]
 diff-editor = ":builtin"
 
-
 [[--scope]]
 --when.commands = ["diff", "show"]
-
 [--scope.ui]
-# https://github.com/jj-vcs/jj/blob/v0.25.0/docs/config.md#processing-contents-to-be-paged
 pager = "delta"
-# NOTE: this is required when using `delta` as a pager
 diff-formatter = ":git"
-
-[merge-tools.nvim]
-prgram = "nvim"
-edit-args = ["-c", "DiffEditor $left $right $output"]
 
 [template-aliases]
 'format_timestamp(timestamp)' = 'timestamp.ago()'
@@ -36,6 +28,7 @@ concat(
   diff.git(),
 )
 '''
+git_push_bookmark = '"felipesere/push-" ++ change_id.short()'
 
 [git]
 sign-on-push = true
@@ -58,20 +51,56 @@ view-pr = [
   "-c",
   """
 #!/usr/bin/env bash
-gh pr view $(jj log --no-graph -r 'near_bookmark' -T 'bookmarks' | sed 's/\\*//') -w
+
+NEAREST_BOOKMARK=$(jj log --no-graph -r 'near_bookmark' -T 'bookmarks' | sed 's/\\*//')
+BOOKMARK="${1:-$NEAREST_BOOKMARK}"
+
+gh pr view $BOOKMARK -w
+""",
+  "",
+]
+create-pr = [
+  "util",
+  "exec",
+  "--",
+  "bash",
+  "-c",
+  """
+#!/usr/bin/env bash
+gh pr create \
+ --head $(jj log -r "${1:-@}" --no-graph --color=never -T 'bookmarks') --base $(jj repo-trunk) --draft --fill-first
 """,
   "",
 ]
 #    ^^
 # This last empty string will become "$0" in bash, so your actual arguments
 # are all included in "$@" and start at "$1" as expected.
+repo-trunk = [
+  "log",
+  "--revisions",
+  "trunk()",
+  "--no-graph",
+  "--color=never",
+  "-T",
+  "bookmarks",
+]
+
+prs = ["util", "exec", "--", "bash", "-c", """
+#!/usr/bin/env bash
+   PR_BOOKMARK=$(gh pr list --json number,title,headRefName \
+         | fzj --format '#{number} {title}'\
+         | jq -r '.headRefName')
+  jj bookmark track "$PR_BOOKMARK@origin"
+  jj new $PR_BOOKMARK
+""", ""]
 
 [revset-aliases]
 bot_author = '(author(tl-renovate) | author(dependabot))'
 trunk = 'trunk()'
+merged = '::trunk()'
 near_bookmark = 'latest(::@ & bookmarks())'
 proper_tags = 'tags(regex:"v\\d+.\\d+.\\d+$")'
-immutable_heads = "builtin_immutable_heads() && proper_tags()"
 'around(r, depth)' =  'ancestors(r, depth) | descendants(r, depth)'
 'around(r)' =  'ancestors(r, 5) | descendants(r, 5)'
 'around_fork(left, right)' = 'around(fork_point(left | right), 5) | left | right'
+eops = 'author_name(substring-i:"felipe") | author_name(substring-i:"eirik") | author_name(substring-i:"weichung")'
