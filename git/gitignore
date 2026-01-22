@@ -72,3 +72,4 @@ zzz-felipe
 # Manual place where I drop releaser stuff
 out/
 libraries.db
+.linear.toml

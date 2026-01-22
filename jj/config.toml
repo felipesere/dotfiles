@@ -72,3 +72,6 @@ trunk = 'trunk()'
 near_bookmark = 'latest(::@ & bookmarks())'
 proper_tags = 'tags(regex:"v\\d+.\\d+.\\d+$")'
 immutable_heads = "builtin_immutable_heads() && proper_tags()"
+'around(r, depth)' =  'ancestors(r, depth) | descendants(r, depth)'
+'around(r)' =  'ancestors(r, 5) | descendants(r, 5)'
+'around_fork(left, right)' = 'around(fork_point(left | right), 5) | left | right'
