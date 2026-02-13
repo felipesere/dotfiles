@@ -85,8 +85,8 @@ alias typora="open -a typora"
 alias next="cargo nextest run"
 alias todo="tmux move-window -t 0; cd ~/Development; set_title TODO; nvim todo.md"
 alias rg='rg --glob="!.git/"  --ignore-file '$HOME/.dotfiles/ripgrepignore
-alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
-alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+# alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
+# alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 alias htop="btm -b"
 
 # Collection of useful kubernetes functions and aliases
