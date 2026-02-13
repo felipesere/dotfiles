@@ -85,13 +85,33 @@ repo-trunk = [
   "bookmarks",
 ]
 
-prs = ["util", "exec", "--", "bash", "-c", """
-#!/usr/bin/env bash
+prs = [
+  "util",
+  "exec",
+  "--",
+  "bash",
+  "-c",
+  """
+  #!/usr/bin/env bash
    PR_BOOKMARK=$(gh pr list --json number,title,headRefName \
          | fzj --format '#{number} {title}'\
          | jq -r '.headRefName')
-  jj bookmark track "$PR_BOOKMARK@origin"
+  jj bookmark track "$PR_BOOKMARK" --remote=origin
   jj new $PR_BOOKMARK
+""", ""]
+
+ci = [
+   "util",
+   "exec",
+   "--",
+   "bash",
+   "-c",
+   """
+   #!/usr/bin/env bash
+   if jj root >/dev/null 2>&1; then
+      repo=$(basename $(jj root))
+      open "https://app.circleci.com/pipelines/github/TrueLayer/$repo"
+   fi
 """, ""]
 
 [revset-aliases]
