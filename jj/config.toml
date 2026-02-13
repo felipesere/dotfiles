@@ -67,8 +67,10 @@ create-pr = [
   "-c",
   """
 #!/usr/bin/env bash
+branch="$(jj repo-trunk)"
+
 gh pr create \
- --head $(jj log -r "${1:-@}" --no-graph --color=never -T 'bookmarks') --base $(jj repo-trunk) --draft --fill-first
+ --head $(jj log -r "${1:-@}" --no-graph --color=never -T 'bookmarks') --base "${branch%@origin}" --draft --fill-first
 """,
   "",
 ]
