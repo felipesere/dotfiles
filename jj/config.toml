@@ -39,6 +39,7 @@ ll = ["log", "-n", "20", "-r", "::trunk() | ::@"]
 lll = ["log", "-r", "::trunk() | ::@"]
 tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@"]
 tug- = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+conflicts = ["log", "-r", "@", "-T", "conflicted_files.map(|f| f.path()).join(\"\\n\")", "--no-graph"]
 up = ["util", "exec", "--", "bash", "-c", """
 #!/usr/bin/env bash
 jj git fetch && jj new trunk
