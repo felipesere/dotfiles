@@ -17,28 +17,30 @@ diff-formatter = ":git"
 'format_timestamp(timestamp)' = 'timestamp.ago()'
 
 [templates]
-draft_commit_description = '''
-concat(
-  coalesce(description, default_commit_description, "\n"),
-  surround(
-    "\nJJ: This commit contains the following changes:\n", "",
-    indent("JJ:     ", diff.stat(72)),
-  ),
-  "\nJJ: ignore-rest\n",
-  diff.git(),
-)
-'''
+draft_commit_description = 'builtin_draft_commit_description_with_diff'
 git_push_bookmark = '"felipesere/push-" ++ change_id.short()'
 
 [git]
 sign-on-push = true
 
+[revset-aliases]
+bot_author = '(author(tl-renovate) | author(dependabot))'
+trunk = 'trunk()'
+merged = '::trunk()'
+near_bookmark = 'latest(::@ & bookmarks())'
+proper_tags = 'tags(regex:"v\\d+.\\d+.\\d+$")'
+'around(r, depth)' =  'ancestors(r, depth) | descendants(r, depth)'
+'around(r)' =  'ancestors(r, 5) | descendants(r, 5)'
+'around_fork(left, right)' = 'around(fork_point(left | right), 5) | left | right'
+eops = 'author_name(substring-i:"felipe") | author_name(substring-i:"eirik") | author_name(substring-i:"weichung")'
+'branch(x)' = 'fork_point(main | x)..x'
+
 [aliases]
 l = ["log", "-n", "20"]
 ll = ["log", "-n", "20", "-r", "::trunk() | ::@"]
 lll = ["log", "-r", "::trunk() | ::@"]
-tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@"]
-tug- = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+tug = ["bookmark", "advance"]
+tug- = ["bookmark", "advance", "--to", "@-"]
 conflicts = ["log", "-r", "@", "-T", "conflicted_files.map(|f| f.path()).join(\"\\n\")", "--no-graph"]
 up = ["util", "exec", "--", "bash", "-c", """
 #!/usr/bin/env bash
@@ -60,6 +62,7 @@ gh pr view $BOOKMARK -w
 """,
   "",
 ]
+
 create-pr = [
   "util",
   "exec",
@@ -67,17 +70,55 @@ create-pr = [
   "bash",
   "-c",
   """
-#!/usr/bin/env bash
-branch="$(jj repo-trunk)"
+  #!/usr/bin/env bash
+  set -euo pipefail
 
-gh pr create \
- --head $(jj log -r "${1:-@}" --no-graph --color=never -T 'bookmarks') --base "${branch%@origin}" --draft --fill-first
+  # Get descriptions of changes between trunk and @
+  descriptions=$(jj log --no-graph -r 'trunk()..@' -T 'if(description,
+  description.first_line() ++ "\n")')
+
+  # Count non-empty lines
+  count=$(echo "$descriptions" | grep -c '.' || true)
+
+  if [[ "$count" -eq 0 ]]; then
+    # No existing descriptions, go straight to custom input
+    desc=$(gum input --placeholder "Enter a description...")
+  elif [[ "$count" -eq 1 ]]; then
+    # Only one description, use it directly
+    desc=$(echo "$descriptions" | grep '.')
+  else
+    # Multiple descriptions, let the user pick or write their own
+    desc=$(printf '%s\n%s' "$descriptions" "[custom]" \
+      | grep '.' \
+      | gum filter --placeholder "Pick a description...")
+  fi
+
+  # If they picked [custom] or we need input
+  if [[ "$desc" == "[custom]" || -z "$desc" ]]; then
+    desc=$(gum input --placeholder "Enter a description...")
+  fi
+
+  branch="$(jj repo-trunk)"
+
+  gh pr create \
+  --head $(jj log -r "${1:-@}" --no-graph --color=never -T 'bookmarks') --base "${branch%@origin}" --draft --title "$desc" --body ""
 """,
   "",
 ]
-#    ^^
-# This last empty string will become "$0" in bash, so your actual arguments
-# are all included in "$@" and start at "$1" as expected.
+
+web = [
+  "util",
+  "exec",
+  "--",
+  "bash",
+  "-c",
+  """
+  #!/usr/bin/env bash
+  open $(jj log -r @ -T 'git_web_url()' --no-graph)
+""", ""]
+
+
+
 repo-trunk = [
   "log",
   "--revisions",
@@ -117,13 +158,3 @@ ci = [
    fi
 """, ""]
 
-[revset-aliases]
-bot_author = '(author(tl-renovate) | author(dependabot))'
-trunk = 'trunk()'
-merged = '::trunk()'
-near_bookmark = 'latest(::@ & bookmarks())'
-proper_tags = 'tags(regex:"v\\d+.\\d+.\\d+$")'
-'around(r, depth)' =  'ancestors(r, depth) | descendants(r, depth)'
-'around(r)' =  'ancestors(r, 5) | descendants(r, 5)'
-'around_fork(left, right)' = 'around(fork_point(left | right), 5) | left | right'
-eops = 'author_name(substring-i:"felipe") | author_name(substring-i:"eirik") | author_name(substring-i:"weichung")'
