@@ -73,3 +73,4 @@ zzz-felipe
 out/
 libraries.db
 .linear.toml
+.claude
