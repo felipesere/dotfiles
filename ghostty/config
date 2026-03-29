@@ -9,4 +9,4 @@ link-url = true
 
 keybind = super+option+l=set_font_size:14
 keybind = super+option+m=set_font_size:18
-keybind = super+option+k=set_font_size:24
+keybind = super+option+p=set_font_size:24
