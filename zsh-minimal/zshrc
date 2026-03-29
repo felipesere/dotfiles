@@ -31,19 +31,20 @@ fi
 
 source "$HOME/.dotfiles/zsh-minimal/zplug.zsh"
 
-GO_BINARIES=$HOME/go/bin
-CARGO_BINARIES=$HOME/.cargo/bin
-PERSONAL_BINARIES=$HOME/bin
-PIPX_BINARIES=$HOME/.local/bin
-EXTRAS="/usr/local/bin/aws_completer"
-HOMEBREW="/opt/homebrew/bin"
-JETBRAINS="$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
-
-# Local binaries
-export PATH=$CARGO_BINARIES:$HOMEBREW:$PERSONAL_BINARIES:$PIPX_BINARIES:$GO_BINARIES:$EXTRAS:$JETBRAINS:$PATH
+# setup the PATH
+() {
+  local go_bin=$HOME/go/bin
+  local cargo_bin=$HOME/.cargo/bin
+  local personal_bin=$HOME/bin
+  local pipx_binaries=$HOME/.local/bin
+  local homebrew_bin="/opt/homebrew/bin"
+  local jetbrains_bins="$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+  
+  export PATH="$cargo_bin:$homebrew_bin:$personal_bin:$pipx_binaries:$go_bin:$EXTRAS:$jetbrains_bins:$PATH"
+}
 
 if [[ "$(uname)" == "Darwin" ]]; then
-  # Install homebrew!
+  # Install homebrew_bin!
   eval "$(brew shellenv)"
 fi
 
@@ -130,8 +131,9 @@ if command -v atuin &> /dev/null; then
 fi
 
 c() {
-  IN_REPO=$(command git rev-parse --is-inside-work-tree 2&> /dev/null)
-  if [ "$IN_REPO" = "true" ]; then
+  if jj root &>/dev/null; then
+    builtin cd -q $(command jj root)
+  elif [ "$(command git rev-parse --is-inside-work-tree 2&> /dev/null)" = "true" ]; then
     builtin cd -q $(command git root)
   fi
 }
@@ -152,10 +154,10 @@ set_title() {
 }
 
 title() {
- IN_REPO=$(command git rev-parse --is-inside-work-tree 2&> /dev/null)
-  if [ "$IN_REPO" = "true" ]; then
-    PATH_IN_GIT=$(command git root)
-    set_title $(basename $PATH_IN_GIT)
+  if jj root &>/dev/null; then
+    set_title $(basename $(jj root))
+  elif [ "$(command git rev-parse --is-inside-work-tree 2&> /dev/null)" = "true" ]; then
+    set_title $(basename $(command git root))
   else
     set_title $(basename $PWD)
   fi
@@ -163,23 +165,6 @@ title() {
 
 chpwd_functions+=title
 title
-
-font_size() {
-  lq -it --input toml ".font.size = $1" $HOME/.alacritty-font-size.toml
-  touch $HOME/.config/alacritty/alacritty.toml
-}
-
-presentation_mode() {
-  font_size 32
-}
-
-normal_mode() {
-  font_size 24
-}
-
-laptop_mode() {
-  font_size 16
-}
 
 dots() {
   cd ~/.dotfiles
@@ -204,14 +189,6 @@ warp() {
 
   if [[ "$1" == "status" || "$1" == "s" ]]; then
     warp-cli status
-  fi
-}
-
-split-k8s() {
-  if [[ "$1" == "" ]]; then
-    echo "Need a path to a file"
-  else
-    yq -s "( .kind | downcase ) + \".\" + ( .metadata.name | downcase ) + \".yaml\"" $1
   fi
 }
 

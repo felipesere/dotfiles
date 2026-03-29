@@ -123,17 +123,24 @@ alias kysa="ky sa"
 alias kyn="ky node"
 alias kyh="ky hpa"
 
+alias ksec='kubectl get secrets --no-headers -o custom-columns=":metadata.name" | fzf --prompt="Select secret: " | xargs -I{} kubectl get secret {} -o json | jq -r ".data | to_entries[] | \"\(.key): \(.value | @base64d)\""'
+
 
 # port-forward to a service by selecting a ports json entry
 kpfs() {
   local -r service="${1:-$(kubectl get service --no-headers | choose 0 | fzf)}"
   local -r spec="$(kubectl get service "${service}" -ojson | jq ".spec")"
-  if [ "$(echo "${spec}" | jq ".ports[]" -Mc | wc -l)" -gt 1 ]; then
-    portjson="$(echo "${spec}" | jq ".ports[]" -Mc | fzf --header='pick a port object')"
+  local portjson port
+
+  if [ "$(echo "${spec}" | jq '.ports | length')" -gt 1 ]; then
+    portjson="$(echo "${spec}" | jq '.ports[]' -Mc | fzf --header='pick a port object')"
   else
-    portjson="$(echo "${spec}" | jq ".ports[0]" -Mc)"
+    portjson="$(echo "${spec}" | jq '.ports[0]' -Mc)"
   fi
-  local -r port="$(echo "${portjson}" | jq ".port" -r)"
+
+  [ -z "${portjson}" ] && { echo "No port selected."; return 1; }
+
+  port="$(echo "${portjson}" | jq '.port' -r)"
   echo "Forwarding to svc/${service}:${port} via local 8000"
   kubectl port-forward "svc/${service}" "8000:${port}"
 }
@@ -190,4 +197,26 @@ podversion() {
   local img=$(echo $image | sd '.*/(.*):.*' '$1')
   local version=$(echo $image | sd '.*:(.*)' '$1')
   echo -e "$grey$registry$reset/$green$img$reset:$blue$version$reset"
+}
+
+split-k8s() {
+  if [[ "$1" == "" ]]; then
+    echo "Need a path to a file"
+  else
+    yq -s "( .kind | downcase ) + \".\" + ( .metadata.name | downcase ) + \".yaml\"" $1
+  fi
+}
+
+kube-resources() {
+  local -r name="$1"
+
+
+  kubectl get secrets,replicasets.apps,pods,prometheusrules.monitoring.coreos.com,configmaps,jobs.batch,serviceaccounts,services,deployments.apps,servicemonitors.monitoring.coreos.com,rolebindings.rbac.authorization.k8s.io,horizontalpodautoscalers.autoscaling,honeycombderivedcolumns.honeycomb.truelayer.com,httproutes.gateway.networking.k8s.io \
+  --ignore-not-found \
+  -A \
+  --field-selector metadata.name="${name}" \
+  -o json \
+    2>/dev/null \
+  | jq -r '["NAMESPACE","KIND","NAME"], (.items[] | [(.metadata.namespace // "cluster-scoped"), .kind, .metadata.name]) | @tsv' \
+  | column -t
 }
