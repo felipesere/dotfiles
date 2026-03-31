@@ -1,4 +1,4 @@
-font-family = "MonaspiceNe NFM"
+font-family = MonaspiceNe NFM
 theme = light:Rose Pine Dawn,dark:Nord
 
 shell-integration-features = no-cursor
