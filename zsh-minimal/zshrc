@@ -90,6 +90,10 @@ alias rg='rg --glob="!.git/"  --ignore-file '$HOME/.dotfiles/ripgrepignore
 # alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 alias htop="btm -b"
 
+if command -v todone &> /dev/null; then
+  alias t="todone"
+fi
+
 # Collection of useful kubernetes functions and aliases
 source "$HOME/.dotfiles/zsh-minimal/kubernetes.zsh"
 
