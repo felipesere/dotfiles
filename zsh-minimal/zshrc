@@ -196,8 +196,8 @@ airpods() {
   BluetoothConnector 2C-32-6A-F0-06-B9 --notify
 }
 
-if [[ -f "$HOME/.client.1password.secrets" ]]; then
-  source <(op inject --in-file ~/.client.1password.secrets)
+if [[ -f "$HOME/.custom-client-env" ]]; then
+  source "$HOME/.custom-client-env";
 fi
 
 if [[ -f "$HOME/.custom-client-functions" ]]; then
