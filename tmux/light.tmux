@@ -11,4 +11,4 @@ set -g status-style bg=colour180
 setw -g window-status-current-format  '#[fg=black,bg=colour9] #I #[bg=colour1] #W #{?window_zoomed_flag,*,}#{?#{>:#{window_panes},1},#{window_panes},} '
 setw -g window-status-format          '#[fg=colour239,bg=colour246 ] #I #[bg=colour252] #W #{?window_zoomed_flag,*,}#{?#{>:#{window_panes},1},#{window_panes},} '
 
-set -g status-right '#[fg=colour11]#[bg=colour11,fg=black] %d/%m/%Y #[fg=colour9]#[bg=colour9,fg=black] Local %H:%M '
+set -g status-right '#[fg=colour11]#[bg=colour11,fg=black] %d/%m/%Y #[fg=colour9]#[bg=colour9,fg=black] Local %H:%M | CET: #(TZ="Europe/Berlin" date +%%H:%%M) '
