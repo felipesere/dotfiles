@@ -2,16 +2,6 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
--- Simple command that runs a script from my dotfiles that toggles the system to Light mode
-vim.api.nvim_create_user_command("Light", function()
-  os.execute("$HOME/.dotfiles/bin/theme.sh light")
-end, { desc = "Change to light mode" })
-
--- as above, but for dark...
-vim.api.nvim_create_user_command("Dark", function()
-  os.execute("$HOME/.dotfiles/bin/theme.sh dark")
-end, { desc = "Change to Dark mode" })
-
 -- I never rememebr the incantation to format a buffer with jq
 vim.api.nvim_create_user_command("JsonFmt", "%!jq '.'", { desc = "Format JSON with jq" })
 
@@ -24,4 +14,25 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.opt_local.spell = false
   end,
+})
+
+local function apply_theme()
+  if vim.o.background == "light" then
+    require("zenbones")
+    vim.cmd.colorscheme("rosebones")
+  else
+    require("catppuccin")
+    vim.cmd.colorscheme("catppuccin-frappe")
+  end
+end
+
+-- run every time the appreach changes
+vim.api.nvim_create_autocmd("OptionSet", {
+  pattern = "background",
+  callback = apply_theme,
+})
+
+-- run once at startup, since OptionSet won't fire for the initial/unchanged value
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = apply_theme,
 })

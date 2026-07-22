@@ -5,6 +5,7 @@ return {
   {
     "zenbones-theme/zenbones.nvim",
     lazy = false,
+    priority = 1001,
     {
       "LazyVim/LazyVim",
       opts = {
@@ -14,8 +15,9 @@ return {
   },
   {
     "catppuccin",
+    lazy = false,
     priority = 1000,
-    optional = true,
+    optional = false,
   },
   -- { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 }
