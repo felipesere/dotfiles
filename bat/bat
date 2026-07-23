@@ -1,2 +1,4 @@
---theme="Monokai Extended Light"
+--theme-light="Monokai Extended Light"
+--theme-dark="Nord"
+--theme auto:system
 --style="numbers,changes,header"

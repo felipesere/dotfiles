@@ -35,14 +35,5 @@ sd '^features = .*' "features = ${mode}" ~/.dotfiles/git/gitconfig
 ## Vim
 echo $mode >~/.theme
 
-## Bat
-bat_theme=""
-if [[ "$mode" = "light" ]]; then
-  bat_theme="Monokai Extended Light"
-else
-  bat_theme="Nord"
-fi
-sd -- '^--theme.*' "--theme=\"${bat_theme}\"" ~/.dotfiles/bat/bat
-
 ## OSX
 osascript -e "tell app \"System Events\" to tell appearance preferences to set dark mode to ${is_dark}"
