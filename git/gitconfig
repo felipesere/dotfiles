@@ -118,3 +118,10 @@ defaultBranch = main
 
 [includeIf "gitdir:~/Development/truelayer/"]
   path = ~/.gitconfig-truelayer
+
+[includeIf "gitdir:~/Development/zimpler/"]
+  path = ~/.gitconfig-truelayer
+
+[url "ssh://git@gitlab.tooling.zimpler.net/"]
+  insteadOf = https://gitlab.tooling.zimpler.net/
+
