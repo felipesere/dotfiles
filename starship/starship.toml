@@ -1,5 +1,5 @@
 format = """
-$directory${custom.story}$kubernetes$git_branch$git_state$git_status
+$directory${custom.story}$kubernetes${custom.jj}
 $jobs$character\
 """
 right_format = """
@@ -16,9 +16,11 @@ error_symbol = "[❯](bold red)"
 style = "blue"
 
 [git_branch]
+disabled = true
 style = "bold yellow"
 
 [git_status]
+disabled = true
 format = "[($staged)](yellow)[($untracked)](blue)[($deleted)](red)[($modified)](green) "
 conflicted = "✘"
 untracked = "◍"
@@ -47,3 +49,8 @@ command = "story current"
 when = "story current"
 detect_files = [".story"]
 ignore_timeout = true
+
+[custom.jj]
+when = "jj-starship detect"
+shell = ["jj-starship", "--jj-symbol", ""]
+format = "$output "
