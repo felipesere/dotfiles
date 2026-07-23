@@ -212,3 +212,8 @@ fi
 today() {
   date -u +%Y-%m-%d
 }
+
+source "/Users/felipe.sere/Library/Application Support/arthur/pkgs/lib/shell-init/arthur.zsh" # added by arthur installer
+
+# Added by arthur netskope trust-ca
+export DENO_TLS_CA_STORE="system"
