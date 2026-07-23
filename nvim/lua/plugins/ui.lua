@@ -10,4 +10,8 @@ return {
       -- opts.sections = { lualine_b = { navic } }
     end,
   },
+  {
+    "folke/zen-mode.nvim",
+    opts = {},
+  },
 }
