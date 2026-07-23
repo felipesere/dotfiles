@@ -51,6 +51,7 @@ lll = ["log", "-r", "::trunk() | ::@"]
 tug = ["bookmark", "advance"]
 tug- = ["bookmark", "advance", "--to", "@-"]
 conflicts = ["log", "-r", "@", "-T", "conflicted_files.map(|f| f.path()).join(\"\\n\")", "--no-graph"]
+changed-files = ["log", "-r", "@", "-T", "self.diff().files().map(|f| f.path()).join(\"\\n\")", "--no-graph"]
 up = ["util", "exec", "--", "bash", "-c", """
 #!/usr/bin/env bash
 jj git fetch && jj new trunk
@@ -64,8 +65,11 @@ view-pr = [
   """
 #!/usr/bin/env bash
 
-NEAREST_BOOKMARK=$(jj log --no-graph -r 'near_bookmark' -T 'bookmarks' | sed 's/\\*//')
-BOOKMARK="${1:-$NEAREST_BOOKMARK}"
+nearest_bookmark() {
+  jj log --no-graph -r 'near_bookmark' -T 'local_bookmarks.join("\n")' | fzf --select-1
+}
+
+BOOKMARK="${1:-$(nearest_bookmark)}"
 
 gh pr view $BOOKMARK -w
 """,
