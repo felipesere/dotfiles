@@ -119,6 +119,20 @@ create-pr = [
   "",
 ]
 
+stack = [
+  "util",
+  "exec",
+  "--",
+  "bash",
+  "-c",
+  """
+  #!/usr/bin/env bash
+  #
+  #
+  jj log -r 'bookmarks() & fork_point(main)..' --no-graph -T 'local_bookmarks.join("\n") ++ "\n"' | gum filter --no-limit | tac | xargs gh stack link
+  """, ""
+]
+
 web = [
   "util",
   "exec",
