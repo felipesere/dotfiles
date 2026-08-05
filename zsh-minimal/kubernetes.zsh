@@ -54,10 +54,51 @@ kl() {
 
 # helper to delete resources
 kx() {
-  local -r resource="${1:-$(kubectl api-resources --no-headers | choose 0 | fzf)}"
-  local -r name="${2:-$(kubectl get "${resource}" --no-headers | choose 0 | fzf)}"
+  local test_label=""
+  local test_annotation=""
+  local -a args=()
+  for arg in "$@"; do
+    case "$arg" in
+      --test-label=*)
+        test_label="${arg#--test-label=}"
+        ;;
+      --test-annotation=*)
+        test_annotation="${arg#--test-annotation=}"
+        ;;
+      *)
+        args+=("$arg")
+        ;;
+    esac
+  done
 
-  gum confirm "Delete ${resource}/${name} ?" && kubectl delete ${resource}/${name}
+  local -r resource="${args[1]:-$(kubectl api-resources --no-headers | choose 0 | fzf)}"
+  local -r name="${args[2]:-$(kubectl get "${resource}" --no-headers | choose 0 | fzf)}"
+
+  local confirm_msg="Delete ${resource}/${name} ?"
+
+  if [[ -n "$test_label" ]]; then
+    local -r escaped_label="${test_label//./\\.}"
+    local label_value
+    label_value="$(kubectl get "${resource}/${name}" -o jsonpath="{.metadata.labels.${escaped_label}}")"
+    if [[ -z "$label_value" ]]; then
+      echo "Label '${test_label}' not present on ${resource}/${name}, aborting."
+      return 1
+    fi
+    confirm_msg="Delete ${resource}/${name} (${test_label}=${label_value}) ?"
+  fi
+
+  if [[ -n "$test_annotation" ]]; then
+    local -r escaped_annotation="${test_annotation//./\\.}"
+    local annotation_value
+    annotation_value="$(kubectl get "${resource}/${name}" -o jsonpath="{.metadata.annotations.${escaped_annotation}}")"
+    if [[ -z "$annotation_value" ]]; then
+      echo "Annotation '${test_annotation}' not present on ${resource}/${name}, aborting."
+      return 1
+    fi
+    confirm_msg="Delete ${resource}/${name} (${test_annotation}=${annotation_value}) ?"
+  fi
+
+  gum confirm "$confirm_msg" && kubectl delete ${resource}/${name}
 }
 
 ke() {
