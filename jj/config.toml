@@ -32,6 +32,9 @@ git_push_bookmark = '"felipesere/push-" ++ change_id.short()'
 [git]
 sign-on-push = true
 
+[revsets]
+immutable-heads = 'builtin_immutable_heads() ~ tags(glob:"*-pre*")'
+
 [revset-aliases]
 bot_author = '(author(tl-renovate) | author(dependabot))'
 trunk = 'trunk()'
@@ -52,10 +55,7 @@ tug = ["bookmark", "advance"]
 tug- = ["bookmark", "advance", "--to", "@-"]
 conflicts = ["log", "-r", "@", "-T", "conflicted_files.map(|f| f.path()).join(\"\\n\")", "--no-graph"]
 changed-files = ["log", "-r", "@", "-T", "self.diff().files().map(|f| f.path()).join(\"\\n\")", "--no-graph"]
-up = ["util", "exec", "--", "bash", "-c", """
-#!/usr/bin/env bash
-jj git fetch && jj new trunk
-""", ""]
+
 view-pr = [
   "util",
   "exec",
