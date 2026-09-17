@@ -1,3 +1,9 @@
+local hostname = vim.uv.os_gethostname()
+
+if hostname == "M2VLXHFQPK" then
+  return {}
+end
+
 return {
   {
     "neovim/nvim-lspconfig",
