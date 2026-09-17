@@ -1,12 +1,19 @@
-# Reset the styles that we modify in this file
+# Dark theme: colors only. Layout/format lives in statusline.tmux.
 set -gu status-style
-set -gu window-status-current-format
-set -gu window-status-format
 
 # 👇 this controls the actual background of the status bar
 set -g status-style bg=colour236
 
-setw -g window-status-current-format  '#[fg=colour16,bg=colour8] #I #[bg=colour12] #W #{?window_zoomed_flag,*,}#{?#{>:#{window_panes},1},#{window_panes},} '
-setw -g window-status-format          '#[fg=colour233,bg=colour238 ] #I #[bg=colour240] #W #{?window_zoomed_flag,*,}#{?#{>:#{window_panes},1},#{window_panes},} '
+set -g @thm_win_cur_fg  colour16
+set -g @thm_win_cur_bg1 colour8
+set -g @thm_win_cur_bg2 colour12
 
-set -g status-right '#[fg=colour4]#[fg=colour233,bg=colour4] %d/%m/%Y #[fg=colour10]#[fg=colour233,bg=colour10] %H:%M | UK #(TZ="Europe/London" date +%%H:%%M) '
+set -g @thm_win_fg  colour233
+set -g @thm_win_bg1 colour238
+set -g @thm_win_bg2 colour240
+
+set -g @thm_date_fg colour233
+set -g @thm_date_bg colour4
+
+set -g @thm_time_fg colour233
+set -g @thm_time_bg colour10
