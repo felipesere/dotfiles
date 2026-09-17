@@ -166,9 +166,13 @@ title() {
     set_title $(basename $PWD)
   fi
 }
-
-chpwd_functions+=title
-title
+# Only a real, human-driven terminal gets to own the window title.
+# Tools like Claude Code start a `zsh -l -i` purely to snapshot the environment,
+# and that startup would otherwise rename whatever tmux window they launched from.
+if [[ -o interactive && -t 1 && "$ZSH_SUBSHELL" -eq 0 && -z "$CLAUDECODE" && -z "$AI_AGENT" ]]; then
+  chpwd_functions+=(title)
+  title
+fi
 
 dots() {
   cd ~/.dotfiles
