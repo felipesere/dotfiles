@@ -12,6 +12,26 @@ return {
       require("vcsigns").setup({
         target_commit = 0, -- Nice default for jj with new+squash flow.
       })
+      local function map(mode, lhs, rhs, desc, opts)
+        local options = { noremap = true, silent = true, desc = desc }
+        if opts then
+          options = vim.tbl_extend("force", options, opts)
+        end
+        vim.keymap.set(mode, lhs, rhs, options)
+      end
+
+      map("n", "[c", function()
+        require("vcsigns.actions").hunk_prev(0, vim.v.count1)
+      end, "Go to previous hunk")
+      map("n", "]c", function()
+        require("vcsigns.actions").hunk_next(0, vim.v.count1)
+      end, "Go to next hunk")
+      map("n", "[C", function()
+        require("vcsigns.actions").hunk_prev(0, 9999)
+      end, "Go to first hunk")
+      map("n", "]C", function()
+        require("vcsigns.actions").hunk_next(0, 9999)
+      end, "Go to last hunk")
     end,
   },
   {
