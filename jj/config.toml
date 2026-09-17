@@ -12,7 +12,12 @@ diff-editor = ":builtin"
 [--scope.ui]
 # pager = "delta"
 # diff-formatter = ":git"
-diff-formatter = ["difft", "--color=always", "$left", "$right"]
+diff-formatter = ["difft", "--color=always", "--width=$width", "$left", "$right"]
+
+[colors]
+# Workspace names (e.g. `felipe@`) in `jj log`; default is green, which blends in with `(empty)` and the `@` node
+working_copies = "red"
+"working_copy working_copies" = "bright red"
 
 [merge-tools.diffconflicts]
 program = "nvim"
@@ -39,7 +44,7 @@ immutable-heads = 'builtin_immutable_heads() ~ tags(glob:"*-pre*")'
 bot_author = '(author(tl-renovate) | author(dependabot))'
 trunk = 'trunk()'
 merged = '::trunk()'
-near_bookmark = 'latest(::@ & bookmarks())'
+near_bookmark = 'heads(::@ & bookmarks())'
 proper_tags = 'tags(regex:"v\\d+.\\d+.\\d+$")'
 'around(r, depth)' =  'ancestors(r, depth) | descendants(r, depth)'
 'around(r)' =  'ancestors(r, 5) | descendants(r, 5)'
@@ -86,8 +91,59 @@ create-pr = [
   #!/usr/bin/env bash
   set -euo pipefail
 
-  # Get descriptions of changes between trunk and @
-  descriptions=$(jj log --no-graph -r 'trunk()..@' -T 'if(description,
+  # gh shells out to git to find the remote. In a non-colocated jj repo there is
+  # no .git folder, so point git at the repository jj keeps under .jj/
+  if [[ ! -e "$(jj root)/.git" ]]; then
+    export GIT_DIR="$(jj git root)"
+  fi
+
+  stack=false
+  rev=""
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --stack) stack=true ;;
+      *) rev="$1" ;;
+    esac
+    shift
+  done
+  rev="${rev:-@}"
+
+  # The revision must carry a local bookmark; that becomes the PR head
+  head=$(jj log --no-graph --color=never -r "$rev" \
+    -T 'if(local_bookmarks, local_bookmarks.first().name())')
+  if [[ -z "$head" ]]; then
+    echo "create-pr: revision '$rev' has no bookmark; run 'jj bookmark create <name> -r $rev' first" >&2
+    exit 1
+  fi
+
+  # The bookmark must be pushed and in sync, i.e. <head>@origin points at the same commit
+  if ! jj log --no-graph --color=never -r "$rev" \
+      -T 'remote_bookmarks.filter(|b| b.remote() == "origin").map(|b| b.name()).join("\n") ++ "\n"' \
+      | grep -qxF "$head"; then
+    echo "create-pr: bookmark '$head' is not up-to-date on origin; run 'jj git push -b $head' first" >&2
+    exit 1
+  fi
+
+  base=""
+  if [[ "$stack" == true ]]; then
+    # Nearest bookmark that is a strict ancestor of the revision we are pushing
+    base=$(jj log --no-graph --color=never \
+      -r "heads((::$rev & bookmarks()) ~ $rev)" \
+      -T 'local_bookmarks.map(|b| b.name()) ++ "\n"' | awk 'NF{print $1; exit}')
+    if [[ -z "$base" ]]; then
+      echo "create-pr: no ancestor bookmark found, falling back to trunk" >&2
+    fi
+  fi
+
+  if [[ -n "$base" ]]; then
+    base_rev="$base"
+  else
+    base="$(jj repo-trunk | awk '{print $1}')"
+    base_rev="trunk()"
+  fi
+
+  # Get descriptions of changes between the base and the revision
+  descriptions=$(jj log --no-graph -r "$base_rev..$rev" -T 'if(description,
   description.first_line() ++ "\n")')
 
   # Count non-empty lines
@@ -111,10 +167,7 @@ create-pr = [
     desc=$(gum input --placeholder "Enter a description...")
   fi
 
-  branch="$(jj repo-trunk)"
-
-  gh pr create \
-  --head $(jj log -r "${1:-@}" --no-graph --color=never -T 'bookmarks') --base "${branch%@origin}" --draft --title "$desc" --body ""
+  gh pr create --head "$head" --base "$base" --draft --title "$desc" --body ""
 """,
   "",
 ]
@@ -153,7 +206,8 @@ repo-trunk = [
   "--no-graph",
   "--color=never",
   "-T",
-  "bookmarks",
+  # Plain bookmark names only: `bookmarks` would decorate them with `*` or `@origin`
+  'coalesce(remote_bookmarks.filter(|b| b.remote() == "origin").map(|b| b.name()).join(" "), local_bookmarks.map(|b| b.name()).join(" "))',
 ]
 
 prs = [
